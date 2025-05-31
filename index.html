@@ -293,40 +293,8 @@
                 
                 <!-- Facebook Messenger Chat Plugin -->
                 <h2 class="text-xl font-bold text-red-600 border-b-2 border-yellow-400 pb-2 mb-4">ส่งข้อความถึงเรา</h2>
-                <div class="bg-yellow-50 p-4 rounded-xl">
-                    <div id="fb-customer-chat" class="fb-customerchat"></div>
-                    <script>
-                        window.fbAsyncInit = function() {
-                            FB.init({
-                                xfbml: true,
-                                version: 'v18.0'
-                            });
-                        };
-                        
-                        (function(d, s, id) {
-                            var js, fjs = d.getElementsByTagName(s)[0];
-                            if (d.getElementById(id)) return;
-                            js = d.createElement(s); js.id = id;
-                            js.src = 'https://connect.facebook.net/th_TH/sdk/xfbml.customerchat.js';
-                            fjs.parentNode.insertBefore(js, fjs);
-                        }(document, 'script', 'facebook-jssdk'));
-                    </script>
-                    
-                    <!-- Your Chat Plugin code -->
-                    <div class="fb-customerchat"
-                        attribution="biz_inbox"
-                        page_id="100064552192399">
-                    </div>
-                    
-                    <!-- Placeholder for Messenger -->
-                    <div class="text-center py-4">
-                        <svg class="mx-auto w-12 h-12 text-blue-500" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M12 2C6.36 2 2 6.13 2 11.7c0 2.91 1.19 5.44 3.14 7.17.16.14.26.39.27.65l.05 2.02c.02.65.69 1.07 1.27.75l2.26-1.24c.16-.09.34-.14.52-.14.18 0 .36.05.52.14 1.12.56 2.56.91 4.05.91C17.64 22 22 17.87 22 12.3 22 6.13 17.64 2 12 2zm6 9.47l-2.93 4.67c-.47.73-1.47.92-2.17.37l-2.34-1.73a.6.6 0 00-.72 0l-3.16 2.4c-.42.33-.97-.17-.68-.61l2.93-4.67c.47-.73 1.47-.92 2.17-.37l2.34 1.73a.6.6 0 00.72 0l3.16-2.4c.42-.33.97.17.68.61z"/>
-                        </svg>
-                        <p class="mt-2 text-gray-700">คลิกที่ไอคอน Messenger ด้านล่างเพื่อส่งข้อความถึงเรา</p>
-                        <a href="https://m.me/100064552192399" target="_blank" class="btn-primary inline-block mt-3 py-2 px-4">ส่งข้อความ</a>
-                    </div>
-                </div>
+                <script async defer crossorigin="anonymous" src="https://connect.facebook.net/th_TH/sdk.js#xfbml=1&version=v23.0&appId=313205698760377"></script>
+                <div class="fb-comments" data-href="https://www.facebook.com/profile.php?id=100057201651273" data-width="100%" data-numposts="5"></div>
             </div>
         </aside>
     </div>
