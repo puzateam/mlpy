@@ -539,27 +539,27 @@
                 html += '<div class="overflow-x-auto">'; // ทำให้ตาราง scroll แนวนอนได้ถ้าข้อมูลเยอะ
                 html += '<table class="min-w-full divide-y divide-gray-200 text-sm">';
                 html += '<thead class="bg-gray-50"><tr>';
-                html += '<th scope="col" class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">ชื่อ-นามสกุล</th>';
-                html += '<th scope="col" class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">ตำแหน่ง</th>';
-                html += '<th scope="col" class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">วิทยฐานะ</th>';
-                html += '<th scope="col" class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">วันที่มาอยู่ รร.นี้</th>';
-                html += '<th scope="col" class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">วิชาเอก</th>';
-                html += '<th scope="col" class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">อีเมลล์</th>';
+                html += '<th scope="col" class="px-4 py-2 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">ชื่อ-นามสกุล</th>';
+                html += '<th scope="col" class="px-4 py-2 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">ตำแหน่ง</th>';
+                html += '<th scope="col" class="px-4 py-2 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">วิทยฐานะ</th>';
+                html += '<th scope="col" class="px-4 py-2 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">วันที่มาอยู่ รร.นี้</th>';
+                html += '<th scope="col" class="px-4 py-2 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">วิชาเอก</th>';
+                html += '<th scope="col" class="px-4 py-2 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">อีเมลล์</th>';
                 html += '</tr></thead>';
                 html += '<tbody class="bg-white divide-y divide-gray-200">';
 
                 result.data.forEach(person => { // วนลูปสร้างแถวของตาราง
                     html += '<tr>';
                     html += `<td class="px-4 py-2 whitespace-nowrap">${person['ชื่อ-นามสกุล'] || '-'}</td>`;
-                    html += `<td class="px-4 py-2 whitespace-nowrap">${person['ตำแหน่ง'] || '-'}</td>`;
-                    html += `<td class="px-4 py-2 whitespace-nowrap">${person['วิทยฐานะ'] || '-'}</td>`;
+                    html += `<td class="px-4 py-2 text-center whitespace-nowrap">${person['ตำแหน่ง'] || '-'}</td>`;
+                    html += `<td class="px-4 py-2 text-center whitespace-nowrap">${person['วิทยฐานะ'] || '-'}</td>`;
                     
                     // *** แสดงค่าวันที่จาก Google Sheet โดยตรง ***
                     // ค่าที่ได้จาก getDisplayValues() ใน Apps Script จะเป็น String ตามที่แสดงใน Sheet แล้ว
                     const dateDisplayValue = person['วันที่มาอยู่โรงเรียนนี้']; // Key ต้องตรงกับ Header ใน Sheet
-                    html += `<td class="px-4 py-2 whitespace-nowrap">${dateDisplayValue || '-'}</td>`;
+                    html += `<td class="px-4 py-2 text-center whitespace-nowrap">${dateDisplayValue || '-'}</td>`;
                     
-                    html += `<td class="px-4 py-2 whitespace-nowrap">${person['วิชาเอก'] || '-'}</td>`;
+                    html += `<td class="px-4 py-2 text-center whitespace-nowrap">${person['วิชาเอก'] || '-'}</td>`;
                     html += `<td class="px-4 py-2 whitespace-nowrap">${person['อีเมลล์'] || '-'}</td>`;
                     html += '</tr>';
                 });
