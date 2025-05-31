@@ -127,6 +127,37 @@
                 max-width: 500px; 
             }
         }
+
+        /* สไตล์เพิ่มเติมสำหรับส่วนข้อมูลสถานศึกษา (แบบเรียบง่าย) */
+        #content-school-info p {
+            margin-bottom: 0.75rem; /* เพิ่มระยะห่างระหว่างย่อหน้า */
+            line-height: 1.6; /* เพิ่มระยะห่างระหว่างบรรทัดให้อ่านง่าย */
+        }
+        #content-school-info .info-label { /* สำหรับหัวข้อ เช่น ชื่อโรงเรียน: */
+            font-weight: 600; /* ตัวหนา */
+            color: #4b5563; /* สีเทาเข้ม */
+        }
+        #content-school-info .school-identity-title { /* หัวข้อ อัตลักษณ์, ปรัชญา, สี */
+            font-size: 1.125rem; /* Tailwind class: text-lg */
+            font-weight: 600; /* Tailwind class: font-semibold */
+            color: #b91c1c; /* Tailwind class: text-red-700 */
+            margin-top: 1.25rem; /* Tailwind class: mt-5 */
+            margin-bottom: 0.5rem; /* Tailwind class: mb-2 */
+        }
+        #content-school-info .school-identity-text { /* เนื้อหา อัตลักษณ์, ปรัชญา, สี */
+            font-size: 1.25rem; /* Tailwind class: text-xl */
+            color: #c2410c; /* สีส้ม-แดง หรือพี่จะปรับเป็นสีอื่นก็ได้ค่ะ */
+            margin-left: 1rem; /* Tailwind class: ml-4 */
+            font-weight: 500;
+        }
+        #content-school-info .color-box { /* กล่องสีเล็กๆ */
+            display: inline-block;
+            width: 1em;
+            height: 1em;
+            margin-right: 0.3em;
+            border-radius: 3px;
+            vertical-align: middle;
+        }
     </style>
 </head>
 <body>
@@ -267,8 +298,25 @@
                 </div>
 
                 <!-- เนื้อหาส่วนข้อมูลสถานศึกษา (ถูกซ่อนไว้เริ่มต้น) -->
-                <div id="content-school-info" class="content-section hidden">
-                    <p><strong>ชื่อสถานศึกษา:</strong> โรงเรียนชุมชนบ้านแม่หละป่าป๋วย</p>
+                <div id="content-school-info" class="content-section hidden text-gray-700">
+                    <p><span class="info-label">ชื่อโรงเรียน :</span> โรงเรียนชุมชนบ้านแม่หละป่าป๋วย</p>
+                    <p><span class="info-label">ที่ตั้ง :</span> เลขที่ 6 หมู่ 9 บ้านดงเจริญ ตำบล สรอย อำเภอ วังชิ้น จังหวัด แพร่ รหัสไปรษณีย์ 54160</p>
+                    <p><span class="info-label">สังกัด :</span> สำนักงานเขตพื้นที่การศึกษาประถมศึกษาแพร่ เขต 2</p>
+                    <p><span class="info-label">หมายเลขโทรศัพท์ :</span> 054-550035 <span class="info-label ml-4">โทรสาร :</span> -</p>
+                    <p><span class="info-label">E-mail :</span> <a href="mailto:mlpycop@gmail.com" class="text-blue-600 hover:underline">mlpycop@gmail.com</a> <span class="info-label ml-4">Website :</span> -</p>
+                    <p><span class="info-label">เปิดสอนตั้งแต่ระดับ :</span> อนุบาลปีที่ 2 ถึงระดับประถมศึกษาปีที่ 6</p>
+                    <p><span class="info-label">เนื้อที่ :</span> 8 ไร่ 2 ตารางวา</p>
+                    <p class="mt-4">ปัจจุบันโรงเรียนชุมชนบ้านแม่หละป่าป๋วย มีเขตพื้นที่บริการ หมู่ที่ 9 บ้านดงเจริญ (พื้นที่ตั้งของโรงเรียน) หมู่ที่ 3 บ้านป่าป๋วย หมู่ที่ 5 บ้านแม่หละ และ หมู่ที่ 11 บ้านเจริญสุข และมีนักเรียน จากโรงเรียนบ้านแม่ขมวกมาทำการเรียนร่วมตั้งแต่ปีการศึกษา 2560 เป็นต้นมา.</p>
+                    <p>ครอบครัวนักเรียนส่วนใหญ่มีอาชีพเกษตรกรและรับจ้าง ฐานะทางเศรษฐกิจปานกลาง ผู้ปกครองบางราย มีรายได้น้อย จึงต้องไปประกอบอาชีพต่างจังหวัด.</p>
+                    <h4 class="school-identity-title">อัตลักษณ์ของโรงเรียน</h4>
+                    <p class="school-identity-text">ยิ้มง่าย ไหว้สวย</p>
+                    <h4 class="school-identity-title">ปรัชญาโรงเรียน</h4>
+                    <p class="school-identity-text">“กยิราเจ กยิราเถนํ” <span class="italic text-gray-600 text-lg font-normal">(ทำอะไรทำจริง)</span></p>
+                    <h4 class="school-identity-title">สีประจำโรงเรียน</h4>
+                    <p class="school-identity-text">
+                        <span class="color-box" style="background-color: #FBBF24;"></span>เหลือง -
+                        <span class="color-box ml-2" style="background-color: #EF4444;"></span>แดง
+                    </p>
                 </div>
 
                 <!-- เนื้อหาส่วนข้อมูลบุคลากร (ถูกซ่อนไว้เริ่มต้น - JavaScript จะโหลดข้อมูลมาใส่) -->
