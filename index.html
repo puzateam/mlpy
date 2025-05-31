@@ -311,7 +311,7 @@
                 <!-- เนื้อหาส่วนประวัติโรงเรียน -->
                 <div id="content-history" class="content-section hidden text-gray-700">
                     <p>โรงเรียนชุมชนบ้านแม่หละป่าป๋วย ตั้งอยู่หมู่ที่ ๙ หมู่บ้านดงเจริญ รับผิดชอบในเขตบริการ ๔ หมู่บ้าน คือ บ้านป่าป๋วย หมูที่ ๓, บ้านดงเจริญ หมู่ที่ ๙, บ้านแม่หละหมู่ที่ ๕ และบ้านเจริญสุข หมู่ที่ ๑๑</p>
-                    <p>โรงเรียนชุมชนบ้านแม่หละป่าป๋วย <strong>ตั้งขึ้นเมื่อวันที่ ๑ พฤศจิกายน พ.ศ. ๒๔๖๘</strong> (รวมอายุในขณะนี้ ๙๖ ปี) โดยมี <strong>นายเมืองตื่น จันทรัตน์</strong> ศึกษาธิการอำเภอลองในขณะนั้นเป็นผู้จัดตั้งขึ้น จัดการเรียนการสอน ตั้งแต่ชั้นประถมศึกษาปีที่ ๑ ถึง ชั้นประถมศึกษาปีที่ ๔ โดยอาศัยศาลาวัดป่าป๋วย (ศรีบุญนำ) เป็นสถานที่เรียน หมู่บ้านอื่นที่มาเรียนร่วมกัน คือ บ้านม่วงคำ และบ้านแม่ขมิง</p>
+                    <p>โรงเรียนชุมชนบ้านแม่หละป่าป๋วย <strong>ตั้งขึ้นเมื่อวันที่ ๑ พฤศจิกายน พ.ศ. ๒๔๖๘</strong><span id="school-age-text">(กำลังคำนวณอายุ...)</span>โดยมี <strong>นายเมืองตื่น จันทรัตน์</strong> ศึกษาธิการอำเภอลองในขณะนั้นเป็นผู้จัดตั้งขึ้น จัดการเรียนการสอน ตั้งแต่ชั้นประถมศึกษาปีที่ ๑ ถึง ชั้นประถมศึกษาปีที่ ๔ โดยอาศัยศาลาวัดป่าป๋วย (ศรีบุญนำ) เป็นสถานที่เรียน หมู่บ้านอื่นที่มาเรียนร่วมกัน คือ บ้านม่วงคำ และบ้านแม่ขมิง</p>
                     <h4>พัฒนาการของโรงเรียน</h4>
                     <p>ต่อมาใน <strong>พ.ศ. ๒๔๗๙</strong> <strong>นายมาลิน ลัยเจริญ</strong> ครูใหญ่ ได้ปรึกษากับนายสุข ตาเปี้ย และนายกิ วิชัยหอมผู้ใหญ่บ้าน เพื่อขยายโรงเรียนออกนอกวัดได้ที่ดิน จำนวน ๑ ไร่ ที่บ้านป่าป๋วย จึงได้ช่วยกันปลูกสร้างอาคารเรียนชั่วคราวในที่แห่งใหม่ขึ้น ขณะนั้นมีนักเรียน ๘๓ คน</p>
                     <p><strong>พ.ศ. ๒๔๙๑</strong> <strong>นายทัน จรลี</strong> รักษาการในตำแหน่ง ครูใหญ่, <strong>นายต่วน เชียงทา</strong> ผู้ใหญ่บ้านป่าป๋วย, <strong>นายอิ่น ปัญญาวงค์</strong> ผู้ใหญ่บ้านแม่หละ ได้ปรึกษาหารือกันจับจองที่ดินว่างเปล่า ระหว่างหมู่บ้านป่าป๋วยและบ้านแม่หละ สร้างอาคารเรียนชั่วคราวแห่งนี้ อีก ๔ ปีต่อมา ได้ร่วมใจกันสร้างอาคารเรียนถาวร โดยได้ทุนสมทบจากทางราชการ จำนวน ๒,๕๐๐ บาท สร้างอาคารเรียน แบบ ป.๓ ตัวอาคารกว้าง ๘ เมตร ยาว ๓๘ เมตร มีมุขกว้าง ๖ เมตร ยาว ๘ เมตร เริ่มลงมือก่อสร้างเมื่อ <strong>๒๑ มิถุนายน ๒๔๙๙</strong></p>
@@ -502,6 +502,27 @@
     // URL ของ Google Apps Script Web App (สำคัญมาก: ตรวจสอบว่าเป็น URL ล่าสุดหลัง Deploy Apps Script ใหม่)
     const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbw-el57qkVjx1K_CTzwasn5y_xkI0rCbinhdrGdoYpS5WsRdU-CcgAuQlZaRylnoLmX/exec"; // URL เว็บแอป               
 
+        // สามารถวางฟังก์ชันนี้ไว้นอก DOMContentLoaded หรือข้างในก็ได้
+        function calculateAndDisplaySchoolAge() {
+            const foundingDate = new Date(1925, 10, 1); // เดือนใน JavaScript เริ่มจาก 0 (ม.ค.) ถึง 11 (ธ.ค.) -> พ.ย. คือ 10
+            const today = new Date();
+        
+            let age = today.getFullYear() - foundingDate.getFullYear();
+            const monthDifference = today.getMonth() - foundingDate.getMonth();
+            const dayDifference = today.getDate() - foundingDate.getDate();
+        
+            if (monthDifference < 0 || (monthDifference === 0 && dayDifference < 0)) {
+                age--;
+            }
+        
+            const schoolAgeTextElement = document.getElementById('school-age-text');
+            if (schoolAgeTextElement) {
+                schoolAgeTextElement.textContent = `(รวมอายุ ${age} ปี)`;
+            } else {
+                console.error("Element with id 'school-age-text' not found.");
+            }
+        }
+    
     document.addEventListener('DOMContentLoaded', function () {
         const mainMenuLinks = document.querySelectorAll('#main-menu a[data-target]'); 
         const homeLink = document.getElementById('home-link'); 
@@ -560,6 +581,9 @@
         
         // เรียกฟังก์ชันดึงสถิติผู้เข้าชมเมื่อหน้าเว็บโหลด
         fetchVisitorStats(); 
+
+        // เรียกฟังก์ชันคำนวณและแสดงอายุโรงเรียน <<<< เพิ่มบรรทัดนี้เข้าไปค่ะ
+        calculateAndDisplaySchoolAge(); 
     });
     
     // ฟังก์ชันสำหรับดึงและแสดงสถิติผู้เข้าชม
@@ -625,26 +649,26 @@
                 html += '<div class="overflow-x-auto">'; 
                 html += '<table class="min-w-full divide-y divide-gray-200 text-sm">';
                 html += '<thead class="bg-gray-50"><tr>';
-                html += '<th scope="col" class="px-4 py-2 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">ชื่อ-นามสกุล</th>';
-                html += '<th scope="col" class="px-4 py-2 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">ตำแหน่ง</th>';
-                html += '<th scope="col" class="px-4 py-2 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">วิทยฐานะ</th>';
-                html += '<th scope="col" class="px-4 py-2 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">วันที่มาอยู่ รร.นี้</th>';
-                html += '<th scope="col" class="px-4 py-2 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">วิชาเอก</th>';
-                html += '<th scope="col" class="px-4 py-2 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">อีเมลล์</th>';
+                html += '<th scope="col" class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">ชื่อ-นามสกุล</th>';
+                html += '<th scope="col" class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">ตำแหน่ง</th>';
+                html += '<th scope="col" class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">วิทยฐานะ</th>';
+                html += '<th scope="col" class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">วันที่มาอยู่ รร.นี้</th>';
+                html += '<th scope="col" class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">วิชาเอก</th>';
+                html += '<th scope="col" class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">อีเมลล์</th>';
                 html += '</tr></thead>';
                 html += '<tbody class="bg-white divide-y divide-gray-200">';
 
                 result.data.forEach(person => { 
                     html += '<tr>';
                     html += `<td class="px-4 py-2 whitespace-nowrap">${person['ชื่อ-นามสกุล'] || '-'}</td>`;
-                    html += `<td class="px-4 py-2 text-center whitespace-nowrap">${person['ตำแหน่ง'] || '-'}</td>`;
-                    html += `<td class="px-4 py-2 text-center whitespace-nowrap">${person['วิทยฐานะ'] || '-'}</td>`;
+                    html += `<td class="px-4 py-2 text-left whitespace-nowrap">${person['ตำแหน่ง'] || '-'}</td>`;
+                    html += `<td class="px-4 py-2 text-left whitespace-nowrap">${person['วิทยฐานะ'] || '-'}</td>`;
                     
                     const dateDisplayValue = person['วันที่มาอยู่โรงเรียนนี้']; 
-                    html += `<td class="px-4 py-2 text-center whitespace-nowrap">${dateDisplayValue || '-'}</td>`;
+                    html += `<td class="px-4 py-2 text-left whitespace-nowrap">${dateDisplayValue || '-'}</td>`;
                     
-                    html += `<td class="px-4 py-2 text-center whitespace-nowrap">${person['วิชาเอก'] || '-'}</td>`;
-                    html += `<td class="px-4 py-2 whitespace-nowrap">${person['อีเมลล์'] || '-'}</td>`;
+                    html += `<td class="px-4 py-2 text-left whitespace-nowrap">${person['วิชาเอก'] || '-'}</td>`;
+                    html += `<td class="px-4 py-2 text-leftwhitespace-nowrap">${person['อีเมลล์'] || '-'}</td>`;
                     html += '</tr>';
                 });
 
@@ -724,6 +748,7 @@
             console.error("Fetch error for student summary:", error);
         }
     }
+    
 </script>
 </body>
 </html>
