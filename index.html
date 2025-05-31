@@ -570,7 +570,7 @@
     
         try {
             // แก้ไข Parameter name จาก "×tamp" เป็น "×tamp="
-            const response = await fetch(`${WEB_APP_URL}?action=logVisitAndGetCounts×tamp=${new Date().getTime()}`); // <<<<< แก้ไขตรงนี้แล้ว
+            const response = await fetch(`${WEB_APP_URL}?action=logVisitAndGetCounts&timestamp=${new Date().getTime()}`); // <<<<< แก้ไขตรงนี้แล้ว
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
