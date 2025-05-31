@@ -12,7 +12,7 @@
         }
         
         body {
-            background-color: #fffaf0; /* FloralWhite */
+            background-color: #fffaf0; /* สี FloralWhite */
         }
         
         .menu-item {
@@ -27,7 +27,7 @@
             height: 2px;
             bottom: -2px;
             left: 0;
-            background-color: #fbbf24; /* amber-400 */
+            background-color: #fbbf24; /* สี amber-400 ของ Tailwind */
             transition: width 0.3s ease;
         }
         
@@ -36,28 +36,28 @@
         }
         
         .btn-primary {
-            background-color: #ef4444; /* red-500 */
+            background-color: #ef4444; /* สี red-500 ของ Tailwind */
             color: #FFF;
             transition: all 0.2s ease;
             border-radius: 50px;
         }
         
         .btn-primary:hover {
-            background-color: #dc2626; /* red-600 */
+            background-color: #dc2626; /* สี red-600 ของ Tailwind */
             transform: translateY(-2px);
             box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
         }
         
         .sidebar-item {
-            border-bottom: 1px solid #fee2e2; /* red-100 */
+            border-bottom: 1px solid #fee2e2; /* สี red-100 ของ Tailwind */
             transition: all 0.3s ease;
         }
         
-        .sidebar-item a.active, /* Added for active state */
+        .sidebar-item a.active, /* เพิ่มสำหรับสถานะ active (เมนูที่กำลังเลือก) */
         .sidebar-item:hover {
-            background-color: rgba(254, 226, 226, 0.5); /* red-100 with opacity */
+            background-color: rgba(254, 226, 226, 0.5); /* สี red-100 ของ Tailwind แบบโปร่งแสง */
             padding-left: 0.5rem;
-            color: #dc2626; /* red-600 */
+            color: #dc2626; /* สี red-600 ของ Tailwind */
         }
         
         .card {
@@ -92,21 +92,21 @@
         }
 
         .content-section {
-            /* Tailwind's 'hidden' class (display: none) will be used by JS */
+            /* คลาส 'hidden' ของ Tailwind (display: none) จะถูกใช้โดย JavaScript เพื่อซ่อน/แสดงเนื้อหา */
         }
         
-        @media (max-width: 768px) {
+        @media (max-width: 768px) { /* สำหรับหน้าจอขนาดเล็กกว่าหรือเท่ากับ 768px */
             .main-container {
-                flex-direction: column;
+                flex-direction: column; /* จัดเรียงเนื้อหาหลักเป็นแนวตั้ง */
             }
             .sidebar {
-                width: 100%;
+                width: 100%; /* ให้ sidebar เต็มความกว้าง */
                 margin-bottom: 1rem;
             }
             .content {
-                width: 100%;
+                width: 100%; /* ให้ content เต็มความกว้าง */
             }
-            .facebook-iframe { /* Make Facebook iframe responsive */
+            .facebook-iframe { /* ทำให้ iframe ของ Facebook ตอบสนองตามขนาดหน้าจอ */
                 width: 100% !important;
                 max-width: 500px; 
             }
@@ -114,7 +114,7 @@
     </style>
 </head>
 <body>
-    <!-- Header Section -->
+    <!-- ส่วนหัวเว็บ (Header) -->
     <header class="bg-gradient-to-r from-red-600 to-yellow-500 p-4">
         <div class="container mx-auto flex flex-col items-center">
             <div class="flex flex-col items-center mb-4">
@@ -135,7 +135,9 @@
         </nav>
     </header>
 
+    <!-- ส่วนเนื้อหาหลักของหน้าเว็บ -->
     <div class="container mx-auto p-4 main-container flex flex-col md:flex-row gap-6">
+        <!-- แถบด้านข้างซ้าย (Sidebar Left) -->
         <aside class="sidebar w-full md:w-1/4">
             <div class="bg-white rounded-2xl shadow-md p-5 card">
                 <h2 class="text-xl font-bold text-red-600 border-b-2 border-yellow-400 pb-2 my-4">สารสนเทศของโรงเรียน</h2>
@@ -173,10 +175,12 @@
             </div>
         </aside>
 
+        <!-- ส่วนเนื้อหาตรงกลาง (Main Content Area) -->
         <main class="content w-full md:w-2/4">
             <div class="bg-white rounded-2xl shadow-md p-5 card">
                 <h2 id="center-content-title" class="text-xl font-bold text-red-600 border-b-2 border-yellow-400 pb-2 mb-6">ยินดีต้อนรับสู่โรงเรียนชุมชนบ้านแม่หละป่าป๋วย</h2>
 
+                <!-- เนื้อหาเริ่มต้น (Default Content) - ข่าวประชาสัมพันธ์ -->
                 <div id="content-default" class="content-section">
                     <h3 class="text-xl font-bold text-red-600 mb-4">ข่าวประชาสัมพันธ์</h3>
                     <div style="display: flex; justify-content: center;">
@@ -184,10 +188,12 @@
                     </div>
                 </div>
 
+                <!-- เนื้อหาส่วนประวัติโรงเรียน (ถูกซ่อนไว้เริ่มต้น) -->
                 <div id="content-history" class="content-section hidden">
                     <p>เนื้อหาเกี่ยวกับประวัติโรงเรียน...</p>
                 </div>
 
+                <!-- เนื้อหาส่วนวิสัยทัศน์/พันธกิจ (ถูกซ่อนไว้เริ่มต้น) -->
                 <div id="content-vision" class="content-section hidden">
                     <p><strong>วิสัยทัศน์:</strong></p>
                     <p>เป็นองค์กรแห่งการเรียนรู้...</p>
@@ -198,24 +204,29 @@
                     </ol>
                 </div>
 
+                <!-- เนื้อหาส่วนโครงสร้างการบริหาร (ถูกซ่อนไว้เริ่มต้น) -->
                 <div id="content-structure" class="content-section hidden">
                     <p>เนื้อหาเกี่ยวกับโครงสร้างการบริหาร...</p>
                 </div>
 
+                <!-- เนื้อหาส่วนข้อมูลสถานศึกษา (ถูกซ่อนไว้เริ่มต้น) -->
                 <div id="content-school-info" class="content-section hidden">
                     <p><strong>ชื่อสถานศึกษา:</strong> โรงเรียนชุมชนบ้านแม่หละป่าป๋วย</p>
                 </div>
 
+                <!-- เนื้อหาส่วนข้อมูลบุคลากร (ถูกซ่อนไว้เริ่มต้น - JavaScript จะโหลดข้อมูลมาใส่) -->
                 <div id="content-personnel" class="content-section hidden">
-                    <!-- JavaScript will populate this -->
+                    <!-- JavaScript จะนำข้อมูลบุคลากรมาแสดงที่นี่ -->
                 </div>
 
+                <!-- เนื้อหาส่วนข้อมูลนักเรียน (ถูกซ่อนไว้เริ่มต้น - JavaScript จะโหลดข้อมูลมาใส่) -->
                 <div id="content-students" class="content-section hidden"> 
-                    <!-- JavaScript will populate this -->
+                    <!-- JavaScript จะนำข้อมูลนักเรียนมาแสดงที่นี่ -->
                 </div>
             </div>
         </main>
 
+        <!-- แถบด้านข้างขวา (Sidebar Right) -->
         <aside class="sidebar w-full md:w-1/4">
             <div class="bg-white rounded-2xl shadow-md p-5 card">
                 <h2 class="text-xl font-bold text-red-600 border-b-2 border-yellow-400 pb-2 mb-4">ลิงก์ที่เกี่ยวข้อง</h2>
@@ -258,6 +269,7 @@
         </aside>
     </div>
 
+    <!-- ส่วนท้ายเว็บ (Footer) -->
     <footer class="bg-gradient-to-r from-red-600 to-yellow-500 text-white py-4 mt-8 rounded-t-3xl">
         <div class="container mx-auto px-4">
             <div class="flex flex-col items-center text-center">
@@ -270,82 +282,93 @@
 
 <script>
     document.addEventListener('DOMContentLoaded', function () {
-        const mainMenuLinks = document.querySelectorAll('#main-menu a[data-target]');
-        const homeLink = document.getElementById('home-link');
-        const contentSections = document.querySelectorAll('.content-section');
-        const centerContentTitle = document.getElementById('center-content-title');
-        const initialTitle = centerContentTitle.textContent; 
+        const mainMenuLinks = document.querySelectorAll('#main-menu a[data-target]'); // ลิงก์เมนูหลักใน sidebar ที่มี data-target
+        const homeLink = document.getElementById('home-link'); // ลิงก์ 'หน้าหลัก'
+        const contentSections = document.querySelectorAll('.content-section'); // ส่วนแสดงเนื้อหาทั้งหมด
+        const centerContentTitle = document.getElementById('center-content-title'); // หัวข้อหลักตรงกลาง
+        const initialTitle = centerContentTitle.textContent;  // เก็บหัวข้อเริ่มต้นไว้
 
+        // ฟังก์ชันสำหรับแสดงเนื้อหาตาม targetId และเปลี่ยนหัวข้อ
         window.showContent = function(targetId, newTitle) {
+            // ซ่อนทุกส่วนของเนื้อหาก่อน
             contentSections.forEach(section => {
                 section.classList.add('hidden');
             });
 
+            // แสดงส่วนเนื้อหาที่ต้องการ
             const targetSection = document.getElementById(targetId);
             if (targetSection) {
                 targetSection.classList.remove('hidden');
             }
 
+            // เปลี่ยนหัวข้อหลักตรงกลาง
             if (newTitle) {
                 centerContentTitle.textContent = newTitle;
             } else {
-                 centerContentTitle.textContent = initialTitle; 
+                 centerContentTitle.textContent = initialTitle; // ถ้าไม่มี newTitle ให้ใช้หัวข้อเริ่มต้น
             }
 
+            // กำหนด active class ให้กับลิงก์เมนูที่ถูกเลือก
             mainMenuLinks.forEach(link => {
-                link.classList.remove('active');
+                link.classList.remove('active'); // ลบ active class ออกจากทุกลิงก์
                 if (link.dataset.target === targetId) {
-                    link.classList.add('active');
+                    link.classList.add('active'); // เพิ่ม active class ให้ลิงก์ที่ตรงกับ targetId
                 }
             });
 
+            // ถ้าเป็นการแสดงข้อมูลบุคลากร ให้เรียกฟังก์ชันดึงข้อมูลบุคลากร
             if (targetId === 'content-personnel') {
                 fetchPersonnelData();
-            } else if (targetId === 'content-students') {
+            } else if (targetId === 'content-students') { // ถ้าเป็นการแสดงข้อมูลนักเรียน ให้เรียกฟังก์ชันดึงข้อมูลนักเรียน
                 fetchStudentSummaryData();
             }
         }
 
+        // เพิ่ม event listener ให้กับทุกลิงก์ในเมนูหลัก (sidebar)
         mainMenuLinks.forEach(link => {
             link.addEventListener('click', function (event) {
-                event.preventDefault();
-                const targetId = this.dataset.target;
-                const newTitleText = this.textContent; 
-                window.showContent(targetId, newTitleText);
+                event.preventDefault(); // ป้องกันการโหลดหน้าใหม่
+                const targetId = this.dataset.target; // ดึงค่า data-target
+                const newTitleText = this.textContent; // ดึงข้อความของลิงก์มาเป็นหัวข้อใหม่
+                window.showContent(targetId, newTitleText); // เรียกฟังก์ชันแสดงเนื้อหา
             });
         });
 
+        // เพิ่ม event listener ให้กับลิงก์ 'หน้าหลัก'
         homeLink.addEventListener('click', function (event) {
-            event.preventDefault();
-            window.showContent('content-default', initialTitle); 
-            mainMenuLinks.forEach(link => link.classList.remove('active'));
+            event.preventDefault(); // ป้องกันการโหลดหน้าใหม่
+            window.showContent('content-default', initialTitle); // แสดงเนื้อหาเริ่มต้นและใช้หัวข้อเริ่มต้น
+            mainMenuLinks.forEach(link => link.classList.remove('active')); // ลบ active class ออกจากเมนู sidebar
         });
 
+        // แสดงเนื้อหาเริ่มต้นเมื่อหน้าเว็บโหลดเสร็จ
         window.showContent('content-default', initialTitle);
     });
 
+    // URL ของ Google Apps Script Web App
     const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbz4RZldjAHj0HOW8-9Za5tPamxfc_uhFidiTcN8k9MeRirF8W0K-LTbSum7Ua5Ustl8/exec"; // URL เว็บแอปของพี่
 
+    // ฟังก์ชันสำหรับดึงและแสดงข้อมูลบุคลากร
     async function fetchPersonnelData() {
         const personnelContentDiv = document.getElementById('content-personnel');
-        personnelContentDiv.innerHTML = '<p class="text-gray-500 animate-pulse">กำลังโหลดข้อมูลบุคลากร...</p>'; 
+        personnelContentDiv.innerHTML = '<p class="text-gray-500 animate-pulse">กำลังโหลดข้อมูลบุคลากร...</p>'; // แสดงข้อความกำลังโหลด
 
         try {
-            const response = await fetch(`${WEB_APP_URL}?action=getPersonnel`);
+            const response = await fetch(`${WEB_APP_URL}?action=getPersonnel`); // เรียก API
             if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
+                throw new Error(`HTTP error! status: ${response.status}`); // ถ้า response ไม่ ok ให้โยน error
             }
-            const result = await response.json();
+            const result = await response.json(); // แปลง response เป็น JSON
 
-            if (result.error) {
+            if (result.error) { // ถ้า API คืนค่า error
                 personnelContentDiv.innerHTML = `<p class="text-red-500">เกิดข้อผิดพลาด: ${result.error} ${result.details || ''}</p><p class="text-sm text-gray-600">โปรดตรวจสอบการตั้งค่า Google Sheet และการ Deploy Apps Script</p>`;
                 console.error("Error fetching personnel:", result);
                 return;
             }
 
-            if (result.data && result.data.length > 0) {
+            if (result.data && result.data.length > 0) { // ถ้ามีข้อมูลและข้อมูลไม่ว่าง
                 let html = '<h3 class="text-xl font-bold text-red-600 mb-4">ข้อมูลบุคลากร</h3>';
-                html += '<div class="overflow-x-auto">';
+                html += '<div class="overflow-x-auto">'; // ทำให้ตาราง scroll แนวนอนได้ถ้าข้อมูลเยอะ
                 html += '<table class="min-w-full divide-y divide-gray-200 text-sm">';
                 html += '<thead class="bg-gray-50"><tr>';
                 html += '<th scope="col" class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">ชื่อ-นามสกุล</th>';
@@ -357,14 +380,14 @@
                 html += '</tr></thead>';
                 html += '<tbody class="bg-white divide-y divide-gray-200">';
 
-                result.data.forEach(person => {
+                result.data.forEach(person => { // วนลูปสร้างแถวของตาราง
                     html += '<tr>';
                     html += `<td class="px-4 py-2 whitespace-nowrap">${person['ชื่อ-นามสกุล'] || '-'}</td>`;
                     html += `<td class="px-4 py-2 whitespace-nowrap">${person['ตำแหน่ง'] || '-'}</td>`;
                     html += `<td class="px-4 py-2 whitespace-nowrap">${person['วิทยฐานะ'] || '-'}</td>`;
                     
                     // *** แสดงค่าวันที่จาก Google Sheet โดยตรง ***
-                    // ค่าที่ได้จาก getDisplayValues() จะเป็น String ตามที่แสดงใน Sheet แล้ว
+                    // ค่าที่ได้จาก getDisplayValues() ใน Apps Script จะเป็น String ตามที่แสดงใน Sheet แล้ว
                     const dateDisplayValue = person['วันที่มาอยู่โรงเรียนนี้']; // Key ต้องตรงกับ Header ใน Sheet
                     html += `<td class="px-4 py-2 whitespace-nowrap">${dateDisplayValue || '-'}</td>`;
                     
@@ -375,36 +398,37 @@
 
                 html += '</tbody></table>';
                 html += '</div>';
-                personnelContentDiv.innerHTML = html;
-            } else {
+                personnelContentDiv.innerHTML = html; // แสดงตารางข้อมูล
+            } else { // ถ้าไม่มีข้อมูล
                 personnelContentDiv.innerHTML = '<h3 class="text-xl font-bold text-red-600 mb-4">ข้อมูลบุคลากร</h3><p>ไม่พบข้อมูลบุคลากร หรือ Sheet อาจจะว่าง</p>';
             }
-        } catch (error) {
+        } catch (error) { // ถ้าเกิด error ระหว่าง fetch
             personnelContentDiv.innerHTML = `<p class="text-red-500">การเชื่อมต่อล้มเหลว: ${error.message}</p><p class="text-sm text-gray-600">โปรดตรวจสอบการเชื่อมต่ออินเทอร์เน็ต และ Web App URL</p>`;
             console.error("Fetch error for personnel:", error);
         }
     }
 
+    // ฟังก์ชันสำหรับดึงและแสดงข้อมูลสรุปนักเรียน
     async function fetchStudentSummaryData() {
         const studentContentDiv = document.getElementById('content-students');
-        studentContentDiv.innerHTML = '<p class="text-gray-500 animate-pulse">กำลังโหลดข้อมูลนักเรียน...</p>';
+        studentContentDiv.innerHTML = '<p class="text-gray-500 animate-pulse">กำลังโหลดข้อมูลนักเรียน...</p>'; // แสดงข้อความกำลังโหลด
 
         try {
-            const response = await fetch(`${WEB_APP_URL}?action=getStudentSummary`);
+            const response = await fetch(`${WEB_APP_URL}?action=getStudentSummary`); // เรียก API
             if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
+                throw new Error(`HTTP error! status: ${response.status}`); // ถ้า response ไม่ ok ให้โยน error
             }
-            const result = await response.json();
+            const result = await response.json(); // แปลง response เป็น JSON
 
-            if (result.error) {
+            if (result.error) { // ถ้า API คืนค่า error
                 studentContentDiv.innerHTML = `<p class="text-red-500">เกิดข้อผิดพลาด: ${result.error} ${result.details || ''}</p><p class="text-sm text-gray-600">โปรดตรวจสอบการตั้งค่า Google Sheet และการ Deploy Apps Script</p>`;
                 console.error("Error fetching student summary:", result);
                 return;
             }
 
-            if (result.data && result.data.length > 0) {
+            if (result.data && result.data.length > 0) { // ถ้ามีข้อมูลและข้อมูลไม่ว่าง
                 let html = '<h3 class="text-xl font-bold text-red-600 mb-4">ข้อมูลนักเรียน (สรุป)</h3>';
-                html += '<div class="overflow-x-auto">';
+                html += '<div class="overflow-x-auto">'; // ทำให้ตาราง scroll แนวนอนได้ถ้าข้อมูลเยอะ
                 html += '<table class="min-w-full divide-y divide-gray-200 text-sm">';
                 html += '<thead class="bg-gray-50"><tr>';
                 html += '<th scope="col" class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">ระดับชั้น</th>';
@@ -414,15 +438,15 @@
                 html += '</tr></thead>';
                 html += '<tbody class="bg-white divide-y divide-gray-200">';
 
-                let totalBoys = 0;
-                let totalGirls = 0;
-                let grandTotalAll = 0; 
+                let totalBoys = 0; // ตัวแปรสำหรับรวมจำนวนนักเรียนชายทั้งหมด
+                let totalGirls = 0; // ตัวแปรสำหรับรวมจำนวนนักเรียนหญิงทั้งหมด
+                let grandTotalAll = 0; // ตัวแปรสำหรับรวมจำนวนนักเรียนทั้งหมดทุกระดับชั้น
 
-                result.data.forEach(level => {
+                result.data.forEach(level => { // วนลูปสร้างแถวของตาราง
                     // ค่าจาก getDisplayValues() จะเป็น String, ถ้าเป็นตัวเลข ควรแปลงเป็นตัวเลขเพื่อคำนวณ
-                    const boys = parseInt(level['จำนวนนักเรียนชาย']) || 0; 
-                    const girls = parseInt(level['จำนวนนักเรียนหญิง']) || 0; 
-                    const sumPerLevel = boys + girls; 
+                    const boys = parseInt(level['จำนวนนักเรียนชาย']) || 0; // แปลงเป็นตัวเลข, ถ้าไม่ได้ให้เป็น 0
+                    const girls = parseInt(level['จำนวนนักเรียนหญิง']) || 0; // แปลงเป็นตัวเลข, ถ้าไม่ได้ให้เป็น 0
+                    const sumPerLevel = boys + girls; // คำนวณผลรวมต่อระดับชั้น
 
                     html += '<tr>';
                     html += `<td class="px-4 py-2 whitespace-nowrap">${level['ระดับชั้น'] || '-'}</td>`; 
@@ -431,19 +455,20 @@
                     html += `<td class="px-4 py-2 whitespace-nowrap text-center">${level['รวม'] || sumPerLevel}</td>`; // แสดง String ที่ได้มา หรือคำนวณใหม่ถ้าไม่มี
                     html += '</tr>';
 
-                    totalBoys += boys;
-                    totalGirls += girls;
-                    grandTotalAll += sumPerLevel; // ใช้ค่าที่คำนวณใหม่เพื่อความแม่นยำ
+                    totalBoys += boys; // เพิ่มจำนวนนักเรียนชาย
+                    totalGirls += girls; // เพิ่มจำนวนนักเรียนหญิง
+                    grandTotalAll += sumPerLevel; // เพิ่มผลรวม (ใช้ค่าที่คำนวณใหม่เพื่อความแม่นยำ)
                 });
+                // แถวสรุปรวม
                 html += `<tr class="font-bold bg-yellow-50"><td class="px-4 py-2 whitespace-nowrap text-gray-900">รวมทุกระดับ</td><td class="px-4 py-2 whitespace-nowrap text-gray-900 text-center">${totalBoys}</td><td class="px-4 py-2 whitespace-nowrap text-gray-900 text-center">${totalGirls}</td><td class="px-4 py-2 whitespace-nowrap text-gray-900 text-center">${grandTotalAll}</td></tr>`;
                 
                 html += '</tbody></table>';
                 html += '</div>';
-                studentContentDiv.innerHTML = html;
-            } else {
+                studentContentDiv.innerHTML = html; // แสดงตารางข้อมูล
+            } else { // ถ้าไม่มีข้อมูล
                 studentContentDiv.innerHTML = '<h3 class="text-xl font-bold text-red-600 mb-4">ข้อมูลนักเรียน (สรุป)</h3><p>ไม่พบข้อมูลนักเรียน หรือ Sheet อาจจะว่าง</p>';
             }
-        } catch (error) {
+        } catch (error) { // ถ้าเกิด error ระหว่าง fetch
             studentContentDiv.innerHTML = `<p class="text-red-500">การเชื่อมต่อล้มเหลว: ${error.message}</p><p class="text-sm text-gray-600">โปรดตรวจสอบการเชื่อมต่ออินเทอร์เน็ต และ Web App URL</p>`;
             console.error("Fetch error for student summary:", error);
         }
