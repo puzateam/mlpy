@@ -207,17 +207,9 @@
                 <!-- Facebook Page Plugin -->
                 <div class="fb-container mb-8">
                     <h3 class="text-xl font-bold text-red-600 mb-4">ข่าวสารผ่าน Facebook</h3>
-                    <div class="bg-yellow-50 rounded-xl p-4">
-                        <div class="fb-responsive">
-                          <iframe 
-                            src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Fprofile.php%3Fid%3D100057201651273&tabs=timeline&width=800&height=700&small_header=true&adapt_container_width=true&hide_cover=true&show_facepile=true&appId=313205698760377" 
-                            scrolling="no" 
-                            frameborder="0" 
-                            allowfullscreen="true" 
-                            allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share">
-                          </iframe>
-                        </div>
-                    </div>
+                    <div id="fb-root"></div>
+                        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/th_TH/sdk.js#xfbml=1&version=v23.0&appId=313205698760377"></script>
+                    <div class="fb-comments" data-href="https://puzateam.github.io/mlpy/" data-width="100%" data-numposts="5"></div>
                 </div>
                 
                 <!-- News Section -->
