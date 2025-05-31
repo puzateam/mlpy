@@ -244,6 +244,7 @@
                 </div>
                 
                 <h2 class="text-xl font-bold text-red-600 border-b-2 border-yellow-400 pb-2 my-4">ติดต่อเรา</h2>
+                <div class="bg-yellow-50 p-4 rounded-xl mb-4">
                     <div class="contact-item">
                         <svg class="contact-icon w-5 h-5 text-red-600" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"></path><path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"></path></svg>
                         <span class="text-gray-700">mlpycop@gmail.com</span>
@@ -261,6 +262,8 @@
         <div class="container mx-auto px-4">
             <div class="flex flex-col items-center text-center">
                 <p class="footer-text">โรงเรียนชุมชนบ้านแม่หละป่าป๋วย</p>
+                <p class="footer-text">ตำบลสรอย อำเภอวังชิ้น จังหวัดแพร่</p>
+                <p class="footer-text">สำนักงานเขตพื้นที่การศึกษาประถมศึกษาแพร่เขต 2</p>
             </div>
         </div>
     </footer>
@@ -273,7 +276,6 @@
         const centerContentTitle = document.getElementById('center-content-title');
         const initialTitle = centerContentTitle.textContent; 
 
-        // Make showContent globally accessible or ensure fetch functions are in scope
         window.showContent = function(targetId, newTitle) {
             contentSections.forEach(section => {
                 section.classList.add('hidden');
@@ -309,7 +311,7 @@
                 event.preventDefault();
                 const targetId = this.dataset.target;
                 const newTitleText = this.textContent; 
-                window.showContent(targetId, newTitleText); // Call the global/scoped function
+                window.showContent(targetId, newTitleText);
             });
         });
 
@@ -319,10 +321,10 @@
             mainMenuLinks.forEach(link => link.classList.remove('active'));
         });
 
-        window.showContent('content-default', initialTitle); // Initial call
+        window.showContent('content-default', initialTitle);
     });
 
-    const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbz4RZldjAHj0HOW8-9Za5tPamxfc_uhFidiTcN8k9MeRirF8W0K-LTbSum7Ua5Ustl8/exec"; 
+    const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbz4RZldjAHj0HOW8-9Za5tPamxfc_uhFidiTcN8k9MeRirF8W0K-LTbSum7Ua5Ustl8/exec"; // URL เว็บแอปของพี่
 
     async function fetchPersonnelData() {
         const personnelContentDiv = document.getElementById('content-personnel');
@@ -349,7 +351,6 @@
                 html += '<th scope="col" class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">ชื่อ-นามสกุล</th>';
                 html += '<th scope="col" class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">ตำแหน่ง</th>';
                 html += '<th scope="col" class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">วิทยฐานะ</th>';
-                // คอลัมน์ "วันที่บรรจุ" ถูกนำออก
                 html += '<th scope="col" class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">วันที่มาอยู่ รร.นี้</th>';
                 html += '<th scope="col" class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">วิชาเอก</th>';
                 html += '<th scope="col" class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">อีเมลล์</th>';
@@ -358,50 +359,15 @@
 
                 result.data.forEach(person => {
                     html += '<tr>';
-                    // ตรวจสอบว่า key 'ชื่อ-นามสกุล' มีอยู่จริงหรือไม่ และแสดงค่า หรือ '-' ถ้าไม่มี
-                    // **สำคัญ:** ชื่อคอลัมน์ใน Google Sheet ต้องตรงกับ key ที่ใช้ตรงนี้เป๊ะๆ
                     html += `<td class="px-4 py-2 whitespace-nowrap">${person['ชื่อ-นามสกุล'] || '-'}</td>`;
                     html += `<td class="px-4 py-2 whitespace-nowrap">${person['ตำแหน่ง'] || '-'}</td>`;
                     html += `<td class="px-4 py-2 whitespace-nowrap">${person['วิทยฐานะ'] || '-'}</td>`;
                     
-                    // จัดรูปแบบวันที่สำหรับ 'วันที่มาอยู่โรงเรียนนี้'
-                    const dateValue = person['วันที่มาอยู่โรงเรียนนี้']; // Key ต้องตรงกับ Header ใน Sheet
-                    let formattedDate = '-';
-
-                    if (dateValue && typeof dateValue === 'string' && dateValue.includes('/')) {
-                        const parts = dateValue.split('/'); // เช่น ["5", "10", "2566"]
-                        if (parts.length === 3) {
-                            const day = parseInt(parts[0], 10);
-                            const month = parseInt(parts[1], 10) - 1; // เดือนใน JavaScript เริ่มจาก 0 (0 = มกราคม)
-                            const buddhistYear = parseInt(parts[2], 10);
-                            
-                            if (!isNaN(day) && !isNaN(month) && !isNaN(buddhistYear) && buddhistYear > 2000) { // ตรวจสอบค่าเบื้องต้น
-                                const christianYear = buddhistYear - 543;
-                                const dateObj = new Date(christianYear, month, day);
-
-                                if (dateObj && !isNaN(dateObj.getTime())) {
-                                    const dateOptions = { day: '2-digit', month: '2-digit', year: 'numeric', calendar: 'buddhist', timeZone: 'Asia/Bangkok' };
-                                    formattedDate = dateObj.toLocaleDateString('th-TH', dateOptions);
-                                } else {
-                                    formattedDate = 'รูปแบบวันที่ไม่ถูกต้อง (หลังแปลง)';
-                                }
-                            } else {
-                                formattedDate = 'ข้อมูลวันที่ไม่ถูกต้อง (ตัวเลข)';
-                            }
-                        } else {
-                            formattedDate = 'รูปแบบวันที่ไม่ตรง (ส่วน)';
-                        }
-                    } else if (dateValue) {
-                        // ถ้าไม่ใช่ string หรือไม่มี '/' ลองพยายามแปลงโดยตรง (อาจเป็น Date object หรือ ISO string)
-                        const dateObj = new Date(dateValue);
-                        if (dateObj && !isNaN(dateObj.getTime())) {
-                            const dateOptions = { day: '2-digit', month: '2-digit', year: 'numeric', calendar: 'buddhist', timeZone: 'Asia/Bangkok' };
-                            formattedDate = dateObj.toLocaleDateString('th-TH', dateOptions);
-                        } else {
-                             formattedDate = (typeof dateValue === 'string' ? dateValue : 'ข้อมูลวันที่ไม่ชัดเจน');
-                        }
-                    }
-                    html += `<td class="px-4 py-2 whitespace-nowrap">${formattedDate}</td>`;                    
+                    // *** แสดงค่าวันที่จาก Google Sheet โดยตรง ***
+                    // ค่าที่ได้จาก getDisplayValues() จะเป็น String ตามที่แสดงใน Sheet แล้ว
+                    const dateDisplayValue = person['วันที่มาอยู่โรงเรียนนี้']; // Key ต้องตรงกับ Header ใน Sheet
+                    html += `<td class="px-4 py-2 whitespace-nowrap">${dateDisplayValue || '-'}</td>`;
+                    
                     html += `<td class="px-4 py-2 whitespace-nowrap">${person['วิชาเอก'] || '-'}</td>`;
                     html += `<td class="px-4 py-2 whitespace-nowrap">${person['อีเมลล์'] || '-'}</td>`;
                     html += '</tr>';
@@ -453,23 +419,22 @@
                 let grandTotalAll = 0; 
 
                 result.data.forEach(level => {
-                    // **สำคัญ:** ชื่อคอลัมน์ใน Google Sheet ต้องตรงกับ key ที่ใช้ตรงนี้เป๊ะๆ
-                    const boys = parseInt(level['จำนวนนักเรียนชาย']) || 0; // Key ต้องตรงกับ Header ใน Sheet
-                    const girls = parseInt(level['จำนวนนักเรียนหญิง']) || 0; // Key ต้องตรงกับ Header ใน Sheet
+                    // ค่าจาก getDisplayValues() จะเป็น String, ถ้าเป็นตัวเลข ควรแปลงเป็นตัวเลขเพื่อคำนวณ
+                    const boys = parseInt(level['จำนวนนักเรียนชาย']) || 0; 
+                    const girls = parseInt(level['จำนวนนักเรียนหญิง']) || 0; 
                     const sumPerLevel = boys + girls; 
 
                     html += '<tr>';
-                    html += `<td class="px-4 py-2 whitespace-nowrap">${level['ระดับชั้น'] || '-'}</td>`; // Key ต้องตรงกับ Header ใน Sheet
-                    html += `<td class="px-4 py-2 whitespace-nowrap text-center">${boys}</td>`;
-                    html += `<td class="px-4 py-2 whitespace-nowrap text-center">${girls}</td>`;
-                    html += `<td class="px-4 py-2 whitespace-nowrap text-center">${sumPerLevel}</td>`;
+                    html += `<td class="px-4 py-2 whitespace-nowrap">${level['ระดับชั้น'] || '-'}</td>`; 
+                    html += `<td class="px-4 py-2 whitespace-nowrap text-center">${level['จำนวนนักเรียนชาย'] || '0'}</td>`; // แสดง String ที่ได้มา
+                    html += `<td class="px-4 py-2 whitespace-nowrap text-center">${level['จำนวนนักเรียนหญิง'] || '0'}</td>`; // แสดง String ที่ได้มา
+                    html += `<td class="px-4 py-2 whitespace-nowrap text-center">${level['รวม'] || sumPerLevel}</td>`; // แสดง String ที่ได้มา หรือคำนวณใหม่ถ้าไม่มี
                     html += '</tr>';
 
                     totalBoys += boys;
                     totalGirls += girls;
-                    grandTotalAll += sumPerLevel;
+                    grandTotalAll += sumPerLevel; // ใช้ค่าที่คำนวณใหม่เพื่อความแม่นยำ
                 });
-                // แถว "รวมทุกระดับ" (เป็นแถวสุดท้ายของข้อมูลสรุป) และทำให้เป็นตัวหนา
                 html += `<tr class="font-bold bg-yellow-50"><td class="px-4 py-2 whitespace-nowrap text-gray-900">รวมทุกระดับ</td><td class="px-4 py-2 whitespace-nowrap text-gray-900 text-center">${totalBoys}</td><td class="px-4 py-2 whitespace-nowrap text-gray-900 text-center">${totalGirls}</td><td class="px-4 py-2 whitespace-nowrap text-gray-900 text-center">${grandTotalAll}</td></tr>`;
                 
                 html += '</tbody></table>';
