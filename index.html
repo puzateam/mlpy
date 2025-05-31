@@ -192,7 +192,7 @@
         #content-vision .strategy-item {
              /* สามารถเพิ่มสไตล์เฉพาะสำหรับ item เหล่านี้ได้ถ้าต้องการ */
         }
-          /* สไตล์เพิ่มเติมสำหรับส่วนโครงสร้างการบริหาร */
+        /* สไตล์เพิ่มเติมสำหรับส่วนโครงสร้างการบริหาร */
         #content-structure h3.section-title { /* หัวข้อหลัก */
             font-size: 1.25rem; /* text-xl */
             font-weight: 700; /* font-bold */
@@ -226,32 +226,10 @@
             max-width: 100%; /* ทำให้รูปภาพ responsive */
             height: auto;     /* รักษาสัดส่วนรูปภาพ */
             border-radius: 4px; /* rounded-sm */
+            border: 1px solid #d1d5db; /* <<<<<<<<<<<< เพิ่มบรรทัดนี้เข้าไปค่ะ */
         }
         #content-structure .image-caption { /* ลบ caption ที่ไม่จำเป็นออกไปแล้ว */
             display: none; 
-        }
-
-        /* ส่วนแสดงรายชื่อบุคลากรจากผัง (ถ้าต้องการแสดงเป็นข้อความด้วย) */
-        #content-structure .personnel-list-title {
-            font-size: 1.125rem; /* text-lg */
-            font-weight: 600; /* font-semibold */
-            color: #374151; /* text-gray-700 */
-            margin-top: 2rem; /* mt-8 */
-            margin-bottom: 0.75rem; /* mb-3 */
-        }
-        #content-structure ul.personnel-details {
-            list-style-type: none; /* ไม่ใช้ bullet */
-            padding-left: 0;
-        }
-        #content-structure ul.personnel-details li {
-            margin-bottom: 0.5rem; /* mb-2 */
-            padding: 0.5rem;
-            background-color: #ffffff;
-            border-left: 4px solid #fbbf24; /* amber-400, เส้นเน้นด้านซ้าย */
-            border-radius: 4px;
-        }
-        #content-structure ul.personnel-details strong {
-            color: #1f2937; /* text-gray-800 */
         }
     </style>
 </head>
@@ -420,6 +398,10 @@
                 <div id="content-structure" class="content-section hidden">
                     <h3 class="section-title">โครงสร้างการบริหารงานโรงเรียน</h3>
                     <p class="intro-paragraph">
+                        <div class="org-chart-container">
+                            <!-- แก้ไข src ตรงนี้ค่ะ -->
+                            <img src='https://i.postimg.cc/L6xjNJ5p/Blue-and-White-Modern-Organizational-Structure-A4.png' border='0' alt='Blue-and-White-Modern-Organizational-Structure-A4'/>
+                        </div>
                             การบริหารงานโรงเรียนชุมชนบ้านแม่หละป่าป๋วย ได้กำหนดโครงการบริหารสถานศึกษา ประกอบด้วย ๔ กลุ่มงาน ดังต่อไปนี้:
                         </p>                       
                         <ol class="admin-groups">
@@ -428,10 +410,6 @@
                             <li>กลุ่มงานทั่วไป</li>
                             <li>กลุ่มงานกิจการนักเรียน</li>
                         </ol>
-                        <div class="org-chart-container">
-                            <!-- แก้ไข src ตรงนี้ค่ะ -->
-                            <img src='https://i.postimg.cc/L6xjNJ5p/Blue-and-White-Modern-Organizational-Structure-A4.png' border='0' alt='Blue-and-White-Modern-Organizational-Structure-A4'/>
-                        </div>
                    </div>
 
                 <!-- เนื้อหาส่วนข้อมูลสถานศึกษา (ถูกซ่อนไว้เริ่มต้น) -->
