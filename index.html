@@ -12,7 +12,7 @@
         }
         
         body {
-            background-color: #fffaf0;
+            background-color: #fffaf0; /* FloralWhite */
         }
         
         .menu-item {
@@ -27,7 +27,7 @@
             height: 2px;
             bottom: -2px;
             left: 0;
-            background-color: #fbbf24;
+            background-color: #fbbf24; /* amber-400 */
             transition: width 0.3s ease;
         }
         
@@ -36,27 +36,28 @@
         }
         
         .btn-primary {
-            background-color: #ef4444;
+            background-color: #ef4444; /* red-500 */
             color: #FFF;
             transition: all 0.2s ease;
             border-radius: 50px;
         }
         
         .btn-primary:hover {
-            background-color: #dc2626;
+            background-color: #dc2626; /* red-600 */
             transform: translateY(-2px);
             box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
         }
         
         .sidebar-item {
-            border-bottom: 1px solid #fee2e2;
+            border-bottom: 1px solid #fee2e2; /* red-100 */
             transition: all 0.3s ease;
         }
         
+        .sidebar-item a.active, /* Added for active state */
         .sidebar-item:hover {
-            background-color: rgba(254, 226, 226, 0.5);
+            background-color: rgba(254, 226, 226, 0.5); /* red-100 with opacity */
             padding-left: 0.5rem;
-            color: #dc2626;
+            color: #dc2626; /* red-600 */
         }
         
         .card {
@@ -70,7 +71,6 @@
             box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
         }
   
-        /* Footer line spacing */
         .footer-text {
             line-height: 1.3;
             margin-bottom: 0.3rem;
@@ -80,7 +80,6 @@
             margin-bottom: 0;
         }
         
-        /* Contact info styling */
         .contact-item {
             display: flex;
             align-items: center;
@@ -90,6 +89,11 @@
         .contact-icon {
             margin-right: 0.5rem;
             flex-shrink: 0;
+        }
+
+        /* Class to hide content sections for SPA */
+        .content-section {
+            /* Tailwind's 'hidden' class (display: none) will be used by JS */
         }
         
         @media (max-width: 768px) {
@@ -102,6 +106,10 @@
             }
             .content {
                 width: 100%;
+            }
+            .facebook-iframe { /* Make Facebook iframe responsive */
+                width: 100% !important;
+                max-width: 500px; /* Keep max width if desired */
             }
         }
     </style>
@@ -121,7 +129,7 @@
         <!-- Navigation Menu -->
         <nav class="container mx-auto mt-4">
             <ul class="flex flex-wrap justify-center space-x-1 md:space-x-8 text-white">
-                <li><a href="#" class="menu-item px-3 py-1 hover:text-yellow-200">หน้าหลัก</a></li>
+                <li><a href="#" id="home-link" class="menu-item px-3 py-1 hover:text-yellow-200">หน้าหลัก</a></li>
                 <li><a href="#" class="menu-item px-3 py-1 hover:text-yellow-200">รับการประเมิน สมศ.</a></li>
                 <li><a href="#" class="menu-item px-3 py-1 hover:text-yellow-200">Smart School Service</a></li>
                 <li><a href="#" class="menu-item px-3 py-1 hover:text-yellow-200">Admin</a></li>
@@ -135,16 +143,15 @@
         <aside class="sidebar w-full md:w-1/4">
             <div class="bg-white rounded-2xl shadow-md p-5 card">
                 <h2 class="text-xl font-bold text-red-600 border-b-2 border-yellow-400 pb-2 mb-4">เมนูหลัก</h2>
-                <ul class="space-y-2">
-                    <li class="sidebar-item pb-2"><a href="#" class="block text-gray-700 hover:text-red-600">ประวัติโรงเรียน</a></li>
-                    <li class="sidebar-item pb-2"><a href="#" class="block text-gray-700 hover:text-red-600">วิสัยทัศน์/พันธกิจ</a></li>
-                    <li class="sidebar-item pb-2"><a href="#" class="block text-gray-700 hover:text-red-600">โครงสร้างการบริหาร</a></li>
-                    <li class="sidebar-item pb-2"><a href="#" class="block text-gray-700 hover:text-red-600">ข้อมูลสถานศึกษา</a></li>
-                    <li class="sidebar-item pb-2"><a href="#" class="block text-gray-700 hover:text-red-600">ข้อมูลบุคลากร</a></li>
-                    <li class="sidebar-item pb-2"><a href="#" class="block text-gray-700 hover:text-red-600">ข้อมูลนักเรียน</a></li>
+                <ul class="space-y-2" id="main-menu">
+                    <li class="sidebar-item pb-2"><a href="#" data-target="content-history" class="block text-gray-700">ประวัติโรงเรียน</a></li>
+                    <li class="sidebar-item pb-2"><a href="#" data-target="content-vision" class="block text-gray-700">วิสัยทัศน์/พันธกิจ</a></li>
+                    <li class="sidebar-item pb-2"><a href="#" data-target="content-structure" class="block text-gray-700">โครงสร้างการบริหาร</a></li>
+                    <li class="sidebar-item pb-2"><a href="#" data-target="content-school-info" class="block text-gray-700">ข้อมูลสถานศึกษา</a></li>
+                    <li class="sidebar-item pb-2"><a href="#" data-target="content-personnel" class="block text-gray-700">ข้อมูลบุคลากร</a></li>
+                    <li class="sidebar-item pb-2"><a href="#" data-target="content-students" class="block text-gray-700">ข้อมูลนักเรียน</a></li>
                 </ul>
                 
-                <!-- Added School Information Section -->
                 <h2 class="text-xl font-bold text-red-600 border-b-2 border-yellow-400 pb-2 my-4">สารสนเทศของโรงเรียน</h2>
                 <ul class="space-y-2">
                     <li class="sidebar-item pb-2"><a href="#" class="block text-gray-700 hover:text-red-600">แผนปฏิบัติการประจำปี</a></li>
@@ -181,12 +188,87 @@
         <!-- Center Content -->
         <main class="content w-full md:w-2/4">
             <div class="bg-white rounded-2xl shadow-md p-5 card">
-                <!-- Reduced font size for the welcome heading -->
-                <h2 class="text-xl font-bold text-red-600 border-b-2 border-yellow-400 pb-2 mb-6" justify-content: center;>ยินดีต้อนรับสู่โรงเรียนชุมชนบ้านแม่หละป่าป๋วย</h2>
-                <h3 class="text-xl font-bold text-red-600 mb-4">ข่าวประชาสัมพันธ์</h3>
-                <div style="display: flex; justify-content: center;">
-                    <iframe src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Fprofile.php%3Fid%3D100057201651273&tabs=timeline&width=500&height=800&small_header=true&adapt_container_width=true&hide_cover=false&show_facepile=true&appId=313205698760377" width="500" height="800" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>
+                <!-- This heading can be dynamic too if needed, or static -->
+                <h2 id="center-content-title" class="text-xl font-bold text-red-600 border-b-2 border-yellow-400 pb-2 mb-6">ยินดีต้อนรับสู่โรงเรียนชุมชนบ้านแม่หละป่าป๋วย</h2>
+
+                <!-- Default content (Facebook Feed) -->
+                <div id="content-default" class="content-section">
+                    <h3 class="text-xl font-bold text-red-600 mb-4">ข่าวประชาสัมพันธ์</h3>
+                    <div style="display: flex; justify-content: center;">
+                        <iframe class="facebook-iframe" src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Fprofile.php%3Fid%3D100057201651273&tabs=timeline&width=500&height=800&small_header=true&adapt_container_width=true&hide_cover=false&show_facepile=true&appId=313205698760377" width="500" height="800" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>
+                    </div>
                 </div>
+
+                <!-- Content for ประวัติโรงเรียน -->
+                <div id="content-history" class="content-section hidden">
+                    <!-- h3 can be removed if center-content-title is updated by JS -->
+                    <!-- <h3 class="text-xl font-bold text-red-600 mb-4">ประวัติโรงเรียน</h3> -->
+                    <p>เนื้อหาเกี่ยวกับประวัติโรงเรียน...</p>
+                    <p>โรงเรียนชุมชนบ้านแม่หละป่าป๋วยก่อตั้งขึ้นเมื่อ พ.ศ. .... โดยมีวัตถุประสงค์เพื่อ...</p>
+                    <img src="https://via.placeholder.com/400x200?text=ภาพประวัติโรงเรียน" alt="ภาพประวัติโรงเรียน" class="my-4 rounded-lg">
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                </div>
+
+                <!-- Content for วิสัยทัศน์/พันธกิจ -->
+                <div id="content-vision" class="content-section hidden">
+                    <p><strong>วิสัยทัศน์:</strong></p>
+                    <p>เป็นองค์กรแห่งการเรียนรู้ มุ่งพัฒนาผู้เรียนให้มีคุณภาพตามมาตรฐานการศึกษา มีคุณธรรม นำความรู้ สู่ความเป็นไทย ก้าวทันเทคโนโลยี มีทักษะชีวิต ดำรงตนตามหลักปรัชญาของเศรษฐกิจพอเพียง</p>
+                    <br>
+                    <p><strong>พันธกิจ:</strong></p>
+                    <ol class="list-decimal list-inside ml-4 space-y-1">
+                        <li>พัฒนาระบบบริหารจัดการศึกษาให้มีประสิทธิภาพตามหลักธรรมาภิบาล</li>
+                        <li>ส่งเสริมและพัฒนาผู้เรียนให้มีคุณภาพตามมาตรฐานการศึกษาและทักษะในศตวรรษที่ 21</li>
+                        <li>ปลูกฝังคุณธรรม จริยธรรม ค่านิยมที่พึงประสงค์ และความเป็นไทย</li>
+                        <li>ส่งเสริมการนำเทคโนโลยีมาใช้ในการจัดการเรียนรู้และการบริหารจัดการ</li>
+                        <li>พัฒนาครูและบุคลากรทางการศึกษาให้เป็นมืออาชีพ</li>
+                        <li>สร้างเครือข่ายความร่วมมือกับทุกภาคส่วนในการพัฒนาการศึกษา</li>
+                    </ol>
+                </div>
+
+                <!-- Content for โครงสร้างการบริหาร -->
+                <div id="content-structure" class="content-section hidden">
+                    <p>เนื้อหาเกี่ยวกับโครงสร้างการบริหาร...</p>
+                    <p>ผู้อำนวยการโรงเรียน: นาย/นาง/นางสาว ...</p>
+                    <p>รองผู้อำนวยการฝ่ายวิชาการ: ...</p>
+                    <img src="https://via.placeholder.com/400x200?text=ภาพโครงสร้างองค์กร" alt="ภาพโครงสร้างองค์กร" class="my-4 rounded-lg">
+                </div>
+
+                <!-- Content for ข้อมูลสถานศึกษา -->
+                <div id="content-school-info" class="content-section hidden">
+                    <p><strong>ชื่อสถานศึกษา:</strong> โรงเรียนชุมชนบ้านแม่หละป่าป๋วย</p>
+                    <p><strong>ที่ตั้ง:</strong> ตำบลสรอย อำเภอวังชิ้น จังหวัดแพร่</p>
+                    <p><strong>สังกัด:</strong> สำนักงานเขตพื้นที่การศึกษาประถมศึกษาแพร่เขต 2</p>
+                    <p><strong>ระดับที่เปิดสอน:</strong> อนุบาล - ประถมศึกษาปีที่ 6</p>
+                    <p><strong>ปรัชญาโรงเรียน:</strong> ปญฺญา นรานํ รตนํ (ปัญญาเป็นรัตนะของนรชน)</p>
+                    <p><strong>สีประจำโรงเรียน:</strong> แดง - เหลือง</p>
+                </div>
+
+                <!-- Content for ข้อมูลบุคลากร -->
+                <div id="content-personnel" class="content-section hidden">
+                    <p>เนื้อหาเกี่ยวกับข้อมูลบุคลากร...</p>
+                    <p>โรงเรียนมีบุคลากรทั้งสิ้น XX คน ประกอบด้วย:</p>
+                    <ul class="list-disc list-inside ml-4">
+                        <li>ผู้อำนวยการ 1 คน</li>
+                        <li>ครูผู้สอน XX คน</li>
+                        <li>เจ้าหน้าที่ธุรการ X คน</li>
+                    </ul>
+                    <p><em>(ส่วนนี้สามารถพัฒนาต่อยอดให้ดึงข้อมูลจาก Google Sheets ได้)</em></p>
+                </div>
+
+                <!-- Content for ข้อมูลนักเรียน -->
+                <div id="content-students" class="content-section hidden">
+                    <p>เนื้อหาเกี่ยวกับข้อมูลนักเรียน...</p>
+                    <p>จำนวนนักเรียนปีการศึกษาปัจจุบัน XXX คน</p>
+                    <p>แบ่งเป็นระดับชั้นดังนี้:</p>
+                    <ul class="list-disc list-inside ml-4">
+                        <li>อนุบาล 1: XX คน</li>
+                        <li>อนุบาล 2: XX คน</li>
+                        <li>ประถมศึกษาปีที่ 1: XX คน</li>
+                        <li>...</li>
+                    </ul>
+                    <p><em>(ส่วนนี้สามารถพัฒนาต่อยอดให้ดึงข้อมูลจาก Google Sheets ได้)</em></p>
+                </div>
+
             </div>
         </main>
 
@@ -218,7 +300,6 @@
                     </div>
                 </div>
                 
-                <!-- Contact Information Section -->
                 <h2 class="text-xl font-bold text-red-600 border-b-2 border-yellow-400 pb-2 my-4">ติดต่อเรา</h2>
                 <div class="bg-yellow-50 p-4 rounded-xl mb-4">
                     <div class="contact-item">
@@ -239,16 +320,77 @@
         </aside>
     </div>
 
-    <!-- Footer Section - Reorganized with reduced line spacing -->
+    <!-- Footer Section -->
     <footer class="bg-gradient-to-r from-red-600 to-yellow-500 text-white py-4 mt-8 rounded-t-3xl">
         <div class="container mx-auto px-4">
             <div class="flex flex-col items-center text-center">
-                <!-- Reduced spacing between lines in footer -->
                 <p class="footer-text">โรงเรียนชุมชนบ้านแม่หละป่าป๋วย</p>
                 <p class="footer-text">ตำบลสรอย อำเภอวังชิ้น จังหวัดแพร่</p>
                 <p class="footer-text">สำนักงานเขตพื้นที่การศึกษาประถมศึกษาแพร่เขต 2</p>
             </div>
         </div>
     </footer>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'948447c4c4235f54',t:'MTc0ODY3MTUzNS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const mainMenuLinks = document.querySelectorAll('#main-menu a[data-target]');
+        const homeLink = document.getElementById('home-link');
+        const contentSections = document.querySelectorAll('.content-section');
+        const defaultContent = document.getElementById('content-default');
+        const centerContentTitle = document.getElementById('center-content-title');
+        const initialTitle = centerContentTitle.textContent; // Store initial title
+
+        // Function to show specific content
+        function showContent(targetId, newTitle) {
+            // Hide all content sections
+            contentSections.forEach(section => {
+                section.classList.add('hidden');
+            });
+
+            // Show the target section
+            const targetSection = document.getElementById(targetId);
+            if (targetSection) {
+                targetSection.classList.remove('hidden');
+            }
+
+            // Update the center content title
+            if (newTitle) {
+                centerContentTitle.textContent = newTitle;
+            } else {
+                 centerContentTitle.textContent = initialTitle; // Reset to default if no title provided
+            }
+
+            // Update active state for sidebar menu
+            mainMenuLinks.forEach(link => {
+                link.classList.remove('active'); // Tailwind doesn't have an 'active' class by default for links, you'd need to style it
+                                                // For now, using the custom .sidebar-item a.active style
+                if (link.dataset.target === targetId) {
+                    link.classList.add('active');
+                }
+            });
+        }
+
+        // Event listeners for sidebar menu items
+        mainMenuLinks.forEach(link => {
+            link.addEventListener('click', function (event) {
+                event.preventDefault();
+                const targetId = this.dataset.target;
+                const newTitleText = this.textContent; // Use link text as title
+                showContent(targetId, newTitleText);
+            });
+        });
+
+        // Event listener for "หน้าหลัก" link
+        homeLink.addEventListener('click', function (event) {
+            event.preventDefault();
+            showContent('content-default', initialTitle); // Show default content and reset title
+             mainMenuLinks.forEach(link => link.classList.remove('active')); // Remove active from sidebar
+        });
+
+        // Initial state: show default content
+        showContent('content-default', initialTitle);
+    });
+</script>
+<!-- Cloudflare script removed for clarity, it's not part of the core functionality -->
+</body>
 </html>
