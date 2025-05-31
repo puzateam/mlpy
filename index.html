@@ -245,30 +245,19 @@
 
                 <!-- Content for ข้อมูลบุคลากร -->
                 <div id="content-personnel" class="content-section hidden">
-                    <p>เนื้อหาเกี่ยวกับข้อมูลบุคลากร...</p>
-                    <p>โรงเรียนมีบุคลากรทั้งสิ้น XX คน ประกอบด้วย:</p>
-                    <ul class="list-disc list-inside ml-4">
-                        <li>ผู้อำนวยการ 1 คน</li>
-                        <li>ครูผู้สอน XX คน</li>
-                        <li>เจ้าหน้าที่ธุรการ X คน</li>
-                    </ul>
-                    <p><em>(ส่วนนี้สามารถพัฒนาต่อยอดให้ดึงข้อมูลจาก Google Sheets ได้)</em></p>
+                    <!-- Content for ข้อมูลบุคลากร -->
+                    <div id="content-personnel" class="content-section hidden">
+                        <!-- JavaScript will populate this -->
+                    </div>
                 </div>
 
                 <!-- Content for ข้อมูลนักเรียน -->
-                <div id="content-students" class="content-section hidden">
-                    <p>เนื้อหาเกี่ยวกับข้อมูลนักเรียน...</p>
-                    <p>จำนวนนักเรียนปีการศึกษาปัจจุบัน XXX คน</p>
-                    <p>แบ่งเป็นระดับชั้นดังนี้:</p>
-                    <ul class="list-disc list-inside ml-4">
-                        <li>อนุบาล 1: XX คน</li>
-                        <li>อนุบาล 2: XX คน</li>
-                        <li>ประถมศึกษาปีที่ 1: XX คน</li>
-                        <li>...</li>
-                    </ul>
-                    <p><em>(ส่วนนี้สามารถพัฒนาต่อยอดให้ดึงข้อมูลจาก Google Sheets ได้)</em></p>
+                <div id="content-students" class="content-section hidden"> 
+                    <!-- Content for ข้อมูลนักเรียน -->
+                    <div id="content-students" class="content-section hidden">
+                        <!-- JavaScript will populate this -->
+                    </div>
                 </div>
-
             </div>
         </main>
 
@@ -390,6 +379,163 @@
         // Initial state: show default content
         showContent('content-default', initialTitle);
     });
+
+// (วางต่อจากโค้ด JavaScript เดิมใน index.html)
+
+const WEB_APP_URL = "YOUR_WEB_APP_URL_FROM_APPS_SCRIPT"; // <--- *** แก้ไขตรงนี้ ***
+
+async function fetchPersonnelData() {
+    const personnelContentDiv = document.getElementById('content-personnel');
+    personnelContentDiv.innerHTML = '<p class="text-gray-500">กำลังโหลดข้อมูลบุคลากร...</p>'; // Loading message
+
+    try {
+        const response = await fetch(`${WEB_APP_URL}?action=getPersonnel`);
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const result = await response.json();
+
+        if (result.error) {
+            personnelContentDiv.innerHTML = `<p class="text-red-500">เกิดข้อผิดพลาดในการโหลดข้อมูล: ${result.error} ${result.details || ''}</p>`;
+            console.error("Error fetching personnel:", result);
+            return;
+        }
+
+        if (result.data && result.data.length > 0) {
+            let html = '<h3 class="text-xl font-bold text-red-600 mb-4">ข้อมูลบุคลากร</h3>';
+            html += '<div class="overflow-x-auto">'; // For responsive table
+            html += '<table class="min-w-full divide-y divide-gray-200">';
+            html += '<thead class="bg-gray-50"><tr>';
+            // Dynamically create headers from the first data object's keys, if needed
+            // Or define them statically if you know the columns
+            // Assuming keys are: ลำดับ, คำนำหน้า, ชื่อ, นามสกุล, ตำแหน่ง, กลุ่มสาระ (from Apps Script headers mapping)
+            html += '<th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">ลำดับ</th>';
+            html += '<th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">ชื่อ-นามสกุล</th>';
+            html += '<th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">ตำแหน่ง</th>';
+            html += '<th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">กลุ่มสาระ</th>';
+            // Add more headers if you have more columns like รูปภาพURL
+            html += '</tr></thead>';
+            html += '<tbody class="bg-white divide-y divide-gray-200">';
+
+            result.data.forEach(person => {
+                html += '<tr>';
+                html += `<td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700">${person.ลำดับ || ''}</td>`;
+                html += `<td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700">${person.คำนำหน้า || ''}${person.ชื่อ || ''} ${person.นามสกุล || ''}</td>`;
+                html += `<td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700">${person.ตำแหน่ง || ''}</td>`;
+                html += `<td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700">${person.กลุ่มสาระ || ''}</td>`;
+                // If you have รูปภาพURL:
+                // if (person.รูปภาพURL) {
+                //    html += `<td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700"><img src="${person.รูปภาพURL}" alt="${person.ชื่อ}" class="h-10 w-10 rounded-full"></td>`;
+                // } else {
+                //    html += `<td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700">-</td>`;
+                // }
+                html += '</tr>';
+            });
+
+            html += '</tbody></table>';
+            html += '</div>';
+            personnelContentDiv.innerHTML = html;
+        } else {
+            personnelContentDiv.innerHTML = '<h3 class="text-xl font-bold text-red-600 mb-4">ข้อมูลบุคลากร</h3><p>ไม่พบข้อมูลบุคลากร</p>';
+        }
+    } catch (error) {
+        personnelContentDiv.innerHTML = `<p class="text-red-500">เกิดข้อผิดพลาดในการเชื่อมต่อเพื่อโหลดข้อมูลบุคลากร: ${error.message}</p>`;
+        console.error("Fetch error for personnel:", error);
+    }
+}
+
+async function fetchStudentSummaryData() {
+    const studentContentDiv = document.getElementById('content-students');
+    studentContentDiv.innerHTML = '<p class="text-gray-500">กำลังโหลดข้อมูลนักเรียน...</p>'; // Loading message
+
+    try {
+        const response = await fetch(`${WEB_APP_URL}?action=getStudentSummary`);
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const result = await response.json();
+
+        if (result.error) {
+            studentContentDiv.innerHTML = `<p class="text-red-500">เกิดข้อผิดพลาดในการโหลดข้อมูล: ${result.error} ${result.details || ''}</p>`;
+            console.error("Error fetching student summary:", result);
+            return;
+        }
+
+        if (result.data && result.data.length > 0) {
+            let html = '<h3 class="text-xl font-bold text-red-600 mb-4">ข้อมูลนักเรียน (สรุป)</h3>';
+            html += '<div class="overflow-x-auto">';
+            html += '<table class="min-w-full divide-y divide-gray-200">';
+            html += '<thead class="bg-gray-50"><tr>';
+            html += '<th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">ระดับชั้น</th>';
+            html += '<th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">ชาย</th>';
+            html += '<th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">หญิง</th>';
+            html += '<th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">รวม</th>';
+            html += '</tr></thead>';
+            html += '<tbody class="bg-white divide-y divide-gray-200">';
+
+            let totalStudents = 0;
+            result.data.forEach(level => {
+                html += '<tr>';
+                html += `<td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700">${level.ระดับชั้น || ''}</td>`;
+                html += `<td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700 text-center">${level.จำนวนนักเรียนชาย || 0}</td>`;
+                html += `<td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700 text-center">${level.จำนวนนักเรียนหญิง || 0}</td>`;
+                const sum = (parseInt(level.จำนวนนักเรียนชาย) || 0) + (parseInt(level.จำนวนนักเรียนหญิง) || 0);
+                html += `<td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700 text-center">${sum}</td>`;
+                html += '</tr>';
+                totalStudents += sum;
+            });
+             html += `<tr class="font-bold bg-yellow-50"><td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">รวมทั้งหมด</td><td></td><td></td><td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 text-center">${totalStudents}</td></tr>`;
+            html += '</tbody></table>';
+            html += '</div>';
+            studentContentDiv.innerHTML = html;
+        } else {
+            studentContentDiv.innerHTML = '<h3 class="text-xl font-bold text-red-600 mb-4">ข้อมูลนักเรียน (สรุป)</h3><p>ไม่พบข้อมูลนักเรียน</p>';
+        }
+    } catch (error) {
+        studentContentDiv.innerHTML = `<p class="text-red-500">เกิดข้อผิดพลาดในการเชื่อมต่อเพื่อโหลดข้อมูลนักเรียน: ${error.message}</p>`;
+        console.error("Fetch error for student summary:", error);
+    }
+}
+
+// Modify the showContent function to trigger data fetching when needed
+// (This is an updated version of the previous showContent function)
+function showContent(targetId, newTitle) {
+    contentSections.forEach(section => {
+        section.classList.add('hidden');
+    });
+
+    const targetSection = document.getElementById(targetId);
+    if (targetSection) {
+        targetSection.classList.remove('hidden');
+    }
+
+    if (newTitle) {
+        centerContentTitle.textContent = newTitle;
+    } else {
+        centerContentTitle.textContent = initialTitle;
+    }
+
+    mainMenuLinks.forEach(link => {
+        link.classList.remove('active');
+        if (link.dataset.target === targetId) {
+            link.classList.add('active');
+        }
+    });
+
+    // *** NEW: Fetch data if the target is personnel or students ***
+    if (targetId === 'content-personnel') {
+        // Check if data has already been loaded to avoid multiple fetches if not needed
+        // For simplicity here, we fetch every time. Can be optimized.
+        fetchPersonnelData();
+    } else if (targetId === 'content-students') {
+        fetchStudentSummaryData();
+    }
+}
+
+// Ensure WEB_APP_URL is defined before being used.
+// The rest of your existing JavaScript (event listeners, etc.) should remain.
+// Make sure the initial call to showContent still works as expected for the default view.
+// Example: homeLink.addEventListener... and the initial showContent('content-default', initialTitle);
 </script>
 <!-- Cloudflare script removed for clarity, it's not part of the core functionality -->
 </body>
