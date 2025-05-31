@@ -192,7 +192,7 @@
         #content-vision .strategy-item {
              /* สามารถเพิ่มสไตล์เฉพาะสำหรับ item เหล่านี้ได้ถ้าต้องการ */
         }
-       /* สไตล์เพิ่มเติมสำหรับส่วนโครงสร้างการบริหาร */
+          /* สไตล์เพิ่มเติมสำหรับส่วนโครงสร้างการบริหาร */
         #content-structure h3.section-title { /* หัวข้อหลัก */
             font-size: 1.25rem; /* text-xl */
             font-weight: 700; /* font-bold */
@@ -226,12 +226,9 @@
             max-width: 100%; /* ทำให้รูปภาพ responsive */
             height: auto;     /* รักษาสัดส่วนรูปภาพ */
             border-radius: 4px; /* rounded-sm */
-            /* border: 1px solid #d1d5db; /* Optional: border-gray-300 */
         }
-        #content-structure .image-caption {
-            font-size: 0.875rem; /* text-sm */
-            color: #6b7280; /* text-gray-500 */
-            margin-top: 0.75rem; /* mt-3 */
+        #content-structure .image-caption { /* ลบ caption ที่ไม่จำเป็นออกไปแล้ว */
+            display: none; 
         }
 
         /* ส่วนแสดงรายชื่อบุคลากรจากผัง (ถ้าต้องการแสดงเป็นข้อความด้วย) */
@@ -422,8 +419,7 @@
                 <!-- เนื้อหาส่วนโครงสร้างการบริหาร (ถูกซ่อนไว้เริ่มต้น) -->
                 <div id="content-structure" class="content-section hidden">
                     <h3 class="section-title">โครงสร้างการบริหารงานโรงเรียน</h3>
-                        
-                        <p class="intro-paragraph">
+                    <p class="intro-paragraph">
                             การบริหารงานโรงเรียนชุมชนบ้านแม่หละป่าป๋วย ได้กำหนดโครงการบริหารสถานศึกษา ประกอบด้วย ๔ กลุ่มงาน ดังต่อไปนี้:
                         </p>
                         
@@ -433,13 +429,13 @@
                             <li>กลุ่มงานทั่วไป</li>
                             <li>กลุ่มงานกิจการนักเรียน</li>
                         </ol>
+                    
                         <div class="org-chart-container">
-                             <img src="https://drive.google.com/uc?id=19crF2LA73QyOuu9PpiSRlL_ChqIfGD-q" alt="ผังโครงสร้างการบริหารงานโรงเรียนชุมชนบ้านแม่หละป่าป๋วย" class="org-chart-image">
-                            <p class="image-caption">
-                                ผังโครงสร้างการบริหารงานโรงเรียนชุมชนบ้านแม่หละป่าป๋วย
-                            </p>
+                            <!-- แก้ไข src ตรงนี้ค่ะ -->
+                            <img src="https://drive.google.com/uc?id=19crF2LA73QyOuu9PpiSRlL_ChqIfGD-q" alt="ผังโครงสร้างการบริหารงานโรงเรียนชุมชนบ้านแม่หละป่าป๋วย" class="org-chart-image">
+                            <!-- หนูได้ลบ image-caption ที่เคยแจ้งให้ใส่ URL ออกไปแล้วนะคะ -->
                         </div>
-                    </div>
+                   </div>
 
                 <!-- เนื้อหาส่วนข้อมูลสถานศึกษา (ถูกซ่อนไว้เริ่มต้น) -->
                 <div id="content-school-info" class="content-section hidden text-gray-700">
