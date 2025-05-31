@@ -371,19 +371,41 @@
                     // จัดรูปแบบวันที่สำหรับ 'วันที่มาอยู่โรงเรียนนี้'
                     const dateValue = person['วันที่มาอยู่โรงเรียนนี้']; // Key ต้องตรงกับ Header ใน Sheet
                     let formattedDate = '-';
-                    if (dateValue) {
+
+                    if (dateValue && typeof dateValue === 'string' && dateValue.includes('/')) {
+                        const parts = dateValue.split('/'); // เช่น ["5", "10", "2566"]
+                        if (parts.length === 3) {
+                            const day = parseInt(parts[0], 10);
+                            const month = parseInt(parts[1], 10) - 1; // เดือนใน JavaScript เริ่มจาก 0 (0 = มกราคม)
+                            const buddhistYear = parseInt(parts[2], 10);
+                            
+                            if (!isNaN(day) && !isNaN(month) && !isNaN(buddhistYear) && buddhistYear > 2000) { // ตรวจสอบค่าเบื้องต้น
+                                const christianYear = buddhistYear - 543;
+                                const dateObj = new Date(christianYear, month, day);
+
+                                if (dateObj && !isNaN(dateObj.getTime())) {
+                                    const dateOptions = { day: '2-digit', month: '2-digit', year: 'numeric', calendar: 'buddhist', timeZone: 'Asia/Bangkok' };
+                                    formattedDate = dateObj.toLocaleDateString('th-TH', dateOptions);
+                                } else {
+                                    formattedDate = 'รูปแบบวันที่ไม่ถูกต้อง (หลังแปลง)';
+                                }
+                            } else {
+                                formattedDate = 'ข้อมูลวันที่ไม่ถูกต้อง (ตัวเลข)';
+                            }
+                        } else {
+                            formattedDate = 'รูปแบบวันที่ไม่ตรง (ส่วน)';
+                        }
+                    } else if (dateValue) {
+                        // ถ้าไม่ใช่ string หรือไม่มี '/' ลองพยายามแปลงโดยตรง (อาจเป็น Date object หรือ ISO string)
                         const dateObj = new Date(dateValue);
-                        // ตรวจสอบว่าเป็นวันที่ที่ถูกต้องหรือไม่ ก่อนที่จะแปลง
-                        if (dateObj && !isNaN(dateObj.getTime())) { 
+                        if (dateObj && !isNaN(dateObj.getTime())) {
                             const dateOptions = { day: '2-digit', month: '2-digit', year: 'numeric', calendar: 'buddhist', timeZone: 'Asia/Bangkok' };
                             formattedDate = dateObj.toLocaleDateString('th-TH', dateOptions);
                         } else {
-                            // หากค่าที่ได้จาก Sheet ไม่ใช่ Date ที่ถูกต้อง ให้แสดงค่าเดิม หรือข้อความแจ้ง
-                            formattedDate = typeof dateValue === 'string' ? dateValue : 'ข้อมูลวันที่ไม่ถูกต้อง'; 
+                             formattedDate = (typeof dateValue === 'string' ? dateValue : 'ข้อมูลวันที่ไม่ชัดเจน');
                         }
                     }
-                    html += `<td class="px-4 py-2 whitespace-nowrap">${formattedDate}</td>`;
-                    
+                    html += `<td class="px-4 py-2 whitespace-nowrap">${formattedDate}</td>`;                    
                     html += `<td class="px-4 py-2 whitespace-nowrap">${person['วิชาเอก'] || '-'}</td>`;
                     html += `<td class="px-4 py-2 whitespace-nowrap">${person['อีเมลล์'] || '-'}</td>`;
                     html += '</tr>';
