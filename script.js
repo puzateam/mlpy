@@ -132,7 +132,7 @@ async function fetchPersonnelData() {
     const personnelContentDiv = document.getElementById('content-personnel');
     personnelContentDiv.innerHTML = '<p class="text-gray-500 animate-pulse">กำลังโหลดข้อมูลบุคลากร...</p>'; 
     try {
-        // <<<<< แก้ไขตรงนี้: เปลี่ยน ×tamp เป็น ×tamp >>>>>
+        // <<<<< แก้ไขตรงนี้: เปลี่ยน ×tamp เป็น &timestamp >>>>>
         const response = await fetch(`${WEB_APP_URL}?action=getPersonnel&timestamp=${new Date().getTime()}`); 
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`); 
@@ -144,7 +144,6 @@ async function fetchPersonnelData() {
             return;
         }
         if (result.data && result.data.length > 0) { 
-            let html = '<h3 class="text-xl font-bold text-red-600 mb-4">ข้อมูลบุคลากร</h3>';
             html += '<div class="overflow-x-auto">'; 
             html += '<table class="min-w-full divide-y divide-gray-200 text-sm">';
             html += '<thead class="bg-gray-50"><tr>';
@@ -183,7 +182,7 @@ async function fetchStudentSummaryData() {
     const studentContentDiv = document.getElementById('content-students');
     studentContentDiv.innerHTML = '<p class="text-gray-500 animate-pulse">กำลังโหลดข้อมูลนักเรียน...</p>'; 
     try {
-        // <<<<< แก้ไขตรงนี้: เปลี่ยน ×tamp เป็น ×tamp >>>>>
+        // <<<<< แก้ไขตรงนี้: เปลี่ยน ×tamp เป็น &timestamp >>>>>
         const response = await fetch(`${WEB_APP_URL}?action=getStudentSummary&timestamp=${new Date().getTime()}`); 
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`); 
@@ -195,7 +194,6 @@ async function fetchStudentSummaryData() {
             return;
         }
         if (result.data && result.data.length > 0) { 
-            let html = '<h3 class="text-xl font-bold text-red-600 mb-4">ข้อมูลนักเรียน (สรุป)</h3>';
             html += '<div class="overflow-x-auto">'; 
             html += '<table class="min-w-full divide-y divide-gray-200 text-sm">';
             html += '<thead class="bg-gray-50"><tr>';
@@ -239,7 +237,7 @@ async function fetchAndDisplayTableData(actionName, targetDivId, tableTitle) {
     const contentDiv = document.getElementById(targetDivId);
     contentDiv.innerHTML = `<p class="text-gray-500 animate-pulse">กำลังโหลดข้อมูล ${tableTitle}...</p>`;
     try {
-        // <<<<< แก้ไขตรงนี้: เปลี่ยน ×tamp เป็น ×tamp >>>>>
+        // <<<<< แก้ไขตรงนี้: เปลี่ยน ×tamp เป็น &timestamp >>>>>
         const response = await fetch(`${WEB_APP_URL}?action=${actionName}&timestamp=${new Date().getTime()}`); 
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
@@ -251,7 +249,6 @@ async function fetchAndDisplayTableData(actionName, targetDivId, tableTitle) {
             return;
         }
         if (result.data && result.data.length > 0) {
-            let html = `<h3 class="text-xl font-bold text-red-600 mb-4">${tableTitle}</h3>`;
             html += '<div class="overflow-x-auto">';
             html += '<table class="link-table min-w-full text-sm">'; 
             html += '<thead class="bg-gray-100"><tr>';
