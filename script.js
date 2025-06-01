@@ -133,7 +133,7 @@ async function fetchVisitorStats() {
     const visitsMonthEl = document.getElementById('visits-this-month');
     const visitsTotalEl = document.getElementById('visits-total');
     try {
-        const response = await fetch(`${WEB_APP_URL}?action=logVisitAndGetCounts×tamp=${new Date().getTime()}`);
+        const response = await fetch(`${WEB_APP_URL}?action=logVisitAndGetCounts&timestamp=${new Date().getTime()}`);
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
