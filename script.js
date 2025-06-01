@@ -294,7 +294,7 @@ async function fetchAndDisplayTableData(actionName, targetDivId, tableTitleFromM
             html += '<tbody class="bg-white divide-y divide-gray-200">';
             result.data.forEach(item => {
                 const linkDestination = item.link && item.link.trim() !== "" ? item.link.trim() : "#";
-                const linkText = linkDestination !== "#" ? "เปิดลิงก์" : "ไม่มีลิงก์";
+                const linkText = linkDestination !== "#" ? "<img src='https://i.postimg.cc/25R6kGJx/ico1.png' border='0' alt='ico1'/>" : "ไม่มีลิงก์";
                 const targetAttribute = linkDestination !== "#" && (linkDestination.startsWith('http://') || linkDestination.startsWith('https://')) ? 'target="_blank" rel="noopener noreferrer"' : '';
                 html += '<tr>';
                 html += `<td class="col-number px-4 py-2 text-center whitespace-nowrap">${item.number || '-'}</td>`;
