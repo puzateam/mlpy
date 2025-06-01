@@ -265,6 +265,8 @@ async function fetchStudentSummaryData() {
 // ฟังก์ชันสำหรับดึงและแสดงข้อมูลตารางลิงก์ (Smart School, สารสนเทศอื่นๆ)
 async function fetchAndDisplayTableData(actionName, targetDivId, tableTitleFromMenu) {
     const contentDiv = document.getElementById(targetDivId);
+    contentDiv.innerHTML = '<p class="text-gray-500 animate-pulse">กำลังโหลดข้อมูล...</p>'; 
+
     // contentDiv.innerHTML = `<p class="text-gray-500 animate-pulse">กำลังโหลดข้อมูล ${tableTitleFromMenu}...</p>`; // หัวข้อจะถูกตั้งโดย showContent
 
     try {
