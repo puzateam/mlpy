@@ -140,7 +140,8 @@ async function fetchPersonnelData() {
             return;
         }
         if (result.data && result.data.length > 0) { 
-            let html += '<div class="overflow-x-auto">'; 
+            let html = `.`;
+            html += '<div class="overflow-x-auto">'; 
             html += '<table class="min-w-full divide-y divide-gray-200 text-sm">';
             html += '<thead class="bg-gray-50"><tr>';
             html += '<th scope="col" class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">ชื่อ-นามสกุล</th>';
@@ -190,7 +191,8 @@ async function fetchStudentSummaryData() {
             return;
         }
         if (result.data && result.data.length > 0) { 
-            let html += '<div class="overflow-x-auto">'; 
+            let html = `.`;
+            html += '<div class="overflow-x-auto">'; 
             html += '<table class="min-w-full divide-y divide-gray-200 text-sm">';
             html += '<thead class="bg-gray-50"><tr>';
             html += '<th scope="col" class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">ระดับชั้น</th>';
@@ -245,6 +247,7 @@ async function fetchAndDisplayTableData(actionName, targetDivId, tableTitle) {
             return;
         }
         if (result.data && result.data.length > 0) {
+            let html = `.`;
             html += '<div class="overflow-x-auto">';
             html += '<table class="link-table min-w-full text-sm">'; 
             html += '<thead class="bg-gray-100"><tr>';
