@@ -285,7 +285,6 @@ function displayPdf(targetDivId, pdfUrl, pdfTitle) {
     const contentDiv = document.getElementById(targetDivId);
     if (pdfUrl && pdfUrl !== 'URL_PDF_แผนปฏิบัติการ.pdf' && pdfUrl !== 'URL_PDF_รายงานผล.pdf' && pdfUrl.toLowerCase().endsWith('.pdf')) {
          contentDiv.innerHTML = `
-            <h3 class="text-xl font-bold text-red-600 mb-4">${pdfTitle}</h3>
             <iframe src="${pdfUrl}" class="pdf-embed-container" frameborder="0">
                 <p>เบราว์เซอร์ของคุณไม่รองรับการแสดง PDF โดยตรง คุณสามารถ <a href="${pdfUrl}" target="_blank">ดาวน์โหลดไฟล์ PDF ที่นี่</a></p>
             </iframe>`;
