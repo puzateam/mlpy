@@ -315,15 +315,15 @@ async function fetchAndDisplayTableData(actionName, targetDivId, tableTitleFromM
 }
 
 // ฟังก์ชันสำหรับแสดง PDF
-function displayPdf(targetDivId, pdfUrl, pdfTitleFromMenu) {
+function displayPdf(targetDivId, pdfUrl) { // ลบ pdfTitleFromMenu ออกถ้าไม่ใช้แล้ว
     const contentDiv = document.getElementById(targetDivId);
     // contentDiv.innerHTML = ''; // ล้างเนื้อหาเก่า (หัวข้อจะถูกตั้งโดย showContent)
 
-    if (pdfUrl && pdfUrl.startsWith('https://drive.google.com/file/d/')) { 
+    if (pdfUrl && pdfUrl.startsWith('https://drive.google.com/file/d/')) {
          contentDiv.innerHTML = `
-            <iframe src="${pdfUrl}" class="pdf-embed-container" frameborder="0">
-                <p>เบราว์เซอร์ของคุณไม่รองรับการแสดง PDF โดยตรง คุณสามารถ <a href="${pdfUrl.replace('/preview', '/view')}" target="_blank" rel="noopener noreferrer">เปิดหรือดาวน์โหลดไฟล์ PDF ที่นี่</a>.</p> 
-            </iframe>`;
+            <iframe src="${pdfUrl}" class="pdf-embed-container" frameborder="0" allowfullscreen>
+                <p>เบราว์เซอร์ของคุณไม่รองรับการแสดง PDF โดยตรง คุณสามารถ <a href="${pdfUrl.replace('/preview', '/view')}" target="_blank" rel="noopener noreferrer">เปิดหรือดาวน์โหลดไฟล์ PDF ที่นี่</a>.</p>
+            </iframe>`; // เพิ่ม allowfullscreen
     } else {
          contentDiv.innerHTML = `
             <p class="text-gray-600 mt-4">ยังไม่มีไฟล์ให้แสดงในขณะนี้ หรือ URL ของ PDF ไม่ถูกต้อง</p>
