@@ -84,7 +84,7 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background-image: url('img/around%20(31).jpg'); /* ตรวจสอบ Path นี้ให้ถูกต้อง */
+    background-image: url('img/around(31).jpg'); /* ตรวจสอบ Path นี้ให้ถูกต้อง */
     background-repeat: no-repeat;
     background-position: center center;
     background-size: cover;
