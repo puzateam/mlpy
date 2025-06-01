@@ -60,21 +60,15 @@ body {
     color: #dc2626; /* สี red-600 ของ Tailwind, เปลี่ยนสีตัวอักษร */
 }
 
-/* ปรับ .card เพื่อรองรับการขยายของ content-section */
+/* สไตล์สำหรับ Card (กล่องเนื้อหา) /
 .card {
-    border-radius: 16px;
-    overflow: hidden; /* อาจต้องเอาออกถ้า content-section จะขยาย */
-    transition: all 0.3s ease;
-    /* เพิ่มเพื่อให้ flex ทำงานได้ดี */
-    display: flex; /* ทำให้เป็น flex container */
-    flex-direction: column; /* จัดเรียง item ภายใน (h2, content-section) เป็นแนวตั้ง */
-    /* อาจจะต้องกำหนด min-height หรือ height ให้ .card ถ้าต้องการให้มันสูงระดับหนึ่ง */
-    /* min-height: 80vh; หรือค่าที่เหมาะสม */
+border-radius: 16px; / ความโค้งมนของขอบ Card /
+overflow: hidden; / ป้องกันเนื้อหาล้นขอบ */
+transition: all 0.3s ease;
 }
-
 .card:hover {
-    transform: translateY(-5px); /* เอฟเฟกต์ Card ลอยขึ้นเมื่อ hover */
-    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); /* เพิ่มเงาที่ชัดขึ้น */
+transform: translateY(-5px); /* เอฟเฟกต์ Card ลอยขึ้นเมื่อ hover /
+box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); / เพิ่มเงาที่ชัดขึ้น */
 }
 
 /* สไตล์สำหรับข้อความใน Footer */
@@ -102,9 +96,6 @@ body {
 /* คลาสสำหรับซ่อน/แสดงส่วนเนื้อหาด้วย JavaScript */
 .content-section {
     /* JavaScript จะเพิ่ม/ลบคลาส 'hidden' (display: none ของ Tailwind) */
-    flex-grow: 1; /* อนุญาตให้ .content-section ขยายเพื่อเติมพื้นที่ */
-    display: flex; /* ทำให้ .content-section เป็น flex container ด้วย */
-    flex-direction: column; /* จัดเรียง item ภายใน (iframe) เป็นแนวตั้ง */
 }
 
 /* สไตล์เพิ่มเติมสำหรับส่วนประวัติโรงเรียน (#content-history) */
@@ -280,9 +271,7 @@ body {
 
 /* สไตล์สำหรับ iframe ที่แสดง PDF */
 .pdf-embed-container {
-    width: 100%;
-    /* height: 70vh;  <-- เอาค่านี้ออก หรือปรับเป็น 100% */
-    height: 100%;    /* ให้ iframe ขยายเต็มความสูงของ parent (.content-section) */
-    border: 1px solid #ccc;
-    flex-grow: 1; /* ให้ iframe ขยายใน content-section */
+width: 100%;
+height: 70vh; / ความสูง 100% ของ viewport height (ปรับได้) /
+border: 1px solid #ccc; / เส้นขอบ */
 }
