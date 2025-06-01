@@ -1,5 +1,5 @@
 // URL ของ Google Apps Script Web App ที่ deploy ไว้
-const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbx8_EwD9mFtTngc-oZMld6BYrFGdUrym5qCWCL7PGVTuhULVt-nbCzWKEzPZLBVCEOP/exec";
+const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbx7COpl7wBfRS6DvxWq8382X8PExJmKciOpluJY4l78ob5biIXlQ4HkYfyG8UDzbeU4/exec";
 
 // --- ฟังก์ชันเกี่ยวกับอายุโรงเรียนและเดือน ---
 function calculateAndDisplaySchoolAge() {
