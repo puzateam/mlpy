@@ -139,7 +139,6 @@ async function fetchPersonnelData() {
             return;
         }
         if (result.data && result.data.length > 0) { 
-            let html = '<h3 class="text-xl font-bold text-red-600 mb-4">ข้อมูลบุคลากร</h3>';
             html += '<div class="overflow-x-auto">'; 
             html += '<table class="min-w-full divide-y divide-gray-200 text-sm">';
             html += '<thead class="bg-gray-50"><tr>';
@@ -190,7 +189,6 @@ async function fetchStudentSummaryData() {
             return;
         }
         if (result.data && result.data.length > 0) { 
-            let html = '<h3 class="text-xl font-bold text-red-600 mb-4">ข้อมูลนักเรียน (สรุป)</h3>';
             html += '<div class="overflow-x-auto">'; 
             html += '<table class="min-w-full divide-y divide-gray-200 text-sm">';
             html += '<thead class="bg-gray-50"><tr>';
