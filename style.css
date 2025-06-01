@@ -1,267 +1,278 @@
-        * {
-            font-family: 'Prompt', sans-serif;
-        }
-        
-        body {
-            background-color: #fffaf0; /* สี FloralWhite */
-        }
-        
-        .menu-item {
-            position: relative;
-            transition: all 0.3s ease;
-        }
-        
-        .menu-item:after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 2px;
-            bottom: -2px;
-            left: 0;
-            background-color: #fbbf24; /* สี amber-400 ของ Tailwind */
-            transition: width 0.3s ease;
-        }
-        
-        .menu-item.active:after, /* เพิ่มสไตล์ active สำหรับเมนู header */
-        .menu-item:hover:after {
-            width: 100%;
-        }
-        
-        .btn-primary {
-            background-color: #ef4444; /* สี red-500 ของ Tailwind */
-            color: #FFF;
-            transition: all 0.2s ease;
-            border-radius: 50px;
-        }
-        
-        .btn-primary:hover {
-            background-color: #dc2626; /* สี red-600 ของ Tailwind */
-            transform: translateY(-2px);
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-        }
-        
-        .sidebar-item {
-            border-bottom: 1px solid #fee2e2; /* สี red-100 ของ Tailwind */
-            transition: all 0.3s ease;
-        }
-        
-        .sidebar-item a.active, 
-        .sidebar-item:hover {
-            background-color: rgba(254, 226, 226, 0.5); 
-            padding-left: 0.5rem;
-            color: #dc2626; 
-        }
-        
-        .card {
-            border-radius: 16px;
-            overflow: hidden;
-            transition: all 0.3s ease;
-        }
-        
-        .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-        }
-  
-        .footer-text {
-            line-height: 1.3;
-            margin-bottom: 0.3rem;
-        }
-        
-        .footer-text:last-child {
-            margin-bottom: 0;
-        }
-        
-        .contact-item {
-            display: flex;
-            align-items: center;
-            margin-bottom: 0.5rem;
-        }
-        
-        .contact-icon {
-            margin-right: 0.5rem;
-            flex-shrink: 0;
-        }
+/* การตั้งค่าฟอนต์เริ่มต้นสำหรับทุก elements */
+* {
+    font-family: 'Prompt', sans-serif;
+}
 
-        .content-section {
-            /* default hidden by JS */
-        }
+/* สไตล์สำหรับ body */
+body {
+    background-color: #fffaf0; /* สี FloralWhite */
+}
 
-        #content-history p {
-            margin-bottom: 0.75rem; 
-            line-height: 1.6; 
-            text-indent: 2em; 
-        }
-        #content-history h4 {
-            font-weight: 600; 
-            color: #c2410c; 
-            margin-top: 1rem;
-            margin-bottom: 0.5rem;
-        }
-        #content-history strong { 
-            color: #b91c1c; 
-        }
-        #content-history .org-chart-container { /* ย้าย .org-chart-container มาใช้ร่วมกัน */
-            text-align: center; 
-            margin-top: 1.5rem; 
-            margin-bottom: 1.5rem; 
-            padding: 1rem;
-            background-color: #f9fafb; 
-            border-radius: 8px; 
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); 
-        }
-        
-        @media (max-width: 768px) { 
-            .main-container {
-                flex-direction: column; 
-            }
-            .sidebar {
-                width: 100%; 
-                margin-bottom: 1rem;
-            }
-            .content {
-                width: 100%; 
-            }
-            .facebook-iframe { 
-                width: 100% !important;
-                max-width: 500px; 
-            }
-        }
+/* สไตล์สำหรับรายการเมนูหลัก (Header Menu) */
+.menu-item {
+    position: relative; /* สำหรับการกำหนดตำแหน่งของ pseudo-element :after */
+    transition: all 0.3s ease; /* เอฟเฟกต์การเปลี่ยนแปลงที่นุ่มนวล */
+}
 
-        #content-school-info p {
-            margin-bottom: 0.75rem; 
-            line-height: 1.6; 
-        }
-        #content-school-info .info-label { 
-            font-weight: 600; 
-            color: #4b5563; 
-        }
-        #content-school-info .school-identity-title { 
-            font-size: 1.125rem; 
-            font-weight: 600; 
-            color: #b91c1c; 
-            margin-top: 1.25rem; 
-            margin-bottom: 0.5rem; 
-        }
-        #content-school-info .school-identity-text { 
-            font-size: 1.25rem; 
-            color: #c2410c; 
-            margin-left: 1rem; 
-            font-weight: 500;
-        }
-        #content-school-info .color-box { 
-            display: inline-block;
-            width: 1em;
-            height: 1em;
-            margin-right: 0.3em;
-            border-radius: 3px;
-            vertical-align: middle;
-        }
-        /* ใช้ .org-chart-container ร่วมกับ #content-history และ #content-structure */
-        /* #content-school-info .org-chart-container { ... } */
+/* เส้นใต้สำหรับรายการเมนูหลัก (ซ่อนไว้เริ่มต้น) */
+.menu-item:after {
+    content: '';
+    position: absolute;
+    width: 0; /* เริ่มต้นความกว้างเป็น 0 */
+    height: 2px;
+    bottom: -2px; /* ตำแหน่งใต้ข้อความ */
+    left: 0;
+    background-color: #fbbf24; /* สี amber-400 ของ Tailwind */
+    transition: width 0.3s ease; /* เอฟเฟกต์การเปลี่ยนแปลงความกว้าง */
+}
 
+/* แสดงเส้นใต้เมื่อเมนู active หรือเมื่อ hover */
+.menu-item.active:after, /* เมื่อเมนูมีคลาส active */
+.menu-item:hover:after {
+    width: 100%; /* ความกว้างเต็ม */
+}
 
-        #content-vision h3 { 
-            font-size: 1.25rem; 
-            font-weight: 700; 
-            color: #b91c1c; 
-            margin-top: 1.5rem; 
-            margin-bottom: 0.75rem; 
-        }
-        #content-vision h3:first-child {
-            margin-top: 0; 
-        }
-        #content-vision p.vision-statement { 
-            font-size: 1.125rem; 
-            line-height: 1.7;
-            margin-left: 1rem; 
-            margin-bottom: 1.5rem; 
-            font-style: italic;
-            color: #374151; 
-        }
-        #content-vision ol, #content-vision ul { 
-            list-style-position: outside;
-            margin-left: 2.5rem; 
-            margin-bottom: 1.5rem; 
-        }
-        #content-vision ol li, #content-vision ul li {
-            margin-bottom: 0.5rem; 
-            line-height: 1.6;
-        }
-        /* #content-vision .mission-item,  */
-        /* #content-vision .goal-item, */
-        /* #content-vision .strategy-item { */
-        /* }  */
-        /* ใช้ .org-chart-container ร่วมกับ #content-history และ #content-structure */
-        /* #content-vision .org-chart-container { ... } */
+/* สไตล์สำหรับปุ่มหลัก */
+.btn-primary {
+    background-color: #ef4444; /* สี red-500 ของ Tailwind */
+    color: #FFF;
+    transition: all 0.2s ease;
+    border-radius: 50px; /* ทำให้ปุ่มโค้งมน */
+}
 
+.btn-primary:hover {
+    background-color: #dc2626; /* สี red-600 ของ Tailwind */
+    transform: translateY(-2px); /* เอฟเฟกต์ปุ่มลอยขึ้นเล็กน้อยเมื่อ hover */
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); /* เพิ่มเงา */
+}
 
-        #content-structure h3.section-title { 
-            font-size: 1.25rem; 
-            font-weight: 700; 
-            color: #b91c1c; 
-            margin-bottom: 1rem; 
-        }
-        #content-structure .intro-paragraph {
-            margin-bottom: 1rem; 
-            line-height: 1.6;
-        }
-        #content-structure ol.admin-groups {
-            list-style-type: decimal; 
-            list-style-position: outside;
-            margin-left: 2.5rem; 
-            margin-bottom: 1.5rem; 
-        }
-        #content-structure ol.admin-groups li {
-            margin-bottom: 0.5rem; 
-            line-height: 1.6;
-        }
-        /* ใช้ .org-chart-container ร่วมกับ #content-history */
-        #content-structure .org-chart-image {
-            max-width: 100%; 
-            height: auto;     
-            border-radius: 4px; 
-            border: 1px solid #9398a1; 
-        }
-        #content-structure .image-caption { 
-            display: none; 
-        }
+/* สไตล์สำหรับรายการเมนูใน Sidebar */
+.sidebar-item {
+    border-bottom: 1px solid #fee2e2; /* สี red-100 ของ Tailwind, เส้นคั่นบางๆ */
+    transition: all 0.3s ease;
+}
 
-        .link-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 1rem;
-        }
-        .link-table th, .link-table td {
-            border: 1px solid #ddd;
-            padding: 8px;
-            text-align: left;
-        }
-        .link-table th {
-            background-color: #f2f2f2;
-            font-weight: 600;
-        }
-        .link-table td a {
-            color: #2563eb; 
-            text-decoration: none;
-        }
-        .link-table td a:hover {
-            text-decoration: underline;
-        }
-        .link-table .col-number {
-            width: 10%;
-            text-align: center;
-        }
-        .link-table .col-name {
-            width: 60%;
-        }
-        .link-table .col-link {
-            width: 30%;
-            text-align: center;
-        }
+/* สไตล์เมื่อรายการเมนูใน Sidebar active หรือเมื่อ hover */
+.sidebar-item a.active, 
+.sidebar-item:hover {
+    background-color: rgba(254, 226, 226, 0.5); /* สี red-100 ของ Tailwind แบบโปร่งแสง */
+    padding-left: 0.5rem; /* เพิ่ม padding ซ้ายเมื่อ active/hover */
+    color: #dc2626; /* สี red-600 ของ Tailwind, เปลี่ยนสีตัวอักษร */
+}
 
-        .pdf-embed-container {
-            width: 100%;
-            height: 70vh; 
-            border: 1px solid #ccc;
-        }
+/* สไตล์สำหรับ Card (กล่องเนื้อหา) */
+.card {
+    border-radius: 16px; /* ความโค้งมนของขอบ Card */
+    overflow: hidden; /* ป้องกันเนื้อหาล้นขอบ */
+    transition: all 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px); /* เอฟเฟกต์ Card ลอยขึ้นเมื่อ hover */
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); /* เพิ่มเงาที่ชัดขึ้น */
+}
+
+/* สไตล์สำหรับข้อความใน Footer */
+.footer-text {
+    line-height: 1.3; /* ความสูงระหว่างบรรทัด */
+    margin-bottom: 0.3rem;
+}
+
+.footer-text:last-child {
+    margin-bottom: 0;
+}
+
+/* สไตล์สำหรับรายการข้อมูลติดต่อ */
+.contact-item {
+    display: flex;
+    align-items: center; /* จัดไอคอนและข้อความให้อยู่กึ่งกลางแนวตั้ง */
+    margin-bottom: 0.5rem;
+}
+
+.contact-icon {
+    margin-right: 0.5rem;
+    flex-shrink: 0; /* ป้องกันไอคอนถูกบีบเมื่อข้อความยาว */
+}
+
+/* คลาสสำหรับซ่อน/แสดงส่วนเนื้อหาด้วย JavaScript */
+.content-section {
+    /* JavaScript จะเพิ่ม/ลบคลาส 'hidden' (display: none ของ Tailwind) */
+}
+
+/* สไตล์เพิ่มเติมสำหรับส่วนประวัติโรงเรียน (#content-history) */
+#content-history p {
+    margin-bottom: 0.75rem; 
+    line-height: 1.6; 
+    text-indent: 2em; /* ย่อหน้าบรรทัดแรก */
+}
+#content-history h4 { /* หัวข้อย่อยในประวัติโรงเรียน */
+    font-weight: 600; 
+    color: #c2410c; /* สีส้มเข้ม */
+    margin-top: 1rem;
+    margin-bottom: 0.5rem;
+}
+#content-history strong { /* เน้นข้อความสำคัญในประวัติโรงเรียน */
+    color: #b91c1c; /* สีแดงเข้ม */
+}
+
+/* สไตล์สำหรับ Container ของรูปภาพผังองค์กร หรือรูปภาพอื่นๆ ที่ต้องการจัดกลางและมีพื้นหลัง */
+.org-chart-container { 
+    text-align: center; /* จัดรูปภาพให้อยู่กึ่งกลาง */
+    margin-top: 1.5rem; 
+    margin-bottom: 1.5rem; 
+    padding: 1rem;
+    background-color: #f9fafb; /* สีพื้นหลังอ่อนๆ (Tailwind gray-50) */
+    border-radius: 8px; /* ความโค้งมนของขอบ */
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); /* เพิ่มเงา */
+}
+/* สไตล์สำหรับรูปภาพภายใน .org-chart-container */
+.org-chart-image {
+    max-width: 100%; /* ทำให้รูปภาพ responsive */
+    height: auto;     /* รักษาสัดส่วนรูปภาพ */
+    border-radius: 4px; /* ความโค้งมนของขอบรูปภาพ */
+    border: 1px solid #9398a1; /* เส้นขอบรูปภาพ (สีเทา) */
+}
+
+/* Media Query สำหรับหน้าจอขนาดเล็ก (Responsive Design) */
+@media (max-width: 768px) { 
+    .main-container {
+        flex-direction: column; /* จัดเรียงเนื้อหาหลักเป็นแนวตั้ง */
+    }
+    .sidebar {
+        width: 100%; 
+        margin-bottom: 1rem;
+    }
+    .content {
+        width: 100%; 
+    }
+    .facebook-iframe { /* ทำให้ iframe ของ Facebook ตอบสนองตามขนาดหน้าจอ */
+        width: 100% !important;
+        max-width: 500px; 
+    }
+}
+
+/* สไตล์เพิ่มเติมสำหรับส่วนข้อมูลสถานศึกษา (#content-school-info) */
+#content-school-info p {
+    margin-bottom: 0.75rem; 
+    line-height: 1.6; 
+}
+#content-school-info .info-label { /* ป้ายกำกับข้อมูล เช่น "ชื่อโรงเรียน :" */
+    font-weight: 600; 
+    color: #4b5563; /* สีเทาเข้ม */
+}
+#content-school-info .school-identity-title { /* หัวข้อ อัตลักษณ์, ปรัชญา, สี */
+    font-size: 1.125rem; /* ขนาดตัวอักษร (Tailwind text-lg) */
+    font-weight: 600; 
+    color: #b91c1c; /* สีแดงเข้ม (Tailwind text-red-700) */
+    margin-top: 1.25rem; 
+    margin-bottom: 0.5rem; 
+}
+#content-school-info .school-identity-text { /* เนื้อหาของอัตลักษณ์, ปรัชญา, สี */
+    font-size: 1.25rem; /* ขนาดตัวอักษร (Tailwind text-xl) */
+    color: #c2410c; /* สีส้ม-แดง */
+    margin-left: 1rem; 
+    font-weight: 500;
+}
+#content-school-info .color-box { /* กล่องสีเล็กๆ สำหรับแสดงสีประจำโรงเรียน */
+    display: inline-block;
+    width: 1em;
+    height: 1em;
+    margin-right: 0.3em;
+    border-radius: 3px;
+    vertical-align: middle; /* จัดให้อยู่กึ่งกลางกับข้อความ */
+}
+
+/* สไตล์เพิ่มเติมสำหรับส่วนวิสัยทัศน์/พันธกิจ (#content-vision) */
+#content-vision h3 { 
+    font-size: 1.25rem; 
+    font-weight: 700; 
+    color: #b91c1c; 
+    margin-top: 1.5rem; 
+    margin-bottom: 0.75rem; 
+}
+#content-vision h3:first-child { /* ไม่ให้หัวข้อแรกมี margin-top มากเกินไป */
+    margin-top: 0; 
+}
+#content-vision p.vision-statement { /* สไตล์สำหรับข้อความวิสัยทัศน์ */
+    font-size: 1.125rem; 
+    line-height: 1.7;
+    margin-left: 1rem; 
+    margin-bottom: 1.5rem; 
+    font-style: italic; /* ตัวเอียง */
+    color: #374151; /* สีเทาเข้ม */
+}
+#content-vision ol, #content-vision ul { /* สไตล์สำหรับรายการ (พันธกิจ, เป้าประสงค์, กลยุทธ์) */
+    list-style-position: outside; /* ให้ bullet/ตัวเลข อยู่นอกข้อความ */
+    margin-left: 2.5rem; /* เยื้องเข้ามา */
+    margin-bottom: 1.5rem; 
+}
+#content-vision ol li, #content-vision ul li { /* แต่ละรายการย่อย */
+    margin-bottom: 0.5rem; 
+    line-height: 1.6;
+}
+
+/* สไตล์เพิ่มเติมสำหรับส่วนโครงสร้างการบริหาร (#content-structure) */
+#content-structure h3.section-title { 
+    font-size: 1.25rem; 
+    font-weight: 700; 
+    color: #b91c1c; 
+    margin-bottom: 1rem; 
+}
+#content-structure .intro-paragraph { /* ย่อหน้าเกริ่นนำ */
+    margin-bottom: 1rem; 
+    line-height: 1.6;
+}
+#content-structure ol.admin-groups { /* รายการกลุ่มงานบริหาร */
+    list-style-type: decimal; /* แสดงเป็นตัวเลข */
+    list-style-position: outside;
+    margin-left: 2.5rem; 
+    margin-bottom: 1.5rem; 
+}
+#content-structure ol.admin-groups li {
+    margin-bottom: 0.5rem; 
+    line-height: 1.6;
+}
+#content-structure .image-caption { /* คำอธิบายใต้ภาพ (ถ้ามี) */
+    display: none; /* ปัจจุบันซ่อนไว้ */
+}
+
+/* สไตล์สำหรับตารางลิงก์ (Smart School Service, สารสนเทศอื่นๆ) */
+.link-table {
+    width: 100%;
+    border-collapse: collapse; /* รวมเส้นขอบเซลล์ */
+    margin-top: 1rem;
+}
+.link-table th, .link-table td { /* หัวตาราง และ เซลล์ข้อมูล */
+    border: 1px solid #ddd; /* เส้นขอบเซลล์ */
+    padding: 8px;
+    text-align: left; /* จัดข้อความชิดซ้าย */
+}
+.link-table th { /* หัวตาราง */
+    background-color: #f2f2f2; /* สีพื้นหลังหัวตาราง */
+    font-weight: 600;
+}
+.link-table td a { /* ลิงก์ในตาราง */
+    color: #2563eb; /* สีน้ำเงิน (Tailwind blue-600) */
+    text-decoration: none; /* ไม่ขีดเส้นใต้ */
+}
+.link-table td a:hover {
+    text-decoration: underline; /* ขีดเส้นใต้เมื่อ hover */
+}
+.link-table .col-number { /* คอลัมน์ลำดับที่ */
+    width: 10%;
+    text-align: center;
+}
+.link-table .col-name { /* คอลัมน์ชื่อรายการ */
+    width: 60%;
+}
+.link-table .col-link { /* คอลัมน์ลิงก์ */
+    width: 30%;
+    text-align: center;
+}
+
+/* สไตล์สำหรับ iframe ที่แสดง PDF */
+.pdf-embed-container {
+    width: 100%;
+    height: 70vh; /* ความสูง 70% ของ viewport height (ปรับได้) */
+    border: 1px solid #ccc; /* เส้นขอบ */
+}
