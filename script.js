@@ -128,7 +128,7 @@
             const personnelContentDiv = document.getElementById('content-personnel');
             personnelContentDiv.innerHTML = '<p class="text-gray-500 animate-pulse">กำลังโหลดข้อมูลบุคลากร...</p>'; 
             try {
-                const response = await fetch(`${WEB_APP_URL}?action=getPersonnel×tamp=${new Date().getTime()}`); 
+                const response = await fetch(`${WEB_APP_URL}?action=getPersonnel&timestamp=${=${new Date().getTime()}`); 
                 if (!response.ok) {
                     throw new Error(`HTTP error! status: ${response.status}`); 
                 }
@@ -178,7 +178,7 @@
             const studentContentDiv = document.getElementById('content-students');
             studentContentDiv.innerHTML = '<p class="text-gray-500 animate-pulse">กำลังโหลดข้อมูลนักเรียน...</p>'; 
             try {
-                const response = await fetch(`${WEB_APP_URL}?action=getStudentSummary×tamp=${new Date().getTime()}`); 
+                const response = await fetch(`${WEB_APP_URL}?action=getStudentSummary&timestamp=${=${new Date().getTime()}`); 
                 if (!response.ok) {
                     throw new Error(`HTTP error! status: ${response.status}`); 
                 }
@@ -233,7 +233,7 @@
             const contentDiv = document.getElementById(targetDivId);
             contentDiv.innerHTML = `<p class="text-gray-500 animate-pulse">กำลังโหลดข้อมูล ${tableTitle}...</p>`;
             try {
-                const response = await fetch(`${WEB_APP_URL}?action=${actionName}×tamp=${new Date().getTime()}`); 
+                const response = await fetch(`${WEB_APP_URL}?action=${actionName}&timestamp=${=${new Date().getTime()}`); 
                 if (!response.ok) {
                     throw new Error(`HTTP error! status: ${response.status}`);
                 }
