@@ -60,9 +60,9 @@ document.addEventListener('DOMContentLoaded', function () {
         } else if (targetId === 'content-information-links') {
             fetchAndDisplayTableData('getInformationLinks', 'content-information-links', 'สารสนเทศ');
         } else if (targetId === 'content-action-plan') {
-            displayPdf('content-action-plan', 'URL_PDF_แผนปฏิบัติการ.pdf', 'แผนปฏิบัติการประจำปี'); 
+            displayPdf('content-action-plan', 'https://drive.google.com/file/d/1n3XtVetBdlzZqaDE8Hlm5xs9GGQg0sSH/preview', 'แผนปฏิบัติการประจำปี'); 
         } else if (targetId === 'content-operation-report') {
-            displayPdf('content-operation-report', 'URL_PDF_รายงานผล.pdf', 'รายงานผลการดำเนินงาน');
+            displayPdf('content-operation-report', 'https://drive.google.com/file/d/1jmBa9Heg4SH9apJlubVRLFfZBm42cZXw/preview', 'รายงานผลการดำเนินงาน');
         }
     }
 
@@ -279,14 +279,16 @@ async function fetchAndDisplayTableData(actionName, targetDivId, tableTitle) {
 
 function displayPdf(targetDivId, pdfUrl, pdfTitle) {
     const contentDiv = document.getElementById(targetDivId);
-    if (pdfUrl && pdfUrl !== 'URL_PDF_แผนปฏิบัติการ.pdf' && pdfUrl !== 'URL_PDF_รายงานผล.pdf' && pdfUrl.toLowerCase().endsWith('.pdf')) {
+    // ตรวจสอบว่า pdfUrl มีค่าและไม่ใช่แค่ placeholder และเป็น URL ที่ถูกต้อง (อาจจะไม่ต้องเช็ค .pdf ถ้าเป็น URL embed)
+    if (pdfUrl && pdfUrl.startsWith('https://drive.google.com/file/d/')) { // เช็ครูปแบบ URL ของ Google Drive embed
          contentDiv.innerHTML = `
             <iframe src="${pdfUrl}" class="pdf-embed-container" frameborder="0">
-                <p>เบราว์เซอร์ของคุณไม่รองรับการแสดง PDF โดยตรง คุณสามารถ <a href="${pdfUrl}" target="_blank">ดาวน์โหลดไฟล์ PDF ที่นี่</a></p>
+                <p>เบราว์เซอร์ของคุณไม่รองรับการแสดง PDF โดยตรง คุณสามารถ <a href="${pdfUrl.replace('/preview', '/view')}" target="_blank">เปิดหรือดาวน์โหลดไฟล์ PDF ที่นี่</a></p> 
             </iframe>`;
+            // ลิงก์สำรองเปลี่ยนจาก /preview เป็น /view เพื่อให้ผู้ใช้เปิดใน Google Drive ได้โดยตรงถ้า iframe ไม่ทำงาน
     } else {
          contentDiv.innerHTML = `
-            <p class="text-gray-600">ยังไม่มีไฟล์ ${pdfTitle} ให้แสดงในขณะนี้</p>
-            <p class="text-sm text-gray-500">(ผู้ดูแลระบบ: โปรดอัปเดต URL ของไฟล์ PDF ในโค้ด JavaScript ส่วนฟังก์ชัน displayPdf)</p>`;
+            <p class="text-gray-600">ยังไม่มีไฟล์ ${pdfTitle} ให้แสดงในขณะนี้ หรือ URL ของ PDF ไม่ถูกต้อง</p>
+            <p class="text-sm text-gray-500">(ผู้ดูแลระบบ: โปรดตรวจสอบ URL ของไฟล์ PDF ในโค้ด JavaScript ส่วนฟังก์ชัน displayPdf และตรวจสอบการตั้งค่าการแชร์ไฟล์บน Google Drive)</p>`;
     }
 }
