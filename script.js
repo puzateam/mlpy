@@ -1,12 +1,15 @@
 // URL ของ Google Apps Script Web App (สำคัญมาก: ตรวจสอบว่าเป็น URL ล่าสุดหลัง Deploy Apps Script ใหม่)
-const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbyH3XNcZJizkV9vBo2FRK7eITPB9VHI_ldx0Zy8xqNq_M_o9-2Dyk3FoE8NPWhv8WdH/exec"; 
+const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbzYei_p2dH4u2obm2v9TPF9pFDmYGqWokfe7DaxF1SBep5PJcrkW7yNUPX7MARsPJtZ/exec"; 
                         
+// ฟังก์ชันสำหรับคำนวณและแสดงอายุโรงเรียน
 function calculateAndDisplaySchoolAge() {
-    const foundingDate = new Date(1925, 10, 1); 
+    const foundingDate = new Date(1925, 10, 1); // เดือนใน JavaScript เริ่มจาก 0 (ม.ค.) ถึง 11 (ธ.ค.) -> พ.ย. คือ 10
     const today = new Date();
     let age = today.getFullYear() - foundingDate.getFullYear();
     const monthDifference = today.getMonth() - foundingDate.getMonth();
     const dayDifference = today.getDate() - foundingDate.getDate();
+
+    // ตรวจสอบถ้ายังไม่ถึงวันครบรอบวันเกิดของปีปัจจุบัน
     if (monthDifference < 0 || (monthDifference === 0 && dayDifference < 0)) {
         age--;
     }
@@ -14,43 +17,59 @@ function calculateAndDisplaySchoolAge() {
     if (schoolAgeTextElement) {
         schoolAgeTextElement.textContent = `(รวมอายุ ${age} ปี)`;
     } else {
-        console.error("Element with id 'school-age-text' not found.");
+        console.error("Element with id 'school-age-text' not found."); // แจ้งเตือนถ้าหา element ไม่เจอ
     }
 }
 
+// Event Listener รอให้ DOM โหลดเสร็จก่อนเริ่มทำงานกับ elements ต่างๆ
 document.addEventListener('DOMContentLoaded', function () {
-    const homeLink = document.getElementById('home-link'); 
-    const contentSections = document.querySelectorAll('.content-section'); 
-    const centerContentTitle = document.getElementById('center-content-title'); 
-    const initialTitle = centerContentTitle.textContent;  
-    
+    const homeLink = document.getElementById('home-link'); // ลิงก์ 'หน้าหลัก'
+    const contentSections = document.querySelectorAll('.content-section'); // ทุกส่วนของเนื้อหาที่สลับการแสดงผล
+    const centerContentTitle = document.getElementById('center-content-title'); // หัวข้อหลักตรงกลาง
+    const initialTitle = centerContentTitle.textContent;  // เก็บหัวข้อเริ่มต้นไว้
+
+    // ฟังก์ชันหลักสำหรับแสดงเนื้อหาและเปลี่ยนหัวข้อ
     window.showContent = function(targetId, newTitle) {
+        // ซ่อนทุกส่วนเนื้อหาก่อน
         contentSections.forEach(section => {
             section.classList.add('hidden');
         });
+
+        // แสดงส่วนเนื้อหาที่ต้องการ
         const targetSection = document.getElementById(targetId);
         if (targetSection) {
             targetSection.classList.remove('hidden');
         }
+
+        // เปลี่ยนหัวข้อหลักตรงกลาง
         if (newTitle) {
             centerContentTitle.textContent = newTitle;
         } else {
-             centerContentTitle.textContent = initialTitle; 
+             centerContentTitle.textContent = initialTitle; // ถ้าไม่มี newTitle ให้ใช้หัวข้อเริ่มต้น
         }
 
+        // ล้าง active class จากเมนูทั้งหมด (ทั้งใน header และ sidebar)
         document.querySelectorAll('.menu-item, .sidebar-item a').forEach(link => {
             link.classList.remove('active');
         });
 
-        const clickedLink = document.querySelector(`a[data-target="${targetId}"]`);
-        if (clickedLink) {
-            if (clickedLink.closest('#main-menu')) { 
-                clickedLink.classList.add('active');
-            } else if (clickedLink.closest('nav')) { 
-                clickedLink.classList.add('active'); 
-            }
+        // เพิ่ม active class ให้กับลิงก์เมนูที่ถูกคลิก (ตรวจสอบทั้ง header และ sidebar)
+        const clickedHeaderLink = document.querySelector(`nav a[data-target="${targetId}"]`);
+        if (clickedHeaderLink) {
+            clickedHeaderLink.classList.add('active');
+        }
+        const clickedSidebarLink = document.querySelector(`#main-menu a[data-target="${targetId}"]`);
+        if (clickedSidebarLink) {
+            clickedSidebarLink.classList.add('active');
+        }
+        
+        // ถ้าเป็นหน้าหลัก (content-default) ให้แน่ใจว่าลิงก์ "หน้าหลัก" ใน header active
+        if (targetId === 'content-default' && homeLink) {
+            homeLink.classList.add('active');
         }
 
+
+        // โหลดข้อมูลตาม targetId ที่ถูกเลือก
         if (targetId === 'content-personnel') {
             fetchPersonnelData();
         } else if (targetId === 'content-students') { 
@@ -58,43 +77,51 @@ document.addEventListener('DOMContentLoaded', function () {
         } else if (targetId === 'content-smart-school') {
             fetchAndDisplayTableData('getSystemLinks', 'content-smart-school', 'Smart School Service');
         } else if (targetId === 'content-information-links') {
-            fetchAndDisplayTableData('getInformationLinks', 'content-information-links', 'สารสนเทศ');
+            fetchAndDisplayTableData('getInformationLinks', 'content-information-links', 'สารสนเทศอื่นๆ'); // เปลี่ยนชื่อหัวข้อให้สื่อความหมาย
         } else if (targetId === 'content-action-plan') {
+            // แทนที่ 'URL_PDF_แผนปฏิบัติการ.pdf' ด้วย URL จริงของไฟล์ PDF
             displayPdf('content-action-plan', 'https://drive.google.com/file/d/1n3XtVetBdlzZqaDE8Hlm5xs9GGQg0sSH/preview', 'แผนปฏิบัติการประจำปี'); 
         } else if (targetId === 'content-operation-report') {
+            // แทนที่ 'URL_PDF_รายงานผล.pdf' ด้วย URL จริงของไฟล์ PDF
             displayPdf('content-operation-report', 'https://drive.google.com/file/d/1jmBa9Heg4SH9apJlubVRLFfZBm42cZXw/preview', 'รายงานผลการดำเนินงาน');
         }
     }
 
+    // Event listeners สำหรับเมนูทั้งหมดที่มี data-target (ทั้งใน header และ sidebar)
     document.querySelectorAll('nav a[data-target], #main-menu a[data-target]').forEach(link => {
         link.addEventListener('click', function (event) {
             event.preventDefault(); 
             const targetId = this.dataset.target; 
-            const newTitleText = this.textContent.trim();
+            const newTitleText = this.textContent.trim(); // .trim() เพื่อตัดช่องว่างที่ไม่จำเป็น
             window.showContent(targetId, newTitleText); 
         });
     });
     
+    // Event listener สำหรับลิงก์ 'หน้าหลัก' โดยเฉพาะ
     homeLink.addEventListener('click', function (event) {
         event.preventDefault(); 
         window.showContent('content-default', initialTitle); 
+        // ล้าง active class จากทุกเมนูแล้วให้ homeLink active
         document.querySelectorAll('.menu-item, .sidebar-item a').forEach(link => link.classList.remove('active'));
-        document.getElementById('home-link').classList.add('active'); 
+        homeLink.classList.add('active'); 
     });
 
+    // แสดงเนื้อหาเริ่มต้นเมื่อหน้าเว็บโหลด และตั้งค่า active ให้เมนูหน้าหลัก
     window.showContent('content-default', initialTitle);
-    document.getElementById('home-link').classList.add('active');
+    if (homeLink) homeLink.classList.add('active');
 
+    // เรียกฟังก์ชันที่ทำงานเมื่อโหลดหน้าเว็บ
     fetchVisitorStats(); 
     calculateAndDisplaySchoolAge();
 });
 
+// ฟังก์ชันสำหรับดึงและแสดงสถิติผู้เข้าชม
 async function fetchVisitorStats() {
     const visitsTodayEl = document.getElementById('visits-today');
     const visitsMonthEl = document.getElementById('visits-this-month');
     const visitsTotalEl = document.getElementById('visits-total');
     try {
-        // <<<<< แก้ไขตรงนี้: เปลี่ยน ×tamp เป็น &timestamp >>>>>
+                                                                        //&timestampดูให้ดีตรงนี้ Ai มองผิดตลอด
         const response = await fetch(`${WEB_APP_URL}?action=logVisitAndGetCounts&timestamp=${new Date().getTime()}`); 
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
@@ -124,11 +151,12 @@ async function fetchVisitorStats() {
     }
 }
 
+// ฟังก์ชันสำหรับดึงและแสดงข้อมูลบุคลากร
 async function fetchPersonnelData() {
     const personnelContentDiv = document.getElementById('content-personnel');
     personnelContentDiv.innerHTML = '<p class="text-gray-500 animate-pulse">กำลังโหลดข้อมูลบุคลากร...</p>'; 
     try {
-        // <<<<< แก้ไขตรงนี้: เปลี่ยน ×tamp เป็น &timestamp >>>>>
+                                                                        //&timestampดูให้ดีตรงนี้ Ai มองผิดตลอด
         const response = await fetch(`${WEB_APP_URL}?action=getPersonnel&timestamp=${new Date().getTime()}`); 
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`); 
@@ -140,7 +168,8 @@ async function fetchPersonnelData() {
             return;
         }
         if (result.data && result.data.length > 0) { 
-            let html = ``;
+            let html = ''; // เริ่มต้นด้วย string ว่าง
+            // html += '<h3 class="text-xl font-bold text-red-600 mb-4">ข้อมูลบุคลากร</h3>'; // หัวข้อนี้จะถูกตั้งโดย showContent แล้ว
             html += '<div class="overflow-x-auto">'; 
             html += '<table class="min-w-full divide-y divide-gray-200 text-sm">';
             html += '<thead class="bg-gray-50"><tr>';
@@ -167,7 +196,7 @@ async function fetchPersonnelData() {
             html += '</div>';
             personnelContentDiv.innerHTML = html; 
         } else { 
-            personnelContentDiv.innerHTML = '<h3 class="text-xl font-bold text-red-600 mb-4">ข้อมูลบุคลากร</h3><p>ไม่พบข้อมูลบุคลากร หรือ Sheet อาจจะว่าง</p>';
+            personnelContentDiv.innerHTML = '<p>ไม่พบข้อมูลบุคลากร หรือ Sheet อาจจะว่าง</p>'; // เอา h3 ออก เพราะ newTitle จะจัดการ
         }
     } catch (error) { 
         personnelContentDiv.innerHTML = `<p class="text-red-500">การเชื่อมต่อล้มเหลว: ${error.message}</p><p class="text-sm text-gray-600">โปรดตรวจสอบการเชื่อมต่ออินเทอร์เน็ต และ Web App URL</p>`;
@@ -175,11 +204,12 @@ async function fetchPersonnelData() {
     }
 }
 
+// ฟังก์ชันสำหรับดึงและแสดงข้อมูลสรุปนักเรียน
 async function fetchStudentSummaryData() {
     const studentContentDiv = document.getElementById('content-students');
     studentContentDiv.innerHTML = '<p class="text-gray-500 animate-pulse">กำลังโหลดข้อมูลนักเรียน...</p>'; 
     try {
-        // <<<<< แก้ไขตรงนี้: เปลี่ยน ×tamp เป็น &timestamp >>>>>
+                                                                        //&timestampดูให้ดีตรงนี้ Ai มองผิดตลอด
         const response = await fetch(`${WEB_APP_URL}?action=getStudentSummary&timestamp=${new Date().getTime()}`); 
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`); 
@@ -191,7 +221,8 @@ async function fetchStudentSummaryData() {
             return;
         }
         if (result.data && result.data.length > 0) { 
-            let html = ``;
+            let html = ''; // เริ่มต้นด้วย string ว่าง
+            // html += '<h3 class="text-xl font-bold text-red-600 mb-4">ข้อมูลนักเรียน (สรุป)</h3>'; // หัวข้อนี้จะถูกตั้งโดย showContent แล้ว
             html += '<div class="overflow-x-auto">'; 
             html += '<table class="min-w-full divide-y divide-gray-200 text-sm">';
             html += '<thead class="bg-gray-50"><tr>';
@@ -223,7 +254,7 @@ async function fetchStudentSummaryData() {
             html += '</div>';
             studentContentDiv.innerHTML = html; 
         } else { 
-            studentContentDiv.innerHTML = '<h3 class="text-xl font-bold text-red-600 mb-4">ข้อมูลนักเรียน (สรุป)</h3><p>ไม่พบข้อมูลนักเรียน หรือ Sheet อาจจะว่าง</p>';
+            studentContentDiv.innerHTML = '<p>ไม่พบข้อมูลนักเรียน หรือ Sheet อาจจะว่าง</p>'; // เอา h3 ออก
         }
     } catch (error) { 
         studentContentDiv.innerHTML = `<p class="text-red-500">การเชื่อมต่อล้มเหลว: ${error.message}</p><p class="text-sm text-gray-600">โปรดตรวจสอบการเชื่อมต่ออินเทอร์เน็ต และ Web App URL</p>`;
@@ -231,23 +262,26 @@ async function fetchStudentSummaryData() {
     }
 }
 
-async function fetchAndDisplayTableData(actionName, targetDivId, tableTitle) {
+// ฟังก์ชันสำหรับดึงและแสดงข้อมูลตารางลิงก์ (Smart School, สารสนเทศอื่นๆ)
+async function fetchAndDisplayTableData(actionName, targetDivId, tableTitleFromMenu) {
     const contentDiv = document.getElementById(targetDivId);
-    contentDiv.innerHTML = `<p class="text-gray-500 animate-pulse">กำลังโหลดข้อมูล ${tableTitle}...</p>`;
+    // contentDiv.innerHTML = `<p class="text-gray-500 animate-pulse">กำลังโหลดข้อมูล ${tableTitleFromMenu}...</p>`; // หัวข้อจะถูกตั้งโดย showContent
+
     try {
-        // <<<<< แก้ไขตรงนี้: เปลี่ยน ×tamp เป็น &timestamp >>>>>
+                                                                        //&timestampดูให้ดีตรงนี้ Ai มองผิดตลอด
         const response = await fetch(`${WEB_APP_URL}?action=${actionName}&timestamp=${new Date().getTime()}`); 
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
         const result = await response.json();
         if (result.error) {
-            contentDiv.innerHTML = `<p class="text-red-500">เกิดข้อผิดพลาดในการโหลดข้อมูล ${tableTitle}: ${result.error} ${result.details || ''}</p>`;
+            contentDiv.innerHTML = `<p class="text-red-500">เกิดข้อผิดพลาดในการโหลดข้อมูล: ${result.error} ${result.details || ''}</p>`;
             console.error(`Error fetching ${actionName}:`, result);
             return;
         }
         if (result.data && result.data.length > 0) {
-            let html = ``;
+            let html = ''; // เริ่มต้นด้วย string ว่าง
+            // html += `<h3 class="text-xl font-bold text-red-600 mb-4">${tableTitleFromMenu}</h3>`; // หัวข้อนี้จะถูกตั้งโดย showContent แล้ว
             html += '<div class="overflow-x-auto">';
             html += '<table class="link-table min-w-full text-sm">'; 
             html += '<thead class="bg-gray-100"><tr>';
@@ -272,26 +306,30 @@ async function fetchAndDisplayTableData(actionName, targetDivId, tableTitle) {
             html += '</div>';
             contentDiv.innerHTML = html;
         } else {
-            contentDiv.innerHTML = `<h3 class="text-xl font-bold text-red-600 mb-4">${tableTitle}</h3><p>ไม่พบข้อมูล ${tableTitle} หรือชีตอาจจะว่าง</p>`;
+            contentDiv.innerHTML = `<p>ไม่พบข้อมูล หรือชีตอาจจะว่าง</p>`; // เอา h3 ออก
         }
     } catch (error) {
-        contentDiv.innerHTML = `<p class="text-red-500">การเชื่อมต่อล้มเหลวขณะโหลดข้อมูล ${tableTitle}: ${error.message}</p>`;
+        contentDiv.innerHTML = `<p class="text-red-500">การเชื่อมต่อล้มเหลวขณะโหลดข้อมูล: ${error.message}</p>`;
         console.error(`Fetch error for ${actionName}:`, error);
     }
 }
 
-function displayPdf(targetDivId, pdfUrl, pdfTitle) {
+// ฟังก์ชันสำหรับแสดง PDF
+function displayPdf(targetDivId, pdfUrl, pdfTitleFromMenu) {
     const contentDiv = document.getElementById(targetDivId);
-    // ตรวจสอบว่า pdfUrl มีค่าและไม่ใช่แค่ placeholder และเป็น URL ที่ถูกต้อง (อาจจะไม่ต้องเช็ค .pdf ถ้าเป็น URL embed)
-    if (pdfUrl && pdfUrl.startsWith('https://drive.google.com/file/d/')) { // เช็ครูปแบบ URL ของ Google Drive embed
+    // contentDiv.innerHTML = ''; // ล้างเนื้อหาเก่า (หัวข้อจะถูกตั้งโดย showContent)
+
+    if (pdfUrl && pdfUrl.startsWith('https://drive.google.com/file/d/')) { 
          contentDiv.innerHTML = `
             <iframe src="${pdfUrl}" class="pdf-embed-container" frameborder="0">
-                <p>เบราว์เซอร์ของคุณไม่รองรับการแสดง PDF โดยตรง คุณสามารถ <a href="${pdfUrl.replace('/preview', '/view')}" target="_blank">เปิดหรือดาวน์โหลดไฟล์ PDF ที่นี่</a></p> 
+                <p>เบราว์เซอร์ของคุณไม่รองรับการแสดง PDF โดยตรง คุณสามารถ <a href="${pdfUrl.replace('/preview', '/view')}" target="_blank" rel="noopener noreferrer">เปิดหรือดาวน์โหลดไฟล์ PDF ที่นี่</a>.</p> 
             </iframe>`;
-            // ลิงก์สำรองเปลี่ยนจาก /preview เป็น /view เพื่อให้ผู้ใช้เปิดใน Google Drive ได้โดยตรงถ้า iframe ไม่ทำงาน
     } else {
          contentDiv.innerHTML = `
-            <p class="text-gray-600">ยังไม่มีไฟล์ ${pdfTitle} ให้แสดงในขณะนี้ หรือ URL ของ PDF ไม่ถูกต้อง</p>
-            <p class="text-sm text-gray-500">(ผู้ดูแลระบบ: โปรดตรวจสอบ URL ของไฟล์ PDF ในโค้ด JavaScript ส่วนฟังก์ชัน displayPdf และตรวจสอบการตั้งค่าการแชร์ไฟล์บน Google Drive)</p>`;
+            <p class="text-gray-600 mt-4">ยังไม่มีไฟล์ให้แสดงในขณะนี้ หรือ URL ของ PDF ไม่ถูกต้อง</p>
+            <p class="text-sm text-gray-500">(ผู้ดูแลระบบ: โปรดตรวจสอบ URL ของไฟล์ PDF ในโค้ด JavaScript และตรวจสอบการตั้งค่าการแชร์ไฟล์บน Google Drive)</p>`;
     }
 }
+</script>
+</body>
+</html>
