@@ -1,4 +1,5 @@
-    const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbw-el57qkVjx1K_CTzwasn5y_xkI0rCbinhdrGdoYpS5WsRdU-CcgAuQlZaRylnoLmX/exec"; 
+    const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbzYei_p2dH4u2obm2v9TPF9pFDmYGqWokfe7DaxF1SBep5PJcrkW7yNUPX7MARsPJtZ/exec"; 
+                        
 
     function calculateAndDisplaySchoolAge() {
         const foundingDate = new Date(1925, 10, 1); 
