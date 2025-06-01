@@ -258,6 +258,47 @@
         #content-structure .image-caption { 
             display: none; 
         }
+
+        /* สไตล์สำหรับตารางลิงก์ (ถ้าต้องการเพิ่มเติม) */
+        .link-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+        }
+        .link-table th, .link-table td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        .link-table th {
+            background-color: #f2f2f2;
+            font-weight: 600;
+        }
+        .link-table td a {
+            color: #2563eb; /* blue-600 */
+            text-decoration: none;
+        }
+        .link-table td a:hover {
+            text-decoration: underline;
+        }
+        .link-table .col-number {
+            width: 10%;
+            text-align: center;
+        }
+        .link-table .col-name {
+            width: 60%;
+        }
+        .link-table .col-link {
+            width: 30%;
+            text-align: center;
+        }
+
+        /* สไตล์สำหรับ PDF embed */
+        .pdf-embed-container {
+            width: 100%;
+            height: 70vh; /* ปรับความสูงตามต้องการ */
+            border: 1px solid #ccc;
+        }
     </style>
 </head>
 <body>
@@ -474,6 +515,32 @@
                 <div id="content-students" class="content-section hidden"> 
                     <!-- JavaScript จะนำข้อมูลนักเรียนมาแสดงที่นี่ -->
                 </div>
+                
+                <!-- ========== เนื้อหาใหม่ ========== -->
+                <!-- 1. Smart School Service -->
+                <div id="content-smart-school" class="content-section hidden">
+                    <!-- JavaScript จะโหลดข้อมูลตารางมาใส่ที่นี่ -->
+                </div>
+
+                <!-- 2. แผนปฏิบัติการประจำปี (PDF) -->
+                <div id="content-action-plan" class="content-section hidden">
+                    <p class="text-gray-500">กำลังโหลดไฟล์ PDF แผนปฏิบัติการประจำปี...</p>
+                    <!-- <iframe src="URL_ของไฟล์_PDF_แผนปฏิบัติการ" class="pdf-embed-container" frameborder="0"></iframe> -->
+                    <!-- หรือใช้ <embed src="URL_ของไฟล์_PDF_แผนปฏิบัติการ" type="application/pdf" class="pdf-embed-container" /> -->
+                    <!-- หรือพี่จะใช้ PDF.js ถ้าต้องการ control มากขึ้น -->
+                </div>
+
+                <!-- 3. สารสนเทศ... (ตารางลิงก์) -->
+                <div id="content-information-links" class="content-section hidden">
+                    <!-- JavaScript จะโหลดข้อมูลตารางมาใส่ที่นี่ -->
+                </div>
+
+                <!-- 4. รายงานผลการดำเนินงาน (PDF) -->
+                <div id="content-operation-report" class="content-section hidden">
+                    <p class="text-gray-500">กำลังโหลดไฟล์ PDF รายงานผลการดำเนินงาน...</p>
+                    <!-- <iframe src="URL_ของไฟล์_PDF_รายงานผล" class="pdf-embed-container" frameborder="0"></iframe> -->
+                </div>
+                <!-- ========== สิ้นสุดเนื้อหาใหม่ ========== -->  
             </div>
         </main>
 
@@ -558,12 +625,12 @@
     
     document.addEventListener('DOMContentLoaded', function () {
         const mainMenuLinks = document.querySelectorAll('#main-menu a[data-target]'); 
+        const smartSchoolLink = document.querySelector('nav a[data-target="content-smart-school"]'); // ลิงก์ Smart School Service
         const homeLink = document.getElementById('home-link'); 
         const contentSections = document.querySelectorAll('.content-section'); 
         const centerContentTitle = document.getElementById('center-content-title'); 
         const initialTitle = centerContentTitle.textContent;  
         
-        // ฟังก์ชันสำหรับแสดงเนื้อหาตาม targetId และเปลี่ยนหัวข้อ
         window.showContent = function(targetId, newTitle) {
             contentSections.forEach(section => {
                 section.classList.add('hidden');
@@ -580,20 +647,37 @@
                  centerContentTitle.textContent = initialTitle; 
             }
 
-            mainMenuLinks.forEach(link => {
-                link.classList.remove('active'); 
-                if (link.dataset.target === targetId) {
-                    link.classList.add('active'); 
-                }
-            });
+            // ล้าง active class จากเมนูทั้งหมด (ทั้ง sidebar และ header)
+            mainMenuLinks.forEach(link => link.classList.remove('active'));
+            if(smartSchoolLink) smartSchoolLink.classList.remove('active'); // ถ้ามีลิงก์ Smart School
+            // (ถ้ามีเมนูอื่นๆ ใน header ที่จะลิงก์มาตรงกลาง ก็ต้องเพิ่มการล้าง active ที่นี่)
 
+            // เพิ่ม active class ให้เมนูที่ถูกเลือก
+            if (targetId.startsWith("content-")) { // สำหรับเมนูใน sidebar
+                const activeSidebarLink = document.querySelector(`#main-menu a[data-target="${targetId}"]`);
+                if (activeSidebarLink) activeSidebarLink.classList.add('active');
+            } else if (targetId === 'content-smart-school' && smartSchoolLink) { // สำหรับ Smart School
+                 smartSchoolLink.classList.add('active'); // ยังไม่มี active style สำหรับ header menu
+            }
+
+
+            // --- โหลดข้อมูลตาม targetId ---
             if (targetId === 'content-personnel') {
                 fetchPersonnelData();
             } else if (targetId === 'content-students') { 
                 fetchStudentSummaryData();
+            } else if (targetId === 'content-smart-school') {
+                fetchAndDisplayTableData('getSystemLinks', 'content-smart-school', 'Smart School Service');
+            } else if (targetId === 'content-information-links') {
+                fetchAndDisplayTableData('getInformationLinks', 'content-information-links', 'สารสนเทศ');
+            } else if (targetId === 'content-action-plan') {
+                displayPdf('content-action-plan', 'URL_PDF_แผนปฏิบัติการ.pdf', 'แผนปฏิบัติการประจำปี'); 
+            } else if (targetId === 'content-operation-report') {
+                displayPdf('content-operation-report', 'URL_PDF_รายงานผล.pdf', 'รายงานผลการดำเนินงาน');
             }
         }
 
+        // Event listeners สำหรับเมนูใน Sidebar
         mainMenuLinks.forEach(link => {
             link.addEventListener('click', function (event) {
                 event.preventDefault(); 
@@ -602,20 +686,34 @@
                 window.showContent(targetId, newTitleText); 
             });
         });
+        
+        // Event listener สำหรับ Smart School Service (ถ้ามี)
+        if (smartSchoolLink) {
+            smartSchoolLink.addEventListener('click', function(event) {
+                event.preventDefault();
+                const targetId = this.dataset.target;
+                const newTitleText = this.textContent;
+                window.showContent(targetId, newTitleText);
+            });
+        }
+
 
         homeLink.addEventListener('click', function (event) {
             event.preventDefault(); 
             window.showContent('content-default', initialTitle); 
             mainMenuLinks.forEach(link => link.classList.remove('active')); 
+            if(smartSchoolLink) smartSchoolLink.classList.remove('active');
         });
 
-        // แสดงเนื้อหาเริ่มต้นเมื่อหน้าเว็บโหลดเสร็จ
         window.showContent('content-default', initialTitle);
+        fetchVisitorStats(); 
+        calculateAndDisplaySchoolAge();
+    });
         
         // เรียกฟังก์ชันดึงสถิติผู้เข้าชมเมื่อหน้าเว็บโหลด
         fetchVisitorStats(); 
 
-        // เรียกฟังก์ชันคำนวณและแสดงอายุโรงเรียน <<<< เพิ่มบรรทัดนี้เข้าไปค่ะ
+        // เรียกฟังก์ชันคำนวณและแสดงอายุโรงเรียน 
         calculateAndDisplaySchoolAge(); 
     });
     
@@ -779,6 +877,81 @@
         } catch (error) { 
             studentContentDiv.innerHTML = `<p class="text-red-500">การเชื่อมต่อล้มเหลว: ${error.message}</p><p class="text-sm text-gray-600">โปรดตรวจสอบการเชื่อมต่ออินเทอร์เน็ต และ Web App URL</p>`;
             console.error("Fetch error for student summary:", error);
+        }
+    }
+
+        // ========== ฟังก์ชันใหม่สำหรับแสดงข้อมูลตารางลิงก์ ==========
+    async function fetchAndDisplayTableData(actionName, targetDivId, tableTitle) {
+        const contentDiv = document.getElementById(targetDivId);
+        contentDiv.innerHTML = `<p class="text-gray-500 animate-pulse">กำลังโหลดข้อมูล ${tableTitle}...</p>`;
+
+        try {
+            const response = await fetch(`${WEB_APP_URL}?action=${actionName}×tamp=${new Date().getTime()}`);
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            const result = await response.json();
+
+            if (result.error) {
+                contentDiv.innerHTML = `<p class="text-red-500">เกิดข้อผิดพลาดในการโหลดข้อมูล ${tableTitle}: ${result.error} ${result.details || ''}</p>`;
+                console.error(`Error fetching ${actionName}:`, result);
+                return;
+            }
+
+            if (result.data && result.data.length > 0) {
+                let html = `<h3 class="text-xl font-bold text-red-600 mb-4">${tableTitle}</h3>`;
+                html += '<div class="overflow-x-auto">';
+                html += '<table class="link-table min-w-full text-sm">'; // ใช้คลาส link-table
+                html += '<thead class="bg-gray-100"><tr>';
+                html += '<th scope="col" class="col-number px-4 py-2 text-center text-xs font-medium text-gray-600 uppercase tracking-wider">ลำดับ</th>';
+                html += '<th scope="col" class="col-name px-4 py-2 text-left text-xs font-medium text-gray-600 uppercase tracking-wider">ชื่อรายการ</th>';
+                html += '<th scope="col" class="col-link px-4 py-2 text-center text-xs font-medium text-gray-600 uppercase tracking-wider">ลิงก์</th>';
+                html += '</tr></thead>';
+                html += '<tbody class="bg-white divide-y divide-gray-200">';
+
+                result.data.forEach(item => {
+                    // ตรวจสอบว่า item.link มีค่าและไม่ใช่ค่าว่าง
+                    const linkDestination = item.link && item.link.trim() !== "" ? item.link.trim() : "#";
+                    const linkText = linkDestination !== "#" ? "เปิดลิงก์" : "ไม่มีลิงก์";
+                    const targetAttribute = linkDestination !== "#" && (linkDestination.startsWith('http://') || linkDestination.startsWith('https://')) ? 'target="_blank" rel="noopener noreferrer"' : '';
+
+
+                    html += '<tr>';
+                    html += `<td class="col-number px-4 py-2 text-center whitespace-nowrap">${item.number || '-'}</td>`;
+                    html += `<td class="col-name px-4 py-2 whitespace-nowrap">${item.name || '-'}</td>`;
+                    html += `<td class="col-link px-4 py-2 text-center whitespace-nowrap">`;
+                    html += `<a href="${linkDestination}" ${targetAttribute} class="text-blue-600 hover:text-blue-800 hover:underline">${linkText}</a>`;
+                    html += `</td>`;
+                    html += '</tr>';
+                });
+
+                html += '</tbody></table>';
+                html += '</div>';
+                contentDiv.innerHTML = html;
+            } else {
+                contentDiv.innerHTML = `<h3 class="text-xl font-bold text-red-600 mb-4">${tableTitle}</h3><p>ไม่พบข้อมูล ${tableTitle} หรือชีตอาจจะว่าง</p>`;
+            }
+        } catch (error) {
+            contentDiv.innerHTML = `<p class="text-red-500">การเชื่อมต่อล้มเหลวขณะโหลดข้อมูล ${tableTitle}: ${error.message}</p>`;
+            console.error(`Fetch error for ${actionName}:`, error);
+        }
+    }
+
+    // ========== ฟังก์ชันใหม่สำหรับแสดง PDF ==========
+    function displayPdf(targetDivId, pdfUrl, pdfTitle) {
+        const contentDiv = document.getElementById(targetDivId);
+        // ตรวจสอบว่า pdfUrl มีค่าและไม่ใช่แค่ placeholder
+        if (pdfUrl && pdfUrl !== 'URL_PDF_แผนปฏิบัติการ.pdf' && pdfUrl !== 'URL_PDF_รายงานผล.pdf' && pdfUrl.toLowerCase().endsWith('.pdf')) {
+             contentDiv.innerHTML = `
+                <h3 class="text-xl font-bold text-red-600 mb-4">${pdfTitle}</h3>
+                <iframe src="${pdfUrl}" class="pdf-embed-container" frameborder="0">
+                    <p>เบราว์เซอร์ของคุณไม่รองรับการแสดง PDF โดยตรง คุณสามารถ <a href="${pdfUrl}" target="_blank">ดาวน์โหลดไฟล์ PDF ที่นี่</a></p>
+                </iframe>`;
+        } else {
+             contentDiv.innerHTML = `
+                <h3 class="text-xl font-bold text-red-600 mb-4">${pdfTitle}</h3>
+                <p class="text-gray-600">ยังไม่มีไฟล์ ${pdfTitle} ให้แสดงในขณะนี้</p>
+                <p class="text-sm text-gray-500">(ผู้ดูแลระบบ: โปรดอัปเดต URL ของไฟล์ PDF ในโค้ด JavaScript ส่วนฟังก์ชัน displayPdf)</p>`;
         }
     }
     
