@@ -123,8 +123,8 @@ async function fetchVisitorStats() {
     const visitsMonthEl = document.getElementById('visits-this-month');
     const visitsTotalEl = document.getElementById('visits-total');
     try {
-        // ส่ง request ไปยัง Web App URL พร้อม action และ timestamp (เพื่อป้องกัน cache)
-        const response = await fetch(`${WEB_APP_URL}?action=logVisitAndGetCounts×tamp=${new Date().getTime()}`);
+        // ส่ง request ไปยัง Web App URL พร้อม action และ &timestamp (เพื่อป้องกัน cache)AI (ชอบเปลี่ยนเป็น xtamp ดูให้ดี)
+        const response = await fetch(`${WEB_APP_URL}?action=logVisitAndGetCounts&timestamp=${new Date().getTime()}`);
         if (!response.ok) { // ตรวจสอบว่า request สำเร็จหรือไม่
             throw new Error(`HTTP error! status: ${response.status}`);
         }
@@ -158,7 +158,7 @@ async function fetchPersonnelData() {
     const personnelContentDiv = document.getElementById('content-personnel');
     personnelContentDiv.innerHTML = '<p class="text-gray-500 animate-pulse">กำลังโหลดข้อมูลบุคลากร...</p>'; // แสดงข้อความกำลังโหลด
     try {
-        const response = await fetch(`${WEB_APP_URL}?action=getPersonnel×tamp=${new Date().getTime()}`);
+        const response = await fetch(`${WEB_APP_URL}?action=getPersonnel&timestamp=${new Date().getTime()}`);
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
@@ -209,7 +209,7 @@ async function fetchStudentSummaryData() {
     const studentContentDiv = document.getElementById('content-students');
     studentContentDiv.innerHTML = '<p class="text-gray-500 animate-pulse">กำลังโหลดข้อมูลนักเรียน...</p>'; // แสดงข้อความกำลังโหลด
     try {
-        const response = await fetch(`${WEB_APP_URL}?action=getStudentSummary×tamp=${new Date().getTime()}`);
+        const response = await fetch(`${WEB_APP_URL}?action=getStudentSummary&timestamp=${new Date().getTime()}`);
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
@@ -267,7 +267,7 @@ async function fetchAndDisplayTableData(actionName, targetDivId) {
     contentDiv.innerHTML = `<p class="text-gray-500 animate-pulse">กำลังโหลดข้อมูล...</p>`; // แสดงข้อความกำลังโหลด
 
     try {
-        const response = await fetch(`${WEB_APP_URL}?action=${actionName}×tamp=${new Date().getTime()}`);
+        const response = await fetch(`${WEB_APP_URL}?action=${actionName}&timestamp=${new Date().getTime()}`);
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
