@@ -31,6 +31,7 @@
             transition: width 0.3s ease;
         }
         
+        .menu-item.active:after, /* เพิ่มสไตล์ active สำหรับเมนู header */
         .menu-item:hover:after {
             width: 100%;
         }
@@ -53,11 +54,11 @@
             transition: all 0.3s ease;
         }
         
-        .sidebar-item a.active, /* เพิ่มสำหรับสถานะ active (เมนูที่กำลังเลือก) */
+        .sidebar-item a.active, 
         .sidebar-item:hover {
-            background-color: rgba(254, 226, 226, 0.5); /* สี red-100 ของ Tailwind แบบโปร่งแสง */
+            background-color: rgba(254, 226, 226, 0.5); 
             padding-left: 0.5rem;
-            color: #dc2626; /* สี red-600 ของ Tailwind */
+            color: #dc2626; 
         }
         
         .card {
@@ -92,10 +93,9 @@
         }
 
         .content-section {
-            /* คลาส 'hidden' ของ Tailwind (display: none) จะถูกใช้โดย JavaScript เพื่อซ่อน/แสดงเนื้อหา */
+            /* default hidden by JS */
         }
 
-        /* สไตล์เพิ่มเติมสำหรับส่วนประวัติโรงเรียน */
         #content-history p {
             margin-bottom: 0.75rem; 
             line-height: 1.6; 
@@ -110,7 +110,7 @@
         #content-history strong { 
             color: #b91c1c; 
         }
-        #content-history .org-chart-container {
+        #content-history .org-chart-container { /* ย้าย .org-chart-container มาใช้ร่วมกัน */
             text-align: center; 
             margin-top: 1.5rem; 
             margin-bottom: 1.5rem; 
@@ -137,7 +137,6 @@
             }
         }
 
-        /* สไตล์เพิ่มเติมสำหรับส่วนข้อมูลสถานศึกษา (แบบเรียบง่าย) */
         #content-school-info p {
             margin-bottom: 0.75rem; 
             line-height: 1.6; 
@@ -167,17 +166,10 @@
             border-radius: 3px;
             vertical-align: middle;
         }
-        #content-school-info .org-chart-container {
-            text-align: center; 
-            margin-top: 1.5rem; 
-            margin-bottom: 1.5rem; 
-            padding: 1rem;
-            background-color: #f9fafb; 
-            border-radius: 8px; 
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); 
-        }
+        /* ใช้ .org-chart-container ร่วมกับ #content-history และ #content-structure */
+        /* #content-school-info .org-chart-container { ... } */
 
-        /* สไตล์เพิ่มเติมสำหรับส่วนวิสัยทัศน์ พันธกิจ เป้าประสงค์ กลยุทธ์ */
+
         #content-vision h3 { 
             font-size: 1.25rem; 
             font-weight: 700; 
@@ -205,21 +197,14 @@
             margin-bottom: 0.5rem; 
             line-height: 1.6;
         }
-        #content-vision .mission-item, 
-        #content-vision .goal-item,
-        #content-vision .strategy-item {
-        } 
-        #content-vision .org-chart-container {
-            text-align: center; 
-            margin-top: 1.5rem; 
-            margin-bottom: 1.5rem; 
-            padding: 1rem;
-            background-color: #f9fafb; 
-            border-radius: 8px; 
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); 
-        }
+        /* #content-vision .mission-item,  */
+        /* #content-vision .goal-item, */
+        /* #content-vision .strategy-item { */
+        /* }  */
+        /* ใช้ .org-chart-container ร่วมกับ #content-history และ #content-structure */
+        /* #content-vision .org-chart-container { ... } */
 
-        /* สไตล์เพิ่มเติมสำหรับส่วนโครงสร้างการบริหาร */
+
         #content-structure h3.section-title { 
             font-size: 1.25rem; 
             font-weight: 700; 
@@ -240,15 +225,7 @@
             margin-bottom: 0.5rem; 
             line-height: 1.6;
         }
-        #content-structure .org-chart-container {
-            text-align: center; 
-            margin-top: 1.5rem; 
-            margin-bottom: 1.5rem; 
-            padding: 1rem;
-            background-color: #f9fafb; 
-            border-radius: 8px; 
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); 
-        }
+        /* ใช้ .org-chart-container ร่วมกับ #content-history */
         #content-structure .org-chart-image {
             max-width: 100%; 
             height: auto;     
@@ -259,7 +236,6 @@
             display: none; 
         }
 
-        /* สไตล์สำหรับตารางลิงก์ (ถ้าต้องการเพิ่มเติม) */
         .link-table {
             width: 100%;
             border-collapse: collapse;
@@ -275,7 +251,7 @@
             font-weight: 600;
         }
         .link-table td a {
-            color: #2563eb; /* blue-600 */
+            color: #2563eb; 
             text-decoration: none;
         }
         .link-table td a:hover {
@@ -293,10 +269,9 @@
             text-align: center;
         }
 
-        /* สไตล์สำหรับ PDF embed */
         .pdf-embed-container {
             width: 100%;
-            height: 70vh; /* ปรับความสูงตามต้องการ */
+            height: 70vh; 
             border: 1px solid #ccc;
         }
     </style>
@@ -317,7 +292,8 @@
             <ul class="flex flex-wrap justify-center space-x-1 md:space-x-8 text-white">
                 <li><a href="#" id="home-link" class="menu-item px-3 py-1 hover:text-yellow-200">หน้าหลัก</a></li>
                 <li><a href="#" class="menu-item px-3 py-1 hover:text-yellow-200">รับการประเมิน สมศ.</a></li>
-                <li><a href="#" class="menu-item px-3 py-1 hover:text-yellow-200">Smart School Service</a></li>
+                <!-- <<<<< แก้ไข: เพิ่ม data-target ที่นี่ >>>>> -->
+                <li><a href="#" data-target="content-smart-school" class="menu-item px-3 py-1 hover:text-yellow-200">Smart School Service</a></li>
                 <li><a href="#" class="menu-item px-3 py-1 hover:text-yellow-200">Admin</a></li>
             </ul>
         </nav>
@@ -336,9 +312,10 @@
                     <li class="sidebar-item pb-2"><a href="#" data-target="content-structure" class="block text-gray-700">โครงสร้างการบริหาร</a></li>
                     <li class="sidebar-item pb-2"><a href="#" data-target="content-personnel" class="block text-gray-700">ข้อมูลบุคลากร</a></li>
                     <li class="sidebar-item pb-2"><a href="#" data-target="content-students" class="block text-gray-700">ข้อมูลนักเรียน</a></li>
-                    <li class="sidebar-item pb-2"><a href="#" class="block text-gray-700 hover:text-red-600">แผนปฏิบัติการประจำปี</a></li>
-                    <li class="sidebar-item pb-2"><a href="#" class="block text-gray-700 hover:text-red-600">สารสนเทศ..............</a></li>
-                    <li class="sidebar-item pb-2"><a href="#" class="block text-gray-700 hover:text-red-600">รายงานผลการดำเนินงาน</a></li>
+                    <!-- <<<<< แก้ไข: data-target ให้ตรงกับ div ใหม่ >>>>> -->
+                    <li class="sidebar-item pb-2"><a href="#" data-target="content-action-plan" class="block text-gray-700 hover:text-red-600">แผนปฏิบัติการประจำปี</a></li>
+                    <li class="sidebar-item pb-2"><a href="#" data-target="content-information-links" class="block text-gray-700 hover:text-red-600">สารสนเทศ..............</a></li>
+                    <li class="sidebar-item pb-2"><a href="#" data-target="content-operation-report" class="block text-gray-700 hover:text-red-600">รายงานผลการดำเนินงาน</a></li>
                 </ul>
                 
                 <h2 class="text-xl font-bold text-red-600 border-b-2 border-yellow-400 pb-2 my-4">ปฏิทินกิจกรรม</h2>
@@ -368,7 +345,6 @@
             <div class="bg-white rounded-2xl shadow-md p-5 card">
                 <h2 id="center-content-title" class="text-xl font-bold text-red-600 border-b-2 border-yellow-400 pb-2 mb-6">ยินดีต้อนรับสู่โรงเรียนชุมชนบ้านแม่หละป่าป๋วย</h2>
 
-                <!-- เนื้อหาเริ่มต้น (Default Content) - ข่าวประชาสัมพันธ์ -->
                 <div id="content-default" class="content-section">
                     <h3 class="text-xl font-bold text-red-600 mb-4">ข่าวประชาสัมพันธ์</h3>
                     <div style="display: flex; justify-content: center;">
@@ -376,12 +352,10 @@
                     </div>
                 </div>
 
-                <!-- เนื้อหาส่วนประวัติโรงเรียน -->
                 <div id="content-history" class="content-section hidden text-gray-700">
                 <div class="org-chart-container">
-                    <img src='https://i.postimg.cc/J0HZ0LZ2/around-31.jpg' border='0' alt='around-31'/>
+                    <img src='https://i.postimg.cc/J0HZ0LZ2/around-31.jpg' border='0' alt='around-31' class="org-chart-image"/> <!-- เพิ่ม class org-chart-image -->
                 </div>
-                    <p>โรงเรียนชุมชนบ้านแม่หละป่าป๋วย ตั้งอยู่หมู่ที่ ๙ หมู่บ้านดงเจริญ รับผิดชอบในเขตบริการ ๔ หมู่บ้าน คือ บ้านป่าป๋วย หมูที่ ๓, บ้านดงเจริญ หมู่ที่ ๙, บ้านแม่หละหมู่ที่ ๕ และบ้านเจริญสุข หมู่ที่ ๑๑</p>
                     <p>โรงเรียนชุมชนบ้านแม่หละป่าป๋วย <strong>ตั้งขึ้นเมื่อวันที่ ๑ พฤศจิกายน พ.ศ. ๒๔๖๘</strong><span id="school-age-text">(กำลังคำนวณอายุ...)</span>โดยมี <strong>นายเมืองตื่น จันทรัตน์</strong> ศึกษาธิการอำเภอลองในขณะนั้นเป็นผู้จัดตั้งขึ้น จัดการเรียนการสอน ตั้งแต่ชั้นประถมศึกษาปีที่ ๑ ถึง ชั้นประถมศึกษาปีที่ ๔ โดยอาศัยศาลาวัดป่าป๋วย (ศรีบุญนำ) เป็นสถานที่เรียน หมู่บ้านอื่นที่มาเรียนร่วมกัน คือ บ้านม่วงคำ และบ้านแม่ขมิง</p>
                     <h4>พัฒนาการของโรงเรียน</h4>
                     <p>ต่อมาใน <strong>พ.ศ. ๒๔๗๙</strong> <strong>นายมาลิน ลัยเจริญ</strong> ครูใหญ่ ได้ปรึกษากับนายสุข ตาเปี้ย และนายกิ วิชัยหอมผู้ใหญ่บ้าน เพื่อขยายโรงเรียนออกนอกวัดได้ที่ดิน จำนวน ๑ ไร่ ที่บ้านป่าป๋วย จึงได้ช่วยกันปลูกสร้างอาคารเรียนชั่วคราวในที่แห่งใหม่ขึ้น ขณะนั้นมีนักเรียน ๘๓ คน</p>
@@ -397,7 +371,7 @@
                     <p>ปี <strong>พ.ศ. ๒๕๒๔</strong> ได้รับงบประมาณ กสช. จำนวน ๔๐,๐๐๐ บาท สร้างสนามบาสเกตบอล ๑ แห่ง</p>
                     <p>ปี <strong>พ.ศ. ๒๕๒๖</strong> เดือนมีนาคม ได้จัดทำผ้าป่าสร้างถนนคอนกรีตภายในโรงเรียนจนแล้วเสร็จ รวมเป็นเงินทั้งสิ้น จำนวน ๔๑,๑๓๒ บาท</p>
                     <p>ปี <strong>พ.ศ. ๒๕๓๘ - ๒๕๔๑</strong> ทางโรงเรียนได้รับความร่วมมือจาก <strong>คุณรัฐรินทร์ อ้ายมา</strong> บริจาคเครื่องคอมพิวเตอร์ จำนวน ๑ เครื่อง เป็นเงิน ๔๐,๐๐๐ บาท</p>
-                    <p>ในเดือนตุลาคม <strong>พ.ศ. ๒๕๔๐</strong> <strong>คุณนริทธ์ วิชัยหอม</strong> ได้ร่วมกับศิษย์เก่าของโรงเรียนจัดซื้อชุดเครื่องดนตรีวงดุริยางค์ให้โรงเรียน มูลค่า ๗๐,๐๐๐ บาท และในปีเดียวกันนี้ทางชุมชน กรรมการโรงเรียน ผู้ปกครอง ได้ร่วมกันจัดหาเงินซื้อที่ดินด้านหลังมอบให้เป็นสมบัติของโรงเรียนประมาณ ๓ ไร่ เพื่อให้ครบ ๑๐ ไร่ ตามเกณฑ์โรงเรียนปฏิรูปการศึกษา</p>
+                    <p>ในเดือนตุลาคม <strong>พ.ศ. ๒๕๔０</strong> <strong>คุณนริทธ์ วิชัยหอม</strong> ได้ร่วมกับศิษย์เก่าของโรงเรียนจัดซื้อชุดเครื่องดนตรีวงดุริยางค์ให้โรงเรียน มูลค่า ๗๐,๐๐๐ บาท และในปีเดียวกันนี้ทางชุมชน กรรมการโรงเรียน ผู้ปกครอง ได้ร่วมกันจัดหาเงินซื้อที่ดินด้านหลังมอบให้เป็นสมบัติของโรงเรียนประมาณ ๓ ไร่ เพื่อให้ครบ ๑๐ ไร่ ตามเกณฑ์โรงเรียนปฏิรูปการศึกษา</p>
                     <p>ปี <strong>พ.ศ. ๒๕๔๒</strong> ได้รับงบประมาณ ๑,๘๓๒,๐๐๐ บาท สร้างอาคารเรียน แบบ สปช. ๑๐๕/๒๙</p>
                     <p>ปี <strong>พ.ศ. ๒๕๔๓</strong> โรงเรียนได้ขออนุญาตรื้อถอน อาคาร ๒ และนำวัสดุมาสร้างเป็นอาคารพิพิธภัณฑ์สื่อพื้นบ้าน โดยจัดหางบประมาณจากการจัดงาน “คืนสู่เหย้าชาวเหลือง-แดง” ในวันที่ ๑๒ เมษายน ๒๕๔๓ ค่าก่อสร้างทั้งหมด ๑๕๐,๐๐๐ บาท</p>
                     <p>ปี <strong>พ.ศ. ๒๕๔๔</strong> โรงเรียนได้รับงบประมาณจากกรมพลศึกษา จัดสร้างสนามกีฬาเอนกประสงค์ จำนวน ๑ แห่ง งบประมาณ ๑๐๐,๐๐๐ บาท เสร็จในเดือน พฤษภาคม ๒๕๔๔ ใช้เป็นศูนย์กีฬาของตำบลสรอย ต่อไป</p>
@@ -423,10 +397,9 @@
                     <p>การเดินทางจากที่ว่าการอำเภอวังชิ้นถึงโรงเรียนโดยรถยนต์และรถจักรยานยนต์ ระยะทาง ๒๕ กิโลเมตร ระยะทางห่างจากสำนักงานเขตพื้นที่การศึกษาประถมศึกษาแพร่ เขต ๒ ประมาณ ๖๕ กิโลเมตร</p>
                 </div>
 
-                <!-- เนื้อหาส่วนวิสัยทัศน์/พันธกิจ -->
                 <div id="content-vision" class="content-section hidden text-gray-700">
                 <div class="org-chart-container">
-                    <a href='https://postimg.cc/1VnsHBSG' target='_blank'><img src='https://i.postimg.cc/0jZj9XHB/sc1.png' border='0' alt='sc1'/>
+                    <a href='https://postimg.cc/1VnsHBSG' target='_blank'><img src='https://i.postimg.cc/0jZj9XHB/sc1.png' border='0' alt='sc1' class="org-chart-image"/></a> <!-- เพิ่ม class org-chart-image -->
                 </div>
                     <h3>วิสัยทัศน์ (VISION)</h3>
                     <p class="vision-statement">
@@ -463,12 +436,10 @@
                     </ul>
                 </div>
 
-                <!-- เนื้อหาส่วนโครงสร้างการบริหาร -->
                 <div id="content-structure" class="content-section hidden text-gray-700">
                     <h3 class="section-title">โครงสร้างการบริหารงานโรงเรียน</h3>
                     <div class="org-chart-container">
-                        <!-- แก้ไข URL รูปภาพให้ถูกต้อง หากมีการเปลี่ยนแปลง -->
-                        <img src='https://i.postimg.cc/L6xjNJ5p/Blue-and-White-Modern-Organizational-Structure-A4.png' border='0' alt='Blue-and-White-Modern-Organizational-Structure-A4'/>
+                        <img src='https://i.postimg.cc/L6xjNJ5p/Blue-and-White-Modern-Organizational-Structure-A4.png' border='0' alt='Blue-and-White-Modern-Organizational-Structure-A4' class="org-chart-image"/> <!-- เพิ่ม class org-chart-image -->
                     </div>
                     <p class="intro-paragraph">
                         การบริหารงานโรงเรียนชุมชนบ้านแม่หละป่าป๋วย ได้กำหนดโครงการบริหารสถานศึกษา ประกอบด้วย ๔ กลุ่มงาน ดังต่อไปนี้:
@@ -481,10 +452,9 @@
                     </ol>
                 </div>
 
-                <!-- เนื้อหาส่วนข้อมูลสถานศึกษา -->
                 <div id="content-school-info" class="content-section hidden text-gray-700">
                 <div class="org-chart-container">
-                    <img src='https://i.postimg.cc/TYrQJV5H/around-10.jpg' border='0' alt='around-10'/>
+                    <img src='https://i.postimg.cc/TYrQJV5H/around-10.jpg' border='0' alt='around-10' class="org-chart-image"/> <!-- เพิ่ม class org-chart-image -->
                 </div>
                     <p><span class="info-label">ชื่อโรงเรียน :</span> โรงเรียนชุมชนบ้านแม่หละป่าป๋วย</p>
                     <p><span class="info-label">ที่ตั้ง :</span> เลขที่ 6 หมู่ 9 บ้านดงเจริญ ตำบล สรอย อำเภอ วังชิ้น จังหวัด แพร่ รหัสไปรษณีย์ 54160</p>
@@ -506,36 +476,28 @@
                     </p>
                 </div>
 
-                <!-- เนื้อหาส่วนข้อมูลบุคลากร -->
                 <div id="content-personnel" class="content-section hidden">
                     <!-- JavaScript จะนำข้อมูลบุคลากรมาแสดงที่นี่ -->
                 </div>
 
-                <!-- เนื้อหาส่วนข้อมูลนักเรียน -->
                 <div id="content-students" class="content-section hidden"> 
                     <!-- JavaScript จะนำข้อมูลนักเรียนมาแสดงที่นี่ -->
                 </div>
                 
                 <!-- ========== เนื้อหาใหม่ ========== -->
-                <!-- 1. Smart School Service -->
                 <div id="content-smart-school" class="content-section hidden">
                     <!-- JavaScript จะโหลดข้อมูลตารางมาใส่ที่นี่ -->
                 </div>
 
-                <!-- 2. แผนปฏิบัติการประจำปี (PDF) -->
                 <div id="content-action-plan" class="content-section hidden">
                     <p class="text-gray-500">กำลังโหลดไฟล์ PDF แผนปฏิบัติการประจำปี...</p>
                     <!-- <iframe src="URL_ของไฟล์_PDF_แผนปฏิบัติการ" class="pdf-embed-container" frameborder="0"></iframe> -->
-                    <!-- หรือใช้ <embed src="URL_ของไฟล์_PDF_แผนปฏิบัติการ" type="application/pdf" class="pdf-embed-container" /> -->
-                    <!-- หรือพี่จะใช้ PDF.js ถ้าต้องการ control มากขึ้น -->
                 </div>
 
-                <!-- 3. สารสนเทศ... (ตารางลิงก์) -->
                 <div id="content-information-links" class="content-section hidden">
                     <!-- JavaScript จะโหลดข้อมูลตารางมาใส่ที่นี่ -->
                 </div>
 
-                <!-- 4. รายงานผลการดำเนินงาน (PDF) -->
                 <div id="content-operation-report" class="content-section hidden">
                     <p class="text-gray-500">กำลังโหลดไฟล์ PDF รายงานผลการดำเนินงาน...</p>
                     <!-- <iframe src="URL_ของไฟล์_PDF_รายงานผล" class="pdf-embed-container" frameborder="0"></iframe> -->
@@ -599,33 +561,28 @@
     </footer>
 
 <script>
-    // URL ของ Google Apps Script Web App (สำคัญมาก: ตรวจสอบว่าเป็น URL ล่าสุดหลัง Deploy Apps Script ใหม่)
-    const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbw-el57qkVjx1K_CTzwasn5y_xkI0rCbinhdrGdoYpS5WsRdU-CcgAuQlZaRylnoLmX/exec"; // URL เว็บแอป               
+    const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbw-el57qkVjx1K_CTzwasn5y_xkI0rCbinhdrGdoYpS5WsRdU-CcgAuQlZaRylnoLmX/exec"; 
 
-        // สามารถวางฟังก์ชันนี้ไว้นอก DOMContentLoaded หรือข้างในก็ได้
-        function calculateAndDisplaySchoolAge() {
-            const foundingDate = new Date(1925, 10, 1); // เดือนใน JavaScript เริ่มจาก 0 (ม.ค.) ถึง 11 (ธ.ค.) -> พ.ย. คือ 10
-            const today = new Date();
-        
-            let age = today.getFullYear() - foundingDate.getFullYear();
-            const monthDifference = today.getMonth() - foundingDate.getMonth();
-            const dayDifference = today.getDate() - foundingDate.getDate();
-        
-            if (monthDifference < 0 || (monthDifference === 0 && dayDifference < 0)) {
-                age--;
-            }
-        
-            const schoolAgeTextElement = document.getElementById('school-age-text');
-            if (schoolAgeTextElement) {
-                schoolAgeTextElement.textContent = `(รวมอายุ ${age} ปี)`;
-            } else {
-                console.error("Element with id 'school-age-text' not found.");
-            }
+    function calculateAndDisplaySchoolAge() {
+        const foundingDate = new Date(1925, 10, 1); 
+        const today = new Date();
+        let age = today.getFullYear() - foundingDate.getFullYear();
+        const monthDifference = today.getMonth() - foundingDate.getMonth();
+        const dayDifference = today.getDate() - foundingDate.getDate();
+        if (monthDifference < 0 || (monthDifference === 0 && dayDifference < 0)) {
+            age--;
         }
+        const schoolAgeTextElement = document.getElementById('school-age-text');
+        if (schoolAgeTextElement) {
+            schoolAgeTextElement.textContent = `(รวมอายุ ${age} ปี)`;
+        } else {
+            console.error("Element with id 'school-age-text' not found.");
+        }
+    }
     
     document.addEventListener('DOMContentLoaded', function () {
         const mainMenuLinks = document.querySelectorAll('#main-menu a[data-target]'); 
-        const smartSchoolLink = document.querySelector('nav a[data-target="content-smart-school"]'); // ลิงก์ Smart School Service
+        const smartSchoolLink = document.querySelector('nav a[data-target="content-smart-school"]'); 
         const homeLink = document.getElementById('home-link'); 
         const contentSections = document.querySelectorAll('.content-section'); 
         const centerContentTitle = document.getElementById('center-content-title'); 
@@ -635,33 +592,31 @@
             contentSections.forEach(section => {
                 section.classList.add('hidden');
             });
-
             const targetSection = document.getElementById(targetId);
             if (targetSection) {
                 targetSection.classList.remove('hidden');
             }
-
             if (newTitle) {
                 centerContentTitle.textContent = newTitle;
             } else {
                  centerContentTitle.textContent = initialTitle; 
             }
 
-            // ล้าง active class จากเมนูทั้งหมด (ทั้ง sidebar และ header)
-            mainMenuLinks.forEach(link => link.classList.remove('active'));
-            if(smartSchoolLink) smartSchoolLink.classList.remove('active'); // ถ้ามีลิงก์ Smart School
-            // (ถ้ามีเมนูอื่นๆ ใน header ที่จะลิงก์มาตรงกลาง ก็ต้องเพิ่มการล้าง active ที่นี่)
+            // ล้าง active class จากเมนูทั้งหมด
+            document.querySelectorAll('.menu-item, .sidebar-item a').forEach(link => link.classList.remove('active'));
+
 
             // เพิ่ม active class ให้เมนูที่ถูกเลือก
-            if (targetId.startsWith("content-")) { // สำหรับเมนูใน sidebar
+            if (targetId && targetId.startsWith("content-")) {
+                // Sidebar menu
                 const activeSidebarLink = document.querySelector(`#main-menu a[data-target="${targetId}"]`);
                 if (activeSidebarLink) activeSidebarLink.classList.add('active');
-            } else if (targetId === 'content-smart-school' && smartSchoolLink) { // สำหรับ Smart School
-                 smartSchoolLink.classList.add('active'); // ยังไม่มี active style สำหรับ header menu
+                // Header menu (ตรวจสอบว่า data-target ตรงกับ sidebar หรือไม่)
+                const activeHeaderLink = document.querySelector(`nav a[data-target="${targetId}"]`);
+                if (activeHeaderLink) activeHeaderLink.classList.add('active');
             }
 
 
-            // --- โหลดข้อมูลตาม targetId ---
             if (targetId === 'content-personnel') {
                 fetchPersonnelData();
             } else if (targetId === 'content-students') { 
@@ -677,60 +632,41 @@
             }
         }
 
-        // Event listeners สำหรับเมนูใน Sidebar
-        mainMenuLinks.forEach(link => {
+        // Event listeners สำหรับเมนูทั้งหมดที่มี data-target
+        document.querySelectorAll('a[data-target]').forEach(link => {
             link.addEventListener('click', function (event) {
                 event.preventDefault(); 
                 const targetId = this.dataset.target; 
-                const newTitleText = this.textContent; 
+                const newTitleText = this.textContent.trim(); // .trim() เพื่อตัดช่องว่าง
                 window.showContent(targetId, newTitleText); 
             });
         });
         
-        // Event listener สำหรับ Smart School Service (ถ้ามี)
-        if (smartSchoolLink) {
-            smartSchoolLink.addEventListener('click', function(event) {
-                event.preventDefault();
-                const targetId = this.dataset.target;
-                const newTitleText = this.textContent;
-                window.showContent(targetId, newTitleText);
-            });
-        }
-
-
         homeLink.addEventListener('click', function (event) {
             event.preventDefault(); 
             window.showContent('content-default', initialTitle); 
-            mainMenuLinks.forEach(link => link.classList.remove('active')); 
-            if(smartSchoolLink) smartSchoolLink.classList.remove('active');
+            document.querySelectorAll('.menu-item, .sidebar-item a').forEach(link => link.classList.remove('active'));
+            // ทำให้หน้าหลักใน header active (ถ้าต้องการ)
+            document.getElementById('home-link').classList.add('active'); 
         });
 
         window.showContent('content-default', initialTitle);
+        document.getElementById('home-link').classList.add('active'); // ทำให้หน้าหลัก active ตอนเริ่ม
+
         fetchVisitorStats(); 
         calculateAndDisplaySchoolAge();
     });
-        
-        // เรียกฟังก์ชันดึงสถิติผู้เข้าชมเมื่อหน้าเว็บโหลด
-        fetchVisitorStats(); 
-
-        // เรียกฟังก์ชันคำนวณและแสดงอายุโรงเรียน 
-        calculateAndDisplaySchoolAge(); 
-    });
     
-    // ฟังก์ชันสำหรับดึงและแสดงสถิติผู้เข้าชม
     async function fetchVisitorStats() {
         const visitsTodayEl = document.getElementById('visits-today');
         const visitsMonthEl = document.getElementById('visits-this-month');
         const visitsTotalEl = document.getElementById('visits-total');
-    
         try {
-            // แก้ไข Parameter name จาก "×tamp" เป็น "×tamp="
-            const response = await fetch(`${WEB_APP_URL}?action=logVisitAndGetCounts&timestamp=${new Date().getTime()}`); // <<<<< แก้ไขตรงนี้แล้ว
+            const response = await fetch(`${WEB_APP_URL}?action=logVisitAndGetCounts×tamp=${new Date().getTime()}`); 
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
             const result = await response.json();
-    
             if (result.error) {
                 console.error("Error fetching visitor stats:", result.error, result.details || "");
                 visitsTodayEl.textContent = "-";
@@ -738,7 +674,6 @@
                 visitsTotalEl.textContent = "-";
                 return;
             }
-    
             if (result.data) {
                 visitsTodayEl.textContent = `${result.data.today.toLocaleString()} คน`;
                 visitsMonthEl.textContent = `${result.data.month.toLocaleString()} คน`;
@@ -748,7 +683,6 @@
                 visitsMonthEl.textContent = "N/A";
                 visitsTotalEl.textContent = "N/A";
             }
-    
         } catch (error) {
             console.error("Failed to fetch visitor stats:", error);
             visitsTodayEl.textContent = "ข้อผิดพลาด";
@@ -757,24 +691,20 @@
         }
     }
     
-    // ฟังก์ชันสำหรับดึงและแสดงข้อมูลบุคลากร
     async function fetchPersonnelData() {
         const personnelContentDiv = document.getElementById('content-personnel');
         personnelContentDiv.innerHTML = '<p class="text-gray-500 animate-pulse">กำลังโหลดข้อมูลบุคลากร...</p>'; 
-
         try {
             const response = await fetch(`${WEB_APP_URL}?action=getPersonnel`); 
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`); 
             }
             const result = await response.json(); 
-
             if (result.error) { 
                 personnelContentDiv.innerHTML = `<p class="text-red-500">เกิดข้อผิดพลาด: ${result.error} ${result.details || ''}</p><p class="text-sm text-gray-600">โปรดตรวจสอบการตั้งค่า Google Sheet และการ Deploy Apps Script</p>`;
                 console.error("Error fetching personnel:", result);
                 return;
             }
-
             if (result.data && result.data.length > 0) { 
                 let html = '<h3 class="text-xl font-bold text-red-600 mb-4">ข้อมูลบุคลากร</h3>';
                 html += '<div class="overflow-x-auto">'; 
@@ -788,21 +718,17 @@
                 html += '<th scope="col" class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">อีเมลล์</th>';
                 html += '</tr></thead>';
                 html += '<tbody class="bg-white divide-y divide-gray-200">';
-
                 result.data.forEach(person => { 
                     html += '<tr>';
                     html += `<td class="px-4 py-2 whitespace-nowrap">${person['ชื่อ-นามสกุล'] || '-'}</td>`;
                     html += `<td class="px-4 py-2 text-left whitespace-nowrap">${person['ตำแหน่ง'] || '-'}</td>`;
                     html += `<td class="px-4 py-2 text-left whitespace-nowrap">${person['วิทยฐานะ'] || '-'}</td>`;
-                    
                     const dateDisplayValue = person['วันที่มาอยู่โรงเรียนนี้']; 
                     html += `<td class="px-4 py-2 text-left whitespace-nowrap">${dateDisplayValue || '-'}</td>`;
-                    
                     html += `<td class="px-4 py-2 text-left whitespace-nowrap">${person['วิชาเอก'] || '-'}</td>`;
-                    html += `<td class="px-4 py-2 text-leftwhitespace-nowrap">${person['อีเมลล์'] || '-'}</td>`;
+                    html += `<td class="px-4 py-2 text-left whitespace-nowrap">${person['อีเมลล์'] || '-'}</td>`;
                     html += '</tr>';
                 });
-
                 html += '</tbody></table>';
                 html += '</div>';
                 personnelContentDiv.innerHTML = html; 
@@ -815,24 +741,20 @@
         }
     }
 
-    // ฟังก์ชันสำหรับดึงและแสดงข้อมูลสรุปนักเรียน
     async function fetchStudentSummaryData() {
         const studentContentDiv = document.getElementById('content-students');
         studentContentDiv.innerHTML = '<p class="text-gray-500 animate-pulse">กำลังโหลดข้อมูลนักเรียน...</p>'; 
-
         try {
             const response = await fetch(`${WEB_APP_URL}?action=getStudentSummary`); 
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`); 
             }
             const result = await response.json(); 
-
             if (result.error) { 
                 studentContentDiv.innerHTML = `<p class="text-red-500">เกิดข้อผิดพลาด: ${result.error} ${result.details || ''}</p><p class="text-sm text-gray-600">โปรดตรวจสอบการตั้งค่า Google Sheet และการ Deploy Apps Script</p>`;
                 console.error("Error fetching student summary:", result);
                 return;
             }
-
             if (result.data && result.data.length > 0) { 
                 let html = '<h3 class="text-xl font-bold text-red-600 mb-4">ข้อมูลนักเรียน (สรุป)</h3>';
                 html += '<div class="overflow-x-auto">'; 
@@ -844,30 +766,24 @@
                 html += '<th scope="col" class="px-4 py-2 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">รวม</th>';
                 html += '</tr></thead>';
                 html += '<tbody class="bg-white divide-y divide-gray-200">';
-
                 let totalBoys = 0; 
                 let totalGirls = 0; 
                 let grandTotalAll = 0; 
-
                 result.data.forEach(level => { 
                     const boys = parseInt(level['จำนวนนักเรียนชาย']) || 0; 
                     const girls = parseInt(level['จำนวนนักเรียนหญิง']) || 0; 
                     const sumPerLevel = boys + girls; 
-
                     html += '<tr>';
                     html += `<td class="px-4 py-2 whitespace-nowrap">${level['ระดับชั้น'] || '-'}</td>`; 
                     html += `<td class="px-4 py-2 whitespace-nowrap text-center">${level['จำนวนนักเรียนชาย'] || '0'}</td>`; 
                     html += `<td class="px-4 py-2 whitespace-nowrap text-center">${level['จำนวนนักเรียนหญิง'] || '0'}</td>`; 
                     html += `<td class="px-4 py-2 whitespace-nowrap text-center">${level['รวม'] || sumPerLevel}</td>`; 
                     html += '</tr>';
-
                     totalBoys += boys; 
                     totalGirls += girls; 
                     grandTotalAll += sumPerLevel; 
                 });
-                
                 html += `<tr class="font-bold bg-yellow-50"><td class="px-4 py-2 whitespace-nowrap text-gray-900">รวมทุกระดับ</td><td class="px-4 py-2 whitespace-nowrap text-gray-900 text-center">${totalBoys}</td><td class="px-4 py-2 whitespace-nowrap text-gray-900 text-center">${totalGirls}</td><td class="px-4 py-2 whitespace-nowrap text-gray-900 text-center">${grandTotalAll}</td></tr>`;
-                
                 html += '</tbody></table>';
                 html += '</div>';
                 studentContentDiv.innerHTML = html; 
@@ -880,42 +796,34 @@
         }
     }
 
-        // ========== ฟังก์ชันใหม่สำหรับแสดงข้อมูลตารางลิงก์ ==========
     async function fetchAndDisplayTableData(actionName, targetDivId, tableTitle) {
         const contentDiv = document.getElementById(targetDivId);
         contentDiv.innerHTML = `<p class="text-gray-500 animate-pulse">กำลังโหลดข้อมูล ${tableTitle}...</p>`;
-
         try {
-            const response = await fetch(`${WEB_APP_URL}?action=${actionName}×tamp=${new Date().getTime()}`);
+            const response = await fetch(`${WEB_APP_URL}?action=${actionName}×tamp=${new Date().getTime()}`); // แก้ไข ×tamp เป็น ×tamp
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
             const result = await response.json();
-
             if (result.error) {
                 contentDiv.innerHTML = `<p class="text-red-500">เกิดข้อผิดพลาดในการโหลดข้อมูล ${tableTitle}: ${result.error} ${result.details || ''}</p>`;
                 console.error(`Error fetching ${actionName}:`, result);
                 return;
             }
-
             if (result.data && result.data.length > 0) {
                 let html = `<h3 class="text-xl font-bold text-red-600 mb-4">${tableTitle}</h3>`;
                 html += '<div class="overflow-x-auto">';
-                html += '<table class="link-table min-w-full text-sm">'; // ใช้คลาส link-table
+                html += '<table class="link-table min-w-full text-sm">'; 
                 html += '<thead class="bg-gray-100"><tr>';
                 html += '<th scope="col" class="col-number px-4 py-2 text-center text-xs font-medium text-gray-600 uppercase tracking-wider">ลำดับ</th>';
                 html += '<th scope="col" class="col-name px-4 py-2 text-left text-xs font-medium text-gray-600 uppercase tracking-wider">ชื่อรายการ</th>';
                 html += '<th scope="col" class="col-link px-4 py-2 text-center text-xs font-medium text-gray-600 uppercase tracking-wider">ลิงก์</th>';
                 html += '</tr></thead>';
                 html += '<tbody class="bg-white divide-y divide-gray-200">';
-
                 result.data.forEach(item => {
-                    // ตรวจสอบว่า item.link มีค่าและไม่ใช่ค่าว่าง
                     const linkDestination = item.link && item.link.trim() !== "" ? item.link.trim() : "#";
                     const linkText = linkDestination !== "#" ? "เปิดลิงก์" : "ไม่มีลิงก์";
                     const targetAttribute = linkDestination !== "#" && (linkDestination.startsWith('http://') || linkDestination.startsWith('https://')) ? 'target="_blank" rel="noopener noreferrer"' : '';
-
-
                     html += '<tr>';
                     html += `<td class="col-number px-4 py-2 text-center whitespace-nowrap">${item.number || '-'}</td>`;
                     html += `<td class="col-name px-4 py-2 whitespace-nowrap">${item.name || '-'}</td>`;
@@ -924,7 +832,6 @@
                     html += `</td>`;
                     html += '</tr>';
                 });
-
                 html += '</tbody></table>';
                 html += '</div>';
                 contentDiv.innerHTML = html;
@@ -937,10 +844,8 @@
         }
     }
 
-    // ========== ฟังก์ชันใหม่สำหรับแสดง PDF ==========
     function displayPdf(targetDivId, pdfUrl, pdfTitle) {
         const contentDiv = document.getElementById(targetDivId);
-        // ตรวจสอบว่า pdfUrl มีค่าและไม่ใช่แค่ placeholder
         if (pdfUrl && pdfUrl !== 'URL_PDF_แผนปฏิบัติการ.pdf' && pdfUrl !== 'URL_PDF_รายงานผล.pdf' && pdfUrl.toLowerCase().endsWith('.pdf')) {
              contentDiv.innerHTML = `
                 <h3 class="text-xl font-bold text-red-600 mb-4">${pdfTitle}</h3>
