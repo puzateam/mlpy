@@ -1,276 +1,278 @@
 /* การตั้งค่าฟอนต์เริ่มต้นสำหรับทุก elements */
 * {
-    font-family: 'Prompt', sans-serif;
+    font-family: 'Prompt', sans-serif; /* กำหนดฟอนต์ Prompt เป็นฟอนต์หลัก */
 }
 
 /* สไตล์สำหรับ body */
 body {
-    background-color: #fffaf0; /* สี FloralWhite */
+    background-color: #fffaf0; /* สี FloralWhite เป็นสีพื้นหลังของหน้าเว็บ */
 }
 
 /* สไตล์สำหรับรายการเมนูหลัก (Header Menu) */
 .menu-item {
-    position: relative;
-    transition: all 0.3s ease;
+    position: relative; /* กำหนด position เป็น relative เพื่อให้ pseudo-element :after อ้างอิงได้ */
+    transition: all 0.3s ease; /* เพิ่ม transition effect ให้ดูนุ่มนวล */
 }
 
 .menu-item:after {
-    content: '';
-    position: absolute;
-    width: 0;
-    height: 2px;
-    bottom: -2px;
-    left: 0;
-    background-color: #fbbf24; /* สี amber-400 */
-    transition: width 0.3s ease;
+    content: ''; /* สร้าง pseudo-element */
+    position: absolute; /* กำหนด position เป็น absolute */
+    width: 0; /* ความกว้างเริ่มต้นเป็น 0 (ซ่อนไว้) */
+    height: 2px; /* ความสูงของเส้นใต้ */
+    bottom: -2px; /* ตำแหน่งด้านล่างของรายการเมนู */
+    left: 0; /* ตำแหน่งด้านซ้าย */
+    background-color: #fbbf24; /* สีของเส้นใต้ (สี amber-400 ของ Tailwind) */
+    transition: width 0.3s ease; /* เพิ่ม transition effect ให้ความกว้าง */
 }
 
-.menu-item.active:after,
-.menu-item:hover:after {
-    width: 100%;
+.menu-item.active:after, /* เมื่อรายการเมนูมีคลาส active */
+.menu-item:hover:after { /* เมื่อนำเมาส์ไปวางบนรายการเมนู */
+    width: 100%; /* แสดงเส้นใต้เต็มความกว้าง */
 }
 
 /* สไตล์สำหรับปุ่มหลัก */
 .btn-primary {
-    background-color: #ef4444; /* สี red-500 */
-    color: #FFF;
-    transition: all 0.2s ease;
-    border-radius: 50px;
+    background-color: #ef4444; /* สีพื้นหลังของปุ่ม (สี red-500 ของ Tailwind) */
+    color: #FFF; /* สีตัวอักษรเป็นสีขาว */
+    transition: all 0.2s ease; /* เพิ่ม transition effect */
+    border-radius: 50px; /* ทำให้ขอบปุ่มโค้งมน */
 }
 
 .btn-primary:hover {
-    background-color: #dc2626; /* สี red-600 */
-    transform: translateY(-2px);
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    background-color: #dc2626; /* สีพื้นหลังเมื่อนำเมาส์ไปวาง (สี red-600 ของ Tailwind) */
+    transform: translateY(-2px); /* เลื่อนปุ่มขึ้นเล็กน้อย */
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); /* เพิ่มเงา */
 }
 
 /* สไตล์สำหรับรายการเมนูใน Sidebar */
 .sidebar-item {
-    border-bottom: 1px solid #fee2e2; /* สี red-100 */
-    transition: all 0.3s ease;
+    border-bottom: 1px solid #fee2e2; /* เพิ่มเส้นคั่นด้านล่าง (สี red-100 ของ Tailwind) */
+    transition: all 0.3s ease; /* เพิ่ม transition effect */
 }
 
-.sidebar-item a.active,
-.sidebar-item:hover {
-    background-color: rgba(254, 226, 226, 0.5); /* สี red-100 โปร่งแสง */
-    padding-left: 0.5rem;
-    color: #dc2626; /* สี red-600 */
+.sidebar-item a.active, /* เมื่อลิงก์ใน sidebar มีคลาส active */
+.sidebar-item:hover { /* เมื่อนำเมาส์ไปวางบนรายการ sidebar */
+    background-color: rgba(254, 226, 226, 0.5); /* สีพื้นหลัง (สี red-100 โปร่งแสง) */
+    padding-left: 0.5rem; /* เพิ่ม padding ด้านซ้าย */
+    color: #dc2626; /* เปลี่ยนสีตัวอักษร (สี red-600 ของ Tailwind) */
 }
 
 /* สไตล์สำหรับ Card (กล่องเนื้อหาทั่วไป - ใน Sidebar) */
 .card {
-    border-radius: 16px;
-    transition: all 0.3s ease;
+    border-radius: 16px; /* ทำให้ขอบกล่องโค้งมน */
+    transition: all 0.3s ease; /* เพิ่ม transition effect */
 }
 
 .card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    transform: translateY(-5px); /* เลื่อนกล่องขึ้นเล็กน้อยเมื่อนำเมาส์ไปวาง */
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); /* เพิ่มเงา */
 }
 
 /* --- สไตล์สำหรับ Card ที่เป็นเนื้อหาหลักตรงกลาง (มีภาพพื้นหลัง) --- */
 .card-main-content {
-    position: relative;
-    z-index: 0;
-    overflow: hidden; 
-    border-radius: 16px; 
+    position: relative; /* กำหนด position เป็น relative สำหรับ pseudo-element */
+    z-index: 0; /* กำหนด z-index เพื่อให้ pseudo-element อยู่ข้างหลังเนื้อหา */
+    overflow: hidden;  /* ซ่อนส่วนที่เกินขอบเขต */
+    border-radius: 16px; /* ขอบมน (ควรตรงกับ .card ทั่วไป) */
     /* Tailwind class bg-white ใน HTML จะจัดการสีพื้นหลังหลัก */
 }
 
 .card-main-content::before {
-    content: "";
-    position: absolute;
+    content: ""; /* สร้าง pseudo-element */
+    position: absolute; /* กำหนด position เป็น absolute */
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-image: url('img/around(31).jpg'); /* ตรวจสอบ Path นี้ให้ถูกต้อง */
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-size: cover;
-    opacity: 0.2;
-    z-index: -1;
-    border-radius: inherit;
+    background-image: url('img/around(31).jpg'); /* กำหนดภาพพื้นหลัง (ตรวจสอบ Path นี้ให้ถูกต้อง หากใช้งานจริงอาจต้องเปลี่ยนเป็น URL หรือ Path ที่ถูกต้อง) */
+    background-repeat: no-repeat; /* ไม่ให้ภาพพื้นหลังซ้ำ */
+    background-position: center center; /* จัดภาพพื้นหลังให้อยู่กึ่งกลาง */
+    background-size: cover; /* ให้ภาพพื้นหลังเต็มพื้นที่และตัดส่วนเกิน */
+    opacity: 0.2; /* กำหนดความโปร่งแสงของภาพพื้นหลัง */
+    z-index: -1; /* ให้ภาพพื้นหลังอยู่หลังเนื้อหาอื่นๆ */
+    border-radius: inherit; /* ให้ขอบมนของ pseudo-element เหมือนกับ parent (.card-main-content) */
 }
 
-.card-main-content > * {
-    position: relative;
-    z-index: 1;
+.card-main-content > * { /* สไตล์สำหรับ elements ลูกทั้งหมดของ .card-main-content */
+    position: relative; /* กำหนด position relative */
+    z-index: 1; /* ให้เนื้อหาอยู่ด้านหน้าภาพพื้นหลัง */
 }
 /* ---------------------------------------------------------------------- */
 
 /* สไตล์สำหรับข้อความใน Footer */
 .footer-text {
-    line-height: 1.3;
-    margin-bottom: 0.3rem;
+    line-height: 1.3; /* กำหนดความสูงของบรรทัด */
+    margin-bottom: 0.3rem; /* ระยะห่างด้านล่าง */
 }
 
 .footer-text:last-child {
-    margin-bottom: 0;
+    margin-bottom: 0; /* ไม่ต้องมีระยะห่างด้านล่างสำหรับบรรทัดสุดท้าย */
 }
 
 /* สไตล์สำหรับรายการข้อมูลติดต่อ */
 .contact-item {
-    display: flex;
-    align-items: center;
-    margin-bottom: 0.5rem;
+    display: flex; /* ใช้ flexbox layout */
+    align-items: center; /* จัดให้อยู่กึ่งกลางแนวตั้ง */
+    margin-bottom: 0.5rem; /* ระยะห่างด้านล่าง */
 }
 
 .contact-icon {
-    margin-right: 0.5rem;
-    flex-shrink: 0;
+    margin-right: 0.5rem; /* ระยะห่างด้านขวาของไอคอน */
+    flex-shrink: 0; /* ไม่ให้ไอคอนหดตัว */
 }
 
 /* คลาสสำหรับซ่อน/แสดงส่วนเนื้อหาด้วย JavaScript */
 .content-section {
-    /* JavaScript จะเพิ่ม/ลบคลาส 'hidden' (display: none ของ Tailwind) */
+    /* JavaScript จะเพิ่ม/ลบคลาส 'hidden' (display: none ของ Tailwind) เพื่อควบคุมการแสดงผล */
 }
 
 /* สไตล์เพิ่มเติมสำหรับส่วนประวัติโรงเรียน (#content-history) */
 #content-history p {
-    margin-bottom: 0.75rem;
-    line-height: 1.6;
-    text-indent: 2em;
+    margin-bottom: 0.75rem; /* ระยะห่างด้านล่างของย่อหน้า */
+    line-height: 1.6; /* ความสูงของบรรทัด */
+    text-indent: 2em; /* ย่อหน้าแรกของแต่ละพารากราฟ */
 }
 #content-history h4 {
-    font-weight: 600;
-    color: #c2410c;
-    margin-top: 1rem;
-    margin-bottom: 0.5rem;
+    font-weight: 600; /* ตัวหนา */
+    color: #c2410c; /* สีตัวอักษร (สีส้มเข้ม) */
+    margin-top: 1rem; /* ระยะห่างด้านบน */
+    margin-bottom: 0.5rem; /* ระยะห่างด้านล่าง */
 }
 #content-history strong {
-    color: #b91c1c;
+    color: #b91c1c; /* สีตัวอักษรสำหรับข้อความที่เน้น (สีแดงเข้ม) */
 }
 
 /* สไตล์สำหรับ Container ของรูปภาพผังองค์กร หรือรูปภาพอื่นๆ */
 .org-chart-container {
-    text-align: center;
-    margin-top: 1.5rem;
-    margin-bottom: 1.5rem;
-    padding: 1rem;
-    background-color: #f9fafb; /* Tailwind gray-50 */
-    border-radius: 8px;
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    text-align: center; /* จัดรูปภาพให้อยู่กึ่งกลาง */
+    margin-top: 1.5rem; /* ระยะห่างด้านบน */
+    margin-bottom: 1.5rem; /* ระยะห่างด้านล่าง */
+    padding: 1rem; /* ระยะห่างภายใน */
+    background-color: #f9fafb; /* สีพื้นหลัง (Tailwind gray-50) */
+    border-radius: 8px; /* ขอบมน */
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); /* เพิ่มเงา */
 }
 .org-chart-image {
-    max-width: 100%;
-    height: auto;
-    border-radius: 4px;
-    border: 1px solid #9398a1;
+    max-width: 100%; /* ความกว้างสูงสุดไม่เกิน container */
+    height: auto; /* ความสูงอัตโนมัติ */
+    border-radius: 4px; /* ขอบมนของรูปภาพ */
+    border: 1px solid #9398a1; /* เส้นขอบรูปภาพ */
 }
 
 /* Media Query สำหรับหน้าจอขนาดเล็ก (Responsive Design) */
-@media (max-width: 768px) {
+@media (max-width: 768px) { /* เมื่อความกว้างหน้าจอน้อยกว่าหรือเท่ากับ 768px */
     .main-container {
-        flex-direction: column;
+        flex-direction: column; /* เปลี่ยนการจัดเรียงเป็นแนวตั้ง */
     }
     .sidebar, .content {
-        width: 100%;
+        width: 100%; /* ให้ sidebar และ content เต็มความกว้าง */
     }
     .sidebar {
-        margin-bottom: 1rem;
+        margin-bottom: 1rem; /* เพิ่มระยะห่างด้านล่างของ sidebar */
     }
     .facebook-iframe {
-        width: 100% !important;
-        max-width: 500px;
+        width: 100% !important; /* ให้ iframe ของ Facebook เต็มความกว้าง (สำคัญกว่า inline style) */
+        max-width: 500px; /* แต่ไม่เกิน 500px */
     }
 }
 
 /* สไตล์เพิ่มเติมสำหรับส่วนข้อมูลสถานศึกษา (#content-school-info) */
 #content-school-info p {
-    margin-bottom: 0.75rem;
-    line-height: 1.6;
+    margin-bottom: 0.75rem; /* ระยะห่างด้านล่างของย่อหน้า */
+    line-height: 1.6; /* ความสูงของบรรทัด */
 }
 #content-school-info .info-label {
-    font-weight: 600;
-    color: #4b5563;
+    font-weight: 600; /* ตัวหนาสำหรับ label */
+    color: #4b5563; /* สีตัวอักษร (สีเทาเข้ม) */
 }
 #content-school-info .school-identity-title {
-    font-size: 1.125rem; /* text-lg */
-    font-weight: 600;
-    color: #b91c1c; /* text-red-700 */
-    margin-top: 1.25rem;
-    margin-bottom: 0.5rem;
+    font-size: 1.125rem; /* ขนาดตัวอักษร (text-lg ของ Tailwind) */
+    font-weight: 600; /* ตัวหนา */
+    color: #b91c1c; /* สีตัวอักษร (text-red-700 ของ Tailwind) */
+    margin-top: 1.25rem; /* ระยะห่างด้านบน */
+    margin-bottom: 0.5rem; /* ระยะห่างด้านล่าง */
 }
 #content-school-info .school-identity-text {
-    font-size: 1.25rem; /* text-xl */
-    color: #c2410c;
-    margin-left: 1rem;
-    font-weight: 500;
+    font-size: 1.25rem; /* ขนาดตัวอักษร (text-xl ของ Tailwind) */
+    color: #c2410c; /* สีตัวอักษร (สีส้มเข้ม) */
+    margin-left: 1rem; /* ระยะห่างด้านซ้าย */
+    font-weight: 500; /* ความหนาตัวอักษรปานกลาง */
 }
 #content-school-info .color-box {
-    display: inline-block;
-    width: 1em;
-    height: 1em;
-    margin-right: 0.3em;
-    border-radius: 3px;
-    vertical-align: middle;
+    display: inline-block; /* แสดงผลแบบ inline-block */
+    width: 1em; /* ความกว้างเท่ากับขนาดตัวอักษรปัจจุบัน */
+    height: 1em; /* ความสูงเท่ากับขนาดตัวอักษรปัจจุบัน */
+    margin-right: 0.3em; /* ระยะห่างด้านขวา */
+    border-radius: 3px; /* ขอบมนเล็กน้อย */
+    vertical-align: middle; /* จัดให้อยู่กึ่งกลางแนวตั้งกับข้อความ */
 }
 
 /* สไตล์เพิ่มเติมสำหรับส่วนวิสัยทัศน์/พันธกิจ (#content-vision) */
 #content-vision h3 {
-    font-size: 1.25rem;
-    font-weight: 700;
-    color: #b91c1c;
-    margin-top: 1.5rem;
-    margin-bottom: 0.75rem;
+    font-size: 1.25rem; /* ขนาดตัวอักษร */
+    font-weight: 700; /* ตัวหนามาก */
+    color: #b91c1c; /* สีตัวอักษร (text-red-700 ของ Tailwind) */
+    margin-top: 1.5rem; /* ระยะห่างด้านบน */
+    margin-bottom: 0.75rem; /* ระยะห่างด้านล่าง */
 }
 #content-vision h3:first-child {
-    margin-top: 0;
+    margin-top: 0; /* ไม่ต้องมีระยะห่างด้านบนสำหรับ h3 ตัวแรก */
 }
 #content-vision p.vision-statement {
-    font-size: 1.125rem;
-    line-height: 1.7;
-    margin-left: 1rem;
-    margin-bottom: 1.5rem;
-    font-style: italic;
-    color: #374151;
+    font-size: 1.125rem; /* ขนาดตัวอักษร */
+    line-height: 1.7; /* ความสูงของบรรทัด */
+    margin-left: 1rem; /* ระยะห่างด้านซ้าย */
+    margin-bottom: 1.5rem; /* ระยะห่างด้านล่าง */
+    font-style: italic; /* ตัวเอียง */
+    color: #374151; /* สีตัวอักษร (สีเทาเข้ม) */
 }
-#content-vision ol, #content-vision ul {
-    list-style-position: outside;
-    margin-left: 2.5rem;
-    margin-bottom: 1.5rem;
+#content-vision ol, /* รายการแบบมีลำดับเลข */
+#content-vision ul { /* รายการแบบมีจุด */
+    list-style-position: outside; /* ให้ bullet/number อยู่นอกขอบเขตข้อความ */
+    margin-left: 2.5rem; /* ระยะห่างด้านซ้าย */
+    margin-bottom: 1.5rem; /* ระยะห่างด้านล่าง */
 }
-#content-vision ol li, #content-vision ul li {
-    margin-bottom: 0.5rem;
-    line-height: 1.6;
+#content-vision ol li,
+#content-vision ul li {
+    margin-bottom: 0.5rem; /* ระยะห่างด้านล่างของแต่ละรายการ */
+    line-height: 1.6; /* ความสูงของบรรทัด */
 }
 
 /* สไตล์เพิ่มเติมสำหรับส่วนโครงสร้างการบริหาร (#content-structure) */
-#content-structure h3.section-title {
+#content-structure h3.section-title { /* (คลาสนี้ไม่ได้ถูกใช้ใน HTML ปัจจุบัน แต่มีเผื่อไว้) */
     font-size: 1.25rem;
     font-weight: 700;
     color: #b91c1c;
     margin-bottom: 1rem;
 }
 #content-structure .intro-paragraph {
-    margin-bottom: 1rem;
-    line-height: 1.6;
+    margin-bottom: 1rem; /* ระยะห่างด้านล่าง */
+    line-height: 1.6; /* ความสูงของบรรทัด */
 }
 #content-structure ol.admin-groups {
-    list-style-type: decimal;
-    list-style-position: outside;
-    margin-left: 2.5rem;
-    margin-bottom: 1.5rem;
+    list-style-type: decimal; /* รูปแบบรายการเป็นตัวเลข */
+    list-style-position: outside; /* ให้ตัวเลขอยู่นอกขอบเขตข้อความ */
+    margin-left: 2.5rem; /* ระยะห่างด้านซ้าย */
+    margin-bottom: 1.5rem; /* ระยะห่างด้านล่าง */
 }
 #content-structure ol.admin-groups li {
-    margin-bottom: 0.5rem;
-    line-height: 1.6;
+    margin-bottom: 0.5rem; /* ระยะห่างด้านล่างของแต่ละรายการ */
+    line-height: 1.6; /* ความสูงของบรรทัด */
 }
 #content-structure .image-caption {
-    display: none;
+    display: none; /* (คลาสนี้ไม่ได้ถูกใช้ใน HTML ปัจจุบัน แต่มีเผื่อไว้สำหรับคำบรรยายภาพ) */
 }
 
 /* สไตล์สำหรับตารางลิงก์ และ ตารางข้อมูลทั่วไป */
-.link-table, .data-table-theme { /* รวม .data-table-theme ที่นี่ */
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 1rem;
+.link-table, .data-table-theme { /* รวม .data-table-theme ที่นี่เพื่อใช้สไตล์ร่วมกัน */
+    width: 100%; /* ความกว้างเต็ม */
+    border-collapse: collapse; /* ให้เส้นขอบตารางรวมเป็นเส้นเดียว */
+    margin-top: 1rem; /* ระยะห่างด้านบน */
 }
 .link-table th, .link-table td,
-.data-table-theme th, .data-table-theme td { /* รวม .data-table-theme ที่นี่ */
-    border: 1px solid #ddd;
-    padding: 8px;
+.data-table-theme th, .data-table-theme td { /* สไตล์สำหรับเซลล์หัวตารางและเซลล์ข้อมูล */
+    border: 1px solid #ddd; /* เส้นขอบเซลล์ */
+    padding: 8px; /* ระยะห่างภายในเซลล์ */
     /* text-align: left; -> ถูก override โดย class text-center ใน HTML หรือ CSS เฉพาะ */
 }
 
@@ -280,20 +282,20 @@ body {
     background-color: #F59E0B; /* Tailwind amber-500 */
     color: #ffffff; /* ตัวอักษรสีขาว */
 
-    /* แบบที่ 2: สีแดงอ่อน */
+    /* แบบที่ 2: สีแดงอ่อน (ตัวเลือกสำรอง) */
     /* background-color: #FCA5A5; */ /* Tailwind red-400 */
     /* color: #4B5563; */
 
-    /* แบบที่ 3: สีเหลืองทอง */
+    /* แบบที่ 3: สีเหลืองทอง (ตัวเลือกสำรอง) */
     /* background-color: #D97706; */ /* Tailwind amber-600 */
     /* color: #FEF3C7; */
 }
 
-.data-table-theme th { /* สไตล์ทั่วไปสำหรับ th ใน theme นี้ */
-    padding: 0.625rem 0.5rem; /* ประมาณ 10px 8px */
-    font-weight: 600;
-    /* text-align: left; */ /* ถ้าต้องการ default เป็น left */
-    /* color: inherit; */ /* สีตัวอักษรจะมาจาก .data-table-theme thead */
+.data-table-theme th { /* สไตล์ทั่วไปสำหรับ th (หัวตาราง) ใน theme นี้ */
+    padding: 0.625rem 0.5rem; /* ประมาณ 10px 8px, สามารถปรับได้ */
+    font-weight: 600; /* ตัวหนา */
+    /* text-align: left; */ /* ถ้าต้องการ default เป็น left, Tailwind class จะ override ได้ */
+    /* color: inherit; */ /* สีตัวอักษรจะมาจาก .data-table-theme thead ที่กำหนดไว้ */
 }
 
 /* Tailwind classes ใน HTML จะ override text-align ของ th ได้ถ้าจำเป็น */
@@ -302,44 +304,45 @@ body {
 
 .link-table td a img, /* สำหรับตารางลิงก์เดิม */
 .data-table-theme td a img { /* สำหรับตารางที่ใช้ theme ใหม่ */
-    width: 1.5rem; /* w-6 */
-    height: 1.5rem; /* h-6 */
-    display: inline-block;
-    vertical-align: middle;
-    transition: transform 0.2s ease-in-out, opacity 0.2s ease-in-out;
+    width: 1.5rem; /* w-6 ของ Tailwind */
+    height: 1.5rem; /* h-6 ของ Tailwind */
+    display: inline-block; /* แสดงผลแบบ inline-block */
+    vertical-align: middle; /* จัดให้อยู่กึ่งกลางแนวตั้ง */
+    transition: transform 0.2s ease-in-out, opacity 0.2s ease-in-out; /* เพิ่ม transition effect */
 }
 
 .link-table td a:hover img,
 .data-table-theme td a:hover img {
-    opacity: 0.75;
-    transform: scale(1.15);
+    opacity: 0.75; /* ลดความทึบแสงเมื่อ hover */
+    transform: scale(1.15); /* ขยายขนาดเล็กน้อยเมื่อ hover */
 }
 
 .link-table .col-number,
-.data-table-theme .col-number { /* ถ้ามีคลาส col-number ใน data-table-theme */
-    width: 10%;
-    text-align: center;
+.data-table-theme .col-number { /* คอลัมน์ลำดับ */
+    width: 10%; /* กำหนดความกว้าง */
+    text-align: center; /* จัดข้อความกึ่งกลาง */
 }
 .link-table .col-name,
-.data-table-theme .col-name { /* ถ้ามีคลาส col-name ใน data-table-theme */
-    width: 60%;
-    text-align: left; /* ให้ชื่อรายการชิดซ้าย */
+.data-table-theme .col-name { /* คอลัมน์ชื่อรายการ */
+    width: 60%; /* กำหนดความกว้าง */
+    text-align: left; /* จัดข้อความชิดซ้าย */
 }
 .link-table .col-link,
-.data-table-theme .col-link { /* ถ้ามีคลาส col-link ใน data-table-theme */
-    width: 30%;
-    text-align: center;
+.data-table-theme .col-link { /* คอลัมน์ลิงก์ */
+    width: 30%; /* กำหนดความกว้าง */
+    text-align: center; /* จัดข้อความกึ่งกลาง */
 }
 
 
 /* สไตล์สำหรับ iframe ที่แสดง PDF */
 .pdf-embed-container {
-    width: 100%;
-    height: calc(100vh - 220px); /* ปรับค่า 220px ตามความสูงของ Header, Footer, และ Title bar ของ content */
-    border: 1px solid #ccc;
+    width: 100%; /* ความกว้างเต็ม */
+    height: calc(100vh - 220px); /* ความสูงคำนวณจากความสูงของ viewport ลบด้วยความสูงโดยประมาณของ Header, Footer, และ Title bar ของ content */
+    border: 1px solid #ccc; /* เส้นขอบ */
 }
 
 /* คลาส sr-only ของ Tailwind (เผื่อไม่ได้โหลดจาก CDN หรือต้องการ define เอง) */
+/* ใช้สำหรับซ่อน element จากการแสดงผล แต่ยังคงเข้าถึงได้โดย screen readers */
 .sr-only {
     position: absolute;
     width: 1px;
