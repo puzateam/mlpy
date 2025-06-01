@@ -89,7 +89,7 @@ body {
     height: 100%;
     
     /* --- แก้ไข URL ของภาพพื้นหลังตรงนี้ --- */
-    background-image: url('img/around%20(31).jpg'); /* <<<<----- Path รูปภาพของพี่ (ตรวจสอบให้แน่ใจว่าถูกต้อง) */
+    background-image: url('img/around(31).jpg'); /* <<<<----- Path รูปภาพของพี่ (ตรวจสอบให้แน่ใจว่าถูกต้อง) */
                                                 /* ถ้า path มี %20 แสดงว่ามี space ในชื่อไฟล์ ซึ่งทำงานได้ แต่อาจจะเลี่ยงได้จะดีกว่า */
     
     background-repeat: no-repeat;
