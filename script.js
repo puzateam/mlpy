@@ -299,7 +299,7 @@ async function fetchAndDisplayTableData(actionName, targetDivId, tableTitleFromM
                 html += '<tr>';
                 html += `<td class="col-number px-4 py-2 text-center whitespace-nowrap">${item.number || '-'}</td>`;
                 html += `<td class="col-name px-4 py-2 whitespace-nowrap">${item.name || '-'}</td>`;
-                html += `<td class="col-link px-4 py-2 text-center whitespace-nowrap">`;
+                html += `<td class="col-link px-4 py-2 text-center whitespace-nowrap align-middle">`;
                 html += `<a href="${linkDestination}" ${targetAttribute} class="text-blue-600 hover:text-blue-800 hover:underline">${linkText}</a>`;
                 html += `</td>`;
                 html += '</tr>';
