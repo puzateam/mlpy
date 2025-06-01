@@ -1,58 +1,62 @@
 <!DOCTYPE html>
-<html lang="th">
+<html lang="th"> <!-- กำหนดภาษาหลักของหน้าเว็บเป็นภาษาไทย -->
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>โรงเรียนชุมชนบ้านแม่หละป่าป๋วย</title>
+    <meta charset="UTF-8"> <!-- กำหนดชุดอักขระเป็น UTF-8 เพื่อรองรับภาษาไทย -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- ตั้งค่าการแสดงผลบนอุปกรณ์ต่างๆ ให้เหมาะสม -->
+    <title>โรงเรียนชุมชนบ้านแม่หละป่าป๋วย</title> <!-- ชื่อของหน้าเว็บที่แสดงบนแท็บของเบราว์เซอร์ -->
+
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600&display=swap" rel="stylesheet"> <!-- นำเข้าฟอนต์ Prompt จาก Google Fonts -->
+
     <!-- Tailwind CSS CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.tailwindcss.com"></script> <!-- นำเข้า Tailwind CSS ผ่าน CDN -->
+
     <!-- Custom Stylesheet -->
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css"> <!-- เชื่อมโยงไปยังไฟล์ CSS ที่กำหนดเอง -->
 </head>
 <body>
     <!-- ส่วนหัวเว็บ (Header) -->
-    <header class="bg-gradient-to-r from-red-600 to-yellow-500 p-4">
-        <div class="container mx-auto flex flex-col items-center">
-            <div class="flex flex-col items-center mb-4">
-                <img src="https://i.postimg.cc/d3PbrGqC/logo-School.png" alt="โลโก้โรงเรียน" class="w-[80px] h-auto mb-2">
-                <div class="text-center">
-                    <h1 class="text-white text-2xl md:text-3xl font-bold">โรงเรียนชุมชนบ้านแม่หละป่าป๋วย</h1>
+    <header class="bg-gradient-to-r from-red-600 to-yellow-500 p-4"> <!-- แถบส่วนหัว ใช้สีพื้นหลังแบบไล่เฉดสีแดงไปเหลือง และมี padding 4 หน่วย -->
+        <div class="container mx-auto flex flex-col items-center"> <!-- จัดเนื้อหาในส่วนหัวให้อยู่กึ่งกลาง และจัดเรียง элементыเป็นคอลัมน์ -->
+            <div class="flex flex-col items-center mb-4"> <!-- กลุ่มของโลโก้และชื่อโรงเรียน จัดเรียงเป็นคอลัมน์และกึ่งกลาง มี margin ด้านล่าง -->
+                <img src="https://i.postimg.cc/d3PbrGqC/logo-School.png" alt="โลโก้โรงเรียน" class="w-[80px] h-auto mb-2"> <!-- แสดงโลโก้โรงเรียน กำหนดความกว้าง 80px ความสูงอัตโนมัติ และ margin ด้านล่าง -->
+                <div class="text-center"> <!-- จัดข้อความชื่อโรงเรียนให้อยู่กึ่งกลาง -->
+                    <h1 class="text-white text-2xl md:text-3xl font-bold">โรงเรียนชุมชนบ้านแม่หละป่าป๋วย</h1> <!-- ชื่อโรงเรียน ตัวอักษรสีขาว ขนาดใหญ่ และตัวหนา -->
                 </div>
             </div>
         </div>
 
-        <nav class="container mx-auto mt-4">
-            <ul class="flex flex-wrap justify-center space-x-1 md:space-x-8 text-white">
-                <li><a href="#" id="home-link" data-target="content-default" class="menu-item px-3 py-1 hover:text-yellow-200">หน้าหลัก</a></li>
-                <li><a href="#" class="menu-item px-3 py-1 hover:text-yellow-200">รับการประเมิน สมศ.</a></li>
-                <li><a href="#" data-target="content-smart-school" class="menu-item px-3 py-1 hover:text-yellow-200">Smart School Service</a></li>
-                <li><a href="#" class="menu-item px-3 py-1 hover:text-yellow-200">Admin</a></li>
+        <!-- เมนูนำทาง (Navigation) -->
+        <nav class="container mx-auto mt-4"> <!-- ส่วนเมนูนำทาง จัดให้อยู่กึ่งกลางและมี margin ด้านบน -->
+            <ul class="flex flex-wrap justify-center space-x-1 md:space-x-8 text-white"> <!-- รายการเมนู จัดเรียงแนวนอน กึ่งกลาง มีระยะห่างระหว่างรายการ และตัวอักษรสีขาว -->
+                <li><a href="#" id="home-link" data-target="content-default" class="menu-item px-3 py-1 hover:text-yellow-200">หน้าหลัก</a></li> <!-- ลิงก์หน้าหลัก มี id และ data-target สำหรับ JavaScript -->
+                <li><a href="#" class="menu-item px-3 py-1 hover:text-yellow-200">รับการประเมิน สมศ.</a></li> <!-- ลิงก์รับการประเมิน สมศ. -->
+                <li><a href="#" data-target="content-smart-school" class="menu-item px-3 py-1 hover:text-yellow-200">Smart School Service</a></li> <!-- ลิงก์ Smart School Service มี data-target -->
+                <li><a href="#" class="menu-item px-3 py-1 hover:text-yellow-200">Admin</a></li> <!-- ลิงก์ Admin -->
             </ul>
         </nav>
     </header>
 
     <!-- ส่วนเนื้อหาหลักของหน้าเว็บ -->
-    <div class="container mx-auto p-4 main-container flex flex-col md:flex-row gap-6">
+    <div class="container mx-auto p-4 main-container flex flex-col md:flex-row gap-6"> <!-- Container หลักของเนื้อหา จัดกึ่งกลาง มี padding, flex layout และระยะห่างระหว่าง flex items -->
         <!-- แถบด้านข้างซ้าย (Sidebar Left) -->
-        <aside class="sidebar w-full md:w-1/4">
-            <div class="bg-white rounded-2xl shadow-md p-5 card">
-                <h2 class="text-xl font-bold text-red-600 border-b-2 border-yellow-400 pb-2 my-4">เมนูหลัก</h2>
-                <ul class="space-y-2" id="main-menu">
-                    <li class="sidebar-item pb-2"><a href="#" data-target="content-history" class="block text-gray-700">ประวัติโรงเรียน</a></li>
-                    <li class="sidebar-item pb-2"><a href="#" data-target="content-school-info" class="block text-gray-700">ข้อมูลสถานศึกษา</a></li>
-                    <li class="sidebar-item pb-2"><a href="#" data-target="content-vision" class="block text-gray-700">วิสัยทัศน์/พันธกิจ</a></li>
-                    <li class="sidebar-item pb-2"><a href="#" data-target="content-structure" class="block text-gray-700">โครงสร้างการบริหาร</a></li>
-                    <li class="sidebar-item pb-2"><a href="#" data-target="content-personnel" class="block text-gray-700">ข้อมูลบุคลากร</a></li>
-                    <li class="sidebar-item pb-2"><a href="#" data-target="content-students" class="block text-gray-700">ข้อมูลนักเรียน</a></li>
-                    <li class="sidebar-item pb-2"><a href="#" data-target="content-information-links" class="block text-gray-700 hover:text-red-600">สารสนเทศอื่นๆ</a></li>
-                    <li class="sidebar-item pb-2"><a href="#" data-target="content-action-plan" class="block text-gray-700 hover:text-red-600">แผนปฏิบัติการประจำปี</a></li>
-                    <li class="sidebar-item pb-2"><a href="#" data-target="content-operation-report" class="block text-gray-700 hover:text-red-600">รายงานผลการดำเนินงาน</a></li>
+        <aside class="sidebar w-full md:w-1/4"> <!-- แถบข้างซ้าย ความกว้างเต็มสำหรับจอเล็ก และ 1/4 สำหรับจอขนาดกลางขึ้นไป -->
+            <div class="bg-white rounded-2xl shadow-md p-5 card"> <!-- กล่องเนื้อหาในแถบข้างซ้าย พื้นหลังสีขาว ขอบมน มีเงา และ padding -->
+                <h2 class="text-xl font-bold text-red-600 border-b-2 border-yellow-400 pb-2 my-4">เมนูหลัก</h2> <!-- หัวข้อ "เมนูหลัก" -->
+                <ul class="space-y-2" id="main-menu"> <!-- รายการเมนูหลักในแถบข้าง มี id สำหรับ JavaScript -->
+                    <li class="sidebar-item pb-2"><a href="#" data-target="content-history" class="block text-gray-700">ประวัติโรงเรียน</a></li> <!-- ลิงก์ประวัติโรงเรียน มี data-target -->
+                    <li class="sidebar-item pb-2"><a href="#" data-target="content-school-info" class="block text-gray-700">ข้อมูลสถานศึกษา</a></li> <!-- ลิงก์ข้อมูลสถานศึกษา มี data-target -->
+                    <li class="sidebar-item pb-2"><a href="#" data-target="content-vision" class="block text-gray-700">วิสัยทัศน์/พันธกิจ</a></li> <!-- ลิงก์วิสัยทัศน์/พันธกิจ มี data-target -->
+                    <li class="sidebar-item pb-2"><a href="#" data-target="content-structure" class="block text-gray-700">โครงสร้างการบริหาร</a></li> <!-- ลิงก์โครงสร้างการบริหาร มี data-target -->
+                    <li class="sidebar-item pb-2"><a href="#" data-target="content-personnel" class="block text-gray-700">ข้อมูลบุคลากร</a></li> <!-- ลิงก์ข้อมูลบุคลากร มี data-target -->
+                    <li class="sidebar-item pb-2"><a href="#" data-target="content-students" class="block text-gray-700">ข้อมูลนักเรียน</a></li> <!-- ลิงก์ข้อมูลนักเรียน มี data-target -->
+                    <li class="sidebar-item pb-2"><a href="#" data-target="content-information-links" class="block text-gray-700 hover:text-red-600">สารสนเทศอื่นๆ</a></li> <!-- ลิงก์สารสนเทศอื่นๆ มี data-target -->
+                    <li class="sidebar-item pb-2"><a href="#" data-target="content-action-plan" class="block text-gray-700 hover:text-red-600">แผนปฏิบัติการประจำปี</a></li> <!-- ลิงก์แผนปฏิบัติการประจำปี มี data-target -->
+                    <li class="sidebar-item pb-2"><a href="#" data-target="content-operation-report" class="block text-gray-700 hover:text-red-600">รายงานผลการดำเนินงาน</a></li> <!-- ลิงก์รายงานผลการดำเนินงาน มี data-target -->
                 </ul>
 
-                <h2 class="text-xl font-bold text-red-600 border-b-2 border-yellow-400 pb-2 my-4">ปฏิทินกิจกรรม</h2>
-                <div class="bg-yellow-50 p-4 rounded-xl">
+                <h2 class="text-xl font-bold text-red-600 border-b-2 border-yellow-400 pb-2 my-4">ปฏิทินกิจกรรม</h2> <!-- หัวข้อ "ปฏิทินกิจกรรม" -->
+                <div class="bg-yellow-50 p-4 rounded-xl"> <!-- กล่องแสดงปฏิทินกิจกรรม -->
                     <div class="mb-3 pb-3 border-b border-dashed border-red-200">
                         <p class="font-bold text-red-600">15 มิ.ย. 2566</p>
                         <p class="text-gray-700">กิจกรรมวันไหว้ครู</p>
@@ -67,75 +71,75 @@
                     </div>
                 </div>
 
-                <div class="mt-6">
+                <div class="mt-6"> <!-- ปุ่ม "ดูทั้งหมด" สำหรับปฏิทินกิจกรรม -->
                     <a href="#" class="btn-primary block text-center py-2 px-4">ดูทั้งหมด</a>
                 </div>
             </div>
         </aside>
 
         <!-- ส่วนเนื้อหาตรงกลาง (Main Content Area) -->
-        <main class="content w-full md:w-2/4">
-            <!-- พี่ได้เพิ่มคลาส card-main-content ที่นี่แล้ว ซึ่งถูกต้อง -->
-            <div class="bg-white rounded-2xl shadow-md p-5 card card-main-content">
-                <h2 id="center-content-title" class="text-xl font-bold text-red-600 border-b-2 border-yellow-400 pb-2 mb-6">ยินดีต้อนรับสู่โรงเรียนชุมชนบ้านแม่หละป่าป๋วย</h2>
+        <main class="content w-full md:w-2/4"> <!-- เนื้อหาหลักตรงกลาง ความกว้างเต็มสำหรับจอเล็ก และ 2/4 สำหรับจอขนาดกลางขึ้นไป -->
+            <div class="bg-white rounded-2xl shadow-md p-5 card card-main-content"> <!-- กล่องเนื้อหาหลัก มีคลาส card-main-content สำหรับสไตล์พิเศษ (เช่น ภาพพื้นหลัง) -->
+                <h2 id="center-content-title" class="text-xl font-bold text-red-600 border-b-2 border-yellow-400 pb-2 mb-6">ยินดีต้อนรับสู่โรงเรียนชุมชนบ้านแม่หละป่าป๋วย</h2> <!-- หัวข้อเนื้อหาตรงกลาง มี id สำหรับ JavaScript เพื่อเปลี่ยนข้อความ -->
 
                 <!-- 0. เนื้อหาเริ่มต้น (Default Content) - ข่าวประชาสัมพันธ์ -->
-                <div id="content-default" class="content-section">
-                    <h3 class="text-xl font-bold text-red-600 mb-4">ข่าวประชาสัมพันธ์</h3>
-                    <div style="display: flex; justify-content: center;">
+                <div id="content-default" class="content-section"> <!-- ส่วนเนื้อหาเริ่มต้น (จะถูกแสดง/ซ่อนโดย JavaScript) -->
+                    <h3 class="text-xl font-bold text-red-600 mb-4">ข่าวประชาสัมพันธ์</h3> <!-- หัวข้อย่อย "ข่าวประชาสัมพันธ์" -->
+                    <div style="display: flex; justify-content: center;"> <!-- จัด iframe Facebook ให้อยู่กึ่งกลาง -->
                         <iframe class="facebook-iframe" src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Fprofile.php%3Fid%3D100057201651273&tabs=timeline&width=500&height=800&small_header=true&adapt_container_width=true&hide_cover=false&show_facepile=true&appId=313205698760377" width="500" height="800" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>
                     </div>
                 </div>
+
                 <!-- 1. เนื้อหาส่วนประวัติโรงเรียน -->
-                <div id="content-history" class="content-section hidden text-gray-700">
-                    <div class="org-chart-container">
-                        <img src='https://i.postimg.cc/J0HZ0LZ2/around-31.jpg' border='0' alt='around-31' class="org-chart-image"/>
+                <div id="content-history" class="content-section hidden text-gray-700"> <!-- ส่วนเนื้อหาประวัติโรงเรียน (ซ่อนไว้เริ่มต้น) -->
+                    <div class="org-chart-container"> <!-- Container สำหรับรูปภาพ (ถ้ามี) -->
+                        <img src='https://i.postimg.cc/J0HZ0LZ2/around-31.jpg' border='0' alt='around-31' class="org-chart-image"/> <!-- รูปภาพ -->
                     </div>
-<p>โรงเรียนชุมชนบ้านแม่หละป่าป๋วย ตั้งอยู่หมู่ที่ ๙ หมู่บ้านดงเจริญ รับผิดชอบในเขตบริการ ๔ หมู่บ้าน คือ บ้านป่าป๋วย หมูที่ ๓, บ้านดงเจริญ หมู่ที่ ๙, บ้านแม่หละหมู่ที่ ๕ และบ้านเจริญสุข หมู่ที่ ๑๑</p>
-                <p>โรงเรียนชุมชนบ้านแม่หละป่าป๋วย <strong>ตั้งขึ้นเมื่อวันที่ ๑ พฤศจิกายน พ.ศ. ๒๔๖๘</strong> (รวมอายุในขณะนี้ ๙๖ ปี) โดยมี <strong>นายเมืองตื่น จันทรัตน์</strong> ศึกษาธิการอำเภอลองในขณะนั้นเป็นผู้จัดตั้งขึ้น จัดการเรียนการสอน ตั้งแต่ชั้นประถมศึกษาปีที่ ๑ ถึง ชั้นประถมศึกษาปีที่ ๔ โดยอาศัยศาลาวัดป่าป๋วย (ศรีบุญนำ) เป็นสถานที่เรียน หมู่บ้านอื่นที่มาเรียนร่วมกัน คือ บ้านม่วงคำ และบ้านแม่ขมิง</p>
-                
-                <h4>พัฒนาการของโรงเรียน</h4>
-                <p>ต่อมาใน <strong>พ.ศ. ๒๔๗๙</strong> <strong>นายมาลิน ลัยเจริญ</strong> ครูใหญ่ ได้ปรึกษากับนายสุข ตาเปี้ย และนายกิ วิชัยหอมผู้ใหญ่บ้าน เพื่อขยายโรงเรียนออกนอกวัดได้ที่ดิน จำนวน ๑ ไร่ ที่บ้านป่าป๋วย จึงได้ช่วยกันปลูกสร้างอาคารเรียนชั่วคราวในที่แห่งใหม่ขึ้น ขณะนั้นมีนักเรียน ๘๓ คน</p>
-                <p><strong>พ.ศ. ๒๔๙๑</strong> <strong>นายทัน จรลี</strong> รักษาการในตำแหน่ง ครูใหญ่, <strong>นายต่วน เชียงทา</strong> ผู้ใหญ่บ้านป่าป๋วย, <strong>นายอิ่น ปัญญาวงค์</strong> ผู้ใหญ่บ้านแม่หละ ได้ปรึกษาหารือกันจับจองที่ดินว่างเปล่า ระหว่างหมู่บ้านป่าป๋วยและบ้านแม่หละ สร้างอาคารเรียนชั่วคราวแห่งนี้ อีก ๔ ปีต่อมา ได้ร่วมใจกันสร้างอาคารเรียนถาวร โดยได้ทุนสมทบจากทางราชการ จำนวน ๒,๕๐๐ บาท สร้างอาคารเรียน แบบ ป.๓ ตัวอาคารกว้าง ๘ เมตร ยาว ๓๘ เมตร มีมุขกว้าง ๖ เมตร ยาว ๘ เมตร เริ่มลงมือก่อสร้างเมื่อ <strong>๒๑ มิถุนายน ๒๔๙๙</strong></p>
-                <p>ในปี <strong>พ.ศ. ๒๕๐๒</strong> <strong>นายสวัสดิ์ เกลี้ยกล่อม</strong> พร้อมด้วยคณะครู กำนัน ผู้ใหญ่บ้าน กรรมการศึกษา ร่วมกันสร้างรั้วถาวรด้านหน้าติดถนนใหญ่ ต่อมาทางราชการอนุมัติเงิน ๘๐,๐๐๐ บาท สร้างอาคารเรียนแบบ ๐๐๓ จำนวน ๑ หลังดังนั้น อาคารเรียนหลังเดิมจึงย้ายไปสร้างทางทิศใต้</p>
-                <p>ปี <strong>พ.ศ. ๒๕๑๐</strong> ได้งบประมาณจำนวน ๒๐,๐๐๐ บาท สร้างบ้านพักครูอีก ๑ หลัง และในปีเดียวกันนี้ <strong>นายช่วง ฤๅชา</strong> ศึกษาธิการอำเภอวังชิ้น ได้มาเปิดชั้นประถมศึกษาตอนปลาย จำนวน ๑ ห้องเรียน</p>
-                <p>ปี <strong>พ.ศ. ๒๕๑๑</strong> ได้รับงบประมาณสร้างอาคารเรียนประถมศึกษาตอนปลาย จำนวนเงิน ๗๐,๕๐๐ บาท โดยสร้างอาคารเรียนแบบ ป.๑ จำนวน ๓ ห้องเรียน กว้าง ๓ เมตร ยาว ๒๗ เมตร ในปีเดียวกันได้สร้างบ่อน้ำ ๑ บ่อ และได้รับงบสร้างบ้านพักครูอีก ๓ หลัง จำนวน ๒๐,๐๐๐ บาท</p>
-                <p>ปี <strong>พ.ศ. ๒๕๑๔</strong> ได้รับงบจากอนามัยจังหวัดสมทบกับทุนโรงเรียนสร้างประปาขึ้น ๑ แห่งเป็นเงิน ๑๔,๐๐๐ บาท</p>
-                <p>ปี <strong>พ.ศ. ๒๕๑๖</strong> ทางสภาตำบลได้สร้างหอประชุมของสภาตำบลด้านหลังโรงเรียน งบประมาณ ๑๘,๐๐๐ บาท</p>
-                <p>ปี <strong>พ.ศ. ๒๕๑๘</strong> <strong>นายประเสริฐ คำจันทรา</strong> รักษาการณ์ในตำแหน่งครูใหญ่ พร้อมด้วยคณะครู และนักการภารโรง ได้ขอความร่วมมือจากผู้ปกครองจัดสร้างโต๊ะ ม้านั่ง จำนวน ๔๕ ชุด และต่อเติมอาคารเรียนอีก ๓ ห้องเรียน ในปีเดียวกันนี้ได้รับงบประมาณจากทางราชการสร้างโรงฝึกงาน ๑ หลัง งบประมาณ ๖๐,๐๐๐ บาท</p>
-                <p>ปี <strong>พ.ศ. ๒๕๒๑</strong> ได้รับงบประมาณ ๗๒๐,๐๐๐ บาท สร้างอาคารเรียนหลังที่ ๔ แบบ ป.พร. ๐๐๒ กว้าง ๑๐ เมตร ยาว ๗๒ เมตร และได้เปิดทำการสอนตามหลักสูตร ๒๕๒๑ ในชั้นประถมศึกษาปีที่ ๑</p>
-                <p>ปี <strong>พ.ศ. ๒๕๒๒</strong> ได้เปิดทำการสอนตั้งแต่ชั้นเด็กเล็ก จนถึงชั้นประถมศึกษาปีที่ ๖ จำนวนนักเรียน ๕๐๗ คน ๒๐ ห้องเรียน ครู ๒๓ คน</p>
-                <p>ปี <strong>พ.ศ. ๒๕๒๔</strong> ได้รับงบประมาณ กสช. จำนวน ๔๐,๐๐๐ บาท สร้างสนามบาสเกตบอล ๑ แห่ง</p>
-                <p>ปี <strong>พ.ศ. ๒๕๒๖</strong> เดือนมีนาคม ได้จัดทำผ้าป่าสร้างถนนคอนกรีตภายในโรงเรียนจนแล้วเสร็จ รวมเป็นเงินทั้งสิ้น จำนวน ๔๑,๑๓๒ บาท</p>
-                <p>ปี <strong>พ.ศ. ๒๕๓๘ - ๒๕๔๑</strong> ทางโรงเรียนได้รับความร่วมมือจาก <strong>คุณรัฐรินทร์ อ้ายมา</strong> บริจาคเครื่องคอมพิวเตอร์ จำนวน ๑ เครื่อง เป็นเงิน ๔๐,๐๐๐ บาท</p>
-                <p>ในเดือนตุลาคม <strong>พ.ศ. ๒๕๔๐</strong> <strong>คุณนริทธ์ วิชัยหอม</strong> ได้ร่วมกับศิษย์เก่าของโรงเรียนจัดซื้อชุดเครื่องดนตรีวงดุริยางค์ให้โรงเรียน มูลค่า ๗๐,๐๐๐ บาท และในปีเดียวกันนี้ทางชุมชน กรรมการโรงเรียน ผู้ปกครอง ได้ร่วมกันจัดหาเงินซื้อที่ดินด้านหลังมอบให้เป็นสมบัติของโรงเรียนประมาณ ๓ ไร่ เพื่อให้ครบ ๑๐ ไร่ ตามเกณฑ์โรงเรียนปฏิรูปการศึกษา</p>
-                <p>ปี <strong>พ.ศ. ๒๕๔๒</strong> ได้รับงบประมาณ ๑,๘๓๒,๐๐๐ บาท สร้างอาคารเรียน แบบ สปช. ๑๐๕/๒๙</p>
-                <p>ปี <strong>พ.ศ. ๒๕๔๓</strong> โรงเรียนได้ขออนุญาตรื้อถอน อาคาร ๒ และนำวัสดุมาสร้างเป็นอาคารพิพิธภัณฑ์สื่อพื้นบ้าน โดยจัดหางบประมาณจากการจัดงาน “คืนสู่เหย้าชาวเหลือง-แดง” ในวันที่ ๑๒ เมษายน ๒๕๔๓ ค่าก่อสร้างทั้งหมด ๑๕๐,๐๐๐ บาท</p>
-                <p>ปี <strong>พ.ศ. ๒๕๔๔</strong> โรงเรียนได้รับงบประมาณจากกรมพลศึกษา จัดสร้างสนามกีฬาเอนกประสงค์ จำนวน ๑ แห่ง งบประมาณ ๑๐๐,๐๐๐ บาท เสร็จในเดือน พฤษภาคม ๒๕๔๔ ใช้เป็นศูนย์กีฬาของตำบลสรอย ต่อไป</p>
-                <p>ปี <strong>พ.ศ. ๒๕๔๖</strong> ได้รับงบประมาณ ๘๒,๐๐๐ บาท ซ่อมแซมเปลี่ยนหลังคาอาคารเรียนต้นกล้า เนื่องจากถูกพายุพัดเสียหายทั้งหลัง</p>
-                <p>ปี <strong>พ.ศ. ๒๕๔๗</strong> <strong>นายวีระพล สุริยะสา</strong> ย้ายมาดำรงตำแหน่งผู้อำนวยการโรงเรียนชุมชนบ้านแม่หละป่าป๋วย</p>
-                <p>ปี <strong>พ.ศ. ๒๕๔๘</strong> จัดผ้าป่าศิษย์เก่าคืนสู่เหย้า จัดซื้อคอมพิวเตอร์เพื่อการเรียนการสอน จำนวน ๕ ชุด</p>
-                <p>ปี <strong>พ.ศ. ๒๕๔๙</strong> ได้รับงบอุดหนุนจาก อบต.สรอย จำนวน ๓๕,๐๐๐ บาท ขุดบ่อเลี้ยงปลา ๑ บ่อ เพื่อสนองปรัชญาเศรษฐกิจพอเพียง สนับสนุนอาหารกลางวันนักเรียน</p>
-                <p>ปี <strong>พ.ศ. ๒๕๕๐</strong> ผ่านการประเมิน จาก สมศ. รอบ ๒</p>
-                <p>ปี <strong>พ.ศ. ๒๕๕๑</strong> ได้รับการรับรองมาตรฐานโรงเรียนส่งเสริมสุขภาพ ระดับทอง จากกรมอนามัยกระทรวงสาธารณสุข</p>
-                <p>ปี <strong>พ.ศ. ๒๕๕๒</strong> ชนะการแข่งขันเซปักตะกร้อหญิงระดับจังหวัด รุ่นอายุไม่เกิน ๑๒ ปี และรางวัลรองชนะเลิศอันดับ ๑ เซปักตะกร้อ สพฐ. มาราธอน ระดับภาคเหนือ</p>
-                <p>ปี <strong>พ.ศ. ๒๕๕๔</strong> <strong>นายอัมพร ฐานะวุฒิกุล</strong> ย้ายมาดำรงตำแหน่งผู้อำนวยการโรงเรียนชุมชนบ้านแม่หละป่าป๋วย</p>
-                <p>ปี <strong>พ.ศ. ๒๕๕๕</strong> ผ่านการประเมิน จาก สมศ. รอบ ๓</p>
-                <p>ในปีงบประมาณ <strong>๒๕๕๕</strong> ทางโรงเรียนได้จัด การเรียนการสอนตามหลักสูตรแกนกลางการศึกษาขั้นพื้นฐาน พุทธศักราช ๒๕๕๑ ในชั้นประถมศึกษาปีที่ ๑ - ๖ โดยเริ่มในปีการศึกษา ๒๕๕๓ โดยทางโรงเรียนได้พัฒนาหลักสูตรสถานศึกษาให้สอดคล้องกับการบริหารของโรงเรียน</p>
-                <p>ปีการศึกษา <strong>๒๕๕๙</strong> โรงเรียนชุมชนบ้านแม่หละป่าป๋วย ได้ดำเนินการจัดกิจกรรมผ่านเกณฑ์ประเมินสถานศึกษาแบบอย่างการจัดกิจกรรมการเรียนรู้และการบริหารจัดการตามหลักปรัชญาของเศรษฐกิจพอเพียงประจำปี ๒๕๕๘</p>
-                <p>ปี <strong>พ.ศ. ๒๕๖๐</strong> <strong>นางสุวพร ขันคำนันต๊ะ</strong> รักษาราชการในตำแหน่งผู้อำนวยการโรงเรียน</p>
-                <p>ปี <strong>พ.ศ. ๒๕๖๐</strong> ได้รับรางวัลระดับเหรียญทอง กิจกรรมการแข่งขันท่องอาขยานทำนองเสนาะ ระดับชั้น ป.๔ - ป.๖ และกิจกรรมการประกวดเพลงคุณธรรม ระดับชั้น ป.๔ - ป.๖</p>
-                <p>ปีการศึกษา <strong>๒๕๖๐</strong> โรงเรียนชุมชนบ้านแม่หละป่าป๋วย มีผลการทดสอบทางการศึกษาระดับชาติ O–NET ชั้นประถมศึกษาปีที่ ๖ ค่าเฉลี่ยรวมสูงกว่าค่าเฉลี่ยระดับประเทศ</p>
-                <p>ปีการศึกษา <strong>๒๕๖๑</strong> ได้รับรางวัลเหรียญเงิน กิจกรรมการแข่งขันเดี่ยวฆ้องวงใหญ่ ระดับชั้น ป.๑ - ป.๖, รางวัลเหรียญเงิน กิจกรรมการแข่งขันเดี่ยวระนาดเอก ระดับชั้น ป.๑ - ป.๖, และรางวัลเหรียญทองแดง กิจกรรมการแข่งขันเดี่ยวระนาดทุ้ม ระดับชั้น ป.๑ - ป.๖</p>
-                <p>ปี <strong>พ.ศ.๒๕๖๒</strong> ได้ดำเนินการระดมทุนร่วมกันของโรงเรียน คณะกรรมการสถานศึกษา คณะกรรมการศิษย์เก่า และชุมชน เพื่อสร้างหลังคา (โดม) ลานกีฬาเอนกประสงค์ และสร้างจนแล้วเสร็จ มีมูลค่าโดยรวม ๕๐๐,๐๐๐ บาท</p>
-                <p><strong>๕ ตุลาคม ๒๕๖๖</strong> <strong>นายสุชาติ เวียงชัย</strong> มาดำรงตำแหน่งผู้อำนวยการโรงเรียนชุมชนบ้านแม่หละป่าป๋วย</p>
-                <h4>ข้อมูลปัจจุบัน</h4>
-                <p>ปัจจุบันโรงเรียนชุมชนบ้านแม่หละป่าป๋วย จัดการเรียนการสอนตั้งแต่ระดับชั้นอนุบาล ๒ ถึง ชั้นประถมศึกษาปีที่ ๖ มีนักเรียนจำนวนทั้งสิ้น ๑๔๖ คน มีข้าราชการครูจำนวน ๑๑ คน พนักงานราชการ ๑ คน ครูอัตราจ้าง ๑ คน และครูธุรการโรงเรียน ๑ คน จัดการเรียนการสอน ๒ ระดับ คือระดับการศึกษาปฐมวัยและระดับการศึกษาขั้นพื้นฐาน</p>
-                <p>การเดินทางจากที่ว่าการอำเภอวังชิ้นถึงโรงเรียนโดยรถยนต์และรถจักรยานยนต์ ระยะทาง ๒๕ กิโลเมตร ระยะทางห่างจากสำนักงานเขตพื้นที่การศึกษาประถมศึกษาแพร่ เขต ๒ ประมาณ ๖๕ กิโลเมตร</p>
+                    <p>โรงเรียนชุมชนบ้านแม่หละป่าป๋วย ตั้งอยู่หมู่ที่ ๙ หมู่บ้านดงเจริญ รับผิดชอบในเขตบริการ ๔ หมู่บ้าน คือ บ้านป่าป๋วย หมูที่ ๓, บ้านดงเจริญ หมู่ที่ ๙, บ้านแม่หละหมู่ที่ ๕ และบ้านเจริญสุข หมู่ที่ ๑๑</p>
+                    <p>โรงเรียนชุมชนบ้านแม่หละป่าป๋วย <strong>ตั้งขึ้นเมื่อวันที่ ๑ พฤศจิกายน พ.ศ. ๒๔๖๘</strong> (รวมอายุในขณะนี้ ๙๖ ปี) โดยมี <strong>นายเมืองตื่น จันทรัตน์</strong> ศึกษาธิการอำเภอลองในขณะนั้นเป็นผู้จัดตั้งขึ้น จัดการเรียนการสอน ตั้งแต่ชั้นประถมศึกษาปีที่ ๑ ถึง ชั้นประถมศึกษาปีที่ ๔ โดยอาศัยศาลาวัดป่าป๋วย (ศรีบุญนำ) เป็นสถานที่เรียน หมู่บ้านอื่นที่มาเรียนร่วมกัน คือ บ้านม่วงคำ และบ้านแม่ขมิง</p>
+                    
+                    <h4>พัฒนาการของโรงเรียน</h4>
+                    <p>ต่อมาใน <strong>พ.ศ. ๒๔๗๙</strong> <strong>นายมาลิน ลัยเจริญ</strong> ครูใหญ่ ได้ปรึกษากับนายสุข ตาเปี้ย และนายกิ วิชัยหอมผู้ใหญ่บ้าน เพื่อขยายโรงเรียนออกนอกวัดได้ที่ดิน จำนวน ๑ ไร่ ที่บ้านป่าป๋วย จึงได้ช่วยกันปลูกสร้างอาคารเรียนชั่วคราวในที่แห่งใหม่ขึ้น ขณะนั้นมีนักเรียน ๘๓ คน</p>
+                    <p><strong>พ.ศ. ๒๔๙๑</strong> <strong>นายทัน จรลี</strong> รักษาการในตำแหน่ง ครูใหญ่, <strong>นายต่วน เชียงทา</strong> ผู้ใหญ่บ้านป่าป๋วย, <strong>นายอิ่น ปัญญาวงค์</strong> ผู้ใหญ่บ้านแม่หละ ได้ปรึกษาหารือกันจับจองที่ดินว่างเปล่า ระหว่างหมู่บ้านป่าป๋วยและบ้านแม่หละ สร้างอาคารเรียนชั่วคราวแห่งนี้ อีก ๔ ปีต่อมา ได้ร่วมใจกันสร้างอาคารเรียนถาวร โดยได้ทุนสมทบจากทางราชการ จำนวน ๒,๕๐๐ บาท สร้างอาคารเรียน แบบ ป.๓ ตัวอาคารกว้าง ๘ เมตร ยาว ๓๘ เมตร มีมุขกว้าง ๖ เมตร ยาว ๘ เมตร เริ่มลงมือก่อสร้างเมื่อ <strong>๒๑ มิถุนายน ๒๔๙๙</strong></p>
+                    <p>ในปี <strong>พ.ศ. ๒๕๐๒</strong> <strong>นายสวัสดิ์ เกลี้ยกล่อม</strong> พร้อมด้วยคณะครู กำนัน ผู้ใหญ่บ้าน กรรมการศึกษา ร่วมกันสร้างรั้วถาวรด้านหน้าติดถนนใหญ่ ต่อมาทางราชการอนุมัติเงิน ๘๐,๐๐๐ บาท สร้างอาคารเรียนแบบ ๐๐๓ จำนวน ๑ หลังดังนั้น อาคารเรียนหลังเดิมจึงย้ายไปสร้างทางทิศใต้</p>
+                    <p>ปี <strong>พ.ศ. ๒๕๑๐</strong> ได้งบประมาณจำนวน ๒๐,๐๐๐ บาท สร้างบ้านพักครูอีก ๑ หลัง และในปีเดียวกันนี้ <strong>นายช่วง ฤๅชา</strong> ศึกษาธิการอำเภอวังชิ้น ได้มาเปิดชั้นประถมศึกษาตอนปลาย จำนวน ๑ ห้องเรียน</p>
+                    <p>ปี <strong>พ.ศ. ๒๕๑๑</strong> ได้รับงบประมาณสร้างอาคารเรียนประถมศึกษาตอนปลาย จำนวนเงิน ๗๐,๕๐๐ บาท โดยสร้างอาคารเรียนแบบ ป.๑ จำนวน ๓ ห้องเรียน กว้าง ๓ เมตร ยาว ๒๗ เมตร ในปีเดียวกันได้สร้างบ่อน้ำ ๑ บ่อ และได้รับงบสร้างบ้านพักครูอีก ๓ หลัง จำนวน ๒๐,๐๐๐ บาท</p>
+                    <p>ปี <strong>พ.ศ. ๒๕๑๔</strong> ได้รับงบจากอนามัยจังหวัดสมทบกับทุนโรงเรียนสร้างประปาขึ้น ๑ แห่งเป็นเงิน ๑๔,๐๐๐ บาท</p>
+                    <p>ปี <strong>พ.ศ. ๒๕๑๖</strong> ทางสภาตำบลได้สร้างหอประชุมของสภาตำบลด้านหลังโรงเรียน งบประมาณ ๑๘,๐๐๐ บาท</p>
+                    <p>ปี <strong>พ.ศ. ๒๕๑๘</strong> <strong>นายประเสริฐ คำจันทรา</strong> รักษาการณ์ในตำแหน่งครูใหญ่ พร้อมด้วยคณะครู และนักการภารโรง ได้ขอความร่วมมือจากผู้ปกครองจัดสร้างโต๊ะ ม้านั่ง จำนวน ๔๕ ชุด และต่อเติมอาคารเรียนอีก ๓ ห้องเรียน ในปีเดียวกันนี้ได้รับงบประมาณจากทางราชการสร้างโรงฝึกงาน ๑ หลัง งบประมาณ ๖๐,๐๐๐ บาท</p>
+                    <p>ปี <strong>พ.ศ. ๒๕๒๑</strong> ได้รับงบประมาณ ๗๒๐,๐๐๐ บาท สร้างอาคารเรียนหลังที่ ๔ แบบ ป.พร. ๐๐๒ กว้าง ๑๐ เมตร ยาว ๗๒ เมตร และได้เปิดทำการสอนตามหลักสูตร ๒๕๒๑ ในชั้นประถมศึกษาปีที่ ๑</p>
+                    <p>ปี <strong>พ.ศ. ๒๕๒๒</strong> ได้เปิดทำการสอนตั้งแต่ชั้นเด็กเล็ก จนถึงชั้นประถมศึกษาปีที่ ๖ จำนวนนักเรียน ๕๐๗ คน ๒๐ ห้องเรียน ครู ๒๓ คน</p>
+                    <p>ปี <strong>พ.ศ. ๒๕๒๔</strong> ได้รับงบประมาณ กสช. จำนวน ๔๐,๐๐๐ บาท สร้างสนามบาสเกตบอล ๑ แห่ง</p>
+                    <p>ปี <strong>พ.ศ. ๒๕๒๖</strong> เดือนมีนาคม ได้จัดทำผ้าป่าสร้างถนนคอนกรีตภายในโรงเรียนจนแล้วเสร็จ รวมเป็นเงินทั้งสิ้น จำนวน ๔๑,๑๓๒ บาท</p>
+                    <p>ปี <strong>พ.ศ. ๒๕๓๘ - ๒๕๔๑</strong> ทางโรงเรียนได้รับความร่วมมือจาก <strong>คุณรัฐรินทร์ อ้ายมา</strong> บริจาคเครื่องคอมพิวเตอร์ จำนวน ๑ เครื่อง เป็นเงิน ๔๐,๐๐๐ บาท</p>
+                    <p>ในเดือนตุลาคม <strong>พ.ศ. ๒๕๔๐</strong> <strong>คุณนริทธ์ วิชัยหอม</strong> ได้ร่วมกับศิษย์เก่าของโรงเรียนจัดซื้อชุดเครื่องดนตรีวงดุริยางค์ให้โรงเรียน มูลค่า ๗๐,๐๐๐ บาท และในปีเดียวกันนี้ทางชุมชน กรรมการโรงเรียน ผู้ปกครอง ได้ร่วมกันจัดหาเงินซื้อที่ดินด้านหลังมอบให้เป็นสมบัติของโรงเรียนประมาณ ๓ ไร่ เพื่อให้ครบ ๑๐ ไร่ ตามเกณฑ์โรงเรียนปฏิรูปการศึกษา</p>
+                    <p>ปี <strong>พ.ศ. ๒๕๔๒</strong> ได้รับงบประมาณ ๑,๘๓๒,๐๐๐ บาท สร้างอาคารเรียน แบบ สปช. ๑๐๕/๒๙</p>
+                    <p>ปี <strong>พ.ศ. ๒๕๔๓</strong> โรงเรียนได้ขออนุญาตรื้อถอน อาคาร ๒ และนำวัสดุมาสร้างเป็นอาคารพิพิธภัณฑ์สื่อพื้นบ้าน โดยจัดหางบประมาณจากการจัดงาน “คืนสู่เหย้าชาวเหลือง-แดง” ในวันที่ ๑๒ เมษายน ๒๕๔๓ ค่าก่อสร้างทั้งหมด ๑๕๐,๐๐๐ บาท</p>
+                    <p>ปี <strong>พ.ศ. ๒๕๔๔</strong> โรงเรียนได้รับงบประมาณจากกรมพลศึกษา จัดสร้างสนามกีฬาเอนกประสงค์ จำนวน ๑ แห่ง งบประมาณ ๑๐๐,๐๐๐ บาท เสร็จในเดือน พฤษภาคม ๒๕๔๔ ใช้เป็นศูนย์กีฬาของตำบลสรอย ต่อไป</p>
+                    <p>ปี <strong>พ.ศ. ๒๕๔๖</strong> ได้รับงบประมาณ ๘๒,๐๐๐ บาท ซ่อมแซมเปลี่ยนหลังคาอาคารเรียนต้นกล้า เนื่องจากถูกพายุพัดเสียหายทั้งหลัง</p>
+                    <p>ปี <strong>พ.ศ. ๒๕๔๗</strong> <strong>นายวีระพล สุริยะสา</strong> ย้ายมาดำรงตำแหน่งผู้อำนวยการโรงเรียนชุมชนบ้านแม่หละป่าป๋วย</p>
+                    <p>ปี <strong>พ.ศ. ๒๕๔๘</strong> จัดผ้าป่าศิษย์เก่าคืนสู่เหย้า จัดซื้อคอมพิวเตอร์เพื่อการเรียนการสอน จำนวน ๕ ชุด</p>
+                    <p>ปี <strong>พ.ศ. ๒๕๔๙</strong> ได้รับงบอุดหนุนจาก อบต.สรอย จำนวน ๓๕,๐๐๐ บาท ขุดบ่อเลี้ยงปลา ๑ บ่อ เพื่อสนองปรัชญาเศรษฐกิจพอเพียง สนับสนุนอาหารกลางวันนักเรียน</p>
+                    <p>ปี <strong>พ.ศ. ๒๕๕๐</strong> ผ่านการประเมิน จาก สมศ. รอบ ๒</p>
+                    <p>ปี <strong>พ.ศ. ๒๕๕๑</strong> ได้รับการรับรองมาตรฐานโรงเรียนส่งเสริมสุขภาพ ระดับทอง จากกรมอนามัยกระทรวงสาธารณสุข</p>
+                    <p>ปี <strong>พ.ศ. ๒๕๕๒</strong> ชนะการแข่งขันเซปักตะกร้อหญิงระดับจังหวัด รุ่นอายุไม่เกิน ๑๒ ปี และรางวัลรองชนะเลิศอันดับ ๑ เซปักตะกร้อ สพฐ. มาราธอน ระดับภาคเหนือ</p>
+                    <p>ปี <strong>พ.ศ. ๒๕๕๔</strong> <strong>นายอัมพร ฐานะวุฒิกุล</strong> ย้ายมาดำรงตำแหน่งผู้อำนวยการโรงเรียนชุมชนบ้านแม่หละป่าป๋วย</p>
+                    <p>ปี <strong>พ.ศ. ๒๕๕๕</strong> ผ่านการประเมิน จาก สมศ. รอบ ๓</p>
+                    <p>ในปีงบประมาณ <strong>๒๕๕๕</strong> ทางโรงเรียนได้จัด การเรียนการสอนตามหลักสูตรแกนกลางการศึกษาขั้นพื้นฐาน พุทธศักราช ๒๕๕๑ ในชั้นประถมศึกษาปีที่ ๑ - ๖ โดยเริ่มในปีการศึกษา ๒๕๕๓ โดยทางโรงเรียนได้พัฒนาหลักสูตรสถานศึกษาให้สอดคล้องกับการบริหารของโรงเรียน</p>
+                    <p>ปีการศึกษา <strong>๒๕๕๙</strong> โรงเรียนชุมชนบ้านแม่หละป่าป๋วย ได้ดำเนินการจัดกิจกรรมผ่านเกณฑ์ประเมินสถานศึกษาแบบอย่างการจัดกิจกรรมการเรียนรู้และการบริหารจัดการตามหลักปรัชญาของเศรษฐกิจพอเพียงประจำปี ๒๕๕๘</p>
+                    <p>ปี <strong>พ.ศ. ๒๕๖๐</strong> <strong>นางสุวพร ขันคำนันต๊ะ</strong> รักษาราชการในตำแหน่งผู้อำนวยการโรงเรียน</p>
+                    <p>ปี <strong>พ.ศ. ๒๕๖๐</strong> ได้รับรางวัลระดับเหรียญทอง กิจกรรมการแข่งขันท่องอาขยานทำนองเสนาะ ระดับชั้น ป.๔ - ป.๖ และกิจกรรมการประกวดเพลงคุณธรรม ระดับชั้น ป.๔ - ป.๖</p>
+                    <p>ปีการศึกษา <strong>๒๕๖๐</strong> โรงเรียนชุมชนบ้านแม่หละป่าป๋วย มีผลการทดสอบทางการศึกษาระดับชาติ O–NET ชั้นประถมศึกษาปีที่ ๖ ค่าเฉลี่ยรวมสูงกว่าค่าเฉลี่ยระดับประเทศ</p>
+                    <p>ปีการศึกษา <strong>๒๕๖๑</strong> ได้รับรางวัลเหรียญเงิน กิจกรรมการแข่งขันเดี่ยวฆ้องวงใหญ่ ระดับชั้น ป.๑ - ป.๖, รางวัลเหรียญเงิน กิจกรรมการแข่งขันเดี่ยวระนาดเอก ระดับชั้น ป.๑ - ป.๖, และรางวัลเหรียญทองแดง กิจกรรมการแข่งขันเดี่ยวระนาดทุ้ม ระดับชั้น ป.๑ - ป.๖</p>
+                    <p>ปี <strong>พ.ศ.๒๕๖๒</strong> ได้ดำเนินการระดมทุนร่วมกันของโรงเรียน คณะกรรมการสถานศึกษา คณะกรรมการศิษย์เก่า และชุมชน เพื่อสร้างหลังคา (โดม) ลานกีฬาเอนกประสงค์ และสร้างจนแล้วเสร็จ มีมูลค่าโดยรวม ๕๐๐,๐๐๐ บาท</p>
+                    <p><strong>๕ ตุลาคม ๒๕๖๖</strong> <strong>นายสุชาติ เวียงชัย</strong> มาดำรงตำแหน่งผู้อำนวยการโรงเรียนชุมชนบ้านแม่หละป่าป๋วย</p>
+                    <h4>ข้อมูลปัจจุบัน</h4>
+                    <p>ปัจจุบันโรงเรียนชุมชนบ้านแม่หละป่าป๋วย จัดการเรียนการสอนตั้งแต่ระดับชั้นอนุบาล ๒ ถึง ชั้นประถมศึกษาปีที่ ๖ มีนักเรียนจำนวนทั้งสิ้น ๑๔๖ คน มีข้าราชการครูจำนวน ๑๑ คน พนักงานราชการ ๑ คน ครูอัตราจ้าง ๑ คน และครูธุรการโรงเรียน ๑ คน จัดการเรียนการสอน ๒ ระดับ คือระดับการศึกษาปฐมวัยและระดับการศึกษาขั้นพื้นฐาน</p>
+                    <p>การเดินทางจากที่ว่าการอำเภอวังชิ้นถึงโรงเรียนโดยรถยนต์และรถจักรยานยนต์ ระยะทาง ๒๕ กิโลเมตร ระยะทางห่างจากสำนักงานเขตพื้นที่การศึกษาประถมศึกษาแพร่ เขต ๒ ประมาณ ๖๕ กิโลเมตร</p>
                 </div>
 
                 <!-- 2. เนื้อหาส่วนข้อมูลสถานศึกษา -->
-                <div id="content-school-info" class="content-section hidden text-gray-700">
+                <div id="content-school-info" class="content-section hidden text-gray-700"> <!-- ส่วนเนื้อหาข้อมูลสถานศึกษา (ซ่อนไว้เริ่มต้น) -->
                     <div class="org-chart-container">
                         <img src='https://i.postimg.cc/TYrQJV5H/around-10.jpg' border='0' alt='around-10' class="org-chart-image"/>
                     </div>
@@ -154,13 +158,13 @@
                         <p class="school-identity-text">“กยิราเจ กยิราเถนํ” <span class="italic text-gray-600 text-lg font-normal">(ทำอะไรทำจริง)</span></p>
                         <h4 class="school-identity-title">สีประจำโรงเรียน</h4>
                         <p class="school-identity-text">
-                            <span class="color-box" style="background-color: #FBBF24;"></span>เหลือง -
-                            <span class="color-box ml-2" style="background-color: #EF4444;"></span>แดง
-                </p>
+                            <span class="color-box" style="background-color: #FBBF24;"></span>เหลือง - <!-- กล่องสีเหลือง -->
+                            <span class="color-box ml-2" style="background-color: #EF4444;"></span>แดง <!-- กล่องสีแดง -->
+                        </p>
                 </div>
 
                 <!-- 3. เนื้อหาส่วนวิสัยทัศน์/พันธกิจ -->
-                <div id="content-vision" class="content-section hidden text-gray-700">
+                <div id="content-vision" class="content-section hidden text-gray-700"> <!-- ส่วนเนื้อหาวิสัยทัศน์/พันธกิจ (ซ่อนไว้เริ่มต้น) -->
                     <div class="org-chart-container">
                         <a href='https://postimg.cc/1VnsHBSG' target='_blank'><img src='https://i.postimg.cc/0jZj9XHB/sc1.png' border='0' alt='sc1' class="org-chart-image"/></a>
                     </div>
@@ -170,7 +174,7 @@
                     </p>
             
                     <h3>พันธกิจ (MISSION)</h3>
-                    <ol class="list-decimal">
+                    <ol class="list-decimal"> <!-- รายการแบบมีลำดับเลข -->
                         <li class="mission-item">พัฒนาศักยภาพ และส่งเสริมธรรมาภิบาลในการบริหารงานที่เน้นการมีส่วนร่วมในการบริหารจัดการ</li>
                         <li class="mission-item">พัฒนาและสร้างเครือข่ายทางการศึกษาในการระดมทรัพยากรทางการศึกษา</li>
                         <li class="mission-item">พัฒนาและสร้างความร่วมมือระหว่างโรงเรียน และชุมชน</li>
@@ -194,7 +198,7 @@
                     </ol>
                 
                     <h3>กลยุทธ์สถานศึกษา (STRATEGY)</h3>
-                    <ul class="list-disc"> <!-- ใช้ list-disc สำหรับกลยุทธ์ หรือจะใช้ list-decimal ก็ได้ค่ะ -->
+                    <ul class="list-disc"> <!-- รายการแบบมีจุดนำหน้า -->
                         <li class="strategy-item"><strong>กลยุทธ์ที่ 1:</strong> ส่งเสริมการบริหารจัดการโรงเรียนอย่างมีส่วนร่วม</li>
                         <li class="strategy-item"><strong>กลยุทธ์ที่ 2:</strong> พัฒนาศักยภาพครู และบุคลากรทางการศึกษา</li>
                         <li class="strategy-item"><strong>กลยุทธ์ที่ 3:</strong> พัฒนาคุณภาพผู้เรียนด้านวิชาการ ทักษะชีวิต และกิจกรรมตามความถนัดของผู้เรียน</li>
@@ -203,7 +207,7 @@
                 </div>
 
                 <!-- 4. เนื้อหาส่วนโครงสร้างการบริหาร -->
-                <div id="content-structure" class="content-section hidden text-gray-700">
+                <div id="content-structure" class="content-section hidden text-gray-700"> <!-- ส่วนเนื้อหาโครงสร้างการบริหาร (ซ่อนไว้เริ่มต้น) -->
                     <div class="org-chart-container">
                         <img src='https://i.postimg.cc/L6xjNJ5p/Blue-and-White-Modern-Organizational-Structure-A4.png' border='0' alt='Blue-and-White-Modern-Organizational-Structure-A4' class="org-chart-image"/>
                     </div>
@@ -219,42 +223,42 @@
                 </div>
 
                 <!-- 5. เนื้อหาส่วนข้อมูลบุคลากร -->
-                <div id="content-personnel" class="content-section hidden">
+                <div id="content-personnel" class="content-section hidden"> <!-- ส่วนเนื้อหาข้อมูลบุคลากร (ซ่อนไว้เริ่มต้น, JavaScript จะนำข้อมูลมาแสดงที่นี่) -->
                     <!-- JavaScript จะนำข้อมูลบุคลากรมาแสดงที่นี่ -->
                 </div>
 
                 <!-- 6. เนื้อหาส่วนข้อมูลนักเรียน -->
-                <div id="content-students" class="content-section hidden">
+                <div id="content-students" class="content-section hidden"> <!-- ส่วนเนื้อหาข้อมูลนักเรียน (ซ่อนไว้เริ่มต้น, JavaScript จะนำข้อมูลมาแสดงที่นี่) -->
                     <!-- JavaScript จะนำข้อมูลนักเรียนมาแสดงที่นี่ -->
                 </div>
 
                 <!-- 7. Smart School Service -->
-                <div id="content-smart-school" class="content-section hidden">
+                <div id="content-smart-school" class="content-section hidden"> <!-- ส่วนเนื้อหา Smart School Service (ซ่อนไว้เริ่มต้น, JavaScript จะโหลดข้อมูลตารางมาใส่ที่นี่) -->
                     <!-- JavaScript จะโหลดข้อมูลตารางมาใส่ที่นี่ -->
                 </div>
 
                 <!-- 8. สารสนเทศอื่นๆ -->
-                <div id="content-information-links" class="content-section hidden">
+                <div id="content-information-links" class="content-section hidden"> <!-- ส่วนเนื้อหาสารสนเทศอื่นๆ (ซ่อนไว้เริ่มต้น, JavaScript จะโหลดข้อมูลตารางมาใส่ที่นี่) -->
                     <!-- JavaScript จะโหลดข้อมูลตารางมาใส่ที่นี่ -->
                 </div>
 
                 <!-- 9. แผนปฏิบัติการประจำปี (PDF) -->
-                <div id="content-action-plan" class="content-section hidden">
+                <div id="content-action-plan" class="content-section hidden"> <!-- ส่วนเนื้อหาแผนปฏิบัติการประจำปี (ซ่อนไว้เริ่มต้น, JavaScript จะโหลด PDF หรือข้อความมาใส่ที่นี่) -->
                     <!-- JavaScript จะโหลด PDF หรือข้อความมาใส่ที่นี่ -->
                 </div>
 
                 <!-- 10. รายงานผลการดำเนินงาน (PDF) -->
-                <div id="content-operation-report" class="content-section hidden">
+                <div id="content-operation-report" class="content-section hidden"> <!-- ส่วนเนื้อหารายงานผลการดำเนินงาน (ซ่อนไว้เริ่มต้น, JavaScript จะโหลด PDF หรือข้อความมาใส่ที่นี่) -->
                     <!-- JavaScript จะโหลด PDF หรือข้อความมาใส่ที่นี่ -->
                 </div>
             </div>
         </main>
 
         <!-- แถบด้านข้างขวา (Sidebar Right) -->
-        <aside class="sidebar w-full md:w-1/4">
-            <div class="bg-white rounded-2xl shadow-md p-5 card">
-                <h2 class="text-xl font-bold text-red-600 border-b-2 border-yellow-400 pb-2 mb-4">ลิงก์ที่เกี่ยวข้อง</h2>
-                <ul class="space-y-2">
+        <aside class="sidebar w-full md:w-1/4"> <!-- แถบข้างขวา ความกว้างเต็มสำหรับจอเล็ก และ 1/4 สำหรับจอขนาดกลางขึ้นไป -->
+            <div class="bg-white rounded-2xl shadow-md p-5 card"> <!-- กล่องเนื้อหาในแถบข้างขวา -->
+                <h2 class="text-xl font-bold text-red-600 border-b-2 border-yellow-400 pb-2 mb-4">ลิงก์ที่เกี่ยวข้อง</h2> <!-- หัวข้อ "ลิงก์ที่เกี่ยวข้อง" -->
+                <ul class="space-y-2"> <!-- รายการลิงก์ที่เกี่ยวข้อง -->
                     <li class="sidebar-item pb-2"><a href="https://www.moe.go.th/" target="_blank" class="block text-gray-700 hover:text-red-600">กระทรวงศึกษาธิการ</a></li>
                     <li class="sidebar-item pb-2"><a href="https://www.obec.go.th/" target="_blank" class="block text-gray-700 hover:text-red-600">สำนักงานคณะกรรมการการศึกษาขั้นพื้นฐาน</a></li>
                     <li class="sidebar-item pb-2"><a href="http://www.ictphrae2.com/" target="_blank" class="block text-gray-700 hover:text-red-600">สำนักงานเขตพื้นที่การศึกษาประถมศึกษาแพร่เขต 2</a></li>
@@ -262,29 +266,29 @@
                     <li class="sidebar-item pb-2"><a href="https://www.dltv.ac.th/" target="_blank" class="block text-gray-700 hover:text-red-600">DLTV การศึกษาทางไกล</a></li>
                 </ul>
 
-                <h2 class="text-xl font-bold text-red-600 border-b-2 border-yellow-400 pb-2 my-4">สถิติผู้เข้าชม</h2>
-                <div class="bg-yellow-50 p-4 rounded-xl">
+                <h2 class="text-xl font-bold text-red-600 border-b-2 border-yellow-400 pb-2 my-4">สถิติผู้เข้าชม</h2> <!-- หัวข้อ "สถิติผู้เข้าชม" -->
+                <div class="bg-yellow-50 p-4 rounded-xl"> <!-- กล่องแสดงสถิติผู้เข้าชม -->
                     <div class="flex justify-between mb-2">
                         <span class="text-gray-700">วันนี้:</span>
-                        <span id="visits-today" class="font-medium text-red-600">กำลังโหลด...</span>
+                        <span id="visits-today" class="font-medium text-red-600">กำลังโหลด...</span> <!-- สถิติวันนี้ (JavaScript จะอัปเดต) -->
                     </div>
                     <div class="flex justify-between mb-2">
                         <span class="text-gray-700">เดือนนี้:</span>
-                        <span id="visits-this-month" class="font-medium text-red-600">กำลังโหลด...</span>
+                        <span id="visits-this-month" class="font-medium text-red-600">กำลังโหลด...</span> <!-- สถิติเดือนนี้ (JavaScript จะอัปเดต) -->
                     </div>
                     <div class="flex justify-between">
                         <span class="text-gray-700">ทั้งหมด:</span>
-                        <span id="visits-total" class="font-medium text-red-600">กำลังโหลด...</span>
+                        <span id="visits-total" class="font-medium text-red-600">กำลังโหลด...</span> <!-- สถิติทั้งหมด (JavaScript จะอัปเดต) -->
                     </div>
                 </div>
 
-                <h2 class="text-xl font-bold text-red-600 border-b-2 border-yellow-400 pb-2 my-4">ติดต่อเรา</h2>
-                <div class="bg-yellow-50 p-4 rounded-xl mb-4">
-                    <div class="contact-item">
+                <h2 class="text-xl font-bold text-red-600 border-b-2 border-yellow-400 pb-2 my-4">ติดต่อเรา</h2> <!-- หัวข้อ "ติดต่อเรา" -->
+                <div class="bg-yellow-50 p-4 rounded-xl mb-4"> <!-- กล่องข้อมูลติดต่อ -->
+                    <div class="contact-item"> <!-- รายการติดต่อ: อีเมล -->
                         <svg class="contact-icon w-5 h-5 text-red-600" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"></path><path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"></path></svg>
                         <span class="text-gray-700">mlpycop@gmail.com</span>
                     </div>
-                    <div class="contact-item">
+                    <div class="contact-item"> <!-- รายการติดต่อ: โทรศัพท์ -->
                         <svg class="contact-icon w-5 h-5 text-red-600" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"></path></svg>
                         <span class="text-gray-700">089-9988096</span>
                     </div>
@@ -293,9 +297,10 @@
         </aside>
     </div>
 
-    <footer class="bg-gradient-to-r from-red-600 to-yellow-500 text-white py-4 mt-8 rounded-t-3xl">
-        <div class="container mx-auto px-4">
-            <div class="flex flex-col items-center text-center">
+    <!-- ส่วนท้ายเว็บ (Footer) -->
+    <footer class="bg-gradient-to-r from-red-600 to-yellow-500 text-white py-4 mt-8 rounded-t-3xl"> <!-- ส่วนท้ายเว็บ ใช้สีพื้นหลังไล่เฉดเหมือน Header -->
+        <div class="container mx-auto px-4"> <!-- จัดเนื้อหาให้อยู่กึ่งกลาง -->
+            <div class="flex flex-col items-center text-center"> <!-- จัดข้อความให้อยู่กึ่งกลาง -->
                 <p class="footer-text">โรงเรียนชุมชนบ้านแม่หละป่าป๋วย</p>
                 <p class="footer-text">ตำบลสรอย อำเภอวังชิ้น จังหวัดแพร่</p>
                 <p class="footer-text">สำนักงานเขตพื้นที่การศึกษาประถมศึกษาแพร่เขต 2</p>
@@ -303,6 +308,6 @@
         </div>
     </footer>
 
-<script src="script.js"></script>
+<script src="script.js"></script> <!-- เชื่อมโยงไปยังไฟล์ JavaScript -->
 </body>
 </html>
