@@ -60,9 +60,7 @@ body {
     color: #dc2626; /* สี red-600 ของ Tailwind, เปลี่ยนสีตัวอักษร */
 }
 
-/* สไตล์สำหรับ Card (กล่องเนื้อหา) /
-/* ใน style.css */
-
+/* สไตล์สำหรับ Card (กล่องเนื้อหา) */
 .card {
     border-radius: 16px;
     /* overflow: hidden; <-- อาจจะต้องเอาออกชั่วคราว หรือปรับถ้าภาพพื้นหลังไม่แสดง */
@@ -86,7 +84,7 @@ body {
     height: 100%;
     
     /* --- แก้ไข URL ของภาพพื้นหลังตรงนี้ --- */
-    background-image: url('images/your-background-image.jpg'); /* <<<<----- ใส่ path รูปภาพของพี่ */
+    background-image: url('img/around%20(31).jpg'); /* <<<<----- ใส่ path รูปภาพของพี่ */
     
     background-repeat: no-repeat; /* ไม่ให้ภาพซ้ำ */
     background-position: center center; /* จัดภาพให้อยู่กึ่งกลาง */
