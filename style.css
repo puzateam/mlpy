@@ -102,6 +102,9 @@ body {
 /* คลาสสำหรับซ่อน/แสดงส่วนเนื้อหาด้วย JavaScript */
 .content-section {
     /* JavaScript จะเพิ่ม/ลบคลาส 'hidden' (display: none ของ Tailwind) */
+    flex-grow: 1; /* อนุญาตให้ .content-section ขยายเพื่อเติมพื้นที่ */
+    display: flex; /* ทำให้ .content-section เป็น flex container ด้วย */
+    flex-direction: column; /* จัดเรียง item ภายใน (iframe) เป็นแนวตั้ง */
 }
 
 /* สไตล์เพิ่มเติมสำหรับส่วนประวัติโรงเรียน (#content-history) */
@@ -273,14 +276,6 @@ body {
 .link-table .col-link { /* คอลัมน์ลิงก์ */
     width: 30%;
     text-align: center;
-}
-
-
-/* ปรับ .content-section ให้ขยายได้เมื่อเป็น flex item */
-.content-section {
-    flex-grow: 1; /* อนุญาตให้ .content-section ขยายเพื่อเติมพื้นที่ */
-    display: flex; /* ทำให้ .content-section เป็น flex container ด้วย */
-    flex-direction: column; /* จัดเรียง item ภายใน (iframe) เป็นแนวตั้ง */
 }
 
 /* สไตล์สำหรับ iframe ที่แสดง PDF */
