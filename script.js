@@ -291,7 +291,6 @@ function displayPdf(targetDivId, pdfUrl, pdfTitle) {
             </iframe>`;
     } else {
          contentDiv.innerHTML = `
-            <h3 class="text-xl font-bold text-red-600 mb-4">${pdfTitle}</h3>
             <p class="text-gray-600">ยังไม่มีไฟล์ ${pdfTitle} ให้แสดงในขณะนี้</p>
             <p class="text-sm text-gray-500">(ผู้ดูแลระบบ: โปรดอัปเดต URL ของไฟล์ PDF ในโค้ด JavaScript ส่วนฟังก์ชัน displayPdf)</p>`;
     }
