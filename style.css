@@ -1,7 +1,6 @@
 /* การตั้งค่าฟอนต์เริ่มต้นสำหรับทุก elements */
 * {
-    font-family: 'Prompt', sans-serif;
-}
+    font-family: 'Prompt', sans-serif;            
 
 /* สไตล์สำหรับ body */
 body {
@@ -71,22 +70,44 @@ transform: translateY(-5px); /* เอฟเฟกต์ Card ลอยขึ้
 box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); / เพิ่มเงาที่ชัดขึ้น */
 }
 
-
+    /* สไตล์สำหรับ Card (เนื้อหาตรงกลาง) */
 .card-main-content {
-    position: relative;
-    z-index: 0;
+    position: relative; /* จำเป็นสำหรับ ::before */
+    z-index: 0;         /* ช่วยจัดการ stacking */
+    /* background-color: transparent; */ /* หรือ #ffffff ถ้าต้องการพื้นขาวใต้ภาพโปร่งใส */
+                                        /* ถ้า transparent จะเห็นสี body ทะลุมา */
+    /* สไตล์อื่นๆ ของ card ที่ต้องการ เช่น padding, shadow, border-radius ก็ใส่ที่นี่ */
+    /* padding: 1.25rem; /* p-5 ของ Tailwind */
+    /* border-radius: 1rem; /* rounded-2xl ของ Tailwind */
+    /* box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -2px rgba(0,0,0,0.1); /* shadow-md */
 }
-.card-main-content::before {
+
+.card-main-content::before { 
+}
     content: "";
     position: absolute;
-    /* ... (สไตล์ background-image และ opacity เหมือนเดิม) ... */
-    z-index: -1;
-    border-radius: inherit;
-    overflow: hidden;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    
+    /* --- สไตล์ background-image และ opacity ที่ "เหมือนเดิม" --- */
+    background-image: url('img/around%20(31).jpg'); /* <<<<----- แก้ไข Path รูปภาพนี้ */
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover; /* หรือ contain, หรือ 100% 100% ตามชอบ */
+    opacity: 0.3; /* 30% opacity, ปรับค่าได้ */
+    /* ------------------------------------------------------- */
+    
+    z-index: -1; /* ให้ pseudo-element อยู่หลังเนื้อหา */
+    border-radius: inherit; /* ให้ขอบมนของ ::before ตรงกับ .card-main-content */
+    overflow: hidden; /* ป้องกันไม่ให้ ::before ล้นออกไป (ถึงแม้จะไม่ค่อยจำเป็นเมื่อใช้ border-radius: inherit) */
 }
+
+/* สไตล์สำหรับเนื้อหาภายใน .card-main-content เพื่อให้แน่ใจว่าอยู่เหนือ ::before */
 .card-main-content > * {
-    position: relative;
-    z-index: 1;
+    position: relative; 
+    z-index: 1; /* ทำให้เนื้อหาอยู่เหนือ ::before */
 }
 
 
