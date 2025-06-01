@@ -61,10 +61,48 @@ body {
 }
 
 /* สไตล์สำหรับ Card (กล่องเนื้อหา) /
+/* ใน style.css */
+
 .card {
-border-radius: 16px; / ความโค้งมนของขอบ Card /
-overflow: hidden; / ป้องกันเนื้อหาล้นขอบ */
-transition: all 0.3s ease;
+    border-radius: 16px;
+    /* overflow: hidden; <-- อาจจะต้องเอาออกชั่วคราว หรือปรับถ้าภาพพื้นหลังไม่แสดง */
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    
+    /* --- เพิ่มส่วนนี้สำหรับการใส่ภาพพื้นหลัง --- */
+    position: relative; /* จำเป็นสำหรับ ::before ที่จะถูก positioned absolute */
+    z-index: 0; /* เพื่อให้เนื้อหาอยู่บน ::before */
+    background-color: #ffffff; /* สีพื้นหลังของ card เอง (ถ้าภาพไม่โหลด หรือเพื่อให้ดูเนียน) */
+                               /* หรืออาจจะเป็น transparent ถ้าต้องการให้สี body แสดงผ่านเมื่อภาพโปร่งใส */
+}
+
+.card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    
+    /* --- แก้ไข URL ของภาพพื้นหลังตรงนี้ --- */
+    background-image: url('images/your-background-image.jpg'); /* <<<<----- ใส่ path รูปภาพของพี่ */
+    
+    background-repeat: no-repeat; /* ไม่ให้ภาพซ้ำ */
+    background-position: center center; /* จัดภาพให้อยู่กึ่งกลาง */
+    background-size: cover; /* ให้ภาพขยายเต็มพื้นที่ โดยรักษาสัดส่วนและอาจมีการตัดบางส่วน */
+
+    /* --- กำหนดความโปร่งใสของภาพพื้นหลัง --- */
+    opacity: 0.3; /* 30% opacity (ปรับค่าได้ตั้งแต่ 0.0 ถึง 1.0) */
+    
+    z-index: -1; /* ทำให้ ::before อยู่หลังเนื้อหาของ .card */
+    border-radius: inherit; /* ให้ขอบมนของ ::before เหมือนกับ .card (สำคัญมาก!) */
+}
+/* สไตล์สำหรับเนื้อหาภายใน .card เพื่อให้แน่ใจว่าอยู่เหนือ ::before */
+/* (อาจจะไม่จำเป็นถ้า z-index ของ .card::before เป็น -1 และ .card มี z-index: 0 หรือสูงกว่า) */
+.card > * { /* เลือก direct children ทั้งหมดของ .card */
+    position: relative; /* ทำให้ children มี stacking context ของตัวเอง */
+    z-index: 1; /* ทำให้มั่นใจว่าอยู่เหนือ ::before */
 }
 .card:hover {
 transform: translateY(-5px); /* เอฟเฟกต์ Card ลอยขึ้นเมื่อ hover /
