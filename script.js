@@ -89,39 +89,44 @@ document.addEventListener('DOMContentLoaded', function () {
     calculateAndDisplaySchoolAge();
 });
 
-async function fetchVisitorStats() {
-    const visitsTodayEl = document.getElementById('visits-today');
-    const visitsMonthEl = document.getElementById('visits-this-month');
-    const visitsTotalEl = document.getElementById('visits-total');
-    try {
-        const response = await fetch(`${WEB_APP_URL}?action=logVisitAndGetCounts&timestamp=${new Date().getTime()}`); 
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
+    // ฟังก์ชันสำหรับดึงและแสดงสถิติผู้เข้าชม
+    async function fetchVisitorStats() {
+        const visitsTodayEl = document.getElementById('visits-today');
+        const visitsMonthEl = document.getElementById('visits-this-month');
+        const visitsTotalEl = document.getElementById('visits-total');
+    
+        try {
+            const response = await fetch(`${WEB_APP_URL}?action=logVisitAndGetCounts&timestamp=${new Date().getTime()}`); 
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            const result = await response.json();
+    
+            if (result.error) {
+                console.error("Error fetching visitor stats:", result.error, result.details || "");
+                visitsTodayEl.textContent = "-";
+                visitsMonthEl.textContent = "-";
+                visitsTotalEl.textContent = "-";
+                return;
+            }
+    
+            if (result.data) {
+                visitsTodayEl.textContent = `${result.data.today.toLocaleString()} คน`;
+                visitsMonthEl.textContent = `${result.data.month.toLocaleString()} คน`;
+                visitsTotalEl.textContent = `${result.data.total.toLocaleString()} คน`;
+            } else {
+                visitsTodayEl.textContent = "N/A";
+                visitsMonthEl.textContent = "N/A";
+                visitsTotalEl.textContent = "N/A";
+            }
+    
+        } catch (error) {
+            console.error("Failed to fetch visitor stats:", error);
+            visitsTodayEl.textContent = "ข้อผิดพลาด";
+            visitsMonthEl.textContent = "ข้อผิดพลาด";
+            visitsTotalEl.textContent = "ข้อผิดพลาด";
         }
-        const result = await response.json();
-        if (result.error) {
-            console.error("Error fetching visitor stats:", result.error, result.details || "");
-            visitsTodayEl.textContent = "-";
-            visitsMonthEl.textContent = "-";
-            visitsTotalEl.textContent = "-";
-            return;
-        }
-        if (result.data) {
-            visitsTodayEl.textContent = `${result.data.today.toLocaleString()} คน`;
-            visitsMonthEl.textContent = `${result.data.month.toLocaleString()} คน`;
-            visitsTotalEl.textContent = `${result.data.total.toLocaleString()} คน`;
-        } else {
-            visitsTodayEl.textContent = "N/A";
-            visitsMonthEl.textContent = "N/A";
-            visitsTotalEl.textContent = "N/A";
-        }
-    } catch (error) {
-        console.error("Failed to fetch visitor stats:", error);
-        visitsTodayEl.textContent = "ข้อผิดพลาด";
-        visitsMonthEl.textContent = "ข้อผิดพลาด";
-        visitsTotalEl.textContent = "ข้อผิดพลาด";
     }
-}
 
 async function fetchPersonnelData() {
     const personnelContentDiv = document.getElementById('content-personnel');
