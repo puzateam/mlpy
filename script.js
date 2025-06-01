@@ -100,7 +100,7 @@ const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbzYei_p2dH4u2obm2v9
         const visitsMonthEl = document.getElementById('visits-this-month');
         const visitsTotalEl = document.getElementById('visits-total');
         try {
-            const response = await fetch(`${WEB_APP_URL}?action=logVisitAndGetCounts&timestamp==${new Date().getTime()}`); 
+            const response = await fetch(`${WEB_APP_URL}?action=logVisitAndGetCounts&timestamp=${new Date().getTime()}`); 
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
