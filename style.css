@@ -95,7 +95,7 @@ body {
     background-repeat: no-repeat;
     background-position: center center;
     background-size: cover; 
-    opacity: 0.3; /* 30% opacity */
+    opacity: 0.3; /* 80% opacity */
     
     z-index: -1; /* ทำให้ ::before อยู่หลังเนื้อหาของ .card-main-content */
     border-radius: inherit; /* ให้ขอบมนของ ::before เหมือนกับ .card-main-content */
