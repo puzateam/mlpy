@@ -233,7 +233,7 @@ async function fetchAndDisplayTableData(actionName, targetDivId, tableTitle) {
     const contentDiv = document.getElementById(targetDivId);
     contentDiv.innerHTML = `<p class="text-gray-500 animate-pulse">กำลังโหลดข้อมูล ${tableTitle}...</p>`;
     try {
-        // <<<<< แก้ไขตรงนี้: เปลี่ยน ×tamp เป็น ×tamp >>>>>
+        // <<<<< แก้ไขตรงนี้: เปลี่ยน ×tamp เป็น &timestamp >>>>>
         const response = await fetch(`${WEB_APP_URL}?action=${actionName}&timestamp=${new Date().getTime()}`); 
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
