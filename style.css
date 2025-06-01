@@ -60,9 +60,7 @@ body {
 /* สไตล์สำหรับ Card (กล่องเนื้อหาทั่วไป - ใน Sidebar) */
 .card {
     border-radius: 16px;
-    /* overflow: hidden; -> ย้ายไปใส่ใน .card-main-content ถ้าจำเป็นสำหรับ ::before */
     transition: all 0.3s ease;
-    /* background-color: #ffffff; ถูกกำหนดโดย Tailwind class bg-white ใน HTML แล้ว */
 }
 
 .card:hover {
@@ -72,12 +70,11 @@ body {
 
 /* --- สไตล์สำหรับ Card ที่เป็นเนื้อหาหลักตรงกลาง (มีภาพพื้นหลัง) --- */
 .card-main-content {
-    position: relative; /* จำเป็นสำหรับ ::before ที่จะถูก positioned absolute */
-    z-index: 0; /* เพื่อให้เนื้อหาอยู่บน ::before */
-    /* background-color: #ffffff; */ /* Tailwind class bg-white ใน HTML จะจัดการส่วนนี้ */
-                                  /* ถ้าต้องการให้พื้นหลังโปร่งใสเห็นสี body ก็อาจจะเอา bg-white ออกจาก HTML แล้วใส่ transparent ที่นี่ */
-    overflow: hidden; /* ป้องกัน ::before ที่ใช้ border-radius:inherit ล้นออกไปในบางกรณี */
-    border-radius: 16px; /* ต้องมี radius ที่นี่เพื่อให้ ::before inherit ได้ */
+    position: relative;
+    z-index: 0;
+    overflow: hidden; 
+    border-radius: 16px; 
+    /* Tailwind class bg-white ใน HTML จะจัดการสีพื้นหลังหลัก */
 }
 
 .card-main-content::before {
@@ -87,28 +84,20 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    
-    /* --- แก้ไข URL ของภาพพื้นหลังตรงนี้ --- */
-    background-image: url('img/around(31).jpg'); /* <<<<----- Path รูปภาพของพี่ (ตรวจสอบให้แน่ใจว่าถูกต้อง) */
-                                                /* ถ้า path มี %20 แสดงว่ามี space ในชื่อไฟล์ ซึ่งทำงานได้ แต่อาจจะเลี่ยงได้จะดีกว่า */
-    
+    background-image: url('img/around%20(31).jpg'); /* ตรวจสอบ Path นี้ให้ถูกต้อง */
     background-repeat: no-repeat;
     background-position: center center;
-    background-size: cover; 
-    opacity: 0.1; /* 10% opacity */
-    
-    z-index: -1; /* ทำให้ ::before อยู่หลังเนื้อหาของ .card-main-content */
-    border-radius: inherit; /* ให้ขอบมนของ ::before เหมือนกับ .card-main-content */
-    /* overflow: hidden;  ไม่จำเป็นที่นี่ถ้า parent (.card-main-content) มี overflow: hidden และ border-radius: inherit ทำงานถูกต้อง */
+    background-size: cover;
+    opacity: 0.3;
+    z-index: -1;
+    border-radius: inherit;
 }
 
-/* สไตล์สำหรับเนื้อหาภายใน .card-main-content เพื่อให้แน่ใจว่าอยู่เหนือ ::before */
 .card-main-content > * {
-    position: relative; /* ทำให้ children มี stacking context ของตัวเอง */
-    z-index: 1; /* ทำให้มั่นใจว่าอยู่เหนือ ::before */
+    position: relative;
+    z-index: 1;
 }
 /* ---------------------------------------------------------------------- */
-
 
 /* สไตล์สำหรับข้อความใน Footer */
 .footer-text {
@@ -139,12 +128,12 @@ body {
 
 /* สไตล์เพิ่มเติมสำหรับส่วนประวัติโรงเรียน (#content-history) */
 #content-history p {
-    margin-bottom: 0.75rem; 
-    line-height: 1.6; 
+    margin-bottom: 0.75rem;
+    line-height: 1.6;
     text-indent: 2em;
 }
 #content-history h4 {
-    font-weight: 600; 
+    font-weight: 600;
     color: #c2410c;
     margin-top: 1rem;
     margin-bottom: 0.5rem;
@@ -154,10 +143,10 @@ body {
 }
 
 /* สไตล์สำหรับ Container ของรูปภาพผังองค์กร หรือรูปภาพอื่นๆ */
-.org-chart-container { 
+.org-chart-container {
     text-align: center;
-    margin-top: 1.5rem; 
-    margin-bottom: 1.5rem; 
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
     padding: 1rem;
     background-color: #f9fafb; /* Tailwind gray-50 */
     border-radius: 8px;
@@ -171,42 +160,42 @@ body {
 }
 
 /* Media Query สำหรับหน้าจอขนาดเล็ก (Responsive Design) */
-@media (max-width: 768px) { 
+@media (max-width: 768px) {
     .main-container {
         flex-direction: column;
     }
-    .sidebar, .content { /* รวม sidebar และ content */
-        width: 100%; 
+    .sidebar, .content {
+        width: 100%;
     }
-    .sidebar { /* เฉพาะ sidebar ถ้าต้องการ margin bottom แยก */
+    .sidebar {
         margin-bottom: 1rem;
     }
     .facebook-iframe {
         width: 100% !important;
-        max-width: 500px; 
+        max-width: 500px;
     }
 }
 
 /* สไตล์เพิ่มเติมสำหรับส่วนข้อมูลสถานศึกษา (#content-school-info) */
 #content-school-info p {
-    margin-bottom: 0.75rem; 
-    line-height: 1.6; 
+    margin-bottom: 0.75rem;
+    line-height: 1.6;
 }
 #content-school-info .info-label {
-    font-weight: 600; 
+    font-weight: 600;
     color: #4b5563;
 }
 #content-school-info .school-identity-title {
     font-size: 1.125rem; /* text-lg */
-    font-weight: 600; 
+    font-weight: 600;
     color: #b91c1c; /* text-red-700 */
-    margin-top: 1.25rem; 
-    margin-bottom: 0.5rem; 
+    margin-top: 1.25rem;
+    margin-bottom: 0.5rem;
 }
 #content-school-info .school-identity-text {
     font-size: 1.25rem; /* text-xl */
     color: #c2410c;
-    margin-left: 1rem; 
+    margin-left: 1rem;
     font-weight: 500;
 }
 #content-school-info .color-box {
@@ -219,109 +208,146 @@ body {
 }
 
 /* สไตล์เพิ่มเติมสำหรับส่วนวิสัยทัศน์/พันธกิจ (#content-vision) */
-#content-vision h3 { 
-    font-size: 1.25rem; 
-    font-weight: 700; 
-    color: #b91c1c; 
-    margin-top: 1.5rem; 
-    margin-bottom: 0.75rem; 
+#content-vision h3 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #b91c1c;
+    margin-top: 1.5rem;
+    margin-bottom: 0.75rem;
 }
 #content-vision h3:first-child {
-    margin-top: 0; 
+    margin-top: 0;
 }
 #content-vision p.vision-statement {
-    font-size: 1.125rem; 
+    font-size: 1.125rem;
     line-height: 1.7;
-    margin-left: 1rem; 
-    margin-bottom: 1.5rem; 
+    margin-left: 1rem;
+    margin-bottom: 1.5rem;
     font-style: italic;
     color: #374151;
 }
 #content-vision ol, #content-vision ul {
     list-style-position: outside;
     margin-left: 2.5rem;
-    margin-bottom: 1.5rem; 
+    margin-bottom: 1.5rem;
 }
 #content-vision ol li, #content-vision ul li {
-    margin-bottom: 0.5rem; 
+    margin-bottom: 0.5rem;
     line-height: 1.6;
 }
 
 /* สไตล์เพิ่มเติมสำหรับส่วนโครงสร้างการบริหาร (#content-structure) */
-#content-structure h3.section-title { 
-    font-size: 1.25rem; 
-    font-weight: 700; 
-    color: #b91c1c; 
-    margin-bottom: 1rem; 
+#content-structure h3.section-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #b91c1c;
+    margin-bottom: 1rem;
 }
 #content-structure .intro-paragraph {
-    margin-bottom: 1rem; 
+    margin-bottom: 1rem;
     line-height: 1.6;
 }
 #content-structure ol.admin-groups {
     list-style-type: decimal;
     list-style-position: outside;
-    margin-left: 2.5rem; 
-    margin-bottom: 1.5rem; 
+    margin-left: 2.5rem;
+    margin-bottom: 1.5rem;
 }
 #content-structure ol.admin-groups li {
-    margin-bottom: 0.5rem; 
+    margin-bottom: 0.5rem;
     line-height: 1.6;
 }
 #content-structure .image-caption {
     display: none;
 }
 
-/* สไตล์สำหรับตารางลิงก์ (Smart School Service, สารสนเทศอื่นๆ) */
-.link-table {
+/* สไตล์สำหรับตารางลิงก์ และ ตารางข้อมูลทั่วไป */
+.link-table, .data-table-theme { /* รวม .data-table-theme ที่นี่ */
     width: 100%;
     border-collapse: collapse;
     margin-top: 1rem;
 }
-.link-table th, .link-table td {
+.link-table th, .link-table td,
+.data-table-theme th, .data-table-theme td { /* รวม .data-table-theme ที่นี่ */
     border: 1px solid #ddd;
     padding: 8px;
-    text-align: left;
-}
-.link-table th {
-    background-color: #f2f2f2;
-    font-weight: 600;
-}
-.link-table td a { /* สไตล์สำหรับลิงก์ที่เป็นข้อความ ถ้ามี */
-    color: #2563eb; /* Tailwind blue-600 */
-    text-decoration: none;
-}
-.link-table td a:hover {
-    text-decoration: underline;
-}
-/* ทำให้รูปภาพ icon ใน a tag มีขนาดพอดีและอาจจะมี effect ตอน hover */
-.link-table td a img {
-    width: 1.5rem; /* w-6 ของ Tailwind */
-    height: 1.5rem; /* h-6 ของ Tailwind */
-    display: inline-block; /* หรือ block และใช้ margin: auto ถ้าต้องการ */
-    vertical-align: middle;
-    transition: opacity 0.2s ease-in-out;
-}
-.link-table td a:hover img {
-    opacity: 0.75;
+    /* text-align: left; -> ถูก override โดย class text-center ใน HTML หรือ CSS เฉพาะ */
 }
 
-.link-table .col-number {
+/* สไตล์สำหรับหัวตารางของตารางข้อมูลและตารางลิงก์ */
+.data-table-theme thead {
+    /* แบบที่ 1: สีส้มสดใส (คล้ายสีเหลืองใน header แต่เข้มขึ้น) */
+    background-color: #F59E0B; /* Tailwind amber-500 */
+    color: #ffffff; /* ตัวอักษรสีขาว */
+
+    /* แบบที่ 2: สีแดงอ่อน */
+    /* background-color: #FCA5A5; */ /* Tailwind red-400 */
+    /* color: #4B5563; */
+
+    /* แบบที่ 3: สีเหลืองทอง */
+    /* background-color: #D97706; */ /* Tailwind amber-600 */
+    /* color: #FEF3C7; */
+}
+
+.data-table-theme th { /* สไตล์ทั่วไปสำหรับ th ใน theme นี้ */
+    padding: 0.625rem 0.5rem; /* ประมาณ 10px 8px */
+    font-weight: 600;
+    /* text-align: left; */ /* ถ้าต้องการ default เป็น left */
+    /* color: inherit; */ /* สีตัวอักษรจะมาจาก .data-table-theme thead */
+}
+
+/* Tailwind classes ใน HTML จะ override text-align ของ th ได้ถ้าจำเป็น */
+/* เช่น class="px-4 py-2 text-center ..." */
+
+
+.link-table td a img, /* สำหรับตารางลิงก์เดิม */
+.data-table-theme td a img { /* สำหรับตารางที่ใช้ theme ใหม่ */
+    width: 1.5rem; /* w-6 */
+    height: 1.5rem; /* h-6 */
+    display: inline-block;
+    vertical-align: middle;
+    transition: transform 0.2s ease-in-out, opacity 0.2s ease-in-out;
+}
+
+.link-table td a:hover img,
+.data-table-theme td a:hover img {
+    opacity: 0.75;
+    transform: scale(1.15);
+}
+
+.link-table .col-number,
+.data-table-theme .col-number { /* ถ้ามีคลาส col-number ใน data-table-theme */
     width: 10%;
     text-align: center;
 }
-.link-table .col-name {
+.link-table .col-name,
+.data-table-theme .col-name { /* ถ้ามีคลาส col-name ใน data-table-theme */
     width: 60%;
+    text-align: left; /* ให้ชื่อรายการชิดซ้าย */
 }
-.link-table .col-link {
+.link-table .col-link,
+.data-table-theme .col-link { /* ถ้ามีคลาส col-link ใน data-table-theme */
     width: 30%;
     text-align: center;
 }
 
+
 /* สไตล์สำหรับ iframe ที่แสดง PDF */
 .pdf-embed-container {
     width: 100%;
-    height: calc(100vh - 200px); /* ปรับความสูง: 100% ของ viewport - 200px (สำหรับ header/footer etc.) */
-                                /* พี่สามารถปรับค่า 200px นี้ได้ตามความเหมาะสม */
+    height: calc(100vh - 220px); /* ปรับค่า 220px ตามความสูงของ Header, Footer, และ Title bar ของ content */
     border: 1px solid #ccc;
+}
+
+/* คลาส sr-only ของ Tailwind (เผื่อไม่ได้โหลดจาก CDN หรือต้องการ define เอง) */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
 }
