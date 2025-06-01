@@ -105,7 +105,7 @@ async function fetchVisitorStats() {
     const visitsMonthEl = document.getElementById('visits-this-month');
     const visitsTotalEl = document.getElementById('visits-total');
     try {
-        const response = await fetch(`${WEB_APP_URL}?action=logVisitAndGetCounts×tamp=${new Date().getTime()}`);
+        const response = await fetch(`${WEB_APP_URL}?action=logVisitAndGetCounts&timestamp=${new Date().getTime()}`);
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
@@ -138,7 +138,7 @@ async function fetchPersonnelData() {
     const personnelContentDiv = document.getElementById('content-personnel');
     personnelContentDiv.innerHTML = '<p class="text-gray-500 animate-pulse">กำลังโหลดข้อมูลบุคลากร...</p>';
     try {
-        const response = await fetch(`${WEB_APP_URL}?action=getPersonnel×tamp=${new Date().getTime()}`);
+        const response = await fetch(`${WEB_APP_URL}?action=getPersonnel&timestamp=${new Date().getTime()}`);
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
@@ -188,7 +188,7 @@ async function fetchStudentSummaryData() {
     const studentContentDiv = document.getElementById('content-students');
     studentContentDiv.innerHTML = '<p class="text-gray-500 animate-pulse">กำลังโหลดข้อมูลนักเรียน...</p>';
     try {
-        const response = await fetch(`${WEB_APP_URL}?action=getStudentSummary×tamp=${new Date().getTime()}`);
+        const response = await fetch(`${WEB_APP_URL}?action=getStudentSummary&timestamp=${new Date().getTime()}`);
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
@@ -244,7 +244,7 @@ async function fetchAndDisplayTableData(actionName, targetDivId) {
     contentDiv.innerHTML = `<p class="text-gray-500 animate-pulse">กำลังโหลดข้อมูล...</p>`;
 
     try {
-        const response = await fetch(`${WEB_APP_URL}?action=${actionName}×tamp=${new Date().getTime()}`);
+        const response = await fetch(`${WEB_APP_URL}?action=${actionName}&timestamp=${new Date().getTime()}`);
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
