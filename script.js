@@ -330,6 +330,3 @@ function displayPdf(targetDivId, pdfUrl, pdfTitleFromMenu) {
             <p class="text-sm text-gray-500">(ผู้ดูแลระบบ: โปรดตรวจสอบ URL ของไฟล์ PDF ในโค้ด JavaScript และตรวจสอบการตั้งค่าการแชร์ไฟล์บน Google Drive)</p>`;
     }
 }
-</script>
-</body>
-</html>
