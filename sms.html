@@ -13,12 +13,97 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <!-- Custom Stylesheet (ไฟล์ style.css หลัก) -->
     <link rel="stylesheet" href="style.css">
+    <style>
+        /* Custom styles for sms.html specifically */
+        .sidebar-sms .sidebar-item {
+            border-bottom: 1px solid #fee2e2; /* Tailwind red-100 */
+            transition: all 0.3s ease;
+        }
+        .sidebar-sms .sidebar-item a.active,
+        .sidebar-sms .sidebar-item:hover > a.sms-sidebar-main-link {
+            background-color: rgba(254, 226, 226, 0.5);
+            padding-left: 0.5rem;
+            color: #dc2626 !important;
+            font-weight: 600;
+        }
+        .sidebar-sms .sub-indicator-menu {
+            list-style-type: none;
+            padding-left: 1rem;
+            margin-top: 0.25rem;
+            margin-bottom: 0.5rem;
+        }
+        .sidebar-sms .sub-indicator-menu li a {
+            font-size: 0.875rem;
+            padding-top: 0.25rem;
+            padding-bottom: 0.25rem;
+            display: block;
+            color: #4b5563;
+            transition: color 0.2s ease, padding-left 0.2s ease;
+        }
+        .sidebar-sms .sub-indicator-menu li a:hover,
+        .sidebar-sms .sub-indicator-menu li a.active-indicator {
+            color: #c53030;
+            font-weight: 500;
+        }
+        .pdf-embed-container-sms {
+            width: 100%;
+            height: calc(100vh - 250px); /* Adjusted height slightly */
+            border: 1px solid #d1d5db;
+            position: relative;
+            z-index: 1;
+        }
+        .main-content-area-sms.showing-pdf .sms-html-content-section,
+        .main-content-area-sms.showing-pdf #no-pdf-message-container {
+            display: none !important;
+        }
+        .main-content-area-sms.showing-html #pdf-viewer-container,
+        .main-content-area-sms.showing-html #no-pdf-message-container {
+            display: none !important;
+        }
+         .main-content-area-sms.showing-no-pdf .sms-html-content-section,
+         .main-content-area-sms.showing-no-pdf #pdf-viewer-container {
+            display: none !important;
+        }
+
+        .card-main-content-sms {
+            position: relative;
+            z-index: 0;
+            overflow: hidden;
+        }
+        .card-main-content-sms::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('img/around(31).jpg'); /* ตรวจสอบ PATH รูปภาพ */
+            background-repeat: no-repeat;
+            background-position: center center;
+            background-size: cover;
+            opacity: 0.1;
+            z-index: -1;
+            border-radius: inherit;
+        }
+        .card-main-content-sms > * {
+            position: relative;
+            z-index: 1;
+        }
+        #no-pdf-message-container {
+            padding: 1rem;
+            text-align: center;
+            color: #718096; /* gray-600 */
+            background-color: #f7fafc; /* gray-100 */
+            border: 1px dashed #e2e8f0; /* gray-300 */
+            border-radius: 0.375rem; /* rounded-md */
+            margin-top: 1rem;
+        }
+    </style>
 </head>
 <body class="bg-gray-100">
 
     <!-- ส่วนหัวเว็บ (Header) -->
     <header>
-        <!-- ส่วนที่ 1: โลโก้และชื่อโรงเรียน (พื้นหลังสีส้มไล่เฉด) -->
         <div class="bg-gradient-to-r from-red-600 to-yellow-500 p-4">
             <div class="container mx-auto flex flex-col items-center">
                 <div class="flex flex-col items-center mb-2">
@@ -29,8 +114,6 @@
                 </div>
             </div>
         </div>
-
-        <!-- ส่วนที่ 2: เมนูนำทาง (พื้นหลังสีขาว) -->
         <nav class="bg-white shadow-md sticky top-0 z-40">
             <div class="container mx-auto">
                 <ul class="flex flex-wrap justify-center space-x-1 sm:space-x-2 md:space-x-3 lg:space-x-4 items-center py-2" id="sms-main-nav-ul">
@@ -53,36 +136,156 @@
                     <li class="sidebar-item">
                         <a href="#" class="block text-gray-700 sms-sidebar-main-link py-2">มาตรฐานที่ 1: คุณภาพของเด็ก</a>
                         <ul class="sub-indicator-menu">
-                            <li><a href="#" class="sms-indicator-link" data-pdf-src="URL_PRESCHOOL_S1_I1.1" data-indicator-title="ปฐมวัย ม.1 ตชว.1.1: เด็กเจริญเติบโตสมวัย สุขภาพแข็งแรง และมีพัฒนาการด้านการเคลื่อนไหว">1.1 เด็กเจริญเติบโตสมวัยฯ</a></li>
-                            <li><a href="#" class="sms-indicator-link" data-pdf-src="URL_PRESCHOOL_S1_I1.2" data-indicator-title="ปฐมวัย ม.1 ตชว.1.2: เด็กมีพัฒนาการด้านสติปัญญา เรียนรู้และสร้างสรรค์">1.2 พัฒนาการด้านสติปัญญา</a></li>
-                            <li><a href="#" class="sms-indicator-link" data-pdf-src="URL_PRESCHOOL_S1_I1.3" data-indicator-title="ปฐมวัย ม.1 ตชว.1.3: เด็กมีพัฒนาการด้านภาษาและการสื่อสาร">1.3 พัฒนาการด้านภาษา</a></li>
-                            <li><a href="#" class="sms-indicator-link" data-pdf-src="URL_PRESCHOOL_S1_I1.4" data-indicator-title="ปฐมวัย ม.1 ตชว.1.4: เด็กมีพัฒนาการด้านอารมณ์และจิตใจ">1.4 พัฒนาการด้านอารมณ์</a></li>
-                            <li><a href="#" class="sms-indicator-link" data-pdf-src="URL_PRESCHOOL_S1_I1.5" data-indicator-title="ปฐมวัย ม.1 ตชว.1.5: เด็กมีพัฒนาการด้านสังคมและคุณธรรม">1.5 พัฒนาการด้านสังคม</a></li>
+                            <li><a href="#" class="sms-indicator-link" 
+                                   data-pdf-src="URL_PRESCHOOL_S1_I1.1" 
+                                   data-level="มาตรฐานการศึกษาปฐมวัย" 
+                                   data-std-no="1" 
+                                   data-std-text="คุณภาพของเด็ก" 
+                                   data-indicator-no="1.1" 
+                                   data-indicator-detail="เด็กเจริญเติบโตสมวัย สุขภาพแข็งแรง และมีพัฒนาการด้านการเคลื่อนไหว">1.1 เด็กเจริญเติบโตสมวัยฯ</a></li>
+                            <li><a href="#" class="sms-indicator-link" 
+                                   data-pdf-src="URL_PRESCHOOL_S1_I1.2" 
+                                   data-level="มาตรฐานการศึกษาปฐมวัย" 
+                                   data-std-no="1" 
+                                   data-std-text="คุณภาพของเด็ก" 
+                                   data-indicator-no="1.2" 
+                                   data-indicator-detail="เด็กมีพัฒนาการด้านสติปัญญา เรียนรู้และสร้างสรรค์">1.2 พัฒนาการด้านสติปัญญา</a></li>
+                            <li><a href="#" class="sms-indicator-link" 
+                                   data-pdf-src="URL_PRESCHOOL_S1_I1.3" 
+                                   data-level="มาตรฐานการศึกษาปฐมวัย" 
+                                   data-std-no="1" 
+                                   data-std-text="คุณภาพของเด็ก" 
+                                   data-indicator-no="1.3" 
+                                   data-indicator-detail="เด็กมีพัฒนาการด้านภาษาและการสื่อสาร">1.3 พัฒนาการด้านภาษา</a></li>
+                            <li><a href="#" class="sms-indicator-link" 
+                                   data-pdf-src="URL_PRESCHOOL_S1_I1.4" 
+                                   data-level="มาตรฐานการศึกษาปฐมวัย" 
+                                   data-std-no="1" 
+                                   data-std-text="คุณภาพของเด็ก" 
+                                   data-indicator-no="1.4" 
+                                   data-indicator-detail="เด็กมีพัฒนาการด้านอารมณ์และจิตใจ">1.4 พัฒนาการด้านอารมณ์</a></li>
+                            <li><a href="#" class="sms-indicator-link" 
+                                   data-pdf-src="URL_PRESCHOOL_S1_I1.5" 
+                                   data-level="มาตรฐานการศึกษาปฐมวัย" 
+                                   data-std-no="1" 
+                                   data-std-text="คุณภาพของเด็ก" 
+                                   data-indicator-no="1.5" 
+                                   data-indicator-detail="เด็กมีพัฒนาการด้านสังคมและคุณธรรม">1.5 พัฒนาการด้านสังคม</a></li>
                         </ul>
                     </li>
                     <li class="sidebar-item">
                         <a href="#" class="block text-gray-700 sms-sidebar-main-link py-2">มาตรฐานที่ 2: กระบวนการบริหารและการจัดการ</a>
                         <ul class="sub-indicator-menu">
-                            <li><a href="#" class="sms-indicator-link" data-pdf-src="URL_PRESCHOOL_S2_I2.1" data-indicator-title="ปฐมวัย ม.2 ตชว.2.1: วิสัยทัศน์ พันธกิจ และค่านิยมของสถานศึกษา">2.1 วิสัยทัศน์ พันธกิจ</a></li>
-                            <li><a href="#" class="sms-indicator-link" data-pdf-src="URL_PRESCHOOL_S2_I2.2" data-indicator-title="ปฐมวัย ม.2 ตชว.2.2: กลยุทธ์และเป้าหมายของสถานศึกษา">2.2 กลยุทธ์และเป้าหมาย</a></li>
-                            <li><a href="#" class="sms-indicator-link" data-pdf-src="URL_PRESCHOOL_S2_I2.3" data-indicator-title="ปฐมวัย ม.2 ตชว.2.3: ผู้บริหารมีภาวะผู้นำทางวิชาการและบริหารจัดการด้วยหลักธรรมาภิบาล">2.3 ผู้บริหารมีภาวะผู้นำ</a></li>
-                            <li><a href="#" class="sms-indicator-link" data-pdf-src="URL_PRESCHOOL_S2_I2.4" data-indicator-title="ปฐมวัย ม.2 ตชว.2.4: การพัฒนาวิชาชีพผู้บริหาร ครู และบุคลากรทางการศึกษา">2.4 พัฒนาวิชาชีพบุคลากร</a></li>
-                            <li><a href="#" class="sms-indicator-link" data-pdf-src="URL_PRESCHOOL_S2_I2.5" data-indicator-title="ปฐมวัย ม.2 ตชว.2.5: การนิเทศและประเมินการปฏิบัติงานอย่างเป็นระบบ">2.5 นิเทศและประเมิน</a></li>
-                            <li><a href="#" class="sms-indicator-link" data-pdf-src="URL_PRESCHOOL_S2_I2.6" data-indicator-title="ปฐมวัย ม.2 ตชว.2.6: การใช้สื่อและเทคโนโลยีสารสนเทศที่เอื้อต่อการเรียนรู้">2.6 การใช้สื่อและเทคโนโลยี</a></li>
-                            <li><a href="#" class="sms-indicator-link" data-pdf-src="URL_PRESCHOOL_S2_I2.7" data-indicator-title="ปฐมวัย ม.2 ตชว.2.7: การจัดสภาพแวดล้อมและแหล่งเรียนรู้ที่ปลอดภัย">2.7 สภาพแวดล้อมปลอดภัย</a></li>
-                            <li><a href="#" class="sms-indicator-link" data-pdf-src="URL_PRESCHOOL_S2_I2.8" data-indicator-title="ปฐมวัย ม.2 ตชว.2.8: สวัสดิการและแนวทางการป้องกันโรคและภัยพิบัติ">2.8 สวัสดิการป้องกันภัย</a></li>
-                            <li><a href="#" class="sms-indicator-link" data-pdf-src="URL_PRESCHOOL_S2_I2.9" data-indicator-title="ปฐมวัย ม.2 ตชว.2.9: กระบวนการเฝ้าระวังและคัดกรองเด็กที่ต้องการความช่วยเหลือ">2.9 เฝ้าระวังและคัดกรอง</a></li>
-                            <li><a href="#" class="sms-indicator-link" data-pdf-src="URL_PRESCHOOL_S2_I2.10" data-indicator-title="ปฐมวัย ม.2 ตชว.2.10: การสร้างเครือข่ายและการมีส่วนร่วมของผู้ปกครองและชุมชน">2.10 เครือข่ายและการมีส่วนร่วม</a></li>
+                            <li><a href="#" class="sms-indicator-link" 
+                                   data-pdf-src="URL_PRESCHOOL_S2_I2.1" 
+                                   data-level="มาตรฐานการศึกษาปฐมวัย" 
+                                   data-std-no="2" 
+                                   data-std-text="กระบวนการบริหารและการจัดการ" 
+                                   data-indicator-no="2.1" 
+                                   data-indicator-detail="วิสัยทัศน์ พันธกิจ และค่านิยมของสถานศึกษา">2.1 วิสัยทัศน์ พันธกิจ</a></li>
+                            <li><a href="#" class="sms-indicator-link" 
+                                   data-pdf-src="URL_PRESCHOOL_S2_I2.2" 
+                                   data-level="มาตรฐานการศึกษาปฐมวัย" 
+                                   data-std-no="2" 
+                                   data-std-text="กระบวนการบริหารและการจัดการ" 
+                                   data-indicator-no="2.2" 
+                                   data-indicator-detail="กลยุทธ์และเป้าหมายของสถานศึกษา">2.2 กลยุทธ์และเป้าหมาย</a></li>
+                            <li><a href="#" class="sms-indicator-link" 
+                                   data-pdf-src="URL_PRESCHOOL_S2_I2.3" 
+                                   data-level="มาตรฐานการศึกษาปฐมวัย" 
+                                   data-std-no="2" 
+                                   data-std-text="กระบวนการบริหารและการจัดการ" 
+                                   data-indicator-no="2.3" 
+                                   data-indicator-detail="ผู้บริหารมีภาวะผู้นำทางวิชาการและบริหารจัดการด้วยหลักธรรมาภิบาล">2.3 ผู้บริหารมีภาวะผู้นำ</a></li>
+                            <li><a href="#" class="sms-indicator-link" 
+                                   data-pdf-src="URL_PRESCHOOL_S2_I2.4" 
+                                   data-level="มาตรฐานการศึกษาปฐมวัย" 
+                                   data-std-no="2" 
+                                   data-std-text="กระบวนการบริหารและการจัดการ" 
+                                   data-indicator-no="2.4" 
+                                   data-indicator-detail="การพัฒนาวิชาชีพผู้บริหาร ครู และบุคลากรทางการศึกษา">2.4 พัฒนาวิชาชีพบุคลากร</a></li>
+                            <li><a href="#" class="sms-indicator-link" 
+                                   data-pdf-src="URL_PRESCHOOL_S2_I2.5" 
+                                   data-level="มาตรฐานการศึกษาปฐมวัย" 
+                                   data-std-no="2" 
+                                   data-std-text="กระบวนการบริหารและการจัดการ" 
+                                   data-indicator-no="2.5" 
+                                   data-indicator-detail="การนิเทศและประเมินการปฏิบัติงานอย่างเป็นระบบ">2.5 นิเทศและประเมิน</a></li>
+                            <li><a href="#" class="sms-indicator-link" 
+                                   data-pdf-src="URL_PRESCHOOL_S2_I2.6" 
+                                   data-level="มาตรฐานการศึกษาปฐมวัย" 
+                                   data-std-no="2" 
+                                   data-std-text="กระบวนการบริหารและการจัดการ" 
+                                   data-indicator-no="2.6" 
+                                   data-indicator-detail="การใช้สื่อและเทคโนโลยีสารสนเทศที่เอื้อต่อการเรียนรู้">2.6 การใช้สื่อและเทคโนโลยี</a></li>
+                            <li><a href="#" class="sms-indicator-link" 
+                                   data-pdf-src="URL_PRESCHOOL_S2_I2.7" 
+                                   data-level="มาตรฐานการศึกษาปฐมวัย" 
+                                   data-std-no="2" 
+                                   data-std-text="กระบวนการบริหารและการจัดการ" 
+                                   data-indicator-no="2.7" 
+                                   data-indicator-detail="การจัดสภาพแวดล้อมและแหล่งเรียนรู้ที่ปลอดภัย">2.7 สภาพแวดล้อมปลอดภัย</a></li>
+                            <li><a href="#" class="sms-indicator-link" 
+                                   data-pdf-src="URL_PRESCHOOL_S2_I2.8" 
+                                   data-level="มาตรฐานการศึกษาปฐมวัย" 
+                                   data-std-no="2" 
+                                   data-std-text="กระบวนการบริหารและการจัดการ" 
+                                   data-indicator-no="2.8" 
+                                   data-indicator-detail="สวัสดิการและแนวทางการป้องกันโรคและภัยพิบัติ">2.8 สวัสดิการป้องกันภัย</a></li>
+                            <li><a href="#" class="sms-indicator-link" 
+                                   data-pdf-src="URL_PRESCHOOL_S2_I2.9" 
+                                   data-level="มาตรฐานการศึกษาปฐมวัย" 
+                                   data-std-no="2" 
+                                   data-std-text="กระบวนการบริหารและการจัดการ" 
+                                   data-indicator-no="2.9" 
+                                   data-indicator-detail="กระบวนการเฝ้าระวังและคัดกรองเด็กที่ต้องการความช่วยเหลือ">2.9 เฝ้าระวังและคัดกรอง</a></li>
+                            <li><a href="#" class="sms-indicator-link" 
+                                   data-pdf-src="URL_PRESCHOOL_S2_I2.10" 
+                                   data-level="มาตรฐานการศึกษาปฐมวัย" 
+                                   data-std-no="2" 
+                                   data-std-text="กระบวนการบริหารและการจัดการ" 
+                                   data-indicator-no="2.10" 
+                                   data-indicator-detail="การสร้างเครือข่ายและการมีส่วนร่วมของผู้ปกครองและชุมชน">2.10 เครือข่ายและการมีส่วนร่วม</a></li>
                         </ul>
                     </li>
                     <li class="sidebar-item">
                         <a href="#" class="block text-gray-700 sms-sidebar-main-link py-2">มาตรฐานที่ 3: การจัดประสบการณ์ฯ</a>
                         <ul class="sub-indicator-menu">
-                            <li><a href="#" class="sms-indicator-link" data-pdf-src="URL_PRESCHOOL_S3_I3.1" data-indicator-title="ปฐมวัย ม.3 ตชว.3.1: ครูมีการวางแผนการจัดประสบการณ์รายปี">3.1 ครูวางแผนการจัดประสบการณ์</a></li>
-                            <li><a href="#" class="sms-indicator-link" data-pdf-src="URL_PRESCHOOL_S3_I3.2" data-indicator-title="ปฐมวัย ม.3 ตชว.3.2: ครูนำแผนการจัดประสบการณ์ไปใช้โดยใช้สื่อและแหล่งเรียนรู้ที่เอื้อต่อการเรียนรู้">3.2 ครูนำแผนไปใช้</a></li>
-                            <li><a href="#" class="sms-indicator-link" data-pdf-src="URL_PRESCHOOL_S3_I3.3" data-indicator-title="ปฐมวัย ม.3 ตชว.3.3: มีการตรวจสอบและประเมินเด็กอย่างเป็นระบบ">3.3 ตรวจสอบและประเมินเด็ก</a></li>
-                            <li><a href="#" class="sms-indicator-link" data-pdf-src="URL_PRESCHOOL_S3_I3.4" data-indicator-title="ปฐมวัย ม.3 ตชว.3.4: มีการนำผลการประเมินมาพัฒนาเด็ก">3.4 นำผลประเมินมาพัฒนา</a></li>
-                            <li><a href="#" class="sms-indicator-link" data-pdf-src="URL_PRESCHOOL_S3_I3.5" data-indicator-title="ปฐมวัย ม.3 ตชว.3.5: มีการแลกเปลี่ยนเรียนรู้และให้ข้อมูลป้อนกลับเพื่อพัฒนาการจัดประสบการณ์">3.5 แลกเปลี่ยนเรียนรู้</a></li>
+                            <li><a href="#" class="sms-indicator-link" 
+                                   data-pdf-src="URL_PRESCHOOL_S3_I3.1" 
+                                   data-level="มาตรฐานการศึกษาปฐมวัย" 
+                                   data-std-no="3" 
+                                   data-std-text="การจัดประสบการณ์ที่เน้นเด็กเป็นสำคัญ" 
+                                   data-indicator-no="3.1" 
+                                   data-indicator-detail="ครูมีการวางแผนการจัดประสบการณ์รายปี">3.1 ครูวางแผนการจัดประสบการณ์</a></li>
+                            <li><a href="#" class="sms-indicator-link" 
+                                   data-pdf-src="URL_PRESCHOOL_S3_I3.2" 
+                                   data-level="มาตรฐานการศึกษาปฐมวัย" 
+                                   data-std-no="3" 
+                                   data-std-text="การจัดประสบการณ์ที่เน้นเด็กเป็นสำคัญ" 
+                                   data-indicator-no="3.2" 
+                                   data-indicator-detail="ครูนำแผนการจัดประสบการณ์ไปใช้โดยใช้สื่อและแหล่งเรียนรู้ที่เอื้อต่อการเรียนรู้">3.2 ครูนำแผนไปใช้</a></li>
+                            <li><a href="#" class="sms-indicator-link" 
+                                   data-pdf-src="URL_PRESCHOOL_S3_I3.3" 
+                                   data-level="มาตรฐานการศึกษาปฐมวัย" 
+                                   data-std-no="3" 
+                                   data-std-text="การจัดประสบการณ์ที่เน้นเด็กเป็นสำคัญ" 
+                                   data-indicator-no="3.3" 
+                                   data-indicator-detail="มีการตรวจสอบและประเมินเด็กอย่างเป็นระบบ">3.3 ตรวจสอบและประเมินเด็ก</a></li>
+                            <li><a href="#" class="sms-indicator-link" 
+                                   data-pdf-src="URL_PRESCHOOL_S3_I3.4" 
+                                   data-level="มาตรฐานการศึกษาปฐมวัย" 
+                                   data-std-no="3" 
+                                   data-std-text="การจัดประสบการณ์ที่เน้นเด็กเป็นสำคัญ" 
+                                   data-indicator-no="3.4" 
+                                   data-indicator-detail="มีการนำผลการประเมินมาพัฒนาเด็ก">3.4 นำผลประเมินมาพัฒนา</a></li>
+                            <li><a href="#" class="sms-indicator-link" 
+                                   data-pdf-src="URL_PRESCHOOL_S3_I3.5" 
+                                   data-level="มาตรฐานการศึกษาปฐมวัย" 
+                                   data-std-no="3" 
+                                   data-std-text="การจัดประสบการณ์ที่เน้นเด็กเป็นสำคัญ" 
+                                   data-indicator-no="3.5" 
+                                   data-indicator-detail="มีการแลกเปลี่ยนเรียนรู้และให้ข้อมูลป้อนกลับเพื่อพัฒนาการจัดประสบการณ์">3.5 แลกเปลี่ยนเรียนรู้</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -94,8 +297,12 @@
             <div class="bg-white rounded-2xl shadow-md p-5 card card-main-content-sms main-content-area-sms">
                 <h2 id="sms-center-content-title" class="text-xl font-bold text-red-600 border-b-2 border-yellow-400 pb-2 mb-6">ประกันคุณภาพภายใน</h2>
 
-                <div id="pdf-viewer-container" class="hidden">
+                <div id="pdf-viewer-container">
                     <iframe id="pdf-iframe" class="pdf-embed-container-sms" frameborder="0" allowfullscreen></iframe>
+                </div>
+
+                <div id="no-pdf-message-container">
+                    <p id="no-pdf-message-text"></p>
                 </div>
 
                 <div id="iqaSectionContent" class="sms-html-content-section">
@@ -114,8 +321,7 @@
                         </ul>
                     </div>
                 </div>
-
-                <div id="highlightsSectionContent" class="sms-html-content-section hidden">
+                <div id="highlightsSectionContent" class="sms-html-content-section">
                     <h3 class="text-lg font-semibold text-orange-700 mb-2">ผลงานเด่นของสถานศึกษา</h3>
                     <div class="grid md:grid-cols-2 gap-6">
                         <div class="highlight-item bg-white p-4 rounded-lg shadow hover:shadow-xl transition-shadow">
@@ -132,7 +338,7 @@
                         </div>
                     </div>
                 </div>
-            </div> 
+            </div>
         </main>
 
         <!-- แถบด้านข้างขวา (Sidebar Right) - สำหรับมาตรฐานขั้นพื้นฐาน -->
@@ -143,40 +349,136 @@
                     <li class="sidebar-item">
                         <a href="#" class="block text-gray-700 sms-sidebar-main-link py-2">มาตรฐานที่ 1: คุณภาพของผู้เรียน</a>
                         <ul class="sub-indicator-menu">
-                            <li><a href="#" class="sms-indicator-link" data-pdf-src="URL_BASICED_S1_I1.1" data-indicator-title="ขั้นพื้นฐาน ม.1 ตชว.1.1: ผู้เรียนมีสมรรถนะตามหลักสูตรสถานศึกษา">1.1 ผู้เรียนมีสมรรถนะ</a></li>
-                            <li><a href="#" class="sms-indicator-link" data-pdf-src="URL_BASICED_S1_I1.2" data-indicator-title="ขั้นพื้นฐาน ม.1 ตชว.1.2: ผู้เรียนมีคุณลักษณะที่พึงประสงค์ตามหลักสูตรสถานศึกษา">1.2 คุณลักษณะที่พึงประสงค์</a></li>
-                            <li><a href="#" class="sms-indicator-link" data-pdf-src="URL_BASICED_S1_I1.3" data-indicator-title="ขั้นพื้นฐาน ม.1 ตชว.1.3: ผู้เรียนสามารถนำตนเองในการเรียนรู้">1.3 นำตนเองในการเรียนรู้</a></li>
+                            <li><a href="#" class="sms-indicator-link" 
+                                   data-pdf-src="URL_BASICED_S1_I1.1" 
+                                   data-level="มาตรฐานการศึกษาขั้นพื้นฐาน" 
+                                   data-std-no="1" 
+                                   data-std-text="คุณภาพของผู้เรียน" 
+                                   data-indicator-no="1.1" 
+                                   data-indicator-detail="ผู้เรียนมีสมรรถนะตามหลักสูตรสถานศึกษา">1.1 ผู้เรียนมีสมรรถนะ</a></li>
+                            <li><a href="#" class="sms-indicator-link" 
+                                   data-pdf-src="URL_BASICED_S1_I1.2" 
+                                   data-level="มาตรฐานการศึกษาขั้นพื้นฐาน" 
+                                   data-std-no="1" 
+                                   data-std-text="คุณภาพของผู้เรียน" 
+                                   data-indicator-no="1.2" 
+                                   data-indicator-detail="ผู้เรียนมีคุณลักษณะที่พึงประสงค์ตามหลักสูตรสถานศึกษา">1.2 คุณลักษณะที่พึงประสงค์</a></li>
+                             <li><a href="#" class="sms-indicator-link" 
+                                   data-pdf-src="URL_BASICED_S1_I1.3" 
+                                   data-level="มาตรฐานการศึกษาขั้นพื้นฐาน" 
+                                   data-std-no="1" 
+                                   data-std-text="คุณภาพของผู้เรียน" 
+                                   data-indicator-no="1.3" 
+                                   data-indicator-detail="ผู้เรียนสามารถนำตนเองในการเรียนรู้">1.3 นำตนเองในการเรียนรู้</a></li>
                         </ul>
                     </li>
                     <li class="sidebar-item">
                         <a href="#" class="block text-gray-700 sms-sidebar-main-link py-2">มาตรฐานที่ 2: กระบวนการบริหารและการจัดการ</a>
                         <ul class="sub-indicator-menu">
-                            <li><a href="#" class="sms-indicator-link" data-pdf-src="URL_BASICED_S2_I2.1" data-indicator-title="ขั้นพื้นฐาน ม.2 ตชว.2.1: วิสัยทัศน์ พันธกิจ และค่านิยมของสถานศึกษา">2.1 วิสัยทัศน์ พันธกิจ</a></li>
-                            <li><a href="#" class="sms-indicator-link" data-pdf-src="URL_BASICED_S2_I2.2" data-indicator-title="ขั้นพื้นฐาน ม.2 ตชว.2.2: นโยบาย ทิศทาง กลยุทธ์ และแผนงานสอดคล้องกับวิสัยทัศน์และพันธกิจ">2.2 นโยบาย ทิศทาง กลยุทธ์</a></li>
-                            <li><a href="#" class="sms-indicator-link" data-pdf-src="URL_BASICED_S2_I2.3" data-indicator-title="ขั้นพื้นฐาน ม.2 ตชว.2.3: ผู้บริหารมีภาวะผู้นำทางวิชาการและบริหารจัดการด้วยหลักธรรมาภิบาล">2.3 ผู้บริหารมีภาวะผู้นำ</a></li>
-                            <li><a href="#" class="sms-indicator-link" data-pdf-src="URL_BASICED_S2_I2.4" data-indicator-title="ขั้นพื้นฐาน ม.2 ตชว.2.4: การพัฒนาครูและบุคลากรทางการศึกษา">2.4 พัฒนาครูและบุคลากร</a></li>
-                            <li><a href="#" class="sms-indicator-link" data-pdf-src="URL_BASICED_S2_I2.5" data-indicator-title="ขั้นพื้นฐาน ม.2 ตชว.2.5: กระบวนการนิเทศการปฏิบัติงานของครูและบุคลากรทางการศึกษา">2.5 นิเทศการปฏิบัติงาน</a></li>
-                            <li><a href="#" class="sms-indicator-link" data-pdf-src="URL_BASICED_S2_I2.6" data-indicator-title="ขั้นพื้นฐาน ม.2 ตชว.2.6: การใช้สื่อ อุปกรณ์ และเทคโนโลยีเพื่อสนับสนุนการจัดการศึกษา">2.6 การใช้สื่อ อุปกรณ์ เทคโนโลยี</a></li>
-                            <li><a href="#" class="sms-indicator-link" data-pdf-src="URL_BASICED_S2_I2.7" data-indicator-title="ขั้นพื้นฐาน ม.2 ตชว.2.7: การจัดสภาพแวดล้อม อาคารสถานที่ที่ปลอดภัยและถูกสุขลักษณะ">2.7 สภาพแวดล้อมปลอดภัย</a></li>
-                            <li><a href="#" class="sms-indicator-link" data-pdf-src="URL_BASICED_S2_I2.8" data-indicator-title="ขั้นพื้นฐาน ม.2 ตชว.2.8: สวัสดิการ สวัสดิภาพ และแนวทางการป้องกันโรคและภัยพิบัติ">2.8 สวัสดิการ สวัสดิภาพ</a></li>
-                            <li><a href="#" class="sms-indicator-link" data-pdf-src="URL_BASICED_S2_I2.9" data-indicator-title="ขั้นพื้นฐาน ม.2 ตชว.2.9: ระบบและกระบวนการช่วยเหลือผู้เรียน">2.9 ระบบช่วยเหลือผู้เรียน</a></li>
-                            <li><a href="#" class="sms-indicator-link" data-pdf-src="URL_BASICED_S2_I2.10" data-indicator-title="ขั้นพื้นฐาน ม.2 ตชว.2.10: การเสริมสร้างเครือข่ายผู้ปกครอง องค์กร และชุมชน">2.10 เสริมสร้างเครือข่าย</a></li>
+                             <li><a href="#" class="sms-indicator-link" 
+                                   data-pdf-src="URL_BASICED_S2_I2.1" 
+                                   data-level="มาตรฐานการศึกษาขั้นพื้นฐาน" 
+                                   data-std-no="2" 
+                                   data-std-text="กระบวนการบริหารและการจัดการ" 
+                                   data-indicator-no="2.1" 
+                                   data-indicator-detail="วิสัยทัศน์ พันธกิจ และค่านิยมของสถานศึกษา">2.1 วิสัยทัศน์ พันธกิจ</a></li>
+                            <li><a href="#" class="sms-indicator-link" 
+                                   data-pdf-src="URL_BASICED_S2_I2.2" 
+                                   data-level="มาตรฐานการศึกษาขั้นพื้นฐาน" 
+                                   data-std-no="2" 
+                                   data-std-text="กระบวนการบริหารและการจัดการ" 
+                                   data-indicator-no="2.2" 
+                                   data-indicator-detail="นโยบาย ทิศทาง กลยุทธ์ และแผนงานสอดคล้องกับวิสัยทัศน์และพันธกิจ">2.2 นโยบาย ทิศทาง กลยุทธ์</a></li>
+                            <li><a href="#" class="sms-indicator-link" 
+                                   data-pdf-src="URL_BASICED_S2_I2.3" 
+                                   data-level="มาตรฐานการศึกษาขั้นพื้นฐาน" 
+                                   data-std-no="2" 
+                                   data-std-text="กระบวนการบริหารและการจัดการ" 
+                                   data-indicator-no="2.3" 
+                                   data-indicator-detail="ผู้บริหารมีภาวะผู้นำทางวิชาการและบริหารจัดการด้วยหลักธรรมาภิบาล">2.3 ผู้บริหารมีภาวะผู้นำ</a></li>
+                            <li><a href="#" class="sms-indicator-link" 
+                                   data-pdf-src="URL_BASICED_S2_I2.4" 
+                                   data-level="มาตรฐานการศึกษาขั้นพื้นฐาน" 
+                                   data-std-no="2" 
+                                   data-std-text="กระบวนการบริหารและการจัดการ" 
+                                   data-indicator-no="2.4" 
+                                   data-indicator-detail="การพัฒนาครูและบุคลากรทางการศึกษา">2.4 พัฒนาครูและบุคลากร</a></li>
+                            <li><a href="#" class="sms-indicator-link" 
+                                   data-pdf-src="URL_BASICED_S2_I2.5" 
+                                   data-level="มาตรฐานการศึกษาขั้นพื้นฐาน" 
+                                   data-std-no="2" 
+                                   data-std-text="กระบวนการบริหารและการจัดการ" 
+                                   data-indicator-no="2.5" 
+                                   data-indicator-detail="กระบวนการนิเทศการปฏิบัติงานของครูและบุคลากรทางการศึกษา">2.5 นิเทศการปฏิบัติงาน</a></li>
+                            <li><a href="#" class="sms-indicator-link" 
+                                   data-pdf-src="URL_BASICED_S2_I2.6" 
+                                   data-level="มาตรฐานการศึกษาขั้นพื้นฐาน" 
+                                   data-std-no="2" 
+                                   data-std-text="กระบวนการบริหารและการจัดการ" 
+                                   data-indicator-no="2.6" 
+                                   data-indicator-detail="การใช้สื่อ อุปกรณ์ และเทคโนโลยีเพื่อสนับสนุนการจัดการศึกษา">2.6 การใช้สื่อ อุปกรณ์ เทคโนโลยี</a></li>
+                            <li><a href="#" class="sms-indicator-link" 
+                                   data-pdf-src="URL_BASICED_S2_I2.7" 
+                                   data-level="มาตรฐานการศึกษาขั้นพื้นฐาน" 
+                                   data-std-no="2" 
+                                   data-std-text="กระบวนการบริหารและการจัดการ" 
+                                   data-indicator-no="2.7" 
+                                   data-indicator-detail="การจัดสภาพแวดล้อม อาคารสถานที่ที่ปลอดภัยและถูกสุขลักษณะ">2.7 สภาพแวดล้อมปลอดภัย</a></li>
+                            <li><a href="#" class="sms-indicator-link" 
+                                   data-pdf-src="URL_BASICED_S2_I2.8" 
+                                   data-level="มาตรฐานการศึกษาขั้นพื้นฐาน" 
+                                   data-std-no="2" 
+                                   data-std-text="กระบวนการบริหารและการจัดการ" 
+                                   data-indicator-no="2.8" 
+                                   data-indicator-detail="สวัสดิการ สวัสดิภาพ และแนวทางการป้องกันโรคและภัยพิบัติ">2.8 สวัสดิการ สวัสดิภาพ</a></li>
+                            <li><a href="#" class="sms-indicator-link" 
+                                   data-pdf-src="URL_BASICED_S2_I2.9" 
+                                   data-level="มาตรฐานการศึกษาขั้นพื้นฐาน" 
+                                   data-std-no="2" 
+                                   data-std-text="กระบวนการบริหารและการจัดการ" 
+                                   data-indicator-no="2.9" 
+                                   data-indicator-detail="ระบบและกระบวนการช่วยเหลือผู้เรียน">2.9 ระบบช่วยเหลือผู้เรียน</a></li>
+                            <li><a href="#" class="sms-indicator-link" 
+                                   data-pdf-src="URL_BASICED_S2_I2.10" 
+                                   data-level="มาตรฐานการศึกษาขั้นพื้นฐาน" 
+                                   data-std-no="2" 
+                                   data-std-text="กระบวนการบริหารและการจัดการ" 
+                                   data-indicator-no="2.10" 
+                                   data-indicator-detail="การเสริมสร้างเครือข่ายผู้ปกครอง องค์กร และชุมชน">2.10 เสริมสร้างเครือข่าย</a></li>
                         </ul>
                     </li>
                     <li class="sidebar-item">
                         <a href="#" class="block text-gray-700 sms-sidebar-main-link py-2">มาตรฐานที่ 3: กระบวนการจัดการเรียนการสอนฯ</a>
                         <ul class="sub-indicator-menu">
-                            <li><a href="#" class="sms-indicator-link" data-pdf-src="URL_BASICED_S3_I3.1" data-indicator-title="ขั้นพื้นฐาน ม.3 ตชว.3.1: การออกแบบหลักสูตรและแผนการจัดการเรียนรู้ที่เสริมสร้างสมรรถนะและคุณลักษณะที่พึงประสงค์">3.1 ออกแบบหลักสูตรและแผนฯ</a></li>
-                            <li><a href="#" class="sms-indicator-link" data-pdf-src="URL_BASICED_S3_I3.2" data-indicator-title="ขั้นพื้นฐาน ม.3 ตชว.3.2: การจัดกิจกรรมการเรียนรู้ที่เสริมสร้างสมรรถนะและคุณลักษณะที่พึงประสงค์">3.2 จัดกิจกรรมการเรียนรู้</a></li>
-                            <li><a href="#" class="sms-indicator-link" data-pdf-src="URL_BASICED_S3_I3.3" data-indicator-title="ขั้นพื้นฐาน ม.3 ตชว.3.3: ครูวัดและประเมินผลการเรียนรู้ของผู้เรียนอย่างเป็นระบบและต่อเนื่อง">3.3 ครูวัดและประเมินผล</a></li>
+                            <li><a href="#" class="sms-indicator-link" 
+                                   data-pdf-src="URL_BASICED_S3_I3.1" 
+                                   data-level="มาตรฐานการศึกษาขั้นพื้นฐาน" 
+                                   data-std-no="3" 
+                                   data-std-text="กระบวนการจัดการเรียนการสอนที่เน้นผู้เรียนเป็นสำคัญ" 
+                                   data-indicator-no="3.1" 
+                                   data-indicator-detail="การออกแบบหลักสูตรและแผนการจัดการเรียนรู้ที่เสริมสร้างสมรรถนะและคุณลักษณะที่พึงประสงค์">3.1 ออกแบบหลักสูตรและแผนฯ</a></li>
+                            <li><a href="#" class="sms-indicator-link" 
+                                   data-pdf-src="URL_BASICED_S3_I3.2" 
+                                   data-level="มาตรฐานการศึกษาขั้นพื้นฐาน" 
+                                   data-std-no="3" 
+                                   data-std-text="กระบวนการจัดการเรียนการสอนที่เน้นผู้เรียนเป็นสำคัญ" 
+                                   data-indicator-no="3.2" 
+                                   data-indicator-detail="การจัดกิจกรรมการเรียนรู้ที่เสริมสร้างสมรรถนะและคุณลักษณะที่พึงประสงค์">3.2 จัดกิจกรรมการเรียนรู้</a></li>
+                            <li><a href="#" class="sms-indicator-link" 
+                                   data-pdf-src="URL_BASICED_S3_I3.3" 
+                                   data-level="มาตรฐานการศึกษาขั้นพื้นฐาน" 
+                                   data-std-no="3" 
+                                   data-std-text="กระบวนการจัดการเรียนการสอนที่เน้นผู้เรียนเป็นสำคัญ" 
+                                   data-indicator-no="3.3" 
+                                   data-indicator-detail="ครูวัดและประเมินผลการเรียนรู้ของผู้เรียนอย่างเป็นระบบและต่อเนื่อง">3.3 ครูวัดและประเมินผล</a></li>
                         </ul>
                     </li>
                 </ul>
             </div>
         </aside>
-    </div> <!-- Close main-container -->
+    </div>
 
-    <!-- ส่วนท้ายเว็บ (Footer) -->
+    <!-- Footer -->
     <footer class="bg-gradient-to-r from-red-600 to-yellow-500 text-white py-4 mt-8 rounded-t-3xl">
         <div class="container mx-auto px-4">
             <div class="flex flex-col items-center text-center">
@@ -192,15 +494,16 @@ document.addEventListener('DOMContentLoaded', function () {
     const smsHtmlContentSections = document.querySelectorAll('.sms-html-content-section');
     const pdfViewerContainer = document.getElementById('pdf-viewer-container');
     const pdfIframe = document.getElementById('pdf-iframe');
+    const noPdfMessageContainer = document.getElementById('no-pdf-message-container');
+    const noPdfMessageText = document.getElementById('no-pdf-message-text');
     const smsCenterContentTitle = document.getElementById('sms-center-content-title');
-    const mainContentArea = document.querySelector('.main-content-area-sms'); // The div wrapping title, html sections, and pdf viewer
+    const mainContentArea = document.querySelector('.main-content-area-sms');
 
     const smsNavLinks = document.querySelectorAll('#sms-main-nav-ul a.sms-nav-link');
     const indicatorLinks = document.querySelectorAll('.sms-indicator-link');
 
-    const initialHtmlContentId = 'iqaSectionContent'; // Default HTML content to show
+    const initialHtmlContentId = 'iqaSectionContent';
     const initialTitle = document.querySelector(`#sms-main-nav-ul a[data-target="${initialHtmlContentId}"]`)?.textContent.trim() || 'ประกันคุณภาพภายใน';
-
 
     function clearAllActiveStates() {
         smsNavLinks.forEach(link => {
@@ -209,27 +512,38 @@ document.addEventListener('DOMContentLoaded', function () {
         });
         indicatorLinks.forEach(link => {
             link.classList.remove('active-indicator');
-             // also remove active from parent main link if it was styled
             const parentMainLink = link.closest('.sidebar-item')?.querySelector('.sms-sidebar-main-link');
             if (parentMainLink) {
-                parentMainLink.classList.remove('active'); // remove any 'active' styling for parent
+                parentMainLink.classList.remove('active');
             }
         });
     }
 
-    function showHtmlContent(targetId, linkElement) {
-        mainContentArea.classList.remove('showing-pdf');
-        mainContentArea.classList.add('showing-html'); // Ensure main area shows HTML containers
+    function updateContentVisibility(mode) {
+        mainContentArea.classList.remove('showing-html', 'showing-pdf', 'showing-no-pdf');
+        if (mode) { // Check if mode is provided
+            mainContentArea.classList.add(`showing-${mode}`);
+        }
+
+
+        pdfViewerContainer.style.display = (mode === 'pdf') ? 'block' : 'none';
+        noPdfMessageContainer.style.display = (mode === 'no-pdf') ? 'block' : 'none';
         
-        pdfViewerContainer.classList.add('hidden'); // Explicitly hide PDF viewer
-        smsHtmlContentSections.forEach(section => section.classList.add('hidden')); // Hide all HTML sections first
+        smsHtmlContentSections.forEach(section => {
+            section.style.display = 'none'; // Hide all HTML sections first
+        });
+    }
+
+
+    function showHtmlContent(targetId, linkElement) {
+        updateContentVisibility('html');
 
         const targetSection = document.getElementById(targetId);
         if (targetSection) {
-            targetSection.classList.remove('hidden');
+            targetSection.style.display = 'block';
         } else {
             const fallbackSection = document.getElementById(initialHtmlContentId);
-            if (fallbackSection) fallbackSection.classList.remove('hidden'); // Fallback to IQA
+            if (fallbackSection) fallbackSection.style.display = 'block';
         }
 
         clearAllActiveStates();
@@ -238,7 +552,7 @@ document.addEventListener('DOMContentLoaded', function () {
             linkElement.classList.add('active', 'text-red-500', 'font-semibold');
             linkElement.classList.remove('text-gray-700');
             titleText = linkElement.textContent.trim();
-        } else { // For initial load
+        } else {
             const defaultLink = document.querySelector(`#sms-main-nav-ul a[data-target="${initialHtmlContentId}"]`);
             if(defaultLink){
                 defaultLink.classList.add('active', 'text-red-500', 'font-semibold');
@@ -248,40 +562,35 @@ document.addEventListener('DOMContentLoaded', function () {
         smsCenterContentTitle.textContent = titleText;
     }
 
-    function showPdfContent(pdfSrc, linkElement) {
-        if (!pdfSrc || pdfSrc.trim() === "" || pdfSrc.toLowerCase().startsWith("url_")) {
-            Swal.fire({
-                icon: 'warning',
-                title: 'ลิงก์ PDF ไม่ถูกต้อง',
-                text: 'ยังไม่ได้กำหนดลิงก์สำหรับหลักฐานนี้ค่ะ หรือลิงก์อาจจะผิดพลาด',
-                confirmButtonColor: '#ef4444'
-            });
-            pdfIframe.src = 'about:blank'; // Clear iframe
-            // Potentially switch back to showing HTML content or a placeholder
-            // showHtmlContent(initialHtmlContentId, document.querySelector(`#sms-main-nav-ul a[data-target="${initialHtmlContentId}"]`));
-            return;
-        }
+    function showIndicatorContent(linkElement) {
+        const pdfSrc = linkElement.dataset.pdfSrc;
+        const level = linkElement.dataset.level || "";
+        const stdNo = linkElement.dataset.stdNo || "";
+        const indicatorNo = linkElement.dataset.indicatorNo || "";
+        const indicatorDetail = linkElement.dataset.indicatorDetail || "";
 
-        mainContentArea.classList.remove('showing-html');
-        mainContentArea.classList.add('showing-pdf'); // Ensure main area shows PDF container
+        const newTitle = `${level} มาตรฐานที่ ${stdNo} ตัวชี้วัดที่ ${indicatorNo} :: ${indicatorDetail}`;
         
-        smsHtmlContentSections.forEach(section => section.classList.add('hidden')); // Hide all HTML sections
-        pdfViewerContainer.classList.remove('hidden'); // Show PDF viewer
-
-        let finalPdfSrc = pdfSrc;
-        if (pdfSrc.includes('drive.google.com') && !pdfSrc.includes('/preview')) {
-            finalPdfSrc = pdfSrc.replace('/view', '/preview').replace(/\?usp=sharing$/, "").replace(/\/$/, "") + '/preview';
+        clearAllActiveStates(); // Clear previous active states
+        linkElement.classList.add('active-indicator');
+        const parentMainLink = linkElement.closest('.sidebar-item')?.querySelector('.sms-sidebar-main-link');
+        if (parentMainLink) {
+            parentMainLink.classList.add('active');
         }
-        pdfIframe.src = finalPdfSrc;
+        smsCenterContentTitle.textContent = newTitle;
 
-        clearAllActiveStates();
-        if (linkElement) {
-            linkElement.classList.add('active-indicator');
-            const parentMainLink = linkElement.closest('.sidebar-item')?.querySelector('.sms-sidebar-main-link');
-            if (parentMainLink) {
-                parentMainLink.classList.add('active'); // Add 'active' class to style the main category link
+        if (!pdfSrc || pdfSrc.trim() === "" || pdfSrc.toLowerCase().startsWith("url_")) {
+            updateContentVisibility('no-pdf');
+            noPdfMessageText.textContent = `ยังไม่มีไฟล์หลักฐานสำหรับ: ตัวชี้วัดที่ ${indicatorNo} :: ${indicatorDetail}`;
+            pdfIframe.src = 'about:blank';
+        } else {
+            updateContentVisibility('pdf');
+            let finalPdfSrc = pdfSrc;
+            // Ensure Google Drive links are in preview format for embedding
+            if (pdfSrc.includes('drive.google.com') && pdfSrc.includes('/file/d/') && !pdfSrc.includes('/preview')) {
+                finalPdfSrc = pdfSrc.replace('/view', '/preview').replace(/\?usp=sharing$/, "").replace(/\/$/, "") + '/preview';
             }
-            smsCenterContentTitle.textContent = linkElement.dataset.indicatorTitle || linkElement.textContent.trim();
+            pdfIframe.src = finalPdfSrc;
         }
     }
 
@@ -298,23 +607,18 @@ document.addEventListener('DOMContentLoaded', function () {
     indicatorLinks.forEach(link => {
         link.addEventListener('click', function (event) {
             event.preventDefault();
-            const pdfSrc = this.dataset.pdfSrc;
-            showPdfContent(pdfSrc, this);
+            showIndicatorContent(this);
         });
     });
 
     document.querySelectorAll('.sms-sidebar-main-link').forEach(mainLink => {
         mainLink.addEventListener('click', function(event) {
             event.preventDefault();
-            // Optional: toggle sub-menu, or do nothing if they are always visible
-            // const subMenu = this.nextElementSibling;
-            // if (subMenu && subMenu.classList.contains('sub-indicator-menu')) {
-            //     subMenu.classList.toggle('hidden');
-            // }
         });
     });
 
-    showHtmlContent(initialHtmlContentId, null); // Initial load with default HTML content
+    // Initial load: Show IQA content
+    showHtmlContent(initialHtmlContentId, document.querySelector(`#sms-main-nav-ul a[data-target="${initialHtmlContentId}"]`));
 
 });
 </script>
