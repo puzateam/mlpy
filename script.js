@@ -425,6 +425,40 @@ async function fetchAndDisplayCalendarEvents() {
     }
 }
 
+        // --- Tab System for ONESQA Standards (มาตรฐานที่ 1, 2, 3) ---
+        const onesqaTabButtons = document.querySelectorAll('#onesqaStandardsTabs .onesqa-tab-button');
+        const onesqaTabPanels = document.querySelectorAll('#onesqaStandardsTabContent .onesqa-tab-panel');
+
+        function updateOnesqaTabs(selectedButton) {
+            onesqaTabButtons.forEach(button => {
+                const targetPanelId = button.getAttribute('data-tabs-target');
+                const targetPanel = document.querySelector(targetPanelId);
+
+                if (button === selectedButton) {
+                    button.setAttribute('aria-selected', 'true');
+                    button.classList.add('text-red-600', 'border-red-600', 'font-semibold'); // Active tab style
+                    button.classList.remove('text-gray-500', 'hover:text-gray-600', 'hover:border-gray-300', 'border-transparent');
+                    if (targetPanel) targetPanel.classList.remove('hidden');
+                } else {
+                    button.setAttribute('aria-selected', 'false');
+                    button.classList.remove('text-red-600', 'border-red-600', 'font-semibold');
+                    button.classList.add('text-gray-500', 'hover:text-gray-600', 'hover:border-gray-300', 'border-transparent'); // Inactive tab style
+                    if (targetPanel) targetPanel.classList.add('hidden');
+                }
+            });
+        }
+
+        onesqaTabButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                updateOnesqaTabs(this);
+            });
+        });
+
+        // Set the first ONESQA tab (Standard 1) as active by default
+        if (onesqaTabButtons.length > 0) {
+            updateOnesqaTabs(onesqaTabButtons[0]);
+        }
+
 // ฟังก์ชันดึงข้อมูลตาราง (Smart School, Information Links) - **ปรับปรุงให้เช็ค Login**
 async function fetchAndDisplayTableData(actionName, targetDivId) {
     const contentDiv = document.getElementById(targetDivId);
