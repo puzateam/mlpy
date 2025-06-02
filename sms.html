@@ -3,14 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ร.ร.ชุมชนบ้านแม่หละป่าป๋วย-รับการประเมิน สมศ.</title>
+    <title>ระบบประกันคุณภาพและผลงานเด่น - ร.ร.ชุมชนบ้านแม่หละป่าป๋วย</title>
 
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600&display=swap" rel="stylesheet">
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- SweetAlert2 CDN (อาจจะไม่จำเป็นถ้าไม่ใช้ แต่ใส่ไว้เผื่อ) -->
-    <!-- <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> -->
     <!-- Custom Stylesheet (ไฟล์ style.css หลัก) -->
     <link rel="stylesheet" href="style.css">
 </head>
@@ -34,9 +32,9 @@
     <nav class="bg-white shadow-md sticky top-0 z-40">
         <div class="container mx-auto">
             <ul class="flex flex-wrap justify-center space-x-2 sm:space-x-4 md:space-x-6 lg:space-x-8 items-center py-2" id="sms-main-nav-ul">
-                <li><a class="nav-link menu-item px-2 sm:px-3 py-2 text-gray-700 hover:text-red-500" data-target="iqaSection" href="#iqa">ประกันคุณภาพภายใน</a></li>
-                <li><a class="nav-link menu-item px-2 sm:px-3 py-2 text-gray-700 hover:text-red-500" data-target="onesqaSection" href="#standards">มาตรฐานการศึกษา (สมศ.)</a></li>
-                <li><a class="nav-link menu-item px-2 sm:px-3 py-2 text-gray-700 hover:text-red-500" data-target="highlightsSection" href="#highlights">ผลงานเด่น</a></li>
+                <li><a class="nav-link menu-item px-2 sm:px-3 py-2 text-gray-700 hover:text-red-500" data-target="iqaSectionContent" href="#iqa">ประกันคุณภาพภายใน</a></li>
+                <li><a class="nav-link menu-item px-2 sm:px-3 py-2 text-gray-700 hover:text-red-500" data-target="onesqaSectionContent" href="#standards">มาตรฐานการศึกษา (สมศ.)</a></li>
+                <li><a class="nav-link menu-item px-2 sm:px-3 py-2 text-gray-700 hover:text-red-500" data-target="highlightsSectionContent" href="#highlights">ผลงานเด่น</a></li>
                 <li><a href="index.html" class="menu-item px-2 sm:px-3 py-2 text-gray-700 hover:text-red-500">กลับเว็บหลัก</a></li>
             </ul>
         </div>
@@ -44,9 +42,11 @@
 
     <!-- Container หลักสำหรับเนื้อหา SPA -->
     <div class="container mx-auto p-4 md:p-6" id="app-content">
-        <!-- Section for IQA -->
-        <section id="iqaSection" class="page-content-section">
-            <h2 class="text-2xl font-bold text-red-700 mb-4 border-b-2 border-yellow-400 pb-2">ระบบการประกันคุณภาพภายใน (IQA)</h2>
+
+        <!-- Section Wrapper สำหรับ IQA - ใช้สไตล์เหมือน Main Content Area Card -->
+        <div id="iqaSectionContent" class="page-content-wrapper content-section bg-white rounded-2xl shadow-md p-5 card mb-6">
+            <!-- เนื้อหา IQA จะอยู่ในนี้ -->
+            <h2 class="text-xl font-bold text-red-600 border-b-2 border-yellow-400 pb-2 mb-6">ระบบการประกันคุณภาพภายใน (IQA)</h2>
             <div class="iqa-item">
                 <h3>รายงานการประเมินตนเอง (SAR)</h3>
                 <p class="text-gray-700 mb-2">สถานศึกษามีการจัดทำรายงานการประเมินตนเองเป็นประจำทุกปี เพื่อสะท้อนผลการดำเนินงานและวางแผนพัฒนาคุณภาพอย่างต่อเนื่อง</p>
@@ -61,11 +61,12 @@
                     <li><a href="path/to/annual_plan.pdf" target="_blank" class="text-blue-600 hover:underline">แผนปฏิบัติการประจำปี</a> <span class="file-type">PDF</span></li>
                 </ul>
             </div>
-        </section>
+        </div>
 
-        <!-- Section for ONESQA Standards -->
-        <section id="onesqaSection" class="page-content-section">
-            <h2 class="text-2xl font-bold text-red-700 mb-4 border-b-2 border-yellow-400 pb-2">มาตรฐานการศึกษาเพื่อการประเมินคุณภาพภายนอก (สมศ.)</h2>
+        <!-- Section Wrapper สำหรับ ONESQA Standards - ใช้สไตล์เหมือน Main Content Area Card -->
+        <div id="onesqaSectionContent" class="page-content-wrapper content-section bg-white rounded-2xl shadow-md p-5 card mb-6">
+            <!-- เนื้อหา สมศ. จะอยู่ในนี้ -->
+            <h2 class="text-xl font-bold text-red-600 border-b-2 border-yellow-400 pb-2 mb-6">มาตรฐานการศึกษาเพื่อการประเมินคุณภาพภายนอก (สมศ.)</h2>
             <div class="standard-block">
                 <h3>มาตรฐานที่ 1: คุณภาพของผู้เรียน</h3>
                 <article class="indicator">
@@ -87,11 +88,11 @@
                     <details class="evidence-section mt-2"><summary class="font-medium text-gray-600 hover:text-gray-800">คลิกเพื่อดูหลักฐาน/ร่องรอย</summary><ul class="evidence-list mt-1"><li><a href="path/to/school_vision_mission.pdf" target="_blank">เอกสารวิสัยทัศน์ พันธกิจ</a> <span class="file-type">PDF</span></li></ul></details>
                 </article>
             </div>
-        </section>
+        </div>
 
-        <!-- Section for Highlights -->
-        <section id="highlightsSection" class="page-content-section">
-            <h2 class="text-2xl font-bold text-red-700 mb-4 border-b-2 border-yellow-400 pb-2">ผลงานเด่นของสถานศึกษา</h2>
+        <!-- Section Wrapper สำหรับ Highlights - ส่วนนี้คงเดิม (แต่ถ้าอยากให้มีกรอบเหมือนกันก็ครอบ div ได้) -->
+        <div id="highlightsSectionContent" class="page-content-wrapper content-section bg-white rounded-2xl shadow-md p-5 card"> <!-- << ครอบด้วย div สไตล์เดียวกัน -->
+            <h2 class="text-xl font-bold text-red-600 border-b-2 border-yellow-400 pb-2 mb-6">ผลงานเด่นของสถานศึกษา</h2> <!-- ใช้สไตล์หัวข้อเหมือนกัน -->
             <p class="text-gray-700 mb-6">นี่คือส่วนจัดแสดงผลงานและความสำเร็จที่น่าภาคภูมิใจของโรงเรียนเรา:</p>
             <div class="grid md:grid-cols-2 gap-6">
                 <div class="highlight-item bg-white p-4 rounded-lg shadow hover:shadow-xl transition-shadow">
@@ -107,7 +108,7 @@
                     <a href="path/to/highlight_detail_2.html" target="_blank" class="btn-primary inline-block px-4 py-2 text-sm">ดูภาพกิจกรรม</a>
                 </div>
             </div>
-        </section>
+        </div>
     </div>
 
     <!-- ส่วนท้ายเว็บ (Footer) - ใช้โครงสร้างและสไตล์เหมือนกับ index.html -->
@@ -117,7 +118,6 @@
                 <p class="footer-text">โรงเรียนชุมชนบ้านแม่หละป่าป๋วย</p>
                 <p class="footer-text">ตำบลสรอย อำเภอวังชิ้น จังหวัดแพร่</p>
                 <p class="footer-text">สำนักงานเขตพื้นที่การศึกษาประถมศึกษาแพร่เขต 2</p>
-                <!-- เพิ่มข้อความลิขสิทธิ์และปี (ถ้าต้องการแยกจาก index.html) -->
                 <p class="text-xs mt-2 opacity-75">© <span id="currentYearSmsPage"></span> สงวนลิขสิทธิ์</p>
             </div>
         </div>
@@ -126,20 +126,22 @@
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         const navLinks = document.querySelectorAll('#sms-main-nav-ul a.nav-link.menu-item');
-        const contentSections = document.querySelectorAll('.page-content-section');
+        // เปลี่ยนจากการเลือก .page-content-section มาเป็น .page-content-wrapper หรือ .content-section ที่ใช้กับ wrapper div
+        const contentWrappers = document.querySelectorAll('.page-content-wrapper.content-section'); 
 
         function updateActiveState(targetId) {
-            contentSections.forEach(section => {
-                if (section.id === targetId) {
-                    section.style.display = 'block';
+            contentWrappers.forEach(wrapper => { // วนลูปที่ wrapper
+                if (wrapper.id === targetId) {
+                    wrapper.style.display = 'block';
                 } else {
-                    section.style.display = 'none';
+                    wrapper.style.display = 'none';
                 }
             });
 
             navLinks.forEach(link => {
                 link.classList.remove('active', 'text-red-500', 'font-semibold');
-                link.classList.add('text-gray-700');
+                link.classList.add('text-gray-700'); // สีปกติ
+                // เปรียบเทียบ dataset.target กับ targetId ที่รับมา
                 if (link.dataset.target === targetId) {
                     link.classList.add('active', 'text-red-500', 'font-semibold');
                     link.classList.remove('text-gray-700');
@@ -149,7 +151,7 @@
 
         navLinks.forEach(link => {
             link.addEventListener('click', function (event) {
-                const targetId = this.dataset.target;
+                const targetId = this.dataset.target; // dataset.target ควรจะเป็น id ของ div wrapper เช่น 'iqaSectionContent'
                 const targetElement = document.getElementById(targetId);
 
                 if (targetId && targetElement) {
@@ -158,36 +160,41 @@
                     }
                     updateActiveState(targetId);
                 } else if (this.getAttribute('href') === 'index.html') {
-                    // Allow navigation to index.html
+                    // Allow navigation
                 } else {
                     event.preventDefault();
-                    console.warn("Target section not found or invalid for:", targetId);
+                    console.warn("Target section wrapper not found or invalid for:", targetId);
                 }
             });
         });
 
         function handleHashChange() {
-            const hash = window.location.hash.substring(1);
+            const hash = window.location.hash.substring(1); // #iqa -> iqa
             let targetIdToShow = null;
 
             if (hash) {
                 navLinks.forEach(link => {
+                    // หาลิงก์ที่ href ตรงกับ hash และดึง data-target (ซึ่งตอนนี้ควรเป็น id ของ wrapper)
                     if (link.getAttribute('href') === `#${hash}`) {
-                        targetIdToShow = link.dataset.target;
+                        targetIdToShow = link.dataset.target; 
                     }
                 });
             }
-
+            
+            // ถ้าหา targetId จาก hash ได้ และ element นั้นมีอยู่จริง
             if (targetIdToShow && document.getElementById(targetIdToShow)) {
                 updateActiveState(targetIdToShow);
             } else if (navLinks.length > 0 && navLinks[0].dataset.target && document.getElementById(navLinks[0].dataset.target)) {
+                // ถ้าไม่มี hash หรือ hash ไม่ตรง ให้แสดง wrapper แรกเป็น default
                 const firstTargetId = navLinks[0].dataset.target;
                 updateActiveState(firstTargetId);
+                // อัปเดต hash ใน URL ให้ตรงกับ section แรก
                 if (navLinks[0].getAttribute('href').startsWith('#')) {
                      window.location.hash = navLinks[0].getAttribute('href').substring(1);
                 }
             } else {
-                contentSections.forEach(section => section.style.display = 'none');
+                // ถ้าไม่มีอะไรจะโชว์เลย ก็ซ่อนทั้งหมด
+                contentWrappers.forEach(wrapper => wrapper.style.display = 'none');
                 navLinks.forEach(link => {
                     link.classList.remove('active', 'text-red-500', 'font-semibold');
                     link.classList.add('text-gray-700');
@@ -196,12 +203,11 @@
         }
 
         window.addEventListener('hashchange', handleHashChange);
-        handleHashChange();
+        handleHashChange(); 
 
-        // อัปเดตปีปัจจุบันใน Footer ของหน้านี้
         const currentYearSpanSms = document.getElementById('currentYearSmsPage');
         if (currentYearSpanSms) {
-            currentYearSpanSms.textContent = new Date().getFullYear() + 543; // แสดงเป็นปี พ.ศ.
+            currentYearSpanSms.textContent = new Date().getFullYear() + 543; 
         }
     });
 </script>
