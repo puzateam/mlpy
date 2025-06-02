@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ฝากข้อความถึงเรา</title>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- SweetAlert2 CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <!-- Emoji Picker Element (Web Component) CDN -->
+    <script type="module" src="https://cdn.jsdelivr.net/npm/emoji-picker-element@^1/index.js"></script>
+    <!-- Font Awesome for Icons (Optional, for a cute emoji icon button) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+
+    <style>
+        body {
+            font-family: 'Prompt', sans-serif;
+            background-color: #FFF0F5; /* LavenderBlush - สีชมพูอ่อนๆ สไตล์เกาหลี */
+        }
+        /* Custom Tailwind Config (ถ้าต้องการใช้สีพิเศษบ่อยๆ) 
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'brand-pink': '#FFC0CB', // Pink
+                        'brand-purple': '#D8BFD8', // Thistle
+                        'brand-blue': '#ADD8E6', // LightBlue
+                        'brand-text': '#5D4037', // Dark Brown for text
+                    }
+                }
+            }
+        }
+        */
+
+        .btn-gradient {
+            background-image: linear-gradient(to right, #FFC0CB 0%, #FFB6C1 50%, #FFC0CB 100%); /* Pink gradient */
+            color: #8B4513; /* SaddleBrown - สีน้ำตาลเข้มสำหรับตัวอักษรบนปุ่ม */
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        .btn-gradient:hover {
+            background-image: linear-gradient(to right, #FFB6C1 0%, #FFC0CB 50%, #FFB6C1 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 8px rgba(0,0,0,0.15);
+        }
+        .btn-gradient:disabled {
+            background-image: linear-gradient(to right, #FFE4E1 0%, #FFF0F5 100%); /* MistyRose to LavenderBlush */
+            color: #A0522D; /* Sienna - สีจางลง */
+            cursor: not-allowed;
+            box-shadow: none;
+        }
+
+        .comment-card {
+            background-color: #fff;
+            border-radius: 1.5rem; /* 24px */
+            box-shadow: 0 10px 25px rgba(255, 105, 180, 0.1); /* Pinkish shadow */
+            border: 1px solid #FFD1DC; /* Light Pink border */
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .comment-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(255, 105, 180, 0.15);
+        }
+        .comment-card .comment-name {
+            color: #FF69B4; /* HotPink */
+            font-weight: 600; /* semibold */
+        }
+        .comment-card .comment-text {
+            color: #774f38; /* Darker Brown for readability */
+            line-height: 1.7;
+            white-space: pre-wrap; /* Preserve newlines and spaces */
+            word-break: break-word;
+        }
+        .comment-card .comment-date {
+            color: #FFB6C1; /* LightPink */
+        }
+
+        /* Modal Styles */
+        .modal {
+            background-color: rgba(0,0,0,0.5); /* Semi-transparent background */
+            transition: opacity 0.3s ease-in-out;
+        }
+        .modal-content {
+            background-color: #FFF9FB; /* Very light pink */
+            border-radius: 1.5rem; /* 24px */
+            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+        .modal-title {
+            color: #DB7093; /* PaleVioletRed */
+        }
+        .emoji-toggle-button {
+            background-color: #FFE4E1; /* MistyRose */
+            color: #CD5C5C; /* IndianRed */
+            border-radius: 9999px; /* rounded-full */
+            transition: background-color 0.2s ease;
+        }
+        .emoji-toggle-button:hover {
+            background-color: #FFC0CB; /* Pink */
+        }
+        emoji-picker { /* Styles for emoji picker inside modal */
+            width: 100%;
+            height: 220px; /* Adjust as needed */
+            --emoji-size: 1.3rem;
+            --num-columns: 9;
+            border: 1px solid #FFD1DC;
+            border-radius: 0.75rem; /* 12px */
+        }
+        .no-comments-container {
+            border: 2px dashed #FFB6C1; /* LightPink dashed border */
+            background-color: rgba(255, 240, 245, 0.5); /* LavenderBlush with opacity */
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col items-center justify-start pt-12 pb-8 px-4">
+
+    <div class="w-full max-w-2xl mx-auto">
+        <header class="mb-10 text-center">
+            <h1 class="text-3xl md:text-4xl font-bold" style="color: #FF69B4;">ฝากข้อความถึงเรา <i class="fas fa-heartbeat text-pink-400"></i></h1>
+            <p class="text-gray-500 mt-2 text-lg">แบ่งปันความรู้สึกดีๆ หรือคำแนะนำติชมได้เลยน้าา~</p>
+        </header>
+
+        <section id="comments-display-section" class="mb-12">
+            <div id="comments-list" class="space-y-6">
+             </div>
+        </section>
+    </div>
+
+    <div id="commentModal" class="modal fixed inset-0 flex items-center justify-center z-50 hidden opacity-0">
+        <div class="modal-content w-full max-w-lg p-6 md:p-8 m-4">
+            <div class="flex justify-between items-center mb-6">
+                <h2 class="modal-title text-2xl font-semibold">เขียนข้อความใหม่ <i class="fas fa-pencil-alt ml-2"></i></h2>
+                <button id="closeModalButton" class="text-gray-500 hover:text-red-500 text-2xl">×</button>
+            </div>
+            <form id="comment-form">
+                <div class="mb-4">
+                    <label for="modalUserName" class="block text-sm font-medium text-gray-700 mb-1">ชื่อเล่น / นามแฝง <span class="text-red-500">*</span></label>
+                    <input type="text" id="modalUserName" name="userName" class="mt-1 p-3 w-full border border-gray-300 rounded-lg shadow-sm focus:ring-pink-400 focus:border-pink-400 transition-colors" placeholder="เช่น น้องชมพู" required>
+                </div>
+                <div class="mb-4">
+                    <label for="modalCommentMessage" class="block text-sm font-medium text-gray-700 mb-1">ข้อความของคุณ <span class="text-red-500">*</span></label>
+                    <textarea id="modalCommentMessage" name="commentMessage" rows="4" class="mt-1 p-3 w-full border border-gray-300 rounded-lg shadow-sm focus:ring-pink-400 focus:border-pink-400 transition-colors" placeholder="พิมพ์ความในใจ..." required></textarea>
+                </div>
+                <div class="mb-6">
+                    <button type="button" id="emojiToggleButton" class="emoji-toggle-button px-4 py-2 text-sm font-medium flex items-center">
+                        <i class="far fa-smile mr-2"></i>เลือก Emoji
+                    </button>
+                    <div id="emojiPickerContainer" class="mt-3 hidden">
+                        <emoji-picker locale="th" class="light"></emoji-picker>
+                    </div>
+                </div>
+                <div class="flex justify-end space-x-3">
+                    <button type="button" id="cancelModalButton" class="py-2 px-5 bg-gray-200 text-gray-700 rounded-full hover:bg-gray-300 transition-colors font-medium">ยกเลิก</button>
+                    <button type="submit" id="submit-comment-button" class="btn-gradient py-2.5 px-6 text-base font-semibold rounded-full">
+                        ส่งข้อความ <i class="fas fa-paper-plane ml-2"></i>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <footer class="mt-12 text-center text-gray-500 text-sm">
+        <p>© <span id="currentYear"></span> โรงเรียนชุมชนบ้านแม่หละป่าป๋วย. All rights reserved.</p>
+    </footer>
+
+<script>
+    // URL ของ Google Apps Script Web App (ต้องเปลี่ยนเป็น URL จริงของพี่)
+    const COMMENTS_WEB_APP_URL = "YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL_HERE_FOR_COMMENTS"; 
+
+    const commentsListDiv = document.getElementById('comments-list');
+    
+    // Modal elements
+    const commentModal = document.getElementById('commentModal');
+    const closeModalButton = document.getElementById('closeModalButton');
+    const cancelModalButton = document.getElementById('cancelModalButton');
+    const commentForm = document.getElementById('comment-form');
+    const modalUserNameInput = document.getElementById('modalUserName');
+    const modalCommentMessageTextarea = document.getElementById('modalCommentMessage');
+    const submitCommentButton = document.getElementById('submit-comment-button');
+    const emojiToggleButton = document.getElementById('emojiToggleButton');
+    const emojiPickerContainer = document.getElementById('emojiPickerContainer');
+    const emojiPicker = emojiPickerContainer.querySelector('emoji-picker');
+
+    function openCommentModal() {
+        commentModal.classList.remove('hidden');
+        setTimeout(() => commentModal.classList.remove('opacity-0'), 10); // For transition
+        modalUserNameInput.value = ''; // Clear previous input
+        modalCommentMessageTextarea.value = '';
+        emojiPickerContainer.classList.add('hidden'); // Hide emoji picker initially
+    }
+
+    function closeCommentModal() {
+        commentModal.classList.add('opacity-0');
+        setTimeout(() => commentModal.classList.add('hidden'), 300); // Wait for transition
+    }
+
+    // --- ฟังก์ชันโหลดความคิดเห็น ---
+    async function loadComments() {
+        if (!commentsListDiv) return;
+        commentsListDiv.innerHTML = '<p class="text-center text-gray-400 animate-pulse py-8 text-lg">กำลังโหลดข้อความน่ารักๆ...</p>';
+        
+        // --- SIMULATE NO COMMENTS FOR NOW ---
+        // Replace this block with actual fetch when Apps Script is ready
+        setTimeout(() => {
+             // Simulate API call delay
+            const noCommentsData = true; // ตั้งเป็น true เพื่อทดสอบกรณีไม่มี comment
+            // const commentsData = [ // ตัวอย่างข้อมูล comment (ถ้ามี)
+            //     { id: '1', name: 'น้องชมพู', commentText: 'เว็บน่ารักมากเลยค่ะ 😊', timestamp: new Date().toISOString() },
+            //     { id: '2', name: 'พี่ฟ้าใส', commentText: 'ชอบสีสันจังเลยยย 💖✨', timestamp: new Date(Date.now() - 3600000).toISOString() }
+            // ];
+
+            if (noCommentsData) { // หรือ (result.data && result.data.length === 0) จาก API จริง
+                commentsListDiv.innerHTML = `
+                    <div class="no-comments-container text-center p-8 md:p-12 rounded-2xl">
+                        <i class="far fa-comment-dots fa-4x text-pink-300 mb-6"></i>
+                        <p class="text-xl text-gray-500 mb-6">ยังไม่มีข้อความในขณะนี้...</p>
+                        <button id="openModalFromEmptyStateButton" class="btn-gradient py-3 px-8 text-lg font-semibold rounded-full">
+                            <i class="fas fa-pen-nib mr-2"></i>มาเป็นคนแรกที่ส่งข้อความถึงเรากันเถอะ!
+                        </button>
+                    </div>
+                `;
+                const openModalBtn = document.getElementById('openModalFromEmptyStateButton');
+                if (openModalBtn) {
+                    openModalBtn.addEventListener('click', openCommentModal);
+                }
+            } else {
+                // ... (ส่วน render comment list จาก API response จริง) ...
+                // let html = '<ul class="space-y-6">';
+                // commentsData.forEach(comment => { /* ...สร้าง HTML ... */ });
+                // html += '</ul>';
+                // commentsListDiv.innerHTML = html;
+                // Add a button to open modal even if there are comments
+                // commentsListDiv.insertAdjacentHTML('afterend', '<div class="text-center mt-8"><button id="openModalButton" class="btn-gradient ...">ส่งข้อความเพิ่ม</button></div>');
+                // document.getElementById('openModalButton').addEventListener('click', openCommentModal);
+            }
+        }, 1500); // Simulate API call delay
+
+        // --- ACTUAL FETCH (comment out the simulation block above when ready) ---
+        /*
+        try {
+            const response = await fetch(`${COMMENTS_WEB_APP_URL}?action=getPublicComments×tamp=${new Date().getTime()}`);
+            if (!response.ok) throw new Error(`API call failed: ${response.status}`);
+            const result = await response.json();
+
+            if (result.error) {
+                commentsListDiv.innerHTML = `<p class="text-center text-red-500 py-4">เกิดข้อผิดพลาด: ${result.error}</p>`;
+                return;
+            }
+
+            if (result.data && result.data.length > 0) {
+                let html = '<ul class="space-y-6">';
+                result.data.forEach(comment => {
+                    const formattedDate = comment.timestamp ? new Date(comment.timestamp).toLocaleString('th-TH', { day: '2-digit', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' }) : 'ไม่ระบุเวลา';
+                    const safeName = (comment.name || 'ผู้ไม่ประสงค์ออกนาม').replace(/</g, "<").replace(/>/g, ">");
+                    const safeCommentText = (comment.commentText || '').replace(/</g, "<").replace(/>/g, ">");
+                    html += `
+                        <li class="comment-card p-5 md:p-6" data-comment-id="${comment.id || ''}">
+                            <div class="flex justify-between items-start mb-2">
+                                <p class="comment-name text-lg">${safeName}</p>
+                                <p class="comment-date text-xs pt-1">${formattedDate} น.</p>
+                            </div>
+                            <p class="comment-text">${safeCommentText}</p>
+                        </li>
+                    `;
+                });
+                html += '</ul>';
+                commentsListDiv.innerHTML = html;
+                 // Add a button to open modal if there are comments
+                const openModalButtonHtml = `
+                    <div class="text-center mt-10">
+                        <button id="openModalMainButton" class="btn-gradient py-3 px-8 text-lg font-semibold rounded-full">
+                            <i class="fas fa-plus-circle mr-2"></i>ฝากข้อความเพิ่ม
+                        </button>
+                    </div>`;
+                commentsListDiv.insertAdjacentHTML('afterend', openModalButtonHtml);
+                const openModalMainBtn = document.getElementById('openModalMainButton');
+                if (openModalMainBtn) openModalMainBtn.addEventListener('click', openCommentModal);
+
+            } else {
+                // Display "No comments" message and button
+                commentsListDiv.innerHTML = `
+                    <div class="no-comments-container text-center p-8 md:p-12 rounded-2xl">
+                        <i class="far fa-comment-dots fa-4x text-pink-300 mb-6"></i>
+                        <p class="text-xl text-gray-500 mb-6">ยังไม่มีข้อความในขณะนี้...</p>
+                        <button id="openModalFromEmptyStateButton" class="btn-gradient py-3 px-8 text-lg font-semibold rounded-full">
+                            <i class="fas fa-pen-nib mr-2"></i>มาเป็นคนแรกที่ส่งข้อความถึงเรากันเถอะ!
+                        </button>
+                    </div>
+                `;
+                const openModalBtn = document.getElementById('openModalFromEmptyStateButton');
+                if (openModalBtn) openModalBtn.addEventListener('click', openCommentModal);
+            }
+        } catch (error) {
+            commentsListDiv.innerHTML = `<p class="text-center text-red-500 py-4">การเชื่อมต่อเพื่อโหลดความคิดเห็นล้มเหลว: ${error.message}</p>`;
+        }
+        */
+    }
+
+    // --- ฟังก์ชันส่งความคิดเห็น ---
+    async function handleSubmitComment(event) {
+        event.preventDefault();
+        const name = modalUserNameInput.value.trim();
+        const text = modalCommentMessageTextarea.value.trim();
+
+        if (!name) {
+            Swal.fire({icon: 'warning', title: 'อุ๊ปส์!', text: 'กรุณากรอกชื่อเล่นหรือนามแฝงด้วยน้า', confirmButtonColor: '#FF69B4'});
+            modalUserNameInput.focus();
+            return;
+        }
+        if (!text) {
+            Swal.fire({icon: 'warning', title: 'เอ๊ะ!', text: 'เหมือนจะลืมพิมพ์ข้อความหรือเปล่าคะ?', confirmButtonColor: '#FF69B4'});
+            modalCommentMessageTextarea.focus();
+            return;
+        }
+
+        submitCommentButton.disabled = true;
+        submitCommentButton.innerHTML = `
+            <span class="animate-spin inline-block w-4 h-4 border-2 border-white border-t-transparent rounded-full mr-2" role="status"></span>
+            กำลังส่งข้อความ...
+        `;
+
+        // --- SIMULATE API CALL (Replace with actual fetch when Apps Script is ready) ---
+        setTimeout(() => {
+            Swal.fire({
+                icon: 'success',
+                title: 'ส่งข้อความเรียบร้อย!',
+                text: 'ได้รับข้อมูลแล้วจ้า กำลังรอผู้ดูแลระบบอนุมัติ ข้อความถึงจะปรากฏบนเว็บนะคะ ขอบคุณค่า~ 😊',
+                confirmButtonColor: '#FF69B4',
+                timer: 4000,
+                timerProgressBar: true
+            });
+            closeCommentModal();
+            commentForm.reset();
+            submitCommentButton.disabled = false;
+            submitCommentButton.innerHTML = 'ส่งข้อความ <i class="fas fa-paper-plane ml-2"></i>';
+        }, 1500);
+
+        // --- ACTUAL FETCH (comment out simulation above when ready) ---
+        /*
+        try {
+            const response = await fetch(COMMENTS_WEB_APP_URL, {
+                method: 'POST',
+                mode: 'cors',
+                headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+                body: JSON.stringify({ action: "submitComment", name: name, commentText: text })
+            });
+            const result = await response.json();
+
+            if (result.success) {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'ส่งข้อความเรียบร้อย!',
+                    text: result.message, // "ได้รับข้อมูลแล้ว กำลังรอผู้ดูแลระบบอนุมัติค่ะ"
+                    confirmButtonColor: '#FF69B4',
+                    timer: 4000,
+                    timerProgressBar: true
+                });
+                closeCommentModal();
+                commentForm.reset(); 
+            } else {
+                Swal.fire('เกิดข้อผิดพลาด', result.message || 'ไม่สามารถส่งความคิดเห็นได้', 'error');
+            }
+        } catch (error) {
+            Swal.fire('เกิดข้อผิดพลาดในการเชื่อมต่อ', `ไม่สามารถติดต่อเซิร์ฟเวอร์ได้: ${error.message}`, 'error');
+        } finally {
+            submitCommentButton.disabled = false;
+            submitCommentButton.innerHTML = 'ส่งข้อความ <i class="fas fa-paper-plane ml-2"></i>';
+        }
+        */
+    }
+
+    // --- Event Listeners ---
+    document.addEventListener('DOMContentLoaded', () => {
+        // Modal open/close
+        closeModalButton.addEventListener('click', closeCommentModal);
+        cancelModalButton.addEventListener('click', closeCommentModal);
+        commentModal.addEventListener('click', (event) => { // Close on outside click
+            if (event.target === commentModal) {
+                closeCommentModal();
+            }
+        });
+
+        // Form submission
+        if (commentForm) {
+            commentForm.addEventListener('submit', handleSubmitComment);
+        }
+
+        // Emoji Picker toggle and selection
+        if (emojiToggleButton && emojiPickerContainer && emojiPicker && modalCommentMessageTextarea) {
+            emojiToggleButton.addEventListener('click', () => {
+                emojiPickerContainer.classList.toggle('hidden');
+            });
+            emojiPicker.addEventListener('emoji-click', event => {
+                const emoji = event.detail.unicode;
+                const textarea = modalCommentMessageTextarea;
+                const start = textarea.selectionStart;
+                const end = textarea.selectionEnd;
+                const text = textarea.value;
+                textarea.value = text.substring(0, start) + emoji + text.substring(end);
+                textarea.focus();
+                // Move cursor after inserted emoji
+                textarea.selectionEnd = start + emoji.length; 
+            });
+        }
+        
+        const currentYearSpan = document.getElementById('currentYear');
+        if (currentYearSpan) {
+            const year = new Date().getFullYear() + 543;
+            currentYearSpan.textContent = year;
+        }
+
+        loadComments(); // โหลดความคิดเห็นเมื่อหน้าเว็บพร้อม
+    });
+</script>
+</body>
+</html>
