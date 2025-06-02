@@ -460,3 +460,74 @@ nav.bg-white .menu-item.active {
         .tab-button-level { /* คลาสใหม่สำหรับปุ่ม Tab ที่แสดงเฉพาะระดับ */
              /* สไตล์เหมือน onesqa-tab-button เดิม */
         }
+        /* Custom styles for sms.html specifically */
+        .sidebar-sms .sidebar-item {
+            border-bottom: 1px solid #fee2e2; /* Tailwind red-100 */
+            transition: all 0.3s ease;
+        }
+        .sidebar-sms .sidebar-item a.active, /* For main link if it becomes active */
+        .sidebar-sms .sidebar-item:hover > a.sms-sidebar-main-link { /* Hover effect on li or a */
+            background-color: rgba(254, 226, 226, 0.5); /* Tailwind red-100 โปร่งแสง */
+            padding-left: 0.5rem;
+            color: #dc2626 !important; /* Tailwind red-600 */
+            font-weight: 600;
+        }
+        .sidebar-sms .sub-indicator-menu {
+            list-style-type: none;
+            padding-left: 1rem; /* Indent sub-menu */
+            margin-top: 0.25rem;
+            margin-bottom: 0.5rem;
+        }
+        .sidebar-sms .sub-indicator-menu li a {
+            font-size: 0.875rem; /* text-sm */
+            padding-top: 0.25rem;
+            padding-bottom: 0.25rem;
+            display: block;
+            color: #4b5563; /* gray-600 */
+            transition: color 0.2s ease, padding-left 0.2s ease;
+        }
+        .sidebar-sms .sub-indicator-menu li a:hover,
+        .sidebar-sms .sub-indicator-menu li a.active-indicator {
+            color: #c53030; /* red-700 */
+            font-weight: 500;
+            /* padding-left: 0.25rem; /* Slight indent on hover/active */
+        }
+        .pdf-embed-container-sms {
+            width: 100%;
+            height: calc(100vh - 230px); /* Adjust height as needed, considering header and title */
+            border: 1px solid #d1d5db; /* Tailwind gray-300 */
+            position: relative; /* For z-index if needed over background */
+            z-index: 1;
+        }
+        .main-content-area-sms.showing-pdf .sms-html-content-section {
+            display: none !important;
+        }
+        .main-content-area-sms.showing-html #pdf-viewer-container {
+            display: none !important;
+        }
+
+        /* Background image for sms.html main content card */
+        .card-main-content-sms {
+            position: relative;
+            z-index: 0;
+            overflow: hidden;
+        }
+        .card-main-content-sms::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('img/around(31).jpg'); /* << ตรวจสอบ Path รูปภาพนี้ให้ถูกต้องนะคะ! */
+            background-repeat: no-repeat;
+            background-position: center center;
+            background-size: cover;
+            opacity: 0.1; /* << ปรับค่า opacity ตามต้องการ อาจจะน้อยกว่าของ index.html เพื่อให้เนื้อหาชัดเจน */
+            z-index: -1;
+            border-radius: inherit; /* ให้ขอบมนเหมือน parent */
+        }
+        .card-main-content-sms > * { /* For direct children like title and content containers */
+            position: relative;
+            z-index: 1;
+        }
