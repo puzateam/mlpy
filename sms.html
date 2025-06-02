@@ -1,353 +1,152 @@
-<!DOCTYPE html>
-<html lang="th">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ระบบประกันคุณภาพและผลงานเด่น - ร.ร.ชุมชนบ้านแม่หละป่าป๋วย</title>
-
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600&display=swap" rel="stylesheet">
-    <!-- Tailwind CSS CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Custom Stylesheet (ไฟล์ style.css หลัก) -->
-    <link rel="stylesheet" href="style.css">
-</head>
-<body class="bg-gray-100">
-
-    <!-- ส่วนหัวเว็บ (Header) - ใช้โครงสร้างเหมือน index.html -->
-    <header>
-        <div class="bg-gradient-to-r from-red-600 to-yellow-500 p-4">
-            <div class="container mx-auto flex flex-col items-center">
-                <div class="flex flex-col items-center mb-2">
-                    <img src="https://i.postimg.cc/d3PbrGqC/logo-School.png" alt="โลโก้โรงเรียน" class="w-[80px] h-auto mb-2">
-                    <div class="text-center">
-                        <h1 class="text-white text-2xl md:text-3xl font-bold">โรงเรียนชุมชนบ้านแม่หละป่าป๋วย</h1>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </header>
-
-    <!-- เมนูนำทาง (Navigation) - ใช้โครงสร้างเหมือน index.html แต่เปลี่ยนรายการเมนู -->
-    <nav class="bg-white shadow-md sticky top-0 z-40">
-        <div class="container mx-auto">
-            <ul class="flex flex-wrap justify-center space-x-2 sm:space-x-4 md:space-x-6 lg:space-x-8 items-center py-2" id="sms-main-nav-ul">
-                <li><a class="nav-link menu-item px-2 sm:px-3 py-2 text-gray-700 hover:text-red-500" data-target="iqaSectionContent" href="#iqa">ประกันคุณภาพภายใน</a></li>
-                <li><a class="nav-link menu-item px-2 sm:px-3 py-2 text-gray-700 hover:text-red-500" data-target="onesqaSectionContent" href="#standards">มาตรฐานการศึกษา (สมศ.)</a></li>
-                <li><a class="nav-link menu-item px-2 sm:px-3 py-2 text-gray-700 hover:text-red-500" data-target="highlightsSectionContent" href="#highlights">ผลงานเด่น</a></li>
-                <li><a href="index.html" class="menu-item px-2 sm:px-3 py-2 text-gray-700 hover:text-red-500">กลับเว็บหลัก</a></li>
-            </ul>
-        </div>
-    </nav>
-
-    <!-- Container หลักสำหรับเนื้อหา SPA -->
-    <div class="container mx-auto p-4 md:p-6" id="app-content">
-
-        <!-- Section Wrapper สำหรับ IQA - ใช้สไตล์เหมือน Main Content Area Card -->
-        <div id="iqaSectionContent" class="page-content-wrapper content-section bg-white rounded-2xl shadow-md p-5 card mb-6">
-            <!-- เนื้อหา IQA จะอยู่ในนี้ -->
-            <h2 class="text-xl font-bold text-red-600 border-b-2 border-yellow-400 pb-2 mb-6">ระบบการประกันคุณภาพภายใน (IQA)</h2>
-            <div class="iqa-item">
-                <h3>รายงานการประเมินตนเอง (SAR)</h3>
-                <p class="text-gray-700 mb-2">สถานศึกษามีการจัดทำรายงานการประเมินตนเองเป็นประจำทุกปี เพื่อสะท้อนผลการดำเนินงานและวางแผนพัฒนาคุณภาพอย่างต่อเนื่อง</p>
-                <ul class="list-disc ml-5 text-gray-700">
-                    <li><a href="path/to/sar_current_year.pdf" target="_blank" class="text-blue-600 hover:underline">SAR ปีการศึกษาปัจจุบัน</a> <span class="file-type">PDF</span></li>
-                </ul>
-            </div>
-            <div class="iqa-item">
-                <h3>แผนพัฒนาคุณภาพการศึกษา</h3>
-                <p class="text-gray-700 mb-2">แผนงานที่แสดงทิศทางการพัฒนาคุณภาพของสถานศึกษาในระยะต่างๆ สอดคล้องกับนโยบายและบริบทของสถานศึกษา</p>
-                <ul class="list-disc ml-5 text-gray-700">
-                    <li><a href="path/to/annual_plan.pdf" target="_blank" class="text-blue-600 hover:underline">แผนปฏิบัติการประจำปี</a> <span class="file-type">PDF</span></li>
-                </ul>
-            </div>
-        </div>
-
-<!-- Section Wrapper สำหรับ ONESQA Standards - ใช้สไตล์เหมือน Main Content Area Card -->
+        <!-- Section Wrapper สำหรับ ONESQA Standards - ใช้สไตล์เหมือน Main Content Area Card -->
         <div id="onesqaSectionContent" class="page-content-wrapper content-section bg-white rounded-2xl shadow-md p-5 card mb-6">
             <h2 class="text-xl font-bold text-red-600 border-b-2 border-yellow-400 pb-2 mb-6">มาตรฐานการศึกษาเพื่อการประเมินคุณภาพภายนอก (สมศ.)</h2>
 
-            <!-- มาตรฐานที่ 1 -->
-            <div class="standard-block">
-                <h3>มาตรฐานที่ 1: คุณภาพของผู้เรียน</h3>
-                
-                <article class="indicator">
-                    <h4>1.1 ผลสัมฤทธิ์ทางวิชาการของผู้เรียน</h4>
-                    <ul class="list-disc ml-5 text-gray-700 mb-2 text-sm">
-                        <li>ความสามารถในการอ่าน การเขียน การสื่อสาร และการคิดคำนวณ</li>
-                        <li>ความสามารถในการคิดวิเคราะห์ คิดอย่างมีวิจารณญาณ อภิปราย แลกเปลี่ยนความคิดเห็น และแก้ปัญหา</li>
-                        <li>ความสามารถในการสร้างนวัตกรรม</li>
-                        <li>ความสามารถในการใช้เทคโนโลยีสารสนเทศและการสื่อสาร</li>
-                        <li>ผลสัมฤทธิ์ทางการเรียนตามหลักสูตรสถานศึกษา</li>
-                        <li>ความรู้ ทักษะพื้นฐาน และเจตคติที่ดีต่องานอาชีพ</li>
-                    </ul>
-                    <details class="evidence-section mt-1"><summary class="font-medium text-gray-600 hover:text-gray-800 text-sm">คลิกเพื่อดูตัวอย่างหลักฐาน/ร่องรอย</summary>
-                        <ul class="evidence-list mt-1 text-xs">
-                            <li><a href="path/to/sar_academic_results.pdf" target="_blank">รายงานผลสัมฤทธิ์ทางการเรียน</a> <span class="file-type">PDF</span></li>
-                            <li><a href="path/to/student_portfolios.pdf" target="_blank">แฟ้มสะสมผลงานนักเรียน</a> <span class="file-type">PDF</span></li>
-                            <li><a href="path/to/innovation_projects.pdf" target="_blank">ผลงาน/โครงงาน/นวัตกรรมของนักเรียน</a> <span class="file-type">PDF</span></li>
-                        </ul>
-                    </details>
-                </article>
-                 
-                <article class="indicator">
-                    <h4>1.2 คุณลักษณะที่พึงประสงค์ของผู้เรียน</h4>
-                    <ul class="list-disc ml-5 text-gray-700 mb-2 text-sm">
-                        <li>การมีคุณธรรม จริยธรรม ค่านิยมที่พึงประสงค์</li>
-                        <li>ความภูมิใจในท้องถิ่นและความเป็นไทย</li>
-                        <li>การยอมรับที่จะอยู่ร่วมกันบนความแตกต่างและหลากหลาย</li>
-                        <li>สุขภาวะทางร่างกาย และจิตสังคม</li>
-                    </ul>
-                    <details class="evidence-section mt-1"><summary class="font-medium text-gray-600 hover:text-gray-800 text-sm">คลิกเพื่อดูตัวอย่างหลักฐาน/ร่องรอย</summary>
-                        <ul class="evidence-list mt-1 text-xs">
-                            <li><a href="path/to/student_behavior_records.pdf" target="_blank">บันทึกพฤติกรรมนักเรียน</a> <span class="file-type">PDF</span></li>
-                            <li><a href="path/to/moral_projects.pdf" target="_blank">รายงานโครงการ/กิจกรรมส่งเสริมคุณธรรม</a> <span class="file-type">PDF</span></li>
-                            <li><a href="path/to/health_promotion_activities.pdf" target="_blank">รายงานกิจกรรมส่งเสริมสุขภาพ</a> <span class="file-type">PDF</span></li>
-                        </ul>
-                    </details>
-                </article>
+            <!-- Tab Buttons สำหรับ มาตรฐานที่ 1, 2, 3 -->
+            <div class="mb-4 border-b border-gray-200 dark:border-gray-700">
+                <ul class="flex flex-wrap -mb-px text-sm font-medium text-center" id="onesqaStandardsTabs" role="tablist">
+                    <li class="mr-2" role="presentation">
+                        <button class="onesqa-tab-button inline-block p-3 sm:p-4 border-b-2 rounded-t-lg" id="standard1-tab" data-tabs-target="#standard1-content" type="button" role="tab" aria-controls="standard1-content" aria-selected="true">มาตรฐานที่ 1</button>
+                    </li>
+                    <li class="mr-2" role="presentation">
+                        <button class="onesqa-tab-button inline-block p-3 sm:p-4 border-b-2 rounded-t-lg" id="standard2-tab" data-tabs-target="#standard2-content" type="button" role="tab" aria-controls="standard2-content" aria-selected="false">มาตรฐานที่ 2</button>
+                    </li>
+                    <li class="mr-2" role="presentation">
+                        <button class="onesqa-tab-button inline-block p-3 sm:p-4 border-b-2 rounded-t-lg" id="standard3-tab" data-tabs-target="#standard3-content" type="button" role="tab" aria-controls="standard3-content" aria-selected="false">มาตรฐานที่ 3</button>
+                    </li>
+                </ul>
             </div>
 
-            <!-- มาตรฐานที่ 2 -->
-             <div class="standard-block">
-                <h3>มาตรฐานที่ 2: กระบวนการบริหารและการจัดการ</h3>
-                <article class="indicator">
-                    <h4>2.1 การมีเป้าหมาย วิสัยทัศน์ และพันธกิจที่สถานศึกษากำหนดชัดเจน</h4>
-                    <p class="text-gray-700 text-sm mb-1">สถานศึกษามีการกำหนดเป้าหมาย วิสัยทัศน์ และพันธกิจที่ชัดเจน สอดคล้องกับบริบทของสถานศึกษาและความต้องการของชุมชน สื่อสารให้ผู้เกี่ยวข้องทุกฝ่ายรับทราบและเข้าใจตรงกัน</p>
-                    <details class="evidence-section mt-1"><summary class="font-medium text-gray-600 hover:text-gray-800 text-sm">คลิกเพื่อดูตัวอย่างหลักฐาน/ร่องรอย</summary>
-                        <ul class="evidence-list mt-1 text-xs">
-                            <li><a href="path/to/school_vision_mission_doc.pdf" target="_blank">เอกสารวิสัยทัศน์ พันธกิจ เป้าประสงค์ของสถานศึกษา</a> <span class="file-type">PDF</span></li>
-                            <li><a href="path/to/meeting_minutes_vision.pdf" target="_blank">รายงานการประชุมคณะกรรมการสถานศึกษา/ผู้เกี่ยวข้อง</a> <span class="file-type">PDF</span></li>
-                        </ul>
-                    </details>
-                </article>
-                <article class="indicator">
-                    <h4>2.2 การมีระบบบริหารจัดการคุณภาพของสถานศึกษา</h4>
-                     <p class="text-gray-700 text-sm mb-1">สถานศึกษามีระบบการบริหารจัดการคุณภาพที่ชัดเจนและดำเนินการตามระบบอย่างต่อเนื่อง มีการนำข้อมูลมาใช้ในการปรับปรุงและพัฒนาคุณภาพสถานศึกษา</p>
-                    <details class="evidence-section mt-1"><summary class="font-medium text-gray-600 hover:text-gray-800 text-sm">คลิกเพื่อดูตัวอย่างหลักฐาน/ร่องรอย</summary>
-                        <ul class="evidence-list mt-1 text-xs">
-                            <li><a href="path/to/qms_manual.pdf" target="_blank">คู่มือระบบบริหารจัดการคุณภาพของสถานศึกษา</a> <span class="file-type">PDF</span></li>
-                            <li><a href="path/to/sar_improvement_plan.pdf" target="_blank">แผนพัฒนาคุณภาพจากผล SAR</a> <span class="file-type">PDF</span></li>
-                        </ul>
-                    </details>
-                </article>
-                <article class="indicator">
-                    <h4>2.3 การดำเนินงานพัฒนาวิชาการที่เน้นคุณภาพผู้เรียนรอบด้าน</h4>
-                     <p class="text-gray-700 text-sm mb-1">สถานศึกษามีการพัฒนาหลักสูตรสถานศึกษาให้สอดคล้องกับหลักสูตรแกนกลางและความต้องการของผู้เรียนและท้องถิ่น ส่งเสริมการจัดการเรียนรู้ที่หลากหลายและเน้นผู้เรียนเป็นสำคัญ</p>
-                    <details class="evidence-section mt-1"><summary class="font-medium text-gray-600 hover:text-gray-800 text-sm">คลิกเพื่อดูตัวอย่างหลักฐาน/ร่องรอย</summary>
-                        <ul class="evidence-list mt-1 text-xs">
-                            <li><a href="path/to/school_curriculum.pdf" target="_blank">หลักสูตรสถานศึกษา</a> <span class="file-type">PDF</span></li>
-                            <li><a href="path/to/academic_projects.pdf" target="_blank">รายงานโครงการพัฒนาวิชาการ</a> <span class="file-type">PDF</span></li>
-                        </ul>
-                    </details>
-                </article>
-                <article class="indicator">
-                    <h4>2.4 การพัฒนาครูและบุคลากรให้มีความเชี่ยวชาญทางวิชาชีพ</h4>
-                    <p class="text-gray-700 text-sm mb-1">สถานศึกษาส่งเสริมและสนับสนุนให้ครูและบุคลากรได้รับการพัฒนาตนเองอย่างต่อเนื่อง ทั้งด้านความรู้ ความสามารถ และทักษะในการจัดการเรียนรู้และปฏิบัติงาน</p>
-                    <details class="evidence-section mt-1"><summary class="font-medium text-gray-600 hover:text-gray-800 text-sm">คลิกเพื่อดูตัวอย่างหลักฐาน/ร่องรอย</summary>
-                        <ul class="evidence-list mt-1 text-xs">
-                            <li><a href="path/to/teacher_development_plan.pdf" target="_blank">แผนพัฒนาครูและบุคลากร</a> <span class="file-type">PDF</span></li>
-                            <li><a href="path/to/training_reports.pdf" target="_blank">รายงานการอบรม/สัมมนาของครู</a> <span class="file-type">PDF</span></li>
-                        </ul>
-                    </details>
-                </article>
-                 <article class="indicator">
-                    <h4>2.5 การจัดสภาพแวดล้อมทางกายภาพและสังคมที่เอื้อต่อการจัดการเรียนรู้</h4>
-                    <p class="text-gray-700 text-sm mb-1">สถานศึกษาจัดอาคารสถานที่ สภาพแวดล้อม แหล่งเรียนรู้ และสิ่งอำนวยความสะดวกให้เพียงพอ ปลอดภัย สะอาด และเอื้อต่อการเรียนรู้ของผู้เรียน</p>
-                    <details class="evidence-section mt-1"><summary class="font-medium text-gray-600 hover:text-gray-800 text-sm">คลิกเพื่อดูตัวอย่างหลักฐาน/ร่องรอย</summary>
-                        <ul class="evidence-list mt-1 text-xs">
-                            <li><a href="path/to/school_environment_photos.pdf" target="_blank">ภาพถ่ายสภาพแวดล้อม/แหล่งเรียนรู้</a> <span class="file-type">รูปภาพ</span></li>
-                            <li><a href="path/to/safety_plan.pdf" target="_blank">แผนความปลอดภัยในสถานศึกษา</a> <span class="file-type">PDF</span></li>
-                        </ul>
-                    </details>
-                </article>
-                 <article class="indicator">
-                    <h4>2.6 การจัดระบบเทคโนโลยีสารสนเทศเพื่อสนับสนุนการบริหารจัดการและการเรียนรู้</h4>
-                    <p class="text-gray-700 text-sm mb-1">สถานศึกษามีการนำเทคโนโลยีสารสนเทศมาใช้ในการบริหารจัดการและสนับสนุนการจัดการเรียนการสอนอย่างเหมาะสมและมีประสิทธิภาพ</p>
-                    <details class="evidence-section mt-1"><summary class="font-medium text-gray-600 hover:text-gray-800 text-sm">คลิกเพื่อดูตัวอย่างหลักฐาน/ร่องรอย</summary>
-                        <ul class="evidence-list mt-1 text-xs">
-                            <li><a href="path/to/ict_plan.pdf" target="_blank">แผนการใช้ ICT ของสถานศึกษา</a> <span class="file-type">PDF</span></li>
-                            <li><a href="path/to/learning_platforms_info.pdf" target="_blank">ข้อมูลระบบ/แพลตฟอร์มการเรียนรู้ที่ใช้</a> <span class="file-type">เอกสาร</span></li>
-                        </ul>
-                    </details>
-                </article>
-            </div>
-
-            <!-- มาตรฐานที่ 3 -->
-            <div class="standard-block">
-                <h3>มาตรฐานที่ 3: กระบวนการจัดการเรียนการสอนที่เน้นผู้เรียนเป็นสำคัญ</h3>
-                <article class="indicator">
-                    <h4>3.1 การจัดการเรียนรู้ผ่านกระบวนการคิดและปฏิบัติจริง และนำไปประยุกต์ใช้ในชีวิตได้</h4>
-                    <p class="text-gray-700 text-sm mb-1">ครูจัดการเรียนการสอนที่ส่งเสริมให้ผู้เรียนได้คิดวิเคราะห์ แก้ปัญหา เรียนรู้จากการปฏิบัติจริง และเชื่อมโยงความรู้สู่การนำไปใช้ในชีวิตประจำวัน</p>
-                    <details class="evidence-section mt-1"><summary class="font-medium text-gray-600 hover:text-gray-800 text-sm">คลิกเพื่อดูตัวอย่างหลักฐาน/ร่องรอย</summary>
-                        <ul class="evidence-list mt-1 text-xs">
-                            <li><a href="path/to/lesson_plans_active_learning.pdf" target="_blank">แผนการจัดการเรียนรู้ที่เน้น Active Learning</a> <span class="file-type">PDF</span></li>
-                            <li><a href="path/to/student_work_examples.pdf" target="_blank">ตัวอย่างผลงาน/ชิ้นงานนักเรียนจากการปฏิบัติ</a> <span class="file-type">PDF/รูปภาพ</span></li>
-                        </ul>
-                    </details>
-                </article>
-                <article class="indicator">
-                    <h4>3.2 การใช้สื่อ เทคโนโลยีสารสนเทศ และแหล่งเรียนรู้ที่เอื้อต่อการเรียนรู้</h4>
-                    <p class="text-gray-700 text-sm mb-1">ครูเลือกใช้สื่อ นวัตกรรม เทคโนโลยี และแหล่งเรียนรู้ทั้งภายในและภายนอกสถานศึกษามาประกอบการจัดการเรียนรู้ได้อย่างเหมาะสมและหลากหลาย</p>
-                    <details class="evidence-section mt-1"><summary class="font-medium text-gray-600 hover:text-gray-800 text-sm">คลิกเพื่อดูตัวอย่างหลักฐาน/ร่องรอย</summary>
-                        <ul class="evidence-list mt-1 text-xs">
-                            <li><a href="path/to/media_usage_log.pdf" target="_blank">บันทึกการใช้สื่อ/เทคโนโลยีในการสอน</a> <span class="file-type">เอกสาร</span></li>
-                            <li><a href="path/to/learning_resource_list.pdf" target="_blank">รายการแหล่งเรียนรู้ที่ใช้</a> <span class="file-type">เอกสาร</span></li>
-                        </ul>
-                    </details>
-                </article>
-                <article class="indicator">
-                    <h4>3.3 การมีการบริหารจัดการชั้นเรียนเชิงบวก</h4>
-                    <p class="text-gray-700 text-sm mb-1">ครูสร้างบรรยากาศในชั้นเรียนที่อบอุ่น ปลอดภัย ส่งเสริมการเรียนรู้ และให้ผู้เรียนมีส่วนร่วมในการเรียนอย่างมีความสุข</p>
-                    <details class="evidence-section mt-1"><summary class="font-medium text-gray-600 hover:text-gray-800 text-sm">คลิกเพื่อดูตัวอย่างหลักฐาน/ร่องรอย</summary>
-                        <ul class="evidence-list mt-1 text-xs">
-                            <li><a href="path/to/classroom_observation_notes.pdf" target="_blank">บันทึกการสังเกตชั้นเรียน</a> <span class="file-type">เอกสาร</span></li>
-                            <li><a href="path/to/student_feedback_classroom.pdf" target="_blank">ผลสำรวจความพึงพอใจของนักเรียนต่อบรรยากาศในชั้นเรียน</a> <span class="file-type">เอกสาร</span></li>
-                        </ul>
-                    </details>
-                </article>
-                <article class="indicator">
-                    <h4>3.4 การตรวจสอบและประเมินผู้เรียนอย่างเป็นระบบ และนำผลมาพัฒนาผู้เรียน</h4>
-                    <p class="text-gray-700 text-sm mb-1">ครูมีวิธีการวัดและประเมินผลที่หลากหลาย สอดคล้องกับสิ่งที่ต้องการวัด และนำผลการประเมินมาใช้ในการวินิจฉัย ปรับปรุงการสอน และพัฒนาผู้เรียนเป็นรายบุคคล</p>
-                     <details class="evidence-section mt-1"><summary class="font-medium text-gray-600 hover:text-gray-800 text-sm">คลิกเพื่อดูตัวอย่างหลักฐาน/ร่องรอย</summary>
-                        <ul class="evidence-list mt-1 text-xs">
-                            <li><a href="path/to/assessment_tools.pdf" target="_blank">ตัวอย่างเครื่องมือวัดและประเมินผล</a> <span class="file-type">PDF</span></li>
-                            <li><a href="path/to/remedial_teaching_records.pdf" target="_blank">บันทึกการสอนซ่อมเสริม/พัฒนาผู้เรียน</a> <span class="file-type">เอกสาร</span></li>
-                        </ul>
-                    </details>
-                </article>
-                <article class="indicator">
-                    <h4>3.5 การมีการแลกเปลี่ยนเรียนรู้และให้ข้อมูลสะท้อนกลับเพื่อพัฒนาและปรับปรุงการจัดการเรียนรู้</h4>
-                    <p class="text-gray-700 text-sm mb-1">ครูและผู้เกี่ยวข้องมีการแลกเปลี่ยนเรียนรู้ (PLC) และให้ข้อมูลป้อนกลับซึ่งกันและกันเพื่อนำไปพัฒนาการจัดการเรียนการสอนอย่างต่อเนื่อง</p>
-                    <details class="evidence-section mt-1"><summary class="font-medium text-gray-600 hover:text-gray-800 text-sm">คลิกเพื่อดูตัวอย่างหลักฐาน/ร่องรอย</summary>
-                        <ul class="evidence-list mt-1 text-xs">
-                            <li><a href="path/to/plc_minutes.pdf" target="_blank">รายงานการประชุม/กิจกรรม PLC</a> <span class="file-type">PDF</span></li>
-                            <li><a href="path/to/peer_observation_feedback.pdf" target="_blank">แบบบันทึกการสังเกตการสอนและให้ข้อมูลย้อนกลับ</a> <span class="file-type">เอกสาร</span></li>
-                        </ul>
-                    </details>
-                </article>
-            </div>
-        </div>
-        <!-- Section Wrapper สำหรับ Highlights - ส่วนนี้คงเดิม (แต่ถ้าอยากให้มีกรอบเหมือนกันก็ครอบ div ได้) -->
-        <div id="highlightsSectionContent" class="page-content-wrapper content-section bg-white rounded-2xl shadow-md p-5 card"> <!-- << ครอบด้วย div สไตล์เดียวกัน -->
-            <h2 class="text-xl font-bold text-red-600 border-b-2 border-yellow-400 pb-2 mb-6">ผลงานเด่นของสถานศึกษา</h2> <!-- ใช้สไตล์หัวข้อเหมือนกัน -->
-            <p class="text-gray-700 mb-6">นี่คือส่วนจัดแสดงผลงานและความสำเร็จที่น่าภาคภูมิใจของโรงเรียนเรา:</p>
-            <div class="grid md:grid-cols-2 gap-6">
-                <div class="highlight-item bg-white p-4 rounded-lg shadow hover:shadow-xl transition-shadow">
-                    <img src="https://via.placeholder.com/600x400.png?text=ผลงานเด่น+1" alt="ผลงานเด่น 1" class="w-full h-48 object-cover rounded-md mb-3">
-                    <h3>รางวัลชนะเลิศการแข่งขันโครงงานวิทยาศาสตร์ระดับภาค</h3>
-                    <p class="text-gray-600 text-sm mb-3">นักเรียนของเราได้รับรางวัลชนะเลิศจากการแข่งขันโครงงานวิทยาศาสตร์ในหัวข้อ "พลังงานสะอาดเพื่ออนาคต" ซึ่งจัดขึ้นโดย...</p>
-                    <a href="path/to/highlight_detail_1.html" target="_blank" class="btn-primary inline-block px-4 py-2 text-sm">อ่านเพิ่มเติม</a>
+            <!-- Tab Content Panels -->
+            <div id="onesqaStandardsTabContent">
+                <!-- เนื้อหา มาตรฐานที่ 1 -->
+                <div class="onesqa-tab-panel hidden p-1 bg-gray-50 rounded-lg dark:bg-gray-800" id="standard1-content" role="tabpanel" aria-labelledby="standard1-tab">
+                    <div class="standard-block"> <!-- ครอบเนื้อหามาตรฐานที่ 1 ด้วย standard-block เหมือนเดิม -->
+                        <h3 class="text-lg font-semibold text-orange-700 mb-3">มาตรฐานที่ 1: คุณภาพของผู้เรียน</h3>
+                        <article class="indicator">
+                            <h4>1.1 ผลสัมฤทธิ์ทางวิชาการของผู้เรียน</h4>
+                            <ul class="list-disc ml-5 text-gray-700 mb-2 text-sm">
+                                <li>ความสามารถในการอ่าน การเขียน การสื่อสาร และการคิดคำนวณ</li>
+                                <li>ความสามารถในการคิดวิเคราะห์ คิดอย่างมีวิจารณญาณ อภิปราย แลกเปลี่ยนความคิดเห็น และแก้ปัญหา</li>
+                                <li>ความสามารถในการสร้างนวัตกรรม</li>
+                                <li>ความสามารถในการใช้เทคโนโลยีสารสนเทศและการสื่อสาร</li>
+                                <li>ผลสัมฤทธิ์ทางการเรียนตามหลักสูตรสถานศึกษา</li>
+                                <li>ความรู้ ทักษะพื้นฐาน และเจตคติที่ดีต่องานอาชีพ</li>
+                            </ul>
+                            <details class="evidence-section mt-1"><summary class="font-medium text-gray-600 hover:text-gray-800 text-sm">คลิกเพื่อดูตัวอย่างหลักฐาน/ร่องรอย</summary>
+                                <ul class="evidence-list mt-1 text-xs">
+                                    <li><a href="path/to/sar_academic_results.pdf" target="_blank">รายงานผลสัมฤทธิ์ทางการเรียน</a> <span class="file-type">PDF</span></li>
+                                    <li><a href="path/to/student_portfolios.pdf" target="_blank">แฟ้มสะสมผลงานนักเรียน</a> <span class="file-type">PDF</span></li>
+                                </ul>
+                            </details>
+                        </article>
+                        <article class="indicator">
+                            <h4>1.2 คุณลักษณะที่พึงประสงค์ของผู้เรียน</h4>
+                            <ul class="list-disc ml-5 text-gray-700 mb-2 text-sm">
+                                <li>การมีคุณธรรม จริยธรรม ค่านิยมที่พึงประสงค์</li>
+                                <li>ความภูมิใจในท้องถิ่นและความเป็นไทย</li>
+                                <li>การยอมรับที่จะอยู่ร่วมกันบนความแตกต่างและหลากหลาย</li>
+                                <li>สุขภาวะทางร่างกาย และจิตสังคม</li>
+                            </ul>
+                            <details class="evidence-section mt-1"><summary class="font-medium text-gray-600 hover:text-gray-800 text-sm">คลิกเพื่อดูตัวอย่างหลักฐาน/ร่องรอย</summary>
+                                <ul class="evidence-list mt-1 text-xs">
+                                    <li><a href="path/to/student_behavior_records.pdf" target="_blank">บันทึกพฤติกรรมนักเรียน</a> <span class="file-type">PDF</span></li>
+                                    <li><a href="path/to/moral_projects.pdf" target="_blank">รายงานโครงการ/กิจกรรมส่งเสริมคุณธรรม</a> <span class="file-type">PDF</span></li>
+                                </ul>
+                            </details>
+                        </article>
+                    </div>
                 </div>
-                <div class="highlight-item bg-white p-4 rounded-lg shadow hover:shadow-xl transition-shadow">
-                    <img src="https://via.placeholder.com/600x400.png?text=กิจกรรมเด่น+2" alt="กิจกรรมเด่น 2" class="w-full h-48 object-cover rounded-md mb-3">
-                    <h3>โครงการจิตอาสาพัฒนาชุมชน</h3>
-                    <p class="text-gray-600 text-sm mb-3">นักเรียนและบุคลากรของโรงเรียนร่วมกันจัดกิจกรรมบำเพ็ญประโยชน์ ทำความสะอาด และปรับปรุงภูมิทัศน์ในชุมชนรอบโรงเรียน...</p>
-                    <a href="path/to/highlight_detail_2.html" target="_blank" class="btn-primary inline-block px-4 py-2 text-sm">ดูภาพกิจกรรม</a>
+
+                <!-- เนื้อหา มาตรฐานที่ 2 -->
+                <div class="onesqa-tab-panel hidden p-1 bg-gray-50 rounded-lg dark:bg-gray-800" id="standard2-content" role="tabpanel" aria-labelledby="standard2-tab">
+                    <div class="standard-block">
+                        <h3 class="text-lg font-semibold text-orange-700 mb-3">มาตรฐานที่ 2: กระบวนการบริหารและการจัดการ</h3>
+                        <article class="indicator">
+                            <h4>2.1 การมีเป้าหมาย วิสัยทัศน์ และพันธกิจที่สถานศึกษากำหนดชัดเจน</h4>
+                            <p class="text-gray-700 text-sm mb-1">สถานศึกษามีการกำหนดเป้าหมาย วิสัยทัศน์ และพันธกิจที่ชัดเจน สอดคล้องกับบริบท...</p>
+                            <details class="evidence-section mt-1"><summary class="font-medium text-gray-600 hover:text-gray-800 text-sm">คลิกเพื่อดูตัวอย่างหลักฐาน/ร่องรอย</summary>
+                                <ul class="evidence-list mt-1 text-xs"><li><a href="path/to/school_vision_mission_doc.pdf" target="_blank">เอกสารวิสัยทัศน์ พันธกิจ</a> <span class="file-type">PDF</span></li></ul>
+                            </details>
+                        </article>
+                        <article class="indicator">
+                            <h4>2.2 การมีระบบบริหารจัดการคุณภาพของสถานศึกษา</h4>
+                            <p class="text-gray-700 text-sm mb-1">สถานศึกษามีระบบการบริหารจัดการคุณภาพที่ชัดเจนและดำเนินการตามระบบอย่างต่อเนื่อง...</p>
+                            <details class="evidence-section mt-1"><summary class="font-medium text-gray-600 hover:text-gray-800 text-sm">คลิกเพื่อดูตัวอย่างหลักฐาน/ร่องรอย</summary>
+                                <ul class="evidence-list mt-1 text-xs"><li><a href="path/to/qms_manual.pdf" target="_blank">คู่มือระบบบริหารจัดการคุณภาพ</a> <span class="file-type">PDF</span></li></ul>
+                            </details>
+                        </article>
+                        <article class="indicator">
+                            <h4>2.3 การดำเนินงานพัฒนาวิชาการที่เน้นคุณภาพผู้เรียนรอบด้าน</h4>
+                            <p class="text-gray-700 text-sm mb-1">สถานศึกษามีการพัฒนาหลักสูตรสถานศึกษาให้สอดคล้องกับหลักสูตรแกนกลาง...</p>
+                             <details class="evidence-section mt-1"><summary class="font-medium text-gray-600 hover:text-gray-800 text-sm">คลิกเพื่อดูตัวอย่างหลักฐาน/ร่องรอย</summary>
+                                <ul class="evidence-list mt-1 text-xs"><li><a href="path/to/school_curriculum.pdf" target="_blank">หลักสูตรสถานศึกษา</a> <span class="file-type">PDF</span></li></ul>
+                            </details>
+                        </article>
+                        <article class="indicator">
+                            <h4>2.4 การพัฒนาครูและบุคลากรให้มีความเชี่ยวชาญทางวิชาชีพ</h4>
+                             <p class="text-gray-700 text-sm mb-1">สถานศึกษาส่งเสริมและสนับสนุนให้ครูและบุคลากรได้รับการพัฒนาตนเองอย่างต่อเนื่อง...</p>
+                             <details class="evidence-section mt-1"><summary class="font-medium text-gray-600 hover:text-gray-800 text-sm">คลิกเพื่อดูตัวอย่างหลักฐาน/ร่องรอย</summary>
+                                <ul class="evidence-list mt-1 text-xs"><li><a href="path/to/teacher_development_plan.pdf" target="_blank">แผนพัฒนาครูและบุคลากร</a> <span class="file-type">PDF</span></li></ul>
+                            </details>
+                        </article>
+                         <article class="indicator">
+                            <h4>2.5 การจัดสภาพแวดล้อมทางกายภาพและสังคมที่เอื้อต่อการจัดการเรียนรู้</h4>
+                             <p class="text-gray-700 text-sm mb-1">สถานศึกษาจัดอาคารสถานที่ สภาพแวดล้อม แหล่งเรียนรู้ และสิ่งอำนวยความสะดวก...</p>
+                             <details class="evidence-section mt-1"><summary class="font-medium text-gray-600 hover:text-gray-800 text-sm">คลิกเพื่อดูตัวอย่างหลักฐาน/ร่องรอย</summary>
+                                <ul class="evidence-list mt-1 text-xs"><li><a href="path/to/school_environment_photos.pdf" target="_blank">ภาพถ่ายสภาพแวดล้อม</a> <span class="file-type">รูปภาพ</span></li></ul>
+                            </details>
+                        </article>
+                         <article class="indicator">
+                            <h4>2.6 การจัดระบบเทคโนโลยีสารสนเทศเพื่อสนับสนุนการบริหารจัดการและการเรียนรู้</h4>
+                             <p class="text-gray-700 text-sm mb-1">สถานศึกษามีการนำเทคโนโลยีสารสนเทศมาใช้ในการบริหารจัดการและสนับสนุนการจัดการเรียนการสอน...</p>
+                            <details class="evidence-section mt-1"><summary class="font-medium text-gray-600 hover:text-gray-800 text-sm">คลิกเพื่อดูตัวอย่างหลักฐาน/ร่องรอย</summary>
+                                <ul class="evidence-list mt-1 text-xs"><li><a href="path/to/ict_plan.pdf" target="_blank">แผนการใช้ ICT</a> <span class="file-type">PDF</span></li></ul>
+                            </details>
+                        </article>
+                    </div>
+                </div>
+
+                <!-- เนื้อหา มาตรฐานที่ 3 -->
+                <div class="onesqa-tab-panel hidden p-1 bg-gray-50 rounded-lg dark:bg-gray-800" id="standard3-content" role="tabpanel" aria-labelledby="standard3-tab">
+                    <div class="standard-block">
+                        <h3 class="text-lg font-semibold text-orange-700 mb-3">มาตรฐานที่ 3: กระบวนการจัดการเรียนการสอนที่เน้นผู้เรียนเป็นสำคัญ</h3>
+                        <article class="indicator">
+                            <h4>3.1 การจัดการเรียนรู้ผ่านกระบวนการคิดและปฏิบัติจริง และนำไปประยุกต์ใช้ในชีวิตได้</h4>
+                            <p class="text-gray-700 text-sm mb-1">ครูจัดการเรียนการสอนที่ส่งเสริมให้ผู้เรียนได้คิดวิเคราะห์ แก้ปัญหา เรียนรู้จากการปฏิบัติจริง...</p>
+                            <details class="evidence-section mt-1"><summary class="font-medium text-gray-600 hover:text-gray-800 text-sm">คลิกเพื่อดูตัวอย่างหลักฐาน/ร่องรอย</summary>
+                                <ul class="evidence-list mt-1 text-xs"><li><a href="path/to/lesson_plans_active_learning.pdf" target="_blank">แผนการจัดการเรียนรู้ Active Learning</a> <span class="file-type">PDF</span></li></ul>
+                            </details>
+                        </article>
+                        <article class="indicator">
+                            <h4>3.2 การใช้สื่อ เทคโนโลยีสารสนเทศ และแหล่งเรียนรู้ที่เอื้อต่อการเรียนรู้</h4>
+                             <p class="text-gray-700 text-sm mb-1">ครูเลือกใช้สื่อ นวัตกรรม เทคโนโลยี และแหล่งเรียนรู้ทั้งภายในและภายนอกสถานศึกษา...</p>
+                            <details class="evidence-section mt-1"><summary class="font-medium text-gray-600 hover:text-gray-800 text-sm">คลิกเพื่อดูตัวอย่างหลักฐาน/ร่องรอย</summary>
+                                <ul class="evidence-list mt-1 text-xs"><li><a href="path/to/media_usage_log.pdf" target="_blank">บันทึกการใช้สื่อ</a> <span class="file-type">เอกสาร</span></li></ul>
+                            </details>
+                        </article>
+                        <article class="indicator">
+                            <h4>3.3 การมีการบริหารจัดการชั้นเรียนเชิงบวก</h4>
+                            <p class="text-gray-700 text-sm mb-1">ครูสร้างบรรยากาศในชั้นเรียนที่อบอุ่น ปลอดภัย ส่งเสริมการเรียนรู้...</p>
+                            <details class="evidence-section mt-1"><summary class="font-medium text-gray-600 hover:text-gray-800 text-sm">คลิกเพื่อดูตัวอย่างหลักฐาน/ร่องรอย</summary>
+                                <ul class="evidence-list mt-1 text-xs"><li><a href="path/to/classroom_observation_notes.pdf" target="_blank">บันทึกการสังเกตชั้นเรียน</a> <span class="file-type">เอกสาร</span></li></ul>
+                            </details>
+                        </article>
+                        <article class="indicator">
+                            <h4>3.4 การตรวจสอบและประเมินผู้เรียนอย่างเป็นระบบ และนำผลมาพัฒนาผู้เรียน</h4>
+                            <p class="text-gray-700 text-sm mb-1">ครูมีวิธีการวัดและประเมินผลที่หลากหลาย สอดคล้องกับสิ่งที่ต้องการวัด...</p>
+                            <details class="evidence-section mt-1"><summary class="font-medium text-gray-600 hover:text-gray-800 text-sm">คลิกเพื่อดูตัวอย่างหลักฐาน/ร่องรอย</summary>
+                                <ul class="evidence-list mt-1 text-xs"><li><a href="path/to/assessment_tools.pdf" target="_blank">ตัวอย่างเครื่องมือวัดผล</a> <span class="file-type">PDF</span></li></ul>
+                            </details>
+                        </article>
+                        <article class="indicator">
+                            <h4>3.5 การมีการแลกเปลี่ยนเรียนรู้และให้ข้อมูลสะท้อนกลับเพื่อพัฒนาและปรับปรุงการจัดการเรียนรู้</h4>
+                            <p class="text-gray-700 text-sm mb-1">ครูและผู้เกี่ยวข้องมีการแลกเปลี่ยนเรียนรู้ (PLC) และให้ข้อมูลป้อนกลับซึ่งกันและกัน...</p>
+                            <details class="evidence-section mt-1"><summary class="font-medium text-gray-600 hover:text-gray-800 text-sm">คลิกเพื่อดูตัวอย่างหลักฐาน/ร่องรอย</summary>
+                                <ul class="evidence-list mt-1 text-xs"><li><a href="path/to/plc_minutes.pdf" target="_blank">รายงานการประชุม PLC</a> <span class="file-type">PDF</span></li></ul>
+                            </details>
+                        </article>
+                    </div>
                 </div>
             </div>
-        </div>
-    </div>
-
-    <!-- ส่วนท้ายเว็บ (Footer) - ใช้โครงสร้างและสไตล์เหมือนกับ index.html -->
-    <footer class="bg-gradient-to-r from-red-600 to-yellow-500 text-white py-4 mt-8 rounded-t-3xl">
-        <div class="container mx-auto px-4">
-            <div class="flex flex-col items-center text-center">
-                <p class="footer-text">โรงเรียนชุมชนบ้านแม่หละป่าป๋วย</p>
-                <p class="footer-text">ตำบลสรอย อำเภอวังชิ้น จังหวัดแพร่</p>
-                <p class="footer-text">สำนักงานเขตพื้นที่การศึกษาประถมศึกษาแพร่เขต 2</p>
-                <p class="text-xs mt-2 opacity-75">© <span id="currentYearSmsPage"></span> สงวนลิขสิทธิ์</p>
-            </div>
-        </div>
-    </footer>
-
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        const navLinks = document.querySelectorAll('#sms-main-nav-ul a.nav-link.menu-item');
-        // เปลี่ยนจากการเลือก .page-content-section มาเป็น .page-content-wrapper หรือ .content-section ที่ใช้กับ wrapper div
-        const contentWrappers = document.querySelectorAll('.page-content-wrapper.content-section'); 
-
-        function updateActiveState(targetId) {
-            contentWrappers.forEach(wrapper => { // วนลูปที่ wrapper
-                if (wrapper.id === targetId) {
-                    wrapper.style.display = 'block';
-                } else {
-                    wrapper.style.display = 'none';
-                }
-            });
-
-            navLinks.forEach(link => {
-                link.classList.remove('active', 'text-red-500', 'font-semibold');
-                link.classList.add('text-gray-700'); // สีปกติ
-                // เปรียบเทียบ dataset.target กับ targetId ที่รับมา
-                if (link.dataset.target === targetId) {
-                    link.classList.add('active', 'text-red-500', 'font-semibold');
-                    link.classList.remove('text-gray-700');
-                }
-            });
-        }
-
-        navLinks.forEach(link => {
-            link.addEventListener('click', function (event) {
-                const targetId = this.dataset.target; // dataset.target ควรจะเป็น id ของ div wrapper เช่น 'iqaSectionContent'
-                const targetElement = document.getElementById(targetId);
-
-                if (targetId && targetElement) {
-                    if (!this.getAttribute('href').startsWith('#')) {
-                        event.preventDefault();
-                    }
-                    updateActiveState(targetId);
-                } else if (this.getAttribute('href') === 'index.html') {
-                    // Allow navigation
-                } else {
-                    event.preventDefault();
-                    console.warn("Target section wrapper not found or invalid for:", targetId);
-                }
-            });
-        });
-
-        function handleHashChange() {
-            const hash = window.location.hash.substring(1); // #iqa -> iqa
-            let targetIdToShow = null;
-
-            if (hash) {
-                navLinks.forEach(link => {
-                    // หาลิงก์ที่ href ตรงกับ hash และดึง data-target (ซึ่งตอนนี้ควรเป็น id ของ wrapper)
-                    if (link.getAttribute('href') === `#${hash}`) {
-                        targetIdToShow = link.dataset.target; 
-                    }
-                });
-            }
-            
-            // ถ้าหา targetId จาก hash ได้ และ element นั้นมีอยู่จริง
-            if (targetIdToShow && document.getElementById(targetIdToShow)) {
-                updateActiveState(targetIdToShow);
-            } else if (navLinks.length > 0 && navLinks[0].dataset.target && document.getElementById(navLinks[0].dataset.target)) {
-                // ถ้าไม่มี hash หรือ hash ไม่ตรง ให้แสดง wrapper แรกเป็น default
-                const firstTargetId = navLinks[0].dataset.target;
-                updateActiveState(firstTargetId);
-                // อัปเดต hash ใน URL ให้ตรงกับ section แรก
-                if (navLinks[0].getAttribute('href').startsWith('#')) {
-                     window.location.hash = navLinks[0].getAttribute('href').substring(1);
-                }
-            } else {
-                // ถ้าไม่มีอะไรจะโชว์เลย ก็ซ่อนทั้งหมด
-                contentWrappers.forEach(wrapper => wrapper.style.display = 'none');
-                navLinks.forEach(link => {
-                    link.classList.remove('active', 'text-red-500', 'font-semibold');
-                    link.classList.add('text-gray-700');
-                });
-            }
-        }
-
-        window.addEventListener('hashchange', handleHashChange);
-        handleHashChange(); 
-
-        const currentYearSpanSms = document.getElementById('currentYearSmsPage');
-        if (currentYearSpanSms) {
-            currentYearSpanSms.textContent = new Date().getFullYear() + 543; 
-        }
-    });
-</script>
-</body>
-</html>
+        </div> <!-- ปิด #onesqaSectionContent -->
