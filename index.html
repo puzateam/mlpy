@@ -19,28 +19,45 @@
 </head>
 <body>
     <!-- ส่วนหัวเว็บ (Header) -->
-    <header class="bg-gradient-to-r from-red-600 to-yellow-500 p-4"> <!-- แถบส่วนหัว ใช้สีพื้นหลังแบบไล่เฉดสีแดงไปเหลือง และมี padding -->
-        <div class="container mx-auto flex flex-col items-center"> <!-- จัดเนื้อหาในส่วนหัวให้อยู่กึ่งกลาง และจัดเรียง элементыเป็นคอลัมน์ -->
-            <div class="flex flex-col items-center mb-4"> <!-- กลุ่มของโลโก้และชื่อโรงเรียน จัดเรียงเป็นคอลัมน์และกึ่งกลาง มี margin ด้านล่าง -->
-                <img src="https://i.postimg.cc/d3PbrGqC/logo-School.png" alt="โลโก้โรงเรียน" class="w-[80px] h-auto mb-2"> <!-- แสดงโลโก้โรงเรียน กำหนดความกว้าง 80px ความสูงอัตโนมัติ และ margin ด้านล่าง -->
-                <div class="text-center"> <!-- จัดข้อความชื่อโรงเรียนให้อยู่กึ่งกลาง -->
-                    <h1 class="text-white text-2xl md:text-3xl font-bold">โรงเรียนชุมชนบ้านแม่หละป่าป๋วย</h1> <!-- ชื่อโรงเรียน ตัวอักษรสีขาว ขนาดใหญ่ และตัวหนา -->
+    <header> <!-- ลบคลาสสีพื้นหลังออกจาก <header> หลัก -->
+        <!-- ส่วนที่ 1: โลโก้และชื่อโรงเรียน (พื้นหลังสีส้มไล่เฉด) -->
+        <div class="bg-gradient-to-r from-red-600 to-yellow-500 p-4">
+            <div class="container mx-auto flex flex-col items-center">
+                <div class="flex flex-col items-center mb-4 md:mb-2"> <!-- ลด mb ในจอ md ขึ้นไปเล็กน้อย -->
+                    <img src="https://i.postimg.cc/d3PbrGqC/logo-School.png" alt="โลโก้โรงเรียน" class="w-[80px] h-auto mb-2">
+                    <div class="text-center">
+                        <h1 class="text-white text-2xl md:text-3xl font-bold">โรงเรียนชุมชนบ้านแม่หละป่าป๋วย</h1>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <!-- เมนูนำทาง (Navigation) -->
-        <nav class="container mx-auto mt-4">
-            <ul class="flex flex-wrap justify-center space-x-1 md:space-x-8 text-white items-center"> <!-- รายการเมนู จัดเรียงแนวนอน กึ่งกลาง มีระยะห่างระหว่างรายการ, ตัวอักษรสีขาว และจัดกึ่งกลางแนวตั้ง -->
-                <li><a href="#" id="home-link" data-target="content-default" class="menu-item px-3 py-1 hover:text-yellow-200">หน้าหลัก</a></li>
-                <li><a href="#" class="menu-item px-3 py-1 hover:text-yellow-200">รับการประเมิน สมศ.</a></li>
-                <li><a href="#" data-target="content-smart-school" class="menu-item px-3 py-1 hover:text-yellow-200">Smart School Service</a></li>
-                <!-- Container สำหรับเมนูพิเศษตาม Role (จะถูกเติมโดย JavaScript) -->
-                <div id="role-specific-menu-container" class="flex space-x-1 md:space-x-8">
-                    <!-- JavaScript จะนำเมนูตาม Role มาใส่ตรงนี้ เช่น <li><a href="...">ลงทะเบียนรับหนังสือ</a></li> -->
-                </div>
-                <li><a href="#" id="login-logout-button" class="menu-item px-3 py-1 hover:text-yellow-200">Login</a></li> <!-- ปุ่ม Login/Logout -->
-            </ul>
+        <!-- ส่วนที่ 2: เมนูนำทาง (พื้นหลังสีขาว) -->
+        <nav class="bg-white shadow-md"> <!-- เพิ่ม bg-white และ shadow-md -->
+            <div class="container mx-auto"> <!-- Container สำหรับจัดกึ่งกลางเมนู -->
+                <ul class="flex flex-wrap justify-center space-x-1 md:space-x-6 lg:space-x-8 items-center py-2"> <!-- ปรับ space-x และเพิ่ม py-2 -->
+                    <!-- เปลี่ยนสีตัวอักษรเมนูเป็นสีเข้ม และปรับ hover state -->
+                    <li><a href="#" id="home-link" data-target="content-default" class="menu-item px-3 py-2 text-gray-700 hover:text-red-500">หน้าหลัก</a></li>
+                    <li><a href="#" class="menu-item px-3 py-2 text-gray-700 hover:text-red-500">รับการประเมิน สมศ.</a></li>
+                    <li><a href="#" data-target="content-smart-school" class="menu-item px-3 py-2 text-gray-700 hover:text-red-500">Smart School Service</a></li>
+                    
+                    <!-- Container สำหรับเมนูพิเศษตาม Role (จะถูกเติมโดย JavaScript) -->
+                    <!-- JavaScript ควรจะสร้าง <li><a>...</a></li> มาใส่ในนี้ -->
+                    <div id="role-specific-menu-container" class="contents"> 
+                        <!-- ใช้ class "contents" เพื่อให้ div นี้ไม่กระทบ layout ของ flex ul โดยตรง
+                             แต่ JavaScript จะต้องสร้าง <li> มาใส่ข้างใน ul หลัก ไม่ใช่ใน div นี้
+                             หรืออีกวิธีคือให้ JS สร้าง <li> มาต่อท้าย ul เลย
+                             **ปรับปรุง: ให้ JavaScript สร้าง <li> แล้ว append เข้าไปใน <ul> นี้โดยตรงจะง่ายกว่า**
+                             ดังนั้น div นี้อาจจะไม่จำเป็นถ้า JS จัดการได้ดี หรือจะคงไว้ถ้ามีเหตุผลอื่น
+                             **เพื่อความง่าย น้องจะให้ JavaScript สร้าง <li> ไปต่อท้าย <ul> โดยตรง**
+                             ดังนั้นน้องจะลบ div นี้ออก และให้ JS จัดการกับ <ul> โดยตรง
+                        -->
+                    </div> 
+                    <!-- ปุ่ม Login/Logout จะถูกจัดการโดย JavaScript ให้อยู่ในรูปแบบ <li> เช่นกัน -->
+                    <!-- <li><a href="#" id="login-logout-button" class="menu-item px-3 py-2 text-gray-700 hover:text-red-500">Login</a></li> -->
+                    <!-- JavaScript จะสร้าง <li> นี้ขึ้นมา หรืออัปเดต <li> ที่มีอยู่แล้ว -->
+                </ul>
+            </div>
         </nav>
     </header>
 
