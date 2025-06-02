@@ -1,152 +1,21 @@
 <!DOCTYPE html>
-<html lang="th">
+<html lang="th"> <!-- กำหนดภาษาหลักของหน้าเว็บเป็นภาษาไทย -->
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>การประกันคุณภาพและมาตรฐานฯ - โรงเรียนชุมชนบ้านแม่หละป่าป๋วย (SPA)</title>
+    <meta charset="UTF-8"> <!-- กำหนดชุดอักขระเป็น UTF-8 เพื่อรองรับภาษาไทย -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- ตั้งค่าการแสดงผลบนอุปกรณ์ต่างๆ ให้เหมาะสม -->
+    <title>โรงเรียนชุมชนบ้านแม่หละป่าป๋วย</title> <!-- ชื่อของหน้าเว็บที่แสดงบนแท็บของเบราว์เซอร์ -->
 
-    <style>
-        /* === โค้ด CSS ของเว็บโรงเรียนเดิม (ส่วนที่ยังใช้และเกี่ยวข้อง) === */
-        * { font-family: 'Prompt', sans-serif; }
-        body { background-color: #fffaf0; /* สี FloralWhite พื้นหลังหน้าเว็บ */ margin: 0; padding: 0; color: #333; line-height: 1.7;}
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600&display=swap" rel="stylesheet"> <!-- นำเข้าฟอนต์ Prompt จาก Google Fonts -->
 
-        .menu-item { position: relative; transition: all 0.3s ease; }
-        .menu-item:after { content: ''; position: absolute; width: 0; height: 2px; bottom: -2px; left: 0; background-color: #fbbf24; transition: width 0.3s ease; }
-        .menu-item.active:after, .menu-item:hover:after { width: 100%; }
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script> <!-- นำเข้า Tailwind CSS ผ่าน CDN -->
 
-        .btn-primary { background-color: #ef4444; color: #FFF; transition: all 0.2s ease; border-radius: 50px; padding: 8px 15px; text-decoration: none; display: inline-block; border: none; cursor: pointer;}
-        .btn-primary:hover { background-color: #dc2626; transform: translateY(-2px); box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); }
+    <!-- SweetAlert2 CDN (สำหรับการแจ้งเตือนสวยๆ) -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-        /* Card สำหรับเนื้อหาหลัก - ไม่มีภาพพื้นหลังแล้ว */
-        .card-main-content {
-            position: relative;
-            overflow: hidden;
-            border-radius: 16px;
-            background-color: #ffffff; /* พื้นหลังสีขาว */
-            padding: 25px;
-            margin-bottom: 30px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-        }
-
-        /* สไตล์ข้อความใน Footer */
-        .footer-text { line-height: 1.3; margin-bottom: 0.3rem; }
-        .footer-text:last-child { margin-bottom: 0; }
-        .contact-item { display: flex; align-items: center; margin-bottom: 0.5rem; }
-        .contact-icon { margin-right: 0.5rem; flex-shrink: 0; }
-
-        /* สไตล์สำหรับตาราง (ถ้ามีการใช้งานในเนื้อหา SPA) */
-        .data-table-theme { width: 100%; border-collapse: collapse; margin-top: 1rem; }
-        .data-table-theme th, .data-table-theme td { border: 1px solid #ddd; padding: 8px; }
-        .data-table-theme thead { background-color: #F59E0B; color: #ffffff; }
-        .data-table-theme th { padding: 0.625rem 0.5rem; font-weight: 600; text-align: left;}
-        .data-table-theme td a img { width: 1.5rem; height: 1.5rem; display: inline-block; vertical-align: middle; transition: transform 0.2s ease-in-out, opacity 0.2s ease-in-out; }
-        .data-table-theme td a:hover img { opacity: 0.75; transform: scale(1.15); }
-        .data-table-theme .col-number { width: 10%; text-align: center; }
-        .data-table-theme .col-name { width: 60%; text-align: left; }
-        .data-table-theme .col-link { width: 30%; text-align: center; }
-        /* === สิ้นสุด CSS ของเว็บโรงเรียนเดิม (ส่วนที่ยังใช้) === */
-
-
-        /* === CSS สำหรับ SPA === */
-        .container { width: 90%; max-width: 1100px; margin: 20px auto; padding: 0 15px; }
-
-        header.spa-header {
-            background: linear-gradient(to right, #E65100, #FFA000);
-            color: #FFFFFF;
-            padding: 15px 0;
-            text-align: center;
-            margin-bottom: 0;
-        }
-        header.spa-header .school-name { font-size: 1.8em; font-weight: bold; }
-        header.spa-header .school-logo { max-height: 50px; vertical-align: middle; margin-right: 10px; }
-
-        nav.spa-nav {
-            background-color: #ffffff;
-            padding: 10px 0;
-            text-align: center;
-            margin-bottom: 20px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-            border-bottom: 1px solid #eee;
-        }
-        nav.spa-nav ul { list-style: none; padding: 0; margin: 0; }
-        nav.spa-nav ul li { display: inline-block; margin: 0 10px; }
-        nav.spa-nav ul li a { /* สไตล์นี้จะถูก .menu-item override บางส่วน */
-            padding: 8px 12px;
-            text-decoration: none;
-            color: #333;
-            font-weight: 500;
-        }
-
-        .page-content-section { /* นี่คือ .card-main-content ที่เราปรับปรุง */
-            display: none; /* JavaScript จะควบคุมการแสดงผล */
-        }
-        .page-content-section.active { display: block; }
-
-        .page-content-section h2 {
-            font-size: 1.8em;
-            color: #D84315;
-            margin-top: 0;
-            margin-bottom: 20px;
-            padding-bottom: 10px;
-            border-bottom: 3px solid #fbbf24;
-        }
-
-        .iqa-item, .standard-block, .indicator, .highlight-item {
-            background-color: #fdfdfd;
-            border: 1px solid #eee;
-            padding: 15px;
-            margin-bottom: 15px;
-            border-radius: 8px;
-        }
-        .iqa-item h3, .standard-block h3, .indicator h4, .highlight-item h3 {
-            color: #EF6C00;
-            margin-top: 0;
-            margin-bottom: 10px;
-        }
-        .highlight-item img {
-            max-width: 100%;
-            height: auto;
-            border-radius: 4px;
-            margin-bottom: 10px;
-            border: 1px solid #ddd;
-        }
-
-
-        .evidence-section summary {
-            cursor: pointer;
-            font-weight: bold;
-            color: #EF6C00;
-            padding: 8px 12px;
-            background-color: #FFF3E0;
-            border: 1px solid #FFCC80;
-            border-radius: 4px;
-            display: inline-block;
-            margin-bottom: 8px;
-            transition: background-color 0.2s;
-        }
-        .evidence-section summary:hover { background-color: #FFE0B2; }
-        .evidence-section summary::-webkit-details-marker { display: none; }
-        .evidence-section summary::before { content: '📂 '; margin-right: 5px; }
-        .evidence-section[open] summary::before { content: '📄 '; }
-        .evidence-list { list-style: none; padding-left: 10px; margin-top: 10px; }
-        .evidence-list li { margin-bottom: 8px; }
-        .evidence-list li a { text-decoration: none; color: #1E88E5; }
-        .evidence-list li a:hover { text-decoration: underline; color: #1565C0; }
-        .file-type { font-size: 0.8em; color: #757575; margin-left: 5px; background-color: #f0f0f0; padding: 2px 6px; border-radius: 3px; font-weight: normal; }
-
-
-        footer.spa-footer {
-            background-color: #333333;
-            color: #FFFFFF;
-            text-align: center;
-            padding: 20px 0;
-            margin-top: 40px;
-        }
-        footer.spa-footer a { color: #fbbf24; text-decoration: none; }
-        footer.spa-footer a:hover { text-decoration: underline; }
-        /* === สิ้นสุด CSS สำหรับ SPA === */
-    </style>
-    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Custom Stylesheet -->
+    <link rel="stylesheet" href="style.css"> <!-- เชื่อมโยงไปยังไฟล์ CSS ที่กำหนดเอง -->
 </head>
 <body>
     <header class="spa-header">
