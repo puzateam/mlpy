@@ -434,27 +434,29 @@ nav.bg-white .menu-item.active {
     border-width: 0;
 }
 
-.evidence-button {
-    background-color: #ef4444; /* Tailwind red-500 */
-    color: white;
-    padding: 0.25rem 0.75rem; /* py-1 px-3 */
-    border-radius: 9999px; /* rounded-full */
-    font-size: 0.75rem; /* text-xs */
-    font-weight: 500; /* font-medium */
-    margin-left: 0.5rem; /* ml-2 */
-    transition: background-color 0.2s ease-in-out;
-    text-decoration: none; /* ป้องกันขีดเส้นใต้จาก a tag */
-    display: inline-flex; /* ช่วยจัด icon กับ text ถ้ามี */
-    align-items: center;
-}
-.evidence-button:hover {
-    background-color: #dc2626; /* Tailwind red-600 */
-}
-.evidence-button .file-type { /* ปรับ file-type ให้อยู่ในปุ่ม */
-    background-color: rgba(255,255,255,0.2); /* สีพื้นหลังจางๆ ให้ตัดกับปุ่ม */
-    color: white; /* สีตัวอักษรของ file-type */
-    margin-left: 0.35rem; /* ระยะห่างจากคำว่า "ดูหลักฐาน" */
-    padding: 0.1rem 0.3rem; /* ปรับขนาด padding ให้เล็กลง */
-    font-size: 0.65rem; /* ปรับขนาด font ให้เล็กลง */
-    /* border-radius จะรับมาจาก .evidence-button ไม่ต้องใส่ซ้ำ */
-}
+        .evidence-button {
+            background-color: #ef4444; /* Tailwind red-500 */
+            color: white;
+            padding: 0.25rem 0.75rem; /* py-1 px-3 */
+            border-radius: 9999px; /* rounded-full */
+            font-size: 0.75rem; /* text-xs */
+            font-weight: 500; /* font-medium */
+            transition: background-color 0.2s ease-in-out;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+        }
+        .evidence-button:hover {
+            background-color: #dc2626; /* Tailwind red-600 */
+        }
+        .evidence-button .file-type {
+            background-color: rgba(255,255,255,0.2);
+            color: white;
+            margin-left: 0.35rem;
+            padding: 0.1rem 0.3rem;
+            font-size: 0.65rem;
+        }
+        /* สไตล์สำหรับ Tab ของแต่ละระดับการศึกษา */
+        .tab-button-level { /* คลาสใหม่สำหรับปุ่ม Tab ที่แสดงเฉพาะระดับ */
+             /* สไตล์เหมือน onesqa-tab-button เดิม */
+        }
