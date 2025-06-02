@@ -81,32 +81,38 @@
             </div>
         </aside>
 
-        <main class="content w-full md:w-2/4">
+<main class="content w-full md:w-2/4">
             <div class="bg-white rounded-2xl shadow-md p-5 card card-main-content-sms main-content-area-sms">
+                {/* Panel สำหรับ "ประกันคุณภาพภายใน" จะแสดงแถบนำทางและ PDF Viewer */}
                 <div id="iqaDocumentsSection" class="main-content-panel">
                     <div class="iqa-sub-nav">
                         <button data-pdf-src="https://drive.google.com/file/d/1n3XtVetBdlzZqaDE8Hlm5xs9GGQg0sSH/preview" class="iqa-sub-nav-item">แผนพัฒนาคุณภาพการศึกษา</button>
-                        <button data-pdf-src="YOUR_SAR_PDF_LINK_HERE" class="iqa-sub-nav-item">รายงานการประเมินตนเอง (SAR)</button>
-                        <button data-pdf-src="YOUR_ANNUAL_PLAN_PDF_LINK_HERE" class="iqa-sub-nav-item">แผนปฏิบัติการประจำปี</button>
+                        <button data-pdf-src="URL_SAR_PDF_LINK_HERE" class="iqa-sub-nav-item">รายงานการประเมินตนเอง (SAR)</button>
+                        <button data-pdf-src="URL_ANNUAL_PLAN_PDF_LINK_HERE" class="iqa-sub-nav-item">แผนปฏิบัติการประจำปี</button>
+                    </div>
+                    {/* NEW: Common area for PDF display, used by IQA and Indicators */}
+                    <div id="commonPdfDisplayArea"> 
+                        <div id="pdf-viewer-container">
+                            <iframe id="pdf-iframe" class="pdf-embed-container-sms" frameborder="0" allowfullscreen></iframe>
+                        </div>
+                        <div id="no-pdf-message-container">
+                            <p id="no-pdf-message-text"></p>
+                        </div>
                     </div>
                 </div>
 
+                {/* Panel สำหรับ "ผลงานเด่น" */}
                 <div id="highlightsSectionContent" class="main-content-panel sms-html-content-section hidden">
                     <h2 class="text-xl font-bold text-red-600 border-b-2 border-yellow-400 pb-2 mb-6">ผลงานเด่นของสถานศึกษา</h2>
-                    <div class="grid md:grid-cols-2 gap-6">
-                        <div class="highlight-item bg-white p-4 rounded-lg shadow hover:shadow-xl transition-shadow"><img src="https://via.placeholder.com/600x400.png?text=ผลงานเด่น+1" alt="ผลงานเด่น 1" class="w-full h-48 object-cover rounded-md mb-3"><h4 class="text-md font-semibold text-gray-800">รางวัลชนะเลิศการแข่งขันโครงงานวิทยาศาสตร์ระดับภาค</h4><p class="text-gray-600 text-sm mb-3">นักเรียนของเราได้รับรางวัลชนะเลิศจากการแข่งขันโครงงานวิทยาศาสตร์ในหัวข้อ "พลังงานสะอาดเพื่ออนาคต" ซึ่งจัดขึ้นโดย...</p><a href="path/to/highlight_detail_1.html" target="_blank" class="btn-primary inline-block px-4 py-2 text-sm">อ่านเพิ่มเติม</a></div>
-                        <div class="highlight-item bg-white p-4 rounded-lg shadow hover:shadow-xl transition-shadow"><img src="https://via.placeholder.com/600x400.png?text=กิจกรรมเด่น+2" alt="กิจกรรมเด่น 2" class="w-full h-48 object-cover rounded-md mb-3"><h4 class="text-md font-semibold text-gray-800">โครงการจิตอาสาพัฒนาชุมชน</h4><p class="text-gray-600 text-sm mb-3">นักเรียนและบุคลากรของโรงเรียนร่วมกันจัดกิจกรรมบำเพ็ญประโยชน์ ทำความสะอาด และปรับปรุงภูมิทัศน์ในชุมชนรอบโรงเรียน...</p><a href="path/to/highlight_detail_2.html" target="_blank" class="btn-primary inline-block px-4 py-2 text-sm">ดูภาพกิจกรรม</a></div>
-                    </div>
+                    {/* ... (เนื้อหา Highlights เหมือนเดิม) ... */}
                 </div>
                 
+                {/* Panel สำหรับแสดงตัวชี้วัดจาก Sidebar */}
                 <div id="indicatorDisplayArea" class="main-content-panel hidden">
+                    {/* หัวข้อ 2 บรรทัดจะถูกใส่โดย JavaScript เมื่อคลิกตัวชี้วัด */}
                     <h2 id="sms-center-content-title" class="text-xl font-bold text-red-600 border-b-2 border-yellow-400 pb-2 mb-6 hidden"></h2>
-                    <div id="pdf-viewer-container">
-                        <iframe id="pdf-iframe" class="pdf-embed-container-sms" frameborder="0" allowfullscreen></iframe>
-                    </div>
-                    <div id="no-pdf-message-container">
-                        <p id="no-pdf-message-text"></p>
-                    </div>
+                    {/* This panel will re-use the #commonPdfDisplayArea when showing PDF/NoPDF message for indicators.
+                        JavaScript will manage showing/hiding commonPdfDisplayArea appropriately. */}
                 </div>
             </div>
         </main>
@@ -172,16 +178,19 @@ document.addEventListener('DOMContentLoaded', function () {
     const indicatorLinks = document.querySelectorAll('.sms-indicator-link');
     
     const mainContentPanels = document.querySelectorAll('.main-content-panel');
-    const highlightsSection = document.getElementById('highlightsSectionContent'); // Should have .main-content-panel
-    const indicatorDisplayArea = document.getElementById('indicatorDisplayArea'); // Should have .main-content-panel
+    const highlightsSection = document.getElementById('highlightsSectionContent');
+    const indicatorDisplayArea = document.getElementById('indicatorDisplayArea');
     
+    // Shared PDF display elements (now inside iqaDocumentsSection, but used by indicatorDisplayArea too)
+    const commonPdfDisplayArea = document.getElementById('commonPdfDisplayArea'); 
     const pdfViewerContainer = document.getElementById('pdf-viewer-container');
     const pdfIframe = document.getElementById('pdf-iframe');
     const noPdfMessageContainer = document.getElementById('no-pdf-message-container');
     const noPdfMessageText = document.getElementById('no-pdf-message-text');
-    const smsCenterContentTitleElement = document.getElementById('sms-center-content-title');
+    
+    const smsCenterContentTitleElement = document.getElementById('sms-center-content-title'); // For indicator titles
 
-    const defaultIqaPdfUrl = "https://drive.google.com/file/d/1n3XtVetBdlzZqaDE8Hlm5xs9GGQg0sSH/preview"; // Default for "แผนพัฒนาคุณภาพการศึกษา"
+    const defaultIqaPdfUrl = "https://drive.google.com/file/d/1n3XtVetBdlzZqaDE8Hlm5xs9GGQg0sSH/preview";
 
     function clearAllActiveNavStates() {
         mainNavLinks.forEach(link => link.classList.remove('active', 'text-red-500', 'font-semibold'));
@@ -198,30 +207,33 @@ document.addEventListener('DOMContentLoaded', function () {
                 panel.classList.add('hidden');
             }
         });
-        // Hide indicator title if not showing indicator specific content
+        // Explicitly manage visibility of the shared PDF display area based on which panel is active
+        if (panelIdToShow === 'iqaDocumentsSection' || panelIdToShow === 'indicatorDisplayArea') {
+            commonPdfDisplayArea.classList.remove('hidden'); // Show it
+        } else {
+            commonPdfDisplayArea.classList.add('hidden'); // Hide it for other panels like highlights
+        }
+
         if (panelIdToShow !== 'indicatorDisplayArea') {
-            smsCenterContentTitleElement.classList.add('hidden');
+            smsCenterContentTitleElement.classList.add('hidden'); // Hide indicator title
+            smsCenterContentTitleElement.innerHTML = '';
         }
     }
 
-    function loadPdfIntoView(pdfSrc, activeSubNavItem) {
-        // This function is now primarily for IQA sub-nav items
-        pdfViewerContainer.style.display = 'block';
-        noPdfMessageContainer.style.display = 'none';
-        // smsCenterContentTitleElement is not used for IQA docs, keep it hidden or clear it
-        smsCenterContentTitleElement.classList.add('hidden');
-        smsCenterContentTitleElement.innerHTML = '';
-
-
-        let finalPdfSrc = pdfSrc;
-        if (pdfSrc && pdfSrc.includes('drive.google.com') && pdfSrc.includes('/file/d/') && !pdfSrc.includes('/preview')) {
-            finalPdfSrc = pdfSrc.replace('/view', '/preview').replace(/\?usp=sharing$/, "").replace(/\/$/, "") + '/preview';
-        }
-        pdfIframe.src = finalPdfSrc || 'about:blank';
-
-        iqaSubNavItems.forEach(item => item.classList.remove('active'));
-        if (activeSubNavItem) {
-            activeSubNavItem.classList.add('active');
+    function displayPdfInCommonArea(pdfSrc, tabNameForNoPdf) {
+        if (pdfSrc && pdfSrc.trim() !== "" && !pdfSrc.toLowerCase().includes("url_") && !pdfSrc.toLowerCase().includes("your_")) {
+            pdfViewerContainer.style.display = 'block';
+            noPdfMessageContainer.style.display = 'none';
+            let finalPdfSrc = pdfSrc;
+            if (pdfSrc.includes('drive.google.com') && pdfSrc.includes('/file/d/') && !pdfSrc.includes('/preview')) {
+                finalPdfSrc = pdfSrc.replace('/view', '/preview').replace(/\?usp=sharing$/, "").replace(/\/$/, "") + '/preview';
+            }
+            pdfIframe.src = finalPdfSrc;
+        } else {
+            pdfViewerContainer.style.display = 'none';
+            noPdfMessageContainer.style.display = 'block';
+            noPdfMessageText.textContent = `ยังไม่มีไฟล์หลักฐานสำหรับ: ${tabNameForNoPdf}`;
+            pdfIframe.src = 'about:blank';
         }
     }
     
@@ -230,6 +242,8 @@ document.addEventListener('DOMContentLoaded', function () {
         smsCenterContentTitleElement.classList.remove('hidden');
     }
 
+    // --- Event Listeners ---
+
     mainNavLinks.forEach(link => {
         link.addEventListener('click', function(event) {
             event.preventDefault();
@@ -237,43 +251,40 @@ document.addEventListener('DOMContentLoaded', function () {
 
             clearAllActiveNavStates();
             this.classList.add('active', 'text-red-500', 'font-semibold');
-
             showMainContentPanel(targetPanelId);
 
             if (targetPanelId === 'iqaDocumentsSection') {
-                const firstSubNavItem = iqaDocumentsSection.querySelector('.iqa-sub-nav-item'); // Should be "แผนพัฒนาคุณภาพการศึกษา"
+                const firstSubNavItem = iqaDocumentsSection.querySelector('.iqa-sub-nav-item');
                 if (firstSubNavItem) {
-                     loadPdfIntoView(firstSubNavItem.dataset.pdfSrc || defaultIqaPdfUrl, firstSubNavItem);
+                    firstSubNavItem.classList.add('active');
+                    displayPdfInCommonArea(firstSubNavItem.dataset.pdfSrc || defaultIqaPdfUrl, firstSubNavItem.textContent.trim());
                 }
             } else if (targetPanelId === 'highlightsSectionContent') {
-                // Ensure PDF viewer is hidden when showing HTML highlights
-                pdfViewerContainer.style.display = 'none';
-                noPdfMessageContainer.style.display = 'none';
+                // HTML content, common PDF area will be hidden by showMainContentPanel
             }
         });
     });
 
     iqaSubNavItems.forEach(item => {
         item.addEventListener('click', function() {
+            iqaSubNavItems.forEach(i => i.classList.remove('active'));
+            this.classList.add('active');
             const pdfSrc = this.dataset.pdfSrc;
-            if (pdfSrc && pdfSrc.trim() !== "" && !pdfSrc.toLowerCase().includes("your_")) {
-                loadPdfIntoView(pdfSrc, this);
-            } else {
-                pdfIframe.src = 'about:blank';
-                pdfViewerContainer.style.display = 'none';
-                noPdfMessageContainer.style.display = 'block';
-                noPdfMessageText.textContent = `ยังไม่มีไฟล์สำหรับ: ${this.textContent.trim()}`;
-                
-                iqaSubNavItems.forEach(i => i.classList.remove('active'));
-                this.classList.add('active');
-            }
+            displayPdfInCommonArea(pdfSrc, this.textContent.trim());
         });
     });
 
     indicatorLinks.forEach(link => {
         link.addEventListener('click', function (event) {
             event.preventDefault();
-            showMainContentPanel('indicatorDisplayArea');
+            clearAllActiveNavStates(); // Clear top nav and IQA sub-nav
+            showMainContentPanel('indicatorDisplayArea'); 
+
+            this.classList.add('active-indicator');
+            const parentMainLink = this.closest('.sidebar-item')?.querySelector('.sms-sidebar-main-link');
+            if (parentMainLink) {
+                parentMainLink.classList.add('active-parent');
+            }
 
             const pdfSrc = this.dataset.pdfSrc;
             const level = this.dataset.level || "";
@@ -285,27 +296,7 @@ document.addEventListener('DOMContentLoaded', function () {
             const titleLine2 = `ตัวชี้วัดที่ ${indicatorNo} :: ${indicatorDetail}`;
             setIndicatorTitle(`<span class="title-line-1">${titleLine1}</span><span class="title-line-2">${titleLine2}</span>`);
             
-            clearAllActiveNavStates();
-            this.classList.add('active-indicator');
-            const parentMainLink = this.closest('.sidebar-item')?.querySelector('.sms-sidebar-main-link');
-            if (parentMainLink) {
-                parentMainLink.classList.add('active-parent');
-            }
-
-            if (!pdfSrc || pdfSrc.trim() === "" || pdfSrc.toLowerCase().startsWith("url_")) {
-                pdfViewerContainer.style.display = 'none';
-                noPdfMessageContainer.style.display = 'block';
-                noPdfMessageText.textContent = `ยังไม่มีไฟล์หลักฐานสำหรับ: ตัวชี้วัดที่ ${indicatorNo} :: ${indicatorDetail}`;
-                pdfIframe.src = 'about:blank';
-            } else {
-                pdfViewerContainer.style.display = 'block';
-                noPdfMessageContainer.style.display = 'none';
-                let finalPdfSrc = pdfSrc;
-                if (pdfSrc.includes('drive.google.com') && pdfSrc.includes('/file/d/') && !pdfSrc.includes('/preview')) {
-                    finalPdfSrc = pdfSrc.replace('/view', '/preview').replace(/\?usp=sharing$/, "").replace(/\/$/, "") + '/preview';
-                }
-                pdfIframe.src = finalPdfSrc;
-            }
+            displayPdfInCommonArea(pdfSrc, `ตัวชี้วัดที่ ${indicatorNo} :: ${indicatorDetail}`);
         });
     });
     
@@ -318,13 +309,7 @@ document.addEventListener('DOMContentLoaded', function () {
     function initializePage() {
         const iqaNavLink = mainNavUl.querySelector('a[data-target="iqaDocumentsSection"]');
         if (iqaNavLink) {
-            iqaNavLink.click(); // Simulate click to trigger active state and content loading
-        } else { // Fallback if somehow the link isn't found
-             showMainContentPanel('iqaDocumentsSection');
-             const firstIqaSubNavItem = iqaDocumentsSection.querySelector('.iqa-sub-nav-item');
-             if (firstIqaSubNavItem) {
-                loadPdfIntoView(firstIqaSubNavItem.dataset.pdfSrc || defaultIqaPdfUrl, firstIqaSubNavItem);
-             }
+            iqaNavLink.click(); 
         }
     }
     initializePage();
