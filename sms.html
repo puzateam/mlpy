@@ -11,8 +11,10 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- SweetAlert2 CDN (สำหรับการแจ้งเตือนสวยๆ) -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <!-- Custom Stylesheet (ไฟล์ style.css หลัก) -->
+    
+    <!-- Custom Stylesheet (ไฟล์ style.css หลัก - สำหรับสไตล์ที่ใช้ร่วมกัน) -->
     <link rel="stylesheet" href="style.css">
+
 </head>
 <body class="bg-gray-100">
 
@@ -48,7 +50,7 @@
                 <h2 class="text-xl font-bold text-red-600 border-b-2 border-yellow-400 pb-2 my-4">มาตรฐานฯ ปฐมวัย</h2>
                 <ul class="space-y-1" id="preschool-standards-menu">
                     <li class="sidebar-item">
-                        <a href="#" class="sms-sidebar-main-link py-2">มาตรฐานที่ 1: คุณภาพของเด็ก</a>
+                        <a href="#" class="sms-sidebar-main-link">มาตรฐานที่ 1: คุณภาพของเด็ก</a>
                         <ul class="sub-indicator-menu">
                             <li><a href="#" class="sms-indicator-link" 
                                    data-pdf-src="URL_PRESCHOOL_S1_I1.1" 
@@ -88,7 +90,7 @@
                         </ul>
                     </li>
                     <li class="sidebar-item">
-                        <a href="#" class="sms-sidebar-main-link py-2">มาตรฐานที่ 2: กระบวนการบริหารและการจัดการ</a>
+                        <a href="#" class="sms-sidebar-main-link">มาตรฐานที่ 2: กระบวนการบริหารและการจัดการ</a>
                         <ul class="sub-indicator-menu">
                             <li><a href="#" class="sms-indicator-link" 
                                    data-pdf-src="URL_PRESCHOOL_S2_I2.1" 
@@ -163,7 +165,7 @@
                         </ul>
                     </li>
                     <li class="sidebar-item">
-                        <a href="#" class="sms-sidebar-main-link py-2">มาตรฐานที่ 3: การจัดประสบการณ์ฯ</a>
+                        <a href="#" class="sms-sidebar-main-link">มาตรฐานที่ 3: การจัดประสบการณ์ฯ</a>
                         <ul class="sub-indicator-menu">
                             <li><a href="#" class="sms-indicator-link" 
                                    data-pdf-src="URL_PRESCHOOL_S3_I3.1" 
@@ -209,7 +211,6 @@
         <!-- ส่วนเนื้อหาตรงกลาง (Main Content Area) -->
         <main class="content w-full md:w-2/4">
             <div class="bg-white rounded-2xl shadow-md p-5 card card-main-content-sms main-content-area-sms">
-                {/* <!-- หัวข้อ 2 บรรทัดจะถูกใส่โดย JavaScript --> */}
                 <h2 id="sms-center-content-title" class="text-xl font-bold text-red-600 border-b-2 border-yellow-400 pb-2 mb-6">
                     {/* JavaScript will populate this */}
                 </h2>
@@ -223,7 +224,6 @@
                 </div>
 
                 <div id="iqaSectionContent" class="sms-html-content-section">
-                    {/* เนื้อหา IQA เหมือนเดิม */}
                     <div class="iqa-item">
                         <h3 class="text-lg font-semibold text-orange-700 mb-2">รายงานการประเมินตนเอง (SAR)</h3>
                         <p class="text-gray-700 mb-2">สถานศึกษามีการจัดทำรายงานการประเมินตนเองเป็นประจำทุกปี เพื่อสะท้อนผลการดำเนินงานและวางแผนพัฒนาคุณภาพอย่างต่อเนื่อง</p>
@@ -240,7 +240,6 @@
                     </div>
                 </div>
                 <div id="highlightsSectionContent" class="sms-html-content-section">
-                    {/* เนื้อหา Highlights เหมือนเดิม */}
                     <h3 class="text-lg font-semibold text-orange-700 mb-2">ผลงานเด่นของสถานศึกษา</h3>
                     <div class="grid md:grid-cols-2 gap-6">
                         <div class="highlight-item bg-white p-4 rounded-lg shadow hover:shadow-xl transition-shadow">
@@ -266,7 +265,7 @@
                 <h2 class="text-xl font-bold text-red-600 border-b-2 border-yellow-400 pb-2 my-4">มาตรฐานฯ ขั้นพื้นฐาน</h2>
                 <ul class="space-y-1" id="basiced-standards-menu">
                     <li class="sidebar-item">
-                        <a href="#" class="sms-sidebar-main-link py-2">มาตรฐานที่ 1: คุณภาพของผู้เรียน</a>
+                        <a href="#" class="sms-sidebar-main-link">มาตรฐานที่ 1: คุณภาพของผู้เรียน</a>
                         <ul class="sub-indicator-menu">
                             <li><a href="#" class="sms-indicator-link" 
                                    data-pdf-src="URL_BASICED_S1_I1.1" 
@@ -292,7 +291,7 @@
                         </ul>
                     </li>
                     <li class="sidebar-item">
-                        <a href="#" class="sms-sidebar-main-link py-2">มาตรฐานที่ 2: กระบวนการบริหารและการจัดการ</a>
+                        <a href="#" class="sms-sidebar-main-link">มาตรฐานที่ 2: กระบวนการบริหารและการจัดการ</a>
                         <ul class="sub-indicator-menu">
                              <li><a href="#" class="sms-indicator-link" 
                                    data-pdf-src="URL_BASICED_S2_I2.1" 
@@ -367,7 +366,7 @@
                         </ul>
                     </li>
                     <li class="sidebar-item">
-                        <a href="#" class="sms-sidebar-main-link py-2">มาตรฐานที่ 3: กระบวนการจัดการเรียนการสอนฯ</a>
+                        <a href="#" class="sms-sidebar-main-link">มาตรฐานที่ 3: กระบวนการจัดการเรียนการสอนฯ</a>
                         <ul class="sub-indicator-menu">
                             <li><a href="#" class="sms-indicator-link" 
                                    data-pdf-src="URL_BASICED_S3_I3.1" 
@@ -415,7 +414,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const pdfIframe = document.getElementById('pdf-iframe');
     const noPdfMessageContainer = document.getElementById('no-pdf-message-container');
     const noPdfMessageText = document.getElementById('no-pdf-message-text');
-    const smsCenterContentTitleElement = document.getElementById('sms-center-content-title'); // Renamed for clarity
+    const smsCenterContentTitleElement = document.getElementById('sms-center-content-title');
     const mainContentArea = document.querySelector('.main-content-area-sms');
 
     const smsNavLinks = document.querySelectorAll('#sms-main-nav-ul a.sms-nav-link');
@@ -432,7 +431,6 @@ document.addEventListener('DOMContentLoaded', function () {
         indicatorLinks.forEach(link => {
             link.classList.remove('active-indicator');
         });
-        // Clear active state from main sidebar links if they were styled as active parent
         document.querySelectorAll('.sms-sidebar-main-link.active-parent').forEach(link => {
             link.classList.remove('active-parent');
         });
@@ -470,14 +468,14 @@ document.addEventListener('DOMContentLoaded', function () {
             linkElement.classList.add('active', 'text-red-500', 'font-semibold');
             linkElement.classList.remove('text-gray-700');
             titleText = linkElement.textContent.trim();
-        } else { // For initial load
+        } else {
             const defaultLink = document.querySelector(`#sms-main-nav-ul a[data-target="${initialHtmlContentId}"]`);
             if (defaultLink) {
                 defaultLink.classList.add('active', 'text-red-500', 'font-semibold');
                 defaultLink.classList.remove('text-gray-700');
             }
         }
-        setMainContentTitle(`<span class="title-line-1">${titleText}</span>`); // Single line for IQA/Highlights
+        setMainContentTitle(`<span class="title-line-1">${titleText}</span>`);
     }
 
     function showIndicatorContent(linkElement) {
@@ -495,7 +493,7 @@ document.addEventListener('DOMContentLoaded', function () {
         linkElement.classList.add('active-indicator');
         const parentMainLink = linkElement.closest('.sidebar-item')?.querySelector('.sms-sidebar-main-link');
         if (parentMainLink) {
-            parentMainLink.classList.add('active-parent'); // Style the parent category as active
+            parentMainLink.classList.add('active-parent');
         }
 
         if (!pdfSrc || pdfSrc.trim() === "" || pdfSrc.toLowerCase().startsWith("url_")) {
@@ -531,11 +529,10 @@ document.addEventListener('DOMContentLoaded', function () {
 
     document.querySelectorAll('.sms-sidebar-main-link').forEach(mainLink => {
         mainLink.addEventListener('click', function(event) {
-            event.preventDefault(); // Main links are not clickable for content change
+            event.preventDefault();
         });
     });
 
-    // Initial load: Show IQA content
     const initialLinkElement = document.querySelector(`#sms-main-nav-ul a[data-target="${initialHtmlContentId}"]`);
     showHtmlContent(initialHtmlContentId, initialLinkElement);
 
