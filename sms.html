@@ -14,16 +14,49 @@
     <!-- Custom Stylesheet (ไฟล์ style.css หลัก) -->
     <link rel="stylesheet" href="style.css">
     <style>
-        /* Custom styles for sms.html specifically if needed */
+        /* Custom styles for sms.html specifically */
+        .sidebar-sms .sidebar-item {
+            border-bottom: 1px solid #fee2e2; /* Tailwind red-100 */
+            transition: all 0.3s ease;
+        }
         .sidebar-sms .sidebar-item a.active,
-        .sidebar-sms .sidebar-item:hover {
+        .sidebar-sms .sidebar-item:hover > a { /* Hover effect on li or a */
             background-color: rgba(254, 226, 226, 0.5); /* Tailwind red-100 โปร่งแสง */
             padding-left: 0.5rem;
             color: #dc2626 !important; /* Tailwind red-600 */
-        }
-        .sidebar-sms .sidebar-item a.active {
             font-weight: 600;
         }
+        .sidebar-sms .sub-indicator-menu {
+            list-style-type: none;
+            padding-left: 1rem; /* Indent sub-menu */
+            margin-top: 0.25rem;
+            margin-bottom: 0.5rem;
+        }
+        .sidebar-sms .sub-indicator-menu li a {
+            font-size: 0.875rem; /* text-sm */
+            padding-top: 0.25rem;
+            padding-bottom: 0.25rem;
+            display: block;
+            color: #4b5563; /* gray-600 */
+        }
+        .sidebar-sms .sub-indicator-menu li a:hover,
+        .sidebar-sms .sub-indicator-menu li a.active-indicator {
+            color: #c53030; /* red-700 */
+            font-weight: 500;
+        }
+        .pdf-embed-container-sms {
+            width: 100%;
+            height: calc(100vh - 220px); /* Adjust height as needed */
+            border: 1px solid #d1d5db; /* Tailwind gray-300 */
+        }
+        /* Hide HTML content sections when PDF is shown */
+        .main-content-area-sms.showing-pdf .sms-html-content-section {
+            display: none !important;
+        }
+         .main-content-area-sms.showing-html #pdf-viewer-container {
+            display: none !important;
+        }
+
     </style>
 </head>
 <body class="bg-gray-100">
@@ -33,7 +66,7 @@
         <!-- ส่วนที่ 1: โลโก้และชื่อโรงเรียน (พื้นหลังสีส้มไล่เฉด) -->
         <div class="bg-gradient-to-r from-red-600 to-yellow-500 p-4">
             <div class="container mx-auto flex flex-col items-center">
-                <div class="flex flex-col items-center mb-2"> <!-- ลด mb ในจอ md ขึ้นไปเล็กน้อย -->
+                <div class="flex flex-col items-center mb-2">
                     <img src="https://i.postimg.cc/d3PbrGqC/logo-School.png" alt="โลโก้โรงเรียน" class="w-[80px] h-auto mb-2">
                     <div class="text-center">
                         <h1 class="text-white text-2xl md:text-3xl font-bold">โรงเรียนชุมชนบ้านแม่หละป่าป๋วย</h1>
@@ -46,7 +79,6 @@
         <nav class="bg-white shadow-md sticky top-0 z-40">
             <div class="container mx-auto">
                 <ul class="flex flex-wrap justify-center space-x-1 sm:space-x-2 md:space-x-3 lg:space-x-4 items-center py-2" id="sms-main-nav-ul">
-                    <!-- ปรับเมนูตามโจทย์ -->
                     <li><a href="#" data-target="iqaSectionContent" class="sms-nav-link menu-item px-2 sm:px-3 py-2 text-gray-700 hover:text-red-500 text-sm md:text-base">ประกันคุณภาพภายใน</a></li>
                     <li><a href="#" data-target="highlightsSectionContent" class="sms-nav-link menu-item px-2 sm:px-3 py-2 text-gray-700 hover:text-red-500 text-sm md:text-base">ผลงานเด่น</a></li>
                     <li><a href="index.html" class="menu-item px-2 sm:px-3 py-2 text-gray-700 hover:text-red-500 text-sm md:text-base">กลับเว็บหลัก</a></li>
@@ -62,217 +94,66 @@
         <aside class="sidebar sidebar-sms w-full md:w-1/4">
             <div class="bg-white rounded-2xl shadow-md p-5 card">
                 <h2 class="text-xl font-bold text-red-600 border-b-2 border-yellow-400 pb-2 my-4">มาตรฐานฯ ปฐมวัย</h2>
-                <ul class="space-y-2" id="preschool-standards-menu">
-                    <li class="sidebar-item pb-2"><a href="#" data-target="preschool-std1-content" class="block text-gray-700 sms-sidebar-link">มาตรฐานที่ 1: คุณภาพของเด็ก</a></li>
-                    <li class="sidebar-item pb-2"><a href="#" data-target="preschool-std2-content" class="block text-gray-700 sms-sidebar-link">มาตรฐานที่ 2: กระบวนการบริหารและการจัดการ</a></li>
-                    <li class="sidebar-item pb-2"><a href="#" data-target="preschool-std3-content" class="block text-gray-700 sms-sidebar-link">มาตรฐานที่ 3: การจัดประสบการณ์ฯ</a></li>
+                <ul class="space-y-1" id="preschool-standards-menu">
+                    <li class="sidebar-item">
+                        <a href="#" class="block text-gray-700 sms-sidebar-main-link py-2">มาตรฐานที่ 1: คุณภาพของเด็ก</a>
+                        <ul class="sub-indicator-menu">
+                            <li><a href="#" class="sms-indicator-link" data-pdf-src="URL_TO_PRESCHOOL_STD1_INDICATOR_1.1.pdf" data-indicator-title="ปฐมวัย ม.1 ตชว.1.1: เด็กเจริญเติบโตสมวัยฯ">1.1 เด็กเจริญเติบโตสมวัยฯ</a></li>
+                            <li><a href="#" class="sms-indicator-link" data-pdf-src="URL_TO_PRESCHOOL_STD1_INDICATOR_1.2.pdf" data-indicator-title="ปฐมวัย ม.1 ตชว.1.2: พัฒนาการด้านสติปัญญา">1.2 พัฒนาการด้านสติปัญญา</a></li>
+                            <li><a href="#" class="sms-indicator-link" data-pdf-src="URL_TO_PRESCHOOL_STD1_INDICATOR_1.3.pdf" data-indicator-title="ปฐมวัย ม.1 ตชว.1.3: พัฒนาการด้านภาษา">1.3 พัฒนาการด้านภาษา</a></li>
+                            <li><a href="#" class="sms-indicator-link" data-pdf-src="URL_TO_PRESCHOOL_STD1_INDICATOR_1.4.pdf" data-indicator-title="ปฐมวัย ม.1 ตชว.1.4: พัฒนาการด้านอารมณ์">1.4 พัฒนาการด้านอารมณ์</a></li>
+                            <li><a href="#" class="sms-indicator-link" data-pdf-src="URL_TO_PRESCHOOL_STD1_INDICATOR_1.5.pdf" data-indicator-title="ปฐมวัย ม.1 ตชว.1.5: พัฒนาการด้านสังคม">1.5 พัฒนาการด้านสังคม</a></li>
+                        </ul>
+                    </li>
+                    <li class="sidebar-item">
+                        <a href="#" class="block text-gray-700 sms-sidebar-main-link py-2">มาตรฐานที่ 2: กระบวนการบริหารและการจัดการ</a>
+                        <ul class="sub-indicator-menu">
+                            <li><a href="#" class="sms-indicator-link" data-pdf-src="URL_TO_PRESCHOOL_STD2_INDICATOR_2.1.pdf" data-indicator-title="ปฐมวัย ม.2 ตชว.2.1: วิสัยทัศน์ พันธกิจ">2.1 วิสัยทัศน์ พันธกิจ</a></li>
+                            <li><a href="#" class="sms-indicator-link" data-pdf-src="URL_TO_PRESCHOOL_STD2_INDICATOR_2.2.pdf" data-indicator-title="ปฐมวัย ม.2 ตชว.2.2: กลยุทธ์และเป้าหมาย">2.2 กลยุทธ์และเป้าหมาย</a></li>
+                            {/* <!-- เพิ่ม Indicator อื่นๆ ของปฐมวัย ม.2 ที่นี่ --> */}
+                        </ul>
+                    </li>
+                    <li class="sidebar-item">
+                        <a href="#" class="block text-gray-700 sms-sidebar-main-link py-2">มาตรฐานที่ 3: การจัดประสบการณ์ฯ</a>
+                        <ul class="sub-indicator-menu">
+                            <li><a href="#" class="sms-indicator-link" data-pdf-src="URL_TO_PRESCHOOL_STD3_INDICATOR_3.1.pdf" data-indicator-title="ปฐมวัย ม.3 ตชว.3.1: ครูวางแผนการจัดประสบการณ์">3.1 ครูวางแผนการจัดประสบการณ์</a></li>
+                            {/* <!-- เพิ่ม Indicator อื่นๆ ของปฐมวัย ม.3 ที่นี่ --> */}
+                        </ul>
+                    </li>
                 </ul>
             </div>
         </aside>
 
         <!-- ส่วนเนื้อหาตรงกลาง (Main Content Area) -->
         <main class="content w-full md:w-2/4">
-            <div class="bg-white rounded-2xl shadow-md p-5 card card-main-content-sms">
+            <div class="bg-white rounded-2xl shadow-md p-5 card card-main-content-sms main-content-area-sms">
                 <h2 id="sms-center-content-title" class="text-xl font-bold text-red-600 border-b-2 border-yellow-400 pb-2 mb-6">ประกันคุณภาพภายใน</h2>
 
+                <!-- Container สำหรับแสดง PDF -->
+                <div id="pdf-viewer-container" class="hidden">
+                    <iframe id="pdf-iframe" class="pdf-embed-container-sms" frameborder="0" allowfullscreen></iframe>
+                </div>
+
                 <!-- 1. Section Wrapper สำหรับ IQA (แสดงเป็น default) -->
-                <div id="iqaSectionContent" class="sms-content-section">
-                    <!-- เนื้อหาประกันคุณภาพภายใน (เหมือนเดิม) -->
+                <div id="iqaSectionContent" class="sms-html-content-section">
                     <div class="iqa-item">
                         <h3 class="text-lg font-semibold text-orange-700 mb-2">รายงานการประเมินตนเอง (SAR)</h3>
                         <p class="text-gray-700 mb-2">สถานศึกษามีการจัดทำรายงานการประเมินตนเองเป็นประจำทุกปี เพื่อสะท้อนผลการดำเนินงานและวางแผนพัฒนาคุณภาพอย่างต่อเนื่อง</p>
                         <ul class="list-disc ml-5 text-gray-700">
-                            <li><a href="#" target="_blank" class="text-blue-600 hover:underline">SAR ปีการศึกษาปัจจุบัน</a> <span class="file-type">PDF</span></li>
+                            <li><a href="YOUR_SAR_PDF_LINK_HERE" target="_blank" class="text-blue-600 hover:underline evidence-button">SAR ปีการศึกษาปัจจุบัน <span class="file-type">PDF</span></a></li>
                         </ul>
                     </div>
                     <div class="iqa-item">
                         <h3 class="text-lg font-semibold text-orange-700 mb-2">แผนพัฒนาคุณภาพการศึกษา</h3>
                         <p class="text-gray-700 mb-2">แผนงานที่แสดงทิศทางการพัฒนาคุณภาพของสถานศึกษาในระยะต่างๆ สอดคล้องกับนโยบายและบริบทของสถานศึกษา</p>
                         <ul class="list-disc ml-5 text-gray-700">
-                            <li><a href="#" target="_blank" class="text-blue-600 hover:underline">แผนปฏิบัติการประจำปี</a> <span class="file-type">PDF</span></li>
+                            <li><a href="YOUR_PLAN_PDF_LINK_HERE" target="_blank" class="text-blue-600 hover:underline evidence-button">แผนปฏิบัติการประจำปี <span class="file-type">PDF</span></a></li>
                         </ul>
                     </div>
                 </div>
 
-                <!-- 2. Section Wrapper สำหรับ มาตรฐานการศึกษาระดับปฐมวัย (ซ่อนไว้ รอการคลิกจาก Sidebar) -->
-                <!-- ปฐมวัย: มาตรฐานที่ 1 -->
-                <div id="preschool-std1-content" class="sms-content-section hidden">
-                    <h3 class="text-lg font-semibold text-orange-700 mb-3 mt-2">มาตรฐานที่ 1 ปฐมวัย: คุณภาพของเด็ก</h3>
-                    <article class="indicator">
-                        <p class="text-gray-700 text-sm mb-1"><strong>ตัวชี้วัดที่ 1.1:</strong> เด็กเจริญเติบโตสมวัย สุขภาพแข็งแรง และมีพัฒนาการด้านการเคลื่อนไหว</p>
-                        <div class="mt-2"><a href="#" target="_blank" class="evidence-button">ดูหลักฐาน<span class="file-type">PDF</span></a></div>
-                    </article>
-                    <article class="indicator">
-                        <p class="text-gray-700 text-sm mb-1"><strong>ตัวชี้วัดที่ 1.2:</strong> เด็กมีพัฒนาการด้านสติปัญญา เรียนรู้และสร้างสรรค์</p>
-                        <div class="mt-2"><a href="path/to/preschool/std1/evidence_1_2.pdf" target="_blank" class="evidence-button">ดูหลักฐาน<span class="file-type">PDF</span></a></div>
-                    </article>
-                    <article class="indicator">
-                        <p class="text-gray-700 text-sm mb-1"><strong>ตัวชี้วัดที่ 1.3:</strong> เด็กมีพัฒนาการด้านภาษาและการสื่อสาร</p>
-                        <div class="mt-2"><a href="#" target="_blank" class="evidence-button">ดูหลักฐาน<span class="file-type">PDF</span></a></div>
-                    </article>
-                    <article class="indicator">
-                        <p class="text-gray-700 text-sm mb-1"><strong>ตัวชี้วัดที่ 1.4:</strong> เด็กมีพัฒนาการด้านอารมณ์และจิตใจ</p>
-                        <div class="mt-2"><a href="#" target="_blank" class="evidence-button">ดูหลักฐาน<span class="file-type">PDF</span></a></div>
-                    </article>
-                    <article class="indicator">
-                        <p class="text-gray-700 text-sm mb-1"><strong>ตัวชี้วัดที่ 1.5:</strong> เด็กมีพัฒนาการด้านสังคมและคุณธรรม</p>
-                        <div class="mt-2"><a href="#" target="_blank" class="evidence-button">ดูหลักฐาน<span class="file-type">PDF</span></a></div>
-                    </article>
-                </div>
-                <!-- ปฐมวัย: มาตรฐานที่ 2 -->
-                <div id="preschool-std2-content" class="sms-content-section hidden">
-                    <h3 class="text-lg font-semibold text-orange-700 mb-3 mt-2">มาตรฐานที่ 2 ปฐมวัย: กระบวนการบริหารและการจัดการ</h3>
-                    <article class="indicator">
-                        <p class="text-gray-700 text-sm mb-1"><strong>ตัวชี้วัดที่ 2.1:</strong> วิสัยทัศน์ พันธกิจ และค่านิยมของสถานศึกษา</p>
-                        <div class="mt-2"><a href="#" target="_blank" class="evidence-button">ดูหลักฐาน<span class="file-type">PDF</span></a></div>
-                    </article>
-                    <!-- ... (Indicator อื่นๆ ของ ปฐมวัย ม.2) ... -->
-                     <article class="indicator">
-                            <p class="text-gray-700 text-sm mb-1"><strong>ตัวชี้วัดที่ 2.2:</strong> กลยุทธ์และเป้าหมายของสถานศึกษา</p>
-                            <div class="mt-2"><a href="#" target="_blank" class="evidence-button">ดูหลักฐาน<span class="file-type">PDF</span></a></div>
-                        </article>
-                        <article class="indicator">
-                            <p class="text-gray-700 text-sm mb-1"><strong>ตัวชี้วัดที่ 2.3:</strong> ผู้บริหารมีภาวะผู้นำทางวิชาการและบริหารจัดการด้วยหลักธรรมาภิบาล</p>
-                            <div class="mt-2"><a href="#" target="_blank" class="evidence-button">ดูหลักฐาน<span class="file-type">PDF</span></a></div>
-                        </article>
-                        <article class="indicator">
-                            <p class="text-gray-700 text-sm mb-1"><strong>ตัวชี้วัดที่ 2.4:</strong> การพัฒนาวิชาชีพผู้บริหาร ครู และบุคลากรทางการศึกษา</p>
-                            <div class="mt-2"><a href="#" target="_blank" class="evidence-button">ดูหลักฐาน<span class="file-type">PDF</span></a></div>
-                        </article>
-                        <article class="indicator">
-                            <p class="text-gray-700 text-sm mb-1"><strong>ตัวชี้วัดที่ 2.5:</strong> การนิเทศและประเมินการปฏิบัติงานอย่างเป็นระบบ</p>
-                            <div class="mt-2"><a href="#" target="_blank" class="evidence-button">ดูหลักฐาน<span class="file-type">PDF</span></a></div>
-                        </article>
-                        <article class="indicator">
-                            <p class="text-gray-700 text-sm mb-1"><strong>ตัวชี้วัดที่ 2.6:</strong> การใช้สื่อและเทคโนโลยีสารสนเทศที่เอื้อต่อการเรียนรู้</p>
-                            <div class="mt-2"><a href="#" target="_blank" class="evidence-button">ดูหลักฐาน<span class="file-type">PDF</span></a></div>
-                        </article>
-                        <article class="indicator">
-                            <p class="text-gray-700 text-sm mb-1"><strong>ตัวชี้วัดที่ 2.7:</strong> การจัดสภาพแวดล้อมและแหล่งเรียนรู้ที่ปลอดภัย</p>
-                            <div class="mt-2"><a href="#" target="_blank" class="evidence-button">ดูหลักฐาน<span class="file-type">PDF</span></a></div>
-                        </article>
-                        <article class="indicator">
-                            <p class="text-gray-700 text-sm mb-1"><strong>ตัวชี้วัดที่ 2.8:</strong> สวัสดิการและแนวทางการป้องกันโรคและภัยพิบัติ</p>
-                            <div class="mt-2"><a href="#" target="_blank" class="evidence-button">ดูหลักฐาน<span class="file-type">PDF</span></a></div>
-                        </article>
-                        <article class="indicator">
-                            <p class="text-gray-700 text-sm mb-1"><strong>ตัวชี้วัดที่ 2.9:</strong> กระบวนการเฝ้าระวังและคัดกรองเด็กที่ต้องการความช่วยเหลือ</p>
-                            <div class="mt-2"><a href="#" target="_blank" class="evidence-button">ดูหลักฐาน<span class="file-type">PDF</span></a></div>
-                        </article>
-                        <article class="indicator">
-                            <p class="text-gray-700 text-sm mb-1"><strong>ตัวชี้วัดที่ 2.10:</strong> การสร้างเครือข่ายและการมีส่วนร่วมของผู้ปกครองและชุมชน</p>
-                            <div class="mt-2"><a href="#" target="_blank" class="evidence-button">ดูหลักฐาน<span class="file-type">PDF</span></a></div>
-                        </article>
-                </div>
-                <!-- ปฐมวัย: มาตรฐานที่ 3 -->
-                <div id="preschool-std3-content" class="sms-content-section hidden">
-                    <h3 class="text-lg font-semibold text-orange-700 mb-3 mt-2">มาตรฐานที่ 3 ปฐมวัย: การจัดประสบการณ์ที่เน้นเด็กเป็นสำคัญ</h3>
-                    <article class="indicator">
-                        <p class="text-gray-700 text-sm mb-1"><strong>ตัวชี้วัดที่ 3.1:</strong> ครูมีการวางแผนการจัดประสบการณ์รายปี</p>
-                        <div class="mt-2"><a href="#" target="_blank" class="evidence-button">ดูหลักฐาน<span class="file-type">PDF</span></a></div>
-                    </article>
-                    <!-- ... (Indicator อื่นๆ ของ ปฐมวัย ม.3) ... -->
-                     <article class="indicator">
-                            <p class="text-gray-700 text-sm mb-1"><strong>ตัวชี้วัดที่ 3.2:</strong> ครูนำแผนการจัดประสบการณ์ไปใช้โดยใช้สื่อและแหล่งเรียนรู้ที่เอื้อต่อการเรียนรู้</p>
-                            <div class="mt-2"><a href="#" target="_blank" class="evidence-button">ดูหลักฐาน<span class="file-type">PDF</span></a></div>
-                        </article>
-                        <article class="indicator">
-                            <p class="text-gray-700 text-sm mb-1"><strong>ตัวชี้วัดที่ 3.3:</strong> มีการตรวจสอบและประเมินเด็กอย่างเป็นระบบ</p>
-                            <div class="mt-2"><a href="#" target="_blank" class="evidence-button">ดูหลักฐาน<span class="file-type">PDF</span></a></div>
-                        </article>
-                        <article class="indicator">
-                            <p class="text-gray-700 text-sm mb-1"><strong>ตัวชี้วัดที่ 3.4:</strong> มีการนำผลการประเมินมาพัฒนาเด็ก</p>
-                            <div class="mt-2"><a href="#" target="_blank" class="evidence-button">ดูหลักฐาน<span class="file-type">PDF</span></a></div>
-                        </article>
-                        <article class="indicator">
-                            <p class="text-gray-700 text-sm mb-1"><strong>ตัวชี้วัดที่ 3.5:</strong> มีการแลกเปลี่ยนเรียนรู้และให้ข้อมูลป้อนกลับเพื่อพัฒนาการจัดประสบการณ์</p>
-                            <div class="mt-2"><a href="#" target="_blank" class="evidence-button">ดูหลักฐาน<span class="file-type">PDF</span></a></div>
-                        </article>
-                </div>
-
-                <!-- 3. Section Wrapper สำหรับ มาตรฐานการศึกษาระดับการศึกษาขั้นพื้นฐาน (ซ่อนไว้ รอการคลิกจาก Sidebar) -->
-                <!-- ขั้นพื้นฐาน: มาตรฐานที่ 1 -->
-                <div id="basiced-std1-content" class="sms-content-section hidden">
-                    <h3 class="text-lg font-semibold text-orange-700 mb-3 mt-2">มาตรฐานที่ 1 ขั้นพื้นฐาน: คุณภาพของผู้เรียน</h3>
-                    <article class="indicator">
-                        <p class="text-gray-700 text-sm mb-1"><strong>ตัวชี้วัดที่ 1.1:</strong> ผู้เรียนมีสมรรถนะตามหลักสูตรสถานศึกษา</p>
-                        <div class="mt-2"><a href="#" target="_blank" class="evidence-button">ดูหลักฐาน<span class="file-type">PDF</span></a></div>
-                    </article>
-                    <!-- ... (Indicator อื่นๆ ของ ขั้นพื้นฐาน ม.1) ... -->
-                    <article class="indicator">
-                        <p class="text-gray-700 text-sm mb-1"><strong>ตัวชี้วัดที่ 1.2:</strong> ผู้เรียนมีคุณลักษณะที่พึงประสงค์ตามหลักสูตรสถานศึกษา</p>
-                        <div class="mt-2"><a href="#" target="_blank" class="evidence-button">ดูหลักฐาน<span class="file-type">PDF</span></a></div>
-                    </article>
-                    <article class="indicator">
-                        <p class="text-gray-700 text-sm mb-1"><strong>ตัวชี้วัดที่ 1.3:</strong> ผู้เรียนสามารถนำตนเองในการเรียนรู้</p>
-                        <div class="mt-2"><a href="#" target="_blank" class="evidence-button">ดูหลักฐาน<span class="file-type">PDF</span></a></div>
-                    </article>
-                </div>
-                <!-- ขั้นพื้นฐาน: มาตรฐานที่ 2 -->
-                <div id="basiced-std2-content" class="sms-content-section hidden">
-                    <h3 class="text-lg font-semibold text-orange-700 mb-3 mt-2">มาตรฐานที่ 2 ขั้นพื้นฐาน: กระบวนการบริหารและการจัดการ</h3>
-                    <article class="indicator">
-                        <p class="text-gray-700 text-sm mb-1"><strong>ตัวชี้วัดที่ 2.1:</strong> วิสัยทัศน์ พันธกิจ และค่านิยมของสถานศึกษา</p>
-                        <div class="mt-2"><a href="#" target="_blank" class="evidence-button">ดูหลักฐาน<span class="file-type">PDF</span></a></div>
-                    </article>
-                    <!-- ... (Indicator อื่นๆ ของ ขั้นพื้นฐาน ม.2) ... -->
-                     <article class="indicator">
-                            <p class="text-gray-700 text-sm mb-1"><strong>ตัวชี้วัดที่ 2.2:</strong> นโยบาย ทิศทาง กลยุทธ์ และแผนงานสอดคล้องกับวิสัยทัศน์และพันธกิจ</p>
-                            <div class="mt-2"><a href="#" target="_blank" class="evidence-button">ดูหลักฐาน<span class="file-type">PDF</span></a></div>
-                        </article>
-                        <article class="indicator">
-                            <p class="text-gray-700 text-sm mb-1"><strong>ตัวชี้วัดที่ 2.3:</strong> ผู้บริหารมีภาวะผู้นำทางวิชาการและบริหารจัดการด้วยหลักธรรมาภิบาล</p>
-                            <div class="mt-2"><a href="#" target="_blank" class="evidence-button">ดูหลักฐาน<span class="file-type">PDF</span></a></div>
-                        </article>
-                        <article class="indicator">
-                            <p class="text-gray-700 text-sm mb-1"><strong>ตัวชี้วัดที่ 2.4:</strong> การพัฒนาครูและบุคลากรทางการศึกษา</p>
-                            <div class="mt-2"><a href="#" target="_blank" class="evidence-button">ดูหลักฐาน<span class="file-type">PDF</span></a></div>
-                        </article>
-                        <article class="indicator">
-                            <p class="text-gray-700 text-sm mb-1"><strong>ตัวชี้วัดที่ 2.5:</strong> กระบวนการนิเทศการปฏิบัติงานของครูและบุคลากรทางการศึกษา</p>
-                            <div class="mt-2"><a href="#" target="_blank" class="evidence-button">ดูหลักฐาน<span class="file-type">PDF</span></a></div>
-                        </article>
-                        <article class="indicator">
-                            <p class="text-gray-700 text-sm mb-1"><strong>ตัวชี้วัดที่ 2.6:</strong> การใช้สื่อ อุปกรณ์ และเทคโนโลยีเพื่อสนับสนุนการจัดการศึกษา</p>
-                            <div class="mt-2"><a href="#" target="_blank" class="evidence-button">ดูหลักฐาน<span class="file-type">PDF</span></a></div>
-                        </article>
-                        <article class="indicator">
-                            <p class="text-gray-700 text-sm mb-1"><strong>ตัวชี้วัดที่ 2.7:</strong> การจัดสภาพแวดล้อม อาคารสถานที่ที่ปลอดภัยและถูกสุขลักษณะ</p>
-                            <div class="mt-2"><a href="#" target="_blank" class="evidence-button">ดูหลักฐาน<span class="file-type">PDF</span></a></div>
-                        </article>
-                        <article class="indicator">
-                            <p class="text-gray-700 text-sm mb-1"><strong>ตัวชี้วัดที่ 2.8:</strong> สวัสดิการ สวัสดิภาพ และแนวทางการป้องกันโรคและภัยพิบัติ</p>
-                            <div class="mt-2"><a href="#" target="_blank" class="evidence-button">ดูหลักฐาน<span class="file-type">PDF</span></a></div>
-                        </article>
-                        <article class="indicator">
-                            <p class="text-gray-700 text-sm mb-1"><strong>ตัวชี้วัดที่ 2.9:</strong> ระบบและกระบวนการช่วยเหลือผู้เรียน</p>
-                            <div class="mt-2"><a href="#" target="_blank" class="evidence-button">ดูหลักฐาน<span class="file-type">PDF</span></a></div>
-                        </article>
-                        <article class="indicator">
-                            <p class="text-gray-700 text-sm mb-1"><strong>ตัวชี้วัดที่ 2.10:</strong> การเสริมสร้างเครือข่ายผู้ปกครอง องค์กร และชุมชน</p>
-                            <div class="mt-2"><a href="#" target="_blank" class="evidence-button">ดูหลักฐาน<span class="file-type">PDF</span></a></div>
-                        </article>
-                </div>
-                <!-- ขั้นพื้นฐาน: มาตรฐานที่ 3 -->
-                <div id="basiced-std3-content" class="sms-content-section hidden">
-                    <h3 class="text-lg font-semibold text-orange-700 mb-3 mt-2">มาตรฐานที่ 3 ขั้นพื้นฐาน: กระบวนการจัดการเรียนการสอนที่เน้นผู้เรียนเป็นสำคัญ</h3>
-                    <article class="indicator">
-                        <p class="text-gray-700 text-sm mb-1"><strong>ตัวชี้วัดที่ 3.1:</strong> การออกแบบหลักสูตรและแผนการจัดการเรียนรู้ที่เสริมสร้างสมรรถนะและคุณลักษณะที่พึงประสงค์</p>
-                        <div class="mt-2"><a href="#" target="_blank" class="evidence-button">ดูหลักฐาน<span class="file-type">PDF</span></a></div>
-                    </article>
-                    <!-- ... (Indicator อื่นๆ ของ ขั้นพื้นฐาน ม.3) ... -->
-                    <article class="indicator">
-                            <p class="text-gray-700 text-sm mb-1"><strong>ตัวชี้วัดที่ 3.2:</strong> การจัดกิจกรรมการเรียนรู้ที่เสริมสร้างสมรรถนะและคุณลักษณะที่พึงประสงค์</p>
-                            <div class="mt-2"><a href="#" target="_blank" class="evidence-button">ดูหลักฐาน<span class="file-type">PDF</span></a></div>
-                        </article>
-                        <article class="indicator">
-                            <p class="text-gray-700 text-sm mb-1"><strong>ตัวชี้วัดที่ 3.3:</strong> ครูวัดและประเมินผลการเรียนรู้ของผู้เรียนอย่างเป็นระบบและต่อเนื่อง</p>
-                            <div class="mt-2"><a href="#" target="_blank" class="evidence-button">ดูหลักฐาน<span class="file-type">PDF</span></a></div>
-                        </article>
-                </div>
-
-                <!-- 4. Section Wrapper สำหรับ Highlights (แสดงเมื่อคลิกจาก Header Nav) -->
-                <div id="highlightsSectionContent" class="sms-content-section hidden">
+                <!-- 2. Section Wrapper สำหรับ Highlights (แสดงเมื่อคลิกจาก Header Nav) -->
+                <div id="highlightsSectionContent" class="sms-html-content-section hidden">
                     <h3 class="text-lg font-semibold text-orange-700 mb-2">ผลงานเด่นของสถานศึกษา</h3>
                     <div class="grid md:grid-cols-2 gap-6">
                         <div class="highlight-item bg-white p-4 rounded-lg shadow hover:shadow-xl transition-shadow">
@@ -289,6 +170,8 @@
                         </div>
                     </div>
                 </div>
+                
+                {/* เนื้อหาของมาตรฐานต่างๆ ที่เคยอยู่ใน Main Content ถูกย้ายไปเป็นลิงก์ใน Sidebar แล้ว */}
 
             </div> <!-- Close card-main-content-sms -->
         </main>
@@ -297,10 +180,29 @@
         <aside class="sidebar sidebar-sms w-full md:w-1/4">
             <div class="bg-white rounded-2xl shadow-md p-5 card">
                 <h2 class="text-xl font-bold text-red-600 border-b-2 border-yellow-400 pb-2 my-4">มาตรฐานฯ ขั้นพื้นฐาน</h2>
-                <ul class="space-y-2" id="basiced-standards-menu">
-                    <li class="sidebar-item pb-2"><a href="#" data-target="basiced-std1-content" class="block text-gray-700 sms-sidebar-link">มาตรฐานที่ 1: คุณภาพของผู้เรียน</a></li>
-                    <li class="sidebar-item pb-2"><a href="#" data-target="basiced-std2-content" class="block text-gray-700 sms-sidebar-link">มาตรฐานที่ 2: กระบวนการบริหารและการจัดการ</a></li>
-                    <li class="sidebar-item pb-2"><a href="#" data-target="basiced-std3-content" class="block text-gray-700 sms-sidebar-link">มาตรฐานที่ 3: กระบวนการจัดการเรียนการสอนฯ</a></li>
+                <ul class="space-y-1" id="basiced-standards-menu">
+                    <li class="sidebar-item">
+                        <a href="#" class="block text-gray-700 sms-sidebar-main-link py-2">มาตรฐานที่ 1: คุณภาพของผู้เรียน</a>
+                        <ul class="sub-indicator-menu">
+                            <li><a href="#" class="sms-indicator-link" data-pdf-src="URL_TO_BASICED_STD1_INDICATOR_1.1.pdf" data-indicator-title="ขั้นพื้นฐาน ม.1 ตชว.1.1: ผู้เรียนมีสมรรถนะ">1.1 ผู้เรียนมีสมรรถนะ</a></li>
+                            <li><a href="#" class="sms-indicator-link" data-pdf-src="URL_TO_BASICED_STD1_INDICATOR_1.2.pdf" data-indicator-title="ขั้นพื้นฐาน ม.1 ตชว.1.2: คุณลักษณะที่พึงประสงค์">1.2 คุณลักษณะที่พึงประสงค์</a></li>
+                             <li><a href="#" class="sms-indicator-link" data-pdf-src="URL_TO_BASICED_STD1_INDICATOR_1.3.pdf" data-indicator-title="ขั้นพื้นฐาน ม.1 ตชว.1.3: นำตนเองในการเรียนรู้">1.3 นำตนเองในการเรียนรู้</a></li>
+                        </ul>
+                    </li>
+                    <li class="sidebar-item">
+                        <a href="#" class="block text-gray-700 sms-sidebar-main-link py-2">มาตรฐานที่ 2: กระบวนการบริหารและการจัดการ</a>
+                        <ul class="sub-indicator-menu">
+                             <li><a href="#" class="sms-indicator-link" data-pdf-src="URL_TO_BASICED_STD2_INDICATOR_2.1.pdf" data-indicator-title="ขั้นพื้นฐาน ม.2 ตชว.2.1: วิสัยทัศน์ พันธกิจ">2.1 วิสัยทัศน์ พันธกิจ</a></li>
+                            {/* <!-- เพิ่ม Indicator อื่นๆ ของขั้นพื้นฐาน ม.2 ที่นี่ --> */}
+                        </ul>
+                    </li>
+                    <li class="sidebar-item">
+                        <a href="#" class="block text-gray-700 sms-sidebar-main-link py-2">มาตรฐานที่ 3: กระบวนการจัดการเรียนการสอนฯ</a>
+                        <ul class="sub-indicator-menu">
+                            <li><a href="#" class="sms-indicator-link" data-pdf-src="URL_TO_BASICED_STD3_INDICATOR_3.1.pdf" data-indicator-title="ขั้นพื้นฐาน ม.3 ตชว.3.1: ออกแบบหลักสูตร">3.1 ออกแบบหลักสูตร</a></li>
+                            {/* <!-- เพิ่ม Indicator อื่นๆ ของขั้นพื้นฐาน ม.3 ที่นี่ --> */}
+                        </ul>
+                    </li>
                 </ul>
             </div>
         </aside>
@@ -318,136 +220,145 @@
     </footer>
 
 <script>
-    document.addEventListener('DOMContentLoaded', function () {
-        const smsContentSections = document.querySelectorAll('.sms-content-section');
-        const smsCenterContentTitle = document.getElementById('sms-center-content-title');
-        const smsNavLinks = document.querySelectorAll('#sms-main-nav-ul a.sms-nav-link');
-        const preschoolMenuLinks = document.querySelectorAll('#preschool-standards-menu a.sms-sidebar-link');
-        const basicEdMenuLinks = document.querySelectorAll('#basiced-standards-menu a.sms-sidebar-link');
+document.addEventListener('DOMContentLoaded', function () {
+    const smsHtmlContentSections = document.querySelectorAll('.sms-html-content-section');
+    const pdfViewerContainer = document.getElementById('pdf-viewer-container');
+    const pdfIframe = document.getElementById('pdf-iframe');
+    const smsCenterContentTitle = document.getElementById('sms-center-content-title');
+    const mainContentArea = document.querySelector('.main-content-area-sms');
 
-        const initialTitle = 'ประกันคุณภาพภายใน'; // Default title
+    const smsNavLinks = document.querySelectorAll('#sms-main-nav-ul a.sms-nav-link');
+    const indicatorLinks = document.querySelectorAll('.sms-indicator-link');
+    // Main standard links in sidebar (like "มาตรฐานที่ 1: คุณภาพของเด็ก") are not meant to load content directly anymore
+    // const sidebarMainLinks = document.querySelectorAll('.sms-sidebar-main-link');
 
-        function showSmsContent(targetId, linkElement) {
-            smsContentSections.forEach(section => {
-                section.classList.add('hidden');
-            });
+    const initialTitle = 'ประกันคุณภาพภายใน'; // Default title
 
-            const targetSection = document.getElementById(targetId);
-            if (targetSection) {
-                targetSection.classList.remove('hidden');
-            } else {
-                // Fallback to default if target not found (e.g., iqaSectionContent)
-                const defaultSection = document.getElementById('iqaSectionContent');
-                if (defaultSection) defaultSection.classList.remove('hidden');
-                targetId = 'iqaSectionContent'; // Reset targetId to default
-                 // console.warn(`SMS Content section with id "${targetId}" not found. Showing default.`);
-            }
+    function clearAllActiveStates() {
+        // Clear active states from Header Nav
+        smsNavLinks.forEach(link => {
+            link.classList.remove('active', 'text-red-500', 'font-semibold');
+            link.classList.add('text-gray-700');
+        });
+        // Clear active states from all indicator links
+        indicatorLinks.forEach(link => {
+            link.classList.remove('active-indicator');
+        });
+        // Clear active states from main sidebar links (if they had any before)
+        document.querySelectorAll('.sms-sidebar-main-link').forEach(link => {
+            link.closest('.sidebar-item').classList.remove('active'); // Assuming active was on parent <li>
+            link.classList.remove('active'); // Or directly on <a>
+        });
+    }
 
-            let newTitleText = initialTitle; // Default title
-            if (linkElement) {
-                newTitleText = linkElement.textContent.trim();
-                // If it's a standard, prepend the level
-                if (linkElement.closest('#preschool-standards-menu')) {
-                    newTitleText = `มาตรฐานฯ ปฐมวัย - ${newTitleText}`;
-                } else if (linkElement.closest('#basiced-standards-menu')) {
-                    newTitleText = `มาตรฐานฯ ขั้นพื้นฐาน - ${newTitleText}`;
-                }
-            } else if (targetId === 'iqaSectionContent') {
-                newTitleText = initialTitle;
-            } else if (targetId === 'highlightsSectionContent') {
-                const highlightsLink = document.querySelector('#sms-main-nav-ul a[data-target="highlightsSectionContent"]');
-                if (highlightsLink) newTitleText = highlightsLink.textContent.trim();
-            }
-            // For cases where content is shown without a direct link click (e.g. initial load)
-            // we might need to find the corresponding link to get its text for the title
-            else {
-                 const activeLink = document.querySelector(`.sms-nav-link[data-target="${targetId}"], .sms-sidebar-link[data-target="${targetId}"]`);
-                 if(activeLink) newTitleText = activeLink.textContent.trim();
-            }
+    function showHtmlContent(targetId, linkElement) {
+        mainContentArea.classList.remove('showing-pdf');
+        mainContentArea.classList.add('showing-html');
 
+        smsHtmlContentSections.forEach(section => section.classList.add('hidden'));
+        // pdfViewerContainer.classList.add('hidden'); // Done by class toggle
 
-            smsCenterContentTitle.textContent = newTitleText;
-
-            // Clear active states from all menu types
-            document.querySelectorAll('#sms-main-nav-ul a.menu-item, #preschool-standards-menu a, #basiced-standards-menu a').forEach(link => {
-                link.classList.remove('active', 'text-red-500', 'font-semibold'); // For nav
-                link.classList.remove('text-red-600'); // For sidebar active
-                if (link.closest('.sidebar-item')) {
-                    link.classList.add('text-gray-700'); // Reset sidebar link color
-                } else {
-                     link.classList.add('text-gray-700'); // Reset nav link color
-                }
-            });
-
-            // Set active state for the clicked link or corresponding link
-            if (linkElement) {
-                linkElement.classList.add('active');
-                if (linkElement.closest('.sidebar-item')) {
-                    linkElement.classList.add('text-red-600', 'font-semibold');
-                    linkElement.classList.remove('text-gray-700');
-                } else { // Header nav
-                    linkElement.classList.add('text-red-500', 'font-semibold');
-                    linkElement.classList.remove('text-gray-700');
-                }
-            } else {
-                // If no linkElement provided (e.g., initial load), find the link corresponding to targetId
-                const currentActiveLink = document.querySelector(`#sms-main-nav-ul a[data-target="${targetId}"], #preschool-standards-menu a[data-target="${targetId}"], #basiced-standards-menu a[data-target="${targetId}"]`);
-                if (currentActiveLink) {
-                    currentActiveLink.classList.add('active');
-                    if (currentActiveLink.closest('.sidebar-item')) {
-                        currentActiveLink.classList.add('text-red-600', 'font-semibold');
-                        currentActiveLink.classList.remove('text-gray-700');
-                    } else {
-                        currentActiveLink.classList.add('text-red-500', 'font-semibold');
-                        currentActiveLink.classList.remove('text-gray-700');
-                    }
-                }
-            }
+        const targetSection = document.getElementById(targetId);
+        if (targetSection) {
+            targetSection.classList.remove('hidden');
+        } else {
+            document.getElementById('iqaSectionContent').classList.remove('hidden'); // Fallback
+            // console.warn(`HTML Content section with id "${targetId}" not found. Showing default.`);
         }
 
-        // Event listeners for Header Navigation
-        smsNavLinks.forEach(link => {
-            if (link.getAttribute('href') !== 'index.html') { // Exclude "กลับเว็บหลัก"
-                link.addEventListener('click', function (event) {
-                    event.preventDefault();
-                    const targetId = this.dataset.target;
-                    showSmsContent(targetId, this);
-                });
+        clearAllActiveStates();
+        if (linkElement) {
+            linkElement.classList.add('active', 'text-red-500', 'font-semibold');
+            linkElement.classList.remove('text-gray-700');
+            smsCenterContentTitle.textContent = linkElement.textContent.trim();
+        } else {
+            // For initial load
+            const defaultLink = document.querySelector('#sms-main-nav-ul a[data-target="iqaSectionContent"]');
+            if(defaultLink){
+                defaultLink.classList.add('active', 'text-red-500', 'font-semibold');
+                defaultLink.classList.remove('text-gray-700');
+                smsCenterContentTitle.textContent = defaultLink.textContent.trim();
+            } else {
+                smsCenterContentTitle.textContent = initialTitle;
             }
-        });
+        }
+    }
 
-        // Event listeners for Preschool Standards Sidebar
-        preschoolMenuLinks.forEach(link => {
+    function showPdfContent(pdfSrc, linkElement) {
+        if (!pdfSrc || pdfSrc.trim() === "" || pdfSrc.toLowerCase().includes("url_to_")) {
+            Swal.fire({
+                icon: 'warning',
+                title: 'ลิงก์ PDF ไม่ถูกต้อง',
+                text: 'ยังไม่ได้กำหนดลิงก์สำหรับหลักฐานนี้ค่ะ หรือลิงก์อาจจะผิดพลาด',
+                confirmButtonColor: '#ef4444'
+            });
+            // Optionally, clear the iframe or show a placeholder
+            // pdfIframe.src = 'about:blank';
+            // mainContentArea.classList.remove('showing-pdf');
+            // mainContentArea.classList.add('showing-html'); // Or keep it as is
+            return; // Stop further execution
+        }
+
+        mainContentArea.classList.remove('showing-html');
+        mainContentArea.classList.add('showing-pdf');
+
+        // smsHtmlContentSections.forEach(section => section.classList.add('hidden')); // Done by class toggle
+        // pdfViewerContainer.classList.remove('hidden'); // Done by class toggle
+        
+        // Ensure the PDF URL uses /preview for embedding Google Drive files
+        if (pdfSrc.includes('drive.google.com') && !pdfSrc.includes('/preview')) {
+            pdfSrc = pdfSrc.replace('/view', '/preview').replace('usp=sharing', '');
+            // Remove trailing slash if any before adding /preview
+             pdfSrc = pdfSrc.replace(/\/$/, "") + (pdfSrc.includes('/preview') ? '' : '/preview');
+        }
+        pdfIframe.src = pdfSrc;
+
+        clearAllActiveStates();
+        if (linkElement) {
+            linkElement.classList.add('active-indicator');
+            // Also make the parent main standard link active-ish (visual cue)
+            const parentSidebarItem = linkElement.closest('.sidebar-item');
+            if (parentSidebarItem) {
+                parentSidebarItem.querySelector('.sms-sidebar-main-link').classList.add('active'); // Or a different style
+            }
+            smsCenterContentTitle.textContent = linkElement.dataset.indicatorTitle || linkElement.textContent.trim();
+        }
+    }
+
+    // Event listeners for Header Navigation (for HTML content)
+    smsNavLinks.forEach(link => {
+        if (link.getAttribute('href') !== 'index.html') { // Exclude "กลับเว็บหลัก"
             link.addEventListener('click', function (event) {
                 event.preventDefault();
                 const targetId = this.dataset.target;
-                showSmsContent(targetId, this);
+                showHtmlContent(targetId, this);
             });
-        });
-
-        // Event listeners for Basic Education Standards Sidebar
-        basicEdMenuLinks.forEach(link => {
-            link.addEventListener('click', function (event) {
-                event.preventDefault();
-                const targetId = this.dataset.target;
-                showSmsContent(targetId, this);
-            });
-        });
-
-        // Show default content (IQA) on page load
-        const defaultNavLink = document.querySelector('#sms-main-nav-ul a[data-target="iqaSectionContent"]');
-        showSmsContent('iqaSectionContent', defaultNavLink);
-
-        // --- Tab System (Not used with the new structure, but kept for reference or future use if needed within a section) ---
-        // If you decide to use tabs *within* one of the content sections (e.g., iqaSectionContent having its own tabs),
-        // you can adapt and call initializeTabs here for that specific section.
-        // For now, the main navigation is handled by showSmsContent.
-
-        // function initializeTabs(tabContainerId, tabButtonClass, tabPanelClass) { ... }
-        // initializeTabs('preschoolStandardsTabs', 'tab-button-level', 'tab-panel-level'); // Example, if needed
-        // initializeTabs('basicEdStandardsTabs', 'tab-button-level', 'tab-panel-level'); // Example, if needed
-
+        }
     });
+
+    // Event listeners for Indicator Links (for PDF content)
+    indicatorLinks.forEach(link => {
+        link.addEventListener('click', function (event) {
+            event.preventDefault();
+            const pdfSrc = this.dataset.pdfSrc;
+            showPdfContent(pdfSrc, this);
+        });
+    });
+
+    // Make main standard links in sidebar non-clickable for content loading,
+    // they are just headers for sub-menus now.
+    document.querySelectorAll('.sms-sidebar-main-link').forEach(mainLink => {
+        mainLink.addEventListener('click', function(event) {
+            event.preventDefault(); // Prevent any default action
+            // Optionally, toggle sub-menu visibility if you want accordion style
+            // this.nextElementSibling.classList.toggle('hidden');
+        });
+    });
+
+    // Show default HTML content (IQA) on page load
+    showHtmlContent('iqaSectionContent', null); // Pass null for linkElement for initial load styling
+
+});
 </script>
 </body>
 </html>
