@@ -436,16 +436,41 @@ async function fetchAndDisplayCalendarEvents() {
 
                 if (button === selectedButton) {
                     button.setAttribute('aria-selected', 'true');
-                    // สไตล์ Tab Active: สีตัวอักษร, สี border ล่าง, **ไม่มี border ด้านอื่นๆ (เพื่อให้เชื่อมกับ Panel)**, **พื้นหลังสีเดียวกับ Panel**
+                    // สไตล์ Tab Active: คล้ายแฟ้ม
+                    button.classList.remove('text-gray-500', 'hover:text-gray-700', 'hover:border-gray-300', 'dark:hover:text-gray-300', 'border-transparent');
                     button.classList.add('text-red-600', 'border-red-600', 'font-semibold', 'bg-white', 'dark:bg-gray-800', 'dark:text-red-500', 'dark:border-red-500');
-                    button.classList.remove('text-gray-500', 'hover:text-gray-600', 'hover:border-gray-300', 'border-transparent');
-                    if (targetPanel) targetPanel.classList.remove('hidden');
+                    // ทำให้ border-bottom ของ tab active หนาเท่ากับ border ของ ul เพื่อให้ดูเชื่อมกัน (หรือ -mb-px บน li)
+                    // button.classList.add('-mb-px'); // หรือใช้ z-index ให้ tab active อยู่เหนือเส้นของ ul
+
+                    if (targetPanel) {
+                        targetPanel.classList.remove('hidden');
+                        // ทำให้ panel ที่ active ไม่มี border บน เพื่อให้เชื่อมกับ tab
+                        targetPanel.classList.add('border-t-0'); 
+                        // ทำให้มุมบนของ panel ที่อยู่ฝั่งตรงข้ามกับ tab อื่นๆ (ถ้ามี) โค้งด้วย
+                        // เช่น ถ้ามี tab 3 อัน และ tab 1 active, panel 1 จะมี rounded-tr-lg
+                        // ถ้า tab 2 active, panel 2 จะมี rounded-tl-lg และ rounded-tr-lg (ถ้าไม่ติด tab อื่น)
+                        // ถ้า tab 3 active, panel 3 จะมี rounded-tl-lg
+                        // ส่วนนี้อาจจะต้องซับซ้อนขึ้นถ้าต้องการให้มุมโค้งของ panel ปรับตามตำแหน่ง tab active
+                        // เพื่อความง่าย เริ่มต้นด้วย rounded-b-lg ก่อน และอาจจะเพิ่ม rounded-tr-lg หรือ rounded-tl-lg ให้ panel ทั้งหมด แล้วให้ tab active บังส่วนที่ไม่ต้องการ
+                        targetPanel.classList.add('rounded-tr-lg', 'rounded-tl-lg'); // ลองเพิ่มให้โค้งทุกมุมบนของ panel
+                        // จากนั้นเราจะให้ tab active "บัง" ส่วนโค้งที่ไม่ต้องการ
+                        if (button.parentElement.previousElementSibling) { // ถ้าไม่ใช่ tab แรก
+                            targetPanel.classList.remove('rounded-tl-lg');
+                        }
+                        if (button.parentElement.nextElementSibling) { // ถ้าไม่ใช่ tab สุดท้าย
+                            targetPanel.classList.remove('rounded-tr-lg');
+                        }
+
+                    }
                 } else {
                     button.setAttribute('aria-selected', 'false');
-                    // สไตล์ Tab Inactive: สีตัวอักษรปกติ, border ล่างโปร่งใส, ไม่มีพื้นหลัง (หรือพื้นหลังของ nav)
-                    button.classList.remove('text-red-600', 'border-red-600', 'font-semibold', 'bg-white', 'dark:bg-gray-800', 'dark:text-red-500', 'dark:border-red-500');
-                    button.classList.add('text-gray-500', 'hover:text-gray-600', 'hover:border-gray-300', 'border-transparent');
-                    if (targetPanel) targetPanel.classList.add('hidden');
+                    // สไตล์ Tab Inactive
+                    button.classList.remove('text-red-600', 'border-red-600', 'font-semibold', 'bg-white', 'dark:bg-gray-800', 'dark:text-red-500', 'dark:border-red-500', '-mb-px');
+                    button.classList.add('text-gray-500', 'hover:text-gray-700', 'hover:border-gray-300', 'dark:hover:text-gray-300', 'border-transparent');
+                    if (targetPanel) {
+                        targetPanel.classList.add('hidden');
+                        targetPanel.classList.remove('border-t-0', 'rounded-tr-lg', 'rounded-tl-lg'); // คืนค่า default
+                    }
                 }
             });
         }
