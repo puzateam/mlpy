@@ -83,14 +83,12 @@
 
 <main class="content w-full md:w-2/4">
             <div class="bg-white rounded-2xl shadow-md p-5 card card-main-content-sms main-content-area-sms">
-                {/* Panel สำหรับ "ประกันคุณภาพภายใน" จะแสดงแถบนำทางและ PDF Viewer */}
                 <div id="iqaDocumentsSection" class="main-content-panel">
                     <div class="iqa-sub-nav">
                         <button data-pdf-src="https://drive.google.com/file/d/1n3XtVetBdlzZqaDE8Hlm5xs9GGQg0sSH/preview" class="iqa-sub-nav-item">แผนพัฒนาคุณภาพการศึกษา</button>
                         <button data-pdf-src="URL_SAR_PDF_LINK_HERE" class="iqa-sub-nav-item">รายงานการประเมินตนเอง (SAR)</button>
                         <button data-pdf-src="URL_ANNUAL_PLAN_PDF_LINK_HERE" class="iqa-sub-nav-item">แผนปฏิบัติการประจำปี</button>
                     </div>
-                    {/* NEW: Common area for PDF display, used by IQA and Indicators */}
                     <div id="commonPdfDisplayArea"> 
                         <div id="pdf-viewer-container">
                             <iframe id="pdf-iframe" class="pdf-embed-container-sms" frameborder="0" allowfullscreen></iframe>
@@ -101,15 +99,11 @@
                     </div>
                 </div>
 
-                {/* Panel สำหรับ "ผลงานเด่น" */}
                 <div id="highlightsSectionContent" class="main-content-panel sms-html-content-section hidden">
                     <h2 class="text-xl font-bold text-red-600 border-b-2 border-yellow-400 pb-2 mb-6">ผลงานเด่นของสถานศึกษา</h2>
-                    {/* ... (เนื้อหา Highlights เหมือนเดิม) ... */}
                 </div>
                 
-                {/* Panel สำหรับแสดงตัวชี้วัดจาก Sidebar */}
                 <div id="indicatorDisplayArea" class="main-content-panel hidden">
-                    {/* หัวข้อ 2 บรรทัดจะถูกใส่โดย JavaScript เมื่อคลิกตัวชี้วัด */}
                     <h2 id="sms-center-content-title" class="text-xl font-bold text-red-600 border-b-2 border-yellow-400 pb-2 mb-6 hidden"></h2>
                     {/* This panel will re-use the #commonPdfDisplayArea when showing PDF/NoPDF message for indicators.
                         JavaScript will manage showing/hiding commonPdfDisplayArea appropriately. */}
