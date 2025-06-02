@@ -11,6 +11,32 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Custom Stylesheet (ไฟล์ style.css หลัก) -->
     <link rel="stylesheet" href="style.css">
+    <style>
+        /* เพิ่มสไตล์เล็กน้อยสำหรับปุ่มหลักฐานย่อย ถ้าต้องการปรับแต่งเพิ่มเติมจาก Tailwind */
+        .evidence-button {
+            background-color: #ef4444; /* Tailwind red-500 */
+            color: white;
+            padding: 0.25rem 0.75rem; /* py-1 px-3 */
+            border-radius: 9999px; /* rounded-full */
+            font-size: 0.75rem; /* text-xs */
+            font-weight: 500; /* font-medium */
+            margin-left: 0.5rem; /* ml-2 */
+            transition: background-color 0.2s ease-in-out;
+            text-decoration: none; /* ป้องกันขีดเส้นใต้จาก a tag */
+            display: inline-flex; /* ช่วยจัด icon กับ text ถ้ามี */
+            align-items: center;
+        }
+        .evidence-button:hover {
+            background-color: #dc2626; /* Tailwind red-600 */
+        }
+        .evidence-button .file-type {
+            background-color: rgba(255,255,255,0.2);
+            color: white;
+            margin-left: 0.35rem;
+            padding: 0.1rem 0.3rem;
+            font-size: 0.65rem;
+        }
+    </style>
 </head>
 <body class="bg-gray-100">
 
@@ -97,34 +123,42 @@
                         <article class="indicator">
                             <h4>1.1 ผลสัมฤทธิ์ทางวิชาการของผู้เรียน</h4>
                             <ul class="list-disc ml-5 text-gray-700 mb-2 text-sm">
-                                <li>ความสามารถในการอ่าน การเขียน การสื่อสาร และการคิดคำนวณ</li>
-                                <li>ความสามารถในการคิดวิเคราะห์ คิดอย่างมีวิจารณญาณ อภิปราย แลกเปลี่ยนความคิดเห็น และแก้ปัญหา</li>
-                                <li>ความสามารถในการสร้างนวัตกรรม</li>
-                                <li>ความสามารถในการใช้เทคโนโลยีสารสนเทศและการสื่อสาร</li>
-                                <li>ผลสัมฤทธิ์ทางการเรียนตามหลักสูตรสถานศึกษา</li>
-                                <li>ความรู้ ทักษะพื้นฐาน และเจตคติที่ดีต่องานอาชีพ</li>
+                                <li class="mb-1">ความสามารถในการอ่าน การเขียน การสื่อสาร และการคิดคำนวณ
+                                    <a href="path/to/evidence_std1_1_reading_writing.pdf" target="_blank" class="evidence-button">ดูหลักฐาน<span class="file-type">PDF</span></a>
+                                </li>
+                                <li class="mb-1">ความสามารถในการคิดวิเคราะห์ คิดอย่างมีวิจารณญาณ อภิปราย แลกเปลี่ยนความคิดเห็น และแก้ปัญหา
+                                    <a href="path/to/evidence_std1_1_critical_thinking.pdf" target="_blank" class="evidence-button">ดูหลักฐาน<span class="file-type">PDF</span></a>
+                                </li>
+                                <li class="mb-1">ความสามารถในการสร้างนวัตกรรม
+                                    <a href="path/to/evidence_std1_1_innovation.pdf" target="_blank" class="evidence-button">ดูหลักฐาน<span class="file-type">PDF</span></a>
+                                </li>
+                                <li class="mb-1">ความสามารถในการใช้เทคโนโลยีสารสนเทศและการสื่อสาร
+                                    <a href="path/to/evidence_std1_1_ict_usage.pdf" target="_blank" class="evidence-button">ดูหลักฐาน<span class="file-type">PDF</span></a>
+                                </li>
+                                <li class="mb-1">ผลสัมฤทธิ์ทางการเรียนตามหลักสูตรสถานศึกษา
+                                    <a href="path/to/evidence_std1_1_academic_results.pdf" target="_blank" class="evidence-button">ดูหลักฐาน<span class="file-type">PDF</span></a>
+                                </li>
+                                <li class="mb-1">ความรู้ ทักษะพื้นฐาน และเจตคติที่ดีต่องานอาชีพ
+                                    <a href="path/to/evidence_std1_1_career_skills.pdf" target="_blank" class="evidence-button">ดูหลักฐาน<span class="file-type">PDF</span></a>
+                                </li>
                             </ul>
-                            <details class="evidence-section mt-1"><summary class="font-medium text-gray-600 hover:text-gray-800 text-sm">คลิกเพื่อดูตัวอย่างหลักฐาน/ร่องรอย</summary>
-                                <ul class="evidence-list mt-1 text-xs">
-                                    <li><a href="path/to/sar_academic_results.pdf" target="_blank">รายงานผลสัมฤทธิ์ทางการเรียน</a> <span class="file-type">PDF</span></li>
-                                    <li><a href="path/to/student_portfolios.pdf" target="_blank">แฟ้มสะสมผลงานนักเรียน</a> <span class="file-type">PDF</span></li>
-                                </ul>
-                            </details>
                         </article>
                         <article class="indicator">
                             <h4>1.2 คุณลักษณะที่พึงประสงค์ของผู้เรียน</h4>
                             <ul class="list-disc ml-5 text-gray-700 mb-2 text-sm">
-                                <li>การมีคุณธรรม จริยธรรม ค่านิยมที่พึงประสงค์</li>
-                                <li>ความภูมิใจในท้องถิ่นและความเป็นไทย</li>
-                                <li>การยอมรับที่จะอยู่ร่วมกันบนความแตกต่างและหลากหลาย</li>
-                                <li>สุขภาวะทางร่างกาย และจิตสังคม</li>
+                                <li class="mb-1">การมีคุณธรรม จริยธรรม ค่านิยมที่พึงประสงค์
+                                    <a href="path/to/evidence_std1_2_ethics.pdf" target="_blank" class="evidence-button">ดูหลักฐาน<span class="file-type">PDF</span></a>
+                                </li>
+                                <li class="mb-1">ความภูมิใจในท้องถิ่นและความเป็นไทย
+                                    <a href="path/to/evidence_std1_2_local_pride.pdf" target="_blank" class="evidence-button">ดูหลักฐาน<span class="file-type">PDF</span></a>
+                                </li>
+                                <li class="mb-1">การยอมรับที่จะอยู่ร่วมกันบนความแตกต่างและหลากหลาย
+                                    <a href="path/to/evidence_std1_2_diversity.pdf" target="_blank" class="evidence-button">ดูหลักฐาน<span class="file-type">PDF</span></a>
+                                </li>
+                                <li class="mb-1">สุขภาวะทางร่างกาย และจิตสังคม
+                                    <a href="path/to/evidence_std1_2_wellbeing.pdf" target="_blank" class="evidence-button">ดูหลักฐาน<span class="file-type">PDF</span></a>
+                                </li>
                             </ul>
-                            <details class="evidence-section mt-1"><summary class="font-medium text-gray-600 hover:text-gray-800 text-sm">คลิกเพื่อดูตัวอย่างหลักฐาน/ร่องรอย</summary>
-                                <ul class="evidence-list mt-1 text-xs">
-                                    <li><a href="path/to/student_behavior_records.pdf" target="_blank">บันทึกพฤติกรรมนักเรียน</a> <span class="file-type">PDF</span></li>
-                                    <li><a href="path/to/moral_projects.pdf" target="_blank">รายงานโครงการ/กิจกรรมส่งเสริมคุณธรรม</a> <span class="file-type">PDF</span></li>
-                                </ul>
-                            </details>
                         </article>
                     </div>
                 </div>
@@ -137,44 +171,44 @@
                         <article class="indicator">
                             <h4>2.1 การมีเป้าหมาย วิสัยทัศน์ และพันธกิจที่สถานศึกษากำหนดชัดเจน</h4>
                             <p class="text-gray-700 text-sm mb-1">สถานศึกษามีการกำหนดเป้าหมาย วิสัยทัศน์ และพันธกิจที่ชัดเจน สอดคล้องกับบริบท...</p>
-                            <details class="evidence-section mt-1"><summary class="font-medium text-gray-600 hover:text-gray-800 text-sm">คลิกเพื่อดูตัวอย่างหลักฐาน/ร่องรอย</summary>
-                                <ul class="evidence-list mt-1 text-xs"><li><a href="path/to/school_vision_mission_doc.pdf" target="_blank">เอกสารวิสัยทัศน์ พันธกิจ</a> <span class="file-type">PDF</span></li></ul>
-                            </details>
+                            <div class="mt-2">
+                                <a href="path/to/school_vision_mission_doc.pdf" target="_blank" class="evidence-button">ดูหลักฐาน<span class="file-type">PDF</span></a>
+                            </div>
                         </article>
                         <article class="indicator">
                             <h4>2.2 การมีระบบบริหารจัดการคุณภาพของสถานศึกษา</h4>
                             <p class="text-gray-700 text-sm mb-1">สถานศึกษามีระบบการบริหารจัดการคุณภาพที่ชัดเจนและดำเนินการตามระบบอย่างต่อเนื่อง...</p>
-                            <details class="evidence-section mt-1"><summary class="font-medium text-gray-600 hover:text-gray-800 text-sm">คลิกเพื่อดูตัวอย่างหลักฐาน/ร่องรอย</summary>
-                                <ul class="evidence-list mt-1 text-xs"><li><a href="path/to/qms_manual.pdf" target="_blank">คู่มือระบบบริหารจัดการคุณภาพ</a> <span class="file-type">PDF</span></li></ul>
-                            </details>
+                            <div class="mt-2">
+                                <a href="path/to/qms_manual.pdf" target="_blank" class="evidence-button">ดูหลักฐาน<span class="file-type">PDF</span></a>
+                            </div>
                         </article>
                         <article class="indicator">
                             <h4>2.3 การดำเนินงานพัฒนาวิชาการที่เน้นคุณภาพผู้เรียนรอบด้าน</h4>
                             <p class="text-gray-700 text-sm mb-1">สถานศึกษามีการพัฒนาหลักสูตรสถานศึกษาให้สอดคล้องกับหลักสูตรแกนกลาง...</p>
-                             <details class="evidence-section mt-1"><summary class="font-medium text-gray-600 hover:text-gray-800 text-sm">คลิกเพื่อดูตัวอย่างหลักฐาน/ร่องรอย</summary>
-                                <ul class="evidence-list mt-1 text-xs"><li><a href="path/to/school_curriculum.pdf" target="_blank">หลักสูตรสถานศึกษา</a> <span class="file-type">PDF</span></li></ul>
-                            </details>
+                             <div class="mt-2">
+                                <a href="path/to/school_curriculum.pdf" target="_blank" class="evidence-button">ดูหลักฐาน<span class="file-type">PDF</span></a>
+                            </div>
                         </article>
                         <article class="indicator">
                             <h4>2.4 การพัฒนาครูและบุคลากรให้มีความเชี่ยวชาญทางวิชาชีพ</h4>
                              <p class="text-gray-700 text-sm mb-1">สถานศึกษาส่งเสริมและสนับสนุนให้ครูและบุคลากรได้รับการพัฒนาตนเองอย่างต่อเนื่อง...</p>
-                             <details class="evidence-section mt-1"><summary class="font-medium text-gray-600 hover:text-gray-800 text-sm">คลิกเพื่อดูตัวอย่างหลักฐาน/ร่องรอย</summary>
-                                <ul class="evidence-list mt-1 text-xs"><li><a href="path/to/teacher_development_plan.pdf" target="_blank">แผนพัฒนาครูและบุคลากร</a> <span class="file-type">PDF</span></li></ul>
-                            </details>
+                             <div class="mt-2">
+                                <a href="path/to/teacher_development_plan.pdf" target="_blank" class="evidence-button">ดูหลักฐาน<span class="file-type">PDF</span></a>
+                            </div>
                         </article>
                          <article class="indicator">
                             <h4>2.5 การจัดสภาพแวดล้อมทางกายภาพและสังคมที่เอื้อต่อการจัดการเรียนรู้</h4>
                              <p class="text-gray-700 text-sm mb-1">สถานศึกษาจัดอาคารสถานที่ สภาพแวดล้อม แหล่งเรียนรู้ และสิ่งอำนวยความสะดวก...</p>
-                             <details class="evidence-section mt-1"><summary class="font-medium text-gray-600 hover:text-gray-800 text-sm">คลิกเพื่อดูตัวอย่างหลักฐาน/ร่องรอย</summary>
-                                <ul class="evidence-list mt-1 text-xs"><li><a href="path/to/school_environment_photos.pdf" target="_blank">ภาพถ่ายสภาพแวดล้อม</a> <span class="file-type">รูปภาพ</span></li></ul>
-                            </details>
+                             <div class="mt-2">
+                                <a href="path/to/school_environment_photos.pdf" target="_blank" class="evidence-button">ดูหลักฐาน<span class="file-type">รูปภาพ</span></a>
+                            </div>
                         </article>
                          <article class="indicator">
                             <h4>2.6 การจัดระบบเทคโนโลยีสารสนเทศเพื่อสนับสนุนการบริหารจัดการและการเรียนรู้</h4>
                              <p class="text-gray-700 text-sm mb-1">สถานศึกษามีการนำเทคโนโลยีสารสนเทศมาใช้ในการบริหารจัดการและสนับสนุนการจัดการเรียนการสอน...</p>
-                            <details class="evidence-section mt-1"><summary class="font-medium text-gray-600 hover:text-gray-800 text-sm">คลิกเพื่อดูตัวอย่างหลักฐาน/ร่องรอย</summary>
-                                <ul class="evidence-list mt-1 text-xs"><li><a href="path/to/ict_plan.pdf" target="_blank">แผนการใช้ ICT</a> <span class="file-type">PDF</span></li></ul>
-                            </details>
+                            <div class="mt-2">
+                                <a href="path/to/ict_plan.pdf" target="_blank" class="evidence-button">ดูหลักฐาน<span class="file-type">PDF</span></a>
+                            </div>
                         </article>
                     </div>
                 </div>
@@ -187,37 +221,37 @@
                         <article class="indicator">
                             <h4>3.1 การจัดการเรียนรู้ผ่านกระบวนการคิดและปฏิบัติจริง และนำไปประยุกต์ใช้ในชีวิตได้</h4>
                             <p class="text-gray-700 text-sm mb-1">ครูจัดการเรียนการสอนที่ส่งเสริมให้ผู้เรียนได้คิดวิเคราะห์ แก้ปัญหา เรียนรู้จากการปฏิบัติจริง...</p>
-                            <details class="evidence-section mt-1"><summary class="font-medium text-gray-600 hover:text-gray-800 text-sm">คลิกเพื่อดูตัวอย่างหลักฐาน/ร่องรอย</summary>
-                                <ul class="evidence-list mt-1 text-xs"><li><a href="path/to/lesson_plans_active_learning.pdf" target="_blank">แผนการจัดการเรียนรู้ Active Learning</a> <span class="file-type">PDF</span></li></ul>
-                            </details>
+                            <div class="mt-2">
+                                <a href="path/to/lesson_plans_active_learning.pdf" target="_blank" class="evidence-button">ดูหลักฐาน<span class="file-type">PDF</span></a>
+                            </div>
                         </article>
                         <article class="indicator">
                             <h4>3.2 การใช้สื่อ เทคโนโลยีสารสนเทศ และแหล่งเรียนรู้ที่เอื้อต่อการเรียนรู้</h4>
                              <p class="text-gray-700 text-sm mb-1">ครูเลือกใช้สื่อ นวัตกรรม เทคโนโลยี และแหล่งเรียนรู้ทั้งภายในและภายนอกสถานศึกษา...</p>
-                            <details class="evidence-section mt-1"><summary class="font-medium text-gray-600 hover:text-gray-800 text-sm">คลิกเพื่อดูตัวอย่างหลักฐาน/ร่องรอย</summary>
-                                <ul class="evidence-list mt-1 text-xs"><li><a href="path/to/media_usage_log.pdf" target="_blank">บันทึกการใช้สื่อ</a> <span class="file-type">เอกสาร</span></li></ul>
-                            </details>
+                            <div class="mt-2">
+                                <a href="path/to/media_usage_log.pdf" target="_blank" class="evidence-button">ดูหลักฐาน<span class="file-type">เอกสาร</span></a>
+                            </div>
                         </article>
                         <article class="indicator">
                             <h4>3.3 การมีการบริหารจัดการชั้นเรียนเชิงบวก</h4>
                             <p class="text-gray-700 text-sm mb-1">ครูสร้างบรรยากาศในชั้นเรียนที่อบอุ่น ปลอดภัย ส่งเสริมการเรียนรู้...</p>
-                            <details class="evidence-section mt-1"><summary class="font-medium text-gray-600 hover:text-gray-800 text-sm">คลิกเพื่อดูตัวอย่างหลักฐาน/ร่องรอย</summary>
-                                <ul class="evidence-list mt-1 text-xs"><li><a href="path/to/classroom_observation_notes.pdf" target="_blank">บันทึกการสังเกตชั้นเรียน</a> <span class="file-type">เอกสาร</span></li></ul>
-                            </details>
+                            <div class="mt-2">
+                                <a href="path/to/classroom_observation_notes.pdf" target="_blank" class="evidence-button">ดูหลักฐาน<span class="file-type">เอกสาร</span></a>
+                            </div>
                         </article>
                         <article class="indicator">
                             <h4>3.4 การตรวจสอบและประเมินผู้เรียนอย่างเป็นระบบ และนำผลมาพัฒนาผู้เรียน</h4>
                             <p class="text-gray-700 text-sm mb-1">ครูมีวิธีการวัดและประเมินผลที่หลากหลาย สอดคล้องกับสิ่งที่ต้องการวัด...</p>
-                            <details class="evidence-section mt-1"><summary class="font-medium text-gray-600 hover:text-gray-800 text-sm">คลิกเพื่อดูตัวอย่างหลักฐาน/ร่องรอย</summary>
-                                <ul class="evidence-list mt-1 text-xs"><li><a href="path/to/assessment_tools.pdf" target="_blank">ตัวอย่างเครื่องมือวัดผล</a> <span class="file-type">PDF</span></li></ul>
-                            </details>
+                            <div class="mt-2">
+                                <a href="path/to/assessment_tools.pdf" target="_blank" class="evidence-button">ดูหลักฐาน<span class="file-type">PDF</span></a>
+                            </div>
                         </article>
                         <article class="indicator">
                             <h4>3.5 การมีการแลกเปลี่ยนเรียนรู้และให้ข้อมูลสะท้อนกลับเพื่อพัฒนาและปรับปรุงการจัดการเรียนรู้</h4>
                             <p class="text-gray-700 text-sm mb-1">ครูและผู้เกี่ยวข้องมีการแลกเปลี่ยนเรียนรู้ (PLC) และให้ข้อมูลป้อนกลับซึ่งกันและกัน...</p>
-                            <details class="evidence-section mt-1"><summary class="font-medium text-gray-600 hover:text-gray-800 text-sm">คลิกเพื่อดูตัวอย่างหลักฐาน/ร่องรอย</summary>
-                                <ul class="evidence-list mt-1 text-xs"><li><a href="path/to/plc_minutes.pdf" target="_blank">รายงานการประชุม PLC</a> <span class="file-type">PDF</span></li></ul>
-                            </details>
+                            <div class="mt-2">
+                                <a href="path/to/plc_minutes.pdf" target="_blank" class="evidence-button">ดูหลักฐาน<span class="file-type">PDF</span></a>
+                            </div>
                         </article>
                     </div>
                 </div>
@@ -273,39 +307,28 @@
 
                 if (button === selectedButton) {
                     button.setAttribute('aria-selected', 'true');
-                    // สไตล์ Tab Active: คล้ายแฟ้ม
                     button.classList.remove('text-gray-500', 'hover:text-gray-700', 'hover:border-gray-300', 'dark:hover:text-gray-300', 'border-transparent');
                     button.classList.add('text-red-600', 'border-red-600', 'font-semibold', 'bg-white', 'dark:bg-gray-800', 'dark:text-red-500', 'dark:border-red-500');
-                    // ทำให้ปุ่ม active อยู่เหนือเส้นขอบของ ul และ panel ไม่มีขอบบน
-                    button.classList.add('relative', '-mb-px'); // -mb-px ดึงปุ่มลงมาทับเส้นของ ul
+                    button.classList.add('relative', '-mb-px'); 
 
                     if (targetPanel) {
                         targetPanel.classList.remove('hidden');
-                        targetPanel.classList.add('border-t-0'); // ทำให้ Panel ที่ Active ไม่มีเส้นขอบบน
-                        // จัดการมุมโค้งของ Panel ให้ดูเหมือนแฟ้ม
-                        // ถ้า Tab แรก Active, Panel จะมีมุมขวาบนโค้ง
-                        // ถ้า Tab กลาง Active, Panel จะไม่มีมุมบนโค้ง (หรือโค้งทั้งสองถ้าออกแบบ)
-                        // ถ้า Tab สุดท้าย Active, Panel จะมีมุมซ้ายบนโค้ง
-                        // ลบคลาสโค้งทั้งหมดก่อน
+                        targetPanel.classList.add('border-t-0'); 
                         targetPanel.classList.remove('rounded-tl-lg', 'rounded-tr-lg');
-                        if (button.parentElement.previousElementSibling === null) { // Tab แรก
+                        if (button.parentElement.previousElementSibling === null) { 
                            targetPanel.classList.add('rounded-tr-lg');
-                        } else if (button.parentElement.nextElementSibling === null) { // Tab สุดท้าย
+                        } else if (button.parentElement.nextElementSibling === null) { 
                            targetPanel.classList.add('rounded-tl-lg');
-                        } else { // Tab กลาง
-                           // อาจจะไม่ต้องมีมุมโค้งบนเลย หรือโค้งทั้งสองถ้าต้องการ
                         }
                     }
                 } else {
                     button.setAttribute('aria-selected', 'false');
-                    // สไตล์ Tab Inactive
                     button.classList.remove('text-red-600', 'border-red-600', 'font-semibold', 'bg-white', 'dark:bg-gray-800', 'dark:text-red-500', 'dark:border-red-500', '-mb-px');
                     button.classList.add('text-gray-500', 'hover:text-gray-700', 'hover:border-gray-300', 'dark:hover:text-gray-300', 'border-transparent');
                     if (targetPanel) {
                         targetPanel.classList.add('hidden');
-                        targetPanel.classList.remove('border-t-0'); // คืนค่า default
-                        // อาจจะต้องคืนค่า rounded corners ของ panel ด้วยถ้ามีการเปลี่ยนแปลง
-                        targetPanel.classList.remove('rounded-tl-lg', 'rounded-tr-lg'); // นำมุมโค้งพิเศษออกเมื่อไม่ active
+                        targetPanel.classList.remove('border-t-0'); 
+                        targetPanel.classList.remove('rounded-tl-lg', 'rounded-tr-lg'); 
                     }
                 }
             });
@@ -376,11 +399,8 @@
 
             if (targetWrapperIdToShow && document.getElementById(targetWrapperIdToShow)) {
                 updateActiveSpaContent(targetWrapperIdToShow);
-                 // ถ้าส่วนที่แสดงคือ ONESQA ให้แน่ใจว่า Tab ภายใน ONESQA ก็ถูกตั้งค่าถูกต้องด้วย
-                if (targetWrapperIdToShow === 'onesqaSectionContent' && onesqaTabButtons.length > 0) {
-                    // อาจจะต้องมี logic เพิ่มเติมเพื่อดูว่า hash ย่อยของ ONESQA คืออะไร
-                    // หรือแค่ default ไปที่ tab แรกของ ONESQA
-                    // updateOnesqaTabs(onesqaTabButtons[0]); // << หรือหา tab ที่ตรงกับ hash ย่อยถ้ามี
+                 if (targetWrapperIdToShow === 'onesqaSectionContent' && onesqaTabButtons.length > 0) {
+                    // updateOnesqaTabs(onesqaTabButtons[0]); 
                 }
             } else if (spaNavLinks.length > 0 && spaNavLinks[0].dataset.target && document.getElementById(spaNavLinks[0].dataset.target)) {
                 const firstTargetId = spaNavLinks[0].dataset.target;
