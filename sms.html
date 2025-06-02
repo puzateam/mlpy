@@ -1,3 +1,67 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ระบบประกันคุณภาพและผลงานเด่น - ร.ร.ชุมชนบ้านแม่หละป่าป๋วย</title>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Custom Stylesheet (ไฟล์ style.css หลัก) -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-gray-100">
+
+    <!-- ส่วนหัวเว็บ (Header) - ใช้โครงสร้างเหมือน index.html -->
+    <header>
+        <div class="bg-gradient-to-r from-red-600 to-yellow-500 p-4">
+            <div class="container mx-auto flex flex-col items-center">
+                <div class="flex flex-col items-center mb-2">
+                    <img src="https://i.postimg.cc/d3PbrGqC/logo-School.png" alt="โลโก้โรงเรียน" class="w-[80px] h-auto mb-2">
+                    <div class="text-center">
+                        <h1 class="text-white text-2xl md:text-3xl font-bold">โรงเรียนชุมชนบ้านแม่หละป่าป๋วย</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- เมนูนำทาง (Navigation) - ใช้โครงสร้างเหมือน index.html แต่เปลี่ยนรายการเมนู -->
+    <nav class="bg-white shadow-md sticky top-0 z-40">
+        <div class="container mx-auto">
+            <ul class="flex flex-wrap justify-center space-x-2 sm:space-x-4 md:space-x-6 lg:space-x-8 items-center py-2" id="sms-main-nav-ul">
+                <li><a class="nav-link menu-item px-2 sm:px-3 py-2 text-gray-700 hover:text-red-500" data-target="iqaSectionContent" href="#iqa">ประกันคุณภาพภายใน</a></li>
+                <li><a class="nav-link menu-item px-2 sm:px-3 py-2 text-gray-700 hover:text-red-500" data-target="onesqaSectionContent" href="#standards">มาตรฐานการศึกษา (สมศ.)</a></li>
+                <li><a class="nav-link menu-item px-2 sm:px-3 py-2 text-gray-700 hover:text-red-500" data-target="highlightsSectionContent" href="#highlights">ผลงานเด่น</a></li>
+                <li><a href="index.html" class="menu-item px-2 sm:px-3 py-2 text-gray-700 hover:text-red-500">กลับเว็บหลัก</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Container หลักสำหรับเนื้อหา SPA -->
+    <div class="container mx-auto p-4 md:p-6" id="app-content">
+
+        <!-- Section Wrapper สำหรับ IQA - ใช้สไตล์เหมือน Main Content Area Card -->
+        <div id="iqaSectionContent" class="page-content-wrapper content-section bg-white rounded-2xl shadow-md p-5 card mb-6">
+            <h2 class="text-xl font-bold text-red-600 border-b-2 border-yellow-400 pb-2 mb-6">ระบบการประกันคุณภาพภายใน (IQA)</h2>
+            <div class="iqa-item">
+                <h3>รายงานการประเมินตนเอง (SAR)</h3>
+                <p class="text-gray-700 mb-2">สถานศึกษามีการจัดทำรายงานการประเมินตนเองเป็นประจำทุกปี เพื่อสะท้อนผลการดำเนินงานและวางแผนพัฒนาคุณภาพอย่างต่อเนื่อง</p>
+                <ul class="list-disc ml-5 text-gray-700">
+                    <li><a href="path/to/sar_current_year.pdf" target="_blank" class="text-blue-600 hover:underline">SAR ปีการศึกษาปัจจุบัน</a> <span class="file-type">PDF</span></li>
+                </ul>
+            </div>
+            <div class="iqa-item">
+                <h3>แผนพัฒนาคุณภาพการศึกษา</h3>
+                <p class="text-gray-700 mb-2">แผนงานที่แสดงทิศทางการพัฒนาคุณภาพของสถานศึกษาในระยะต่างๆ สอดคล้องกับนโยบายและบริบทของสถานศึกษา</p>
+                <ul class="list-disc ml-5 text-gray-700">
+                    <li><a href="path/to/annual_plan.pdf" target="_blank" class="text-blue-600 hover:underline">แผนปฏิบัติการประจำปี</a> <span class="file-type">PDF</span></li>
+                </ul>
+            </div>
+        </div>
+
         <!-- Section Wrapper สำหรับ ONESQA Standards - ใช้สไตล์เหมือน Main Content Area Card -->
         <div id="onesqaSectionContent" class="page-content-wrapper content-section bg-white rounded-2xl shadow-md p-5 card mb-6">
             <h2 class="text-xl font-bold text-red-600 border-b-2 border-yellow-400 pb-2 mb-6">มาตรฐานการศึกษาเพื่อการประเมินคุณภาพภายนอก (สมศ.)</h2>
@@ -6,13 +70,13 @@
             <div class="mb-4 border-b border-gray-200 dark:border-gray-700">
                 <ul class="flex flex-wrap -mb-px text-sm font-medium text-center" id="onesqaStandardsTabs" role="tablist">
                     <li class="mr-2" role="presentation">
-                        <button class="onesqa-tab-button inline-block p-3 sm:p-4 border-b-2 rounded-t-lg" id="standard1-tab" data-tabs-target="#standard1-content" type="button" role="tab" aria-controls="standard1-content" aria-selected="true">มาตรฐานที่ 1</button>
+                        <button class="onesqa-tab-button inline-block p-3 sm:p-4 border-b-2 rounded-t-lg" id="standard1-tab" data-tabs-target="#standard1-content" type="button" role="tab" aria-controls="standard1-content" aria-selected="true">มาตรฐานที่ 1: คุณภาพผู้เรียน</button>
                     </li>
                     <li class="mr-2" role="presentation">
-                        <button class="onesqa-tab-button inline-block p-3 sm:p-4 border-b-2 rounded-t-lg" id="standard2-tab" data-tabs-target="#standard2-content" type="button" role="tab" aria-controls="standard2-content" aria-selected="false">มาตรฐานที่ 2</button>
+                        <button class="onesqa-tab-button inline-block p-3 sm:p-4 border-b-2 rounded-t-lg" id="standard2-tab" data-tabs-target="#standard2-content" type="button" role="tab" aria-controls="standard2-content" aria-selected="false">มาตรฐานที่ 2: การบริหาร</button>
                     </li>
                     <li class="mr-2" role="presentation">
-                        <button class="onesqa-tab-button inline-block p-3 sm:p-4 border-b-2 rounded-t-lg" id="standard3-tab" data-tabs-target="#standard3-content" type="button" role="tab" aria-controls="standard3-content" aria-selected="false">มาตรฐานที่ 3</button>
+                        <button class="onesqa-tab-button inline-block p-3 sm:p-4 border-b-2 rounded-t-lg" id="standard3-tab" data-tabs-target="#standard3-content" type="button" role="tab" aria-controls="standard3-content" aria-selected="false">มาตรฐานที่ 3: การจัดการเรียนรู้</button>
                     </li>
                 </ul>
             </div>
@@ -21,8 +85,8 @@
             <div id="onesqaStandardsTabContent">
                 <!-- เนื้อหา มาตรฐานที่ 1 -->
                 <div class="onesqa-tab-panel hidden p-1 bg-gray-50 rounded-lg dark:bg-gray-800" id="standard1-content" role="tabpanel" aria-labelledby="standard1-tab">
-                    <div class="standard-block"> <!-- ครอบเนื้อหามาตรฐานที่ 1 ด้วย standard-block เหมือนเดิม -->
-                        <h3 class="text-lg font-semibold text-orange-700 mb-3">มาตรฐานที่ 1: คุณภาพของผู้เรียน</h3>
+                    <div class="standard-block"> 
+                        <h3 class="text-lg font-semibold text-orange-700 mb-3 mt-2">มาตรฐานที่ 1: คุณภาพของผู้เรียน</h3>
                         <article class="indicator">
                             <h4>1.1 ผลสัมฤทธิ์ทางวิชาการของผู้เรียน</h4>
                             <ul class="list-disc ml-5 text-gray-700 mb-2 text-sm">
@@ -61,7 +125,7 @@
                 <!-- เนื้อหา มาตรฐานที่ 2 -->
                 <div class="onesqa-tab-panel hidden p-1 bg-gray-50 rounded-lg dark:bg-gray-800" id="standard2-content" role="tabpanel" aria-labelledby="standard2-tab">
                     <div class="standard-block">
-                        <h3 class="text-lg font-semibold text-orange-700 mb-3">มาตรฐานที่ 2: กระบวนการบริหารและการจัดการ</h3>
+                        <h3 class="text-lg font-semibold text-orange-700 mb-3 mt-2">มาตรฐานที่ 2: กระบวนการบริหารและการจัดการ</h3>
                         <article class="indicator">
                             <h4>2.1 การมีเป้าหมาย วิสัยทัศน์ และพันธกิจที่สถานศึกษากำหนดชัดเจน</h4>
                             <p class="text-gray-700 text-sm mb-1">สถานศึกษามีการกำหนดเป้าหมาย วิสัยทัศน์ และพันธกิจที่ชัดเจน สอดคล้องกับบริบท...</p>
@@ -110,7 +174,7 @@
                 <!-- เนื้อหา มาตรฐานที่ 3 -->
                 <div class="onesqa-tab-panel hidden p-1 bg-gray-50 rounded-lg dark:bg-gray-800" id="standard3-content" role="tabpanel" aria-labelledby="standard3-tab">
                     <div class="standard-block">
-                        <h3 class="text-lg font-semibold text-orange-700 mb-3">มาตรฐานที่ 3: กระบวนการจัดการเรียนการสอนที่เน้นผู้เรียนเป็นสำคัญ</h3>
+                        <h3 class="text-lg font-semibold text-orange-700 mb-3 mt-2">มาตรฐานที่ 3: กระบวนการจัดการเรียนการสอนที่เน้นผู้เรียนเป็นสำคัญ</h3>
                         <article class="indicator">
                             <h4>3.1 การจัดการเรียนรู้ผ่านกระบวนการคิดและปฏิบัติจริง และนำไปประยุกต์ใช้ในชีวิตได้</h4>
                             <p class="text-gray-700 text-sm mb-1">ครูจัดการเรียนการสอนที่ส่งเสริมให้ผู้เรียนได้คิดวิเคราะห์ แก้ปัญหา เรียนรู้จากการปฏิบัติจริง...</p>
@@ -149,4 +213,157 @@
                     </div>
                 </div>
             </div>
-        </div> <!-- ปิด #onesqaSectionContent -->
+        </div>
+
+        <!-- Section Wrapper สำหรับ Highlights - สไตล์เหมือนส่วนอื่นๆ -->
+        <div id="highlightsSectionContent" class="page-content-wrapper content-section bg-white rounded-2xl shadow-md p-5 card">
+            <h2 class="text-xl font-bold text-red-600 border-b-2 border-yellow-400 pb-2 mb-6">ผลงานเด่นของสถานศึกษา</h2>
+            <p class="text-gray-700 mb-6">นี่คือส่วนจัดแสดงผลงานและความสำเร็จที่น่าภาคภูมิใจของโรงเรียนเรา:</p>
+            <div class="grid md:grid-cols-2 gap-6">
+                <div class="highlight-item bg-white p-4 rounded-lg shadow hover:shadow-xl transition-shadow">
+                    <img src="https://via.placeholder.com/600x400.png?text=ผลงานเด่น+1" alt="ผลงานเด่น 1" class="w-full h-48 object-cover rounded-md mb-3">
+                    <h3>รางวัลชนะเลิศการแข่งขันโครงงานวิทยาศาสตร์ระดับภาค</h3>
+                    <p class="text-gray-600 text-sm mb-3">นักเรียนของเราได้รับรางวัลชนะเลิศจากการแข่งขันโครงงานวิทยาศาสตร์ในหัวข้อ "พลังงานสะอาดเพื่ออนาคต" ซึ่งจัดขึ้นโดย...</p>
+                    <a href="path/to/highlight_detail_1.html" target="_blank" class="btn-primary inline-block px-4 py-2 text-sm">อ่านเพิ่มเติม</a>
+                </div>
+                <div class="highlight-item bg-white p-4 rounded-lg shadow hover:shadow-xl transition-shadow">
+                    <img src="https://via.placeholder.com/600x400.png?text=กิจกรรมเด่น+2" alt="กิจกรรมเด่น 2" class="w-full h-48 object-cover rounded-md mb-3">
+                    <h3>โครงการจิตอาสาพัฒนาชุมชน</h3>
+                    <p class="text-gray-600 text-sm mb-3">นักเรียนและบุคลากรของโรงเรียนร่วมกันจัดกิจกรรมบำเพ็ญประโยชน์ ทำความสะอาด และปรับปรุงภูมิทัศน์ในชุมชนรอบโรงเรียน...</p>
+                    <a href="path/to/highlight_detail_2.html" target="_blank" class="btn-primary inline-block px-4 py-2 text-sm">ดูภาพกิจกรรม</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ส่วนท้ายเว็บ (Footer) - ใช้โครงสร้างและสไตล์เหมือนกับ index.html -->
+    <footer class="bg-gradient-to-r from-red-600 to-yellow-500 text-white py-4 mt-8 rounded-t-3xl">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col items-center text-center">
+                <p class="footer-text">โรงเรียนชุมชนบ้านแม่หละป่าป๋วย</p>
+                <p class="footer-text">ตำบลสรอย อำเภอวังชิ้น จังหวัดแพร่</p>
+                <p class="footer-text">สำนักงานเขตพื้นที่การศึกษาประถมศึกษาแพร่เขต 2</p>
+                <p class="text-xs mt-2 opacity-75">© <span id="currentYearSmsPage"></span> สงวนลิขสิทธิ์</p>
+            </div>
+        </div>
+    </footer>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const spaNavLinks = document.querySelectorAll('#sms-main-nav-ul a.nav-link.menu-item');
+        const spaContentWrappers = document.querySelectorAll('.page-content-wrapper.content-section');
+
+        // --- Tab System for ONESQA Standards (มาตรฐานที่ 1, 2, 3) ---
+        const onesqaTabButtons = document.querySelectorAll('#onesqaStandardsTabs .onesqa-tab-button');
+        const onesqaTabPanels = document.querySelectorAll('#onesqaStandardsTabContent .onesqa-tab-panel');
+
+        function updateOnesqaTabs(selectedButton) {
+            onesqaTabButtons.forEach(button => {
+                const targetPanelId = button.getAttribute('data-tabs-target');
+                const targetPanel = document.querySelector(targetPanelId);
+
+                if (button === selectedButton) {
+                    button.setAttribute('aria-selected', 'true');
+                    button.classList.add('text-red-600', 'border-red-600', 'font-semibold');
+                    button.classList.remove('text-gray-500', 'hover:text-gray-600', 'hover:border-gray-300', 'border-transparent');
+                    if (targetPanel) targetPanel.classList.remove('hidden');
+                } else {
+                    button.setAttribute('aria-selected', 'false');
+                    button.classList.remove('text-red-600', 'border-red-600', 'font-semibold');
+                    button.classList.add('text-gray-500', 'hover:text-gray-600', 'hover:border-gray-300', 'border-transparent');
+                    if (targetPanel) targetPanel.classList.add('hidden');
+                }
+            });
+        }
+
+        onesqaTabButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                updateOnesqaTabs(this);
+            });
+        });
+
+        // Set the first ONESQA tab (Standard 1) as active by default
+        if (onesqaTabButtons.length > 0) {
+            updateOnesqaTabs(onesqaTabButtons[0]);
+        }
+        // --- End Tab System for ONESQA Standards ---
+
+
+        function updateActiveSpaContent(targetWrapperId) {
+            spaContentWrappers.forEach(wrapper => {
+                if (wrapper.id === targetWrapperId) {
+                    wrapper.style.display = 'block';
+                } else {
+                    wrapper.style.display = 'none';
+                }
+            });
+
+            spaNavLinks.forEach(link => {
+                link.classList.remove('active', 'text-red-500', 'font-semibold');
+                link.classList.add('text-gray-700');
+                if (link.dataset.target === targetWrapperId) {
+                    link.classList.add('active', 'text-red-500', 'font-semibold');
+                    link.classList.remove('text-gray-700');
+                }
+            });
+        }
+
+        spaNavLinks.forEach(link => {
+            link.addEventListener('click', function (event) {
+                const targetWrapperId = this.dataset.target;
+                const targetElement = document.getElementById(targetWrapperId);
+
+                if (targetWrapperId && targetElement) {
+                    if (!this.getAttribute('href').startsWith('#')) {
+                        event.preventDefault();
+                    }
+                    updateActiveSpaContent(targetWrapperId);
+                } else if (this.getAttribute('href') === 'index.html') {
+                    // Allow navigation
+                } else {
+                    event.preventDefault();
+                    console.warn("Target section wrapper not found or invalid for:", targetWrapperId);
+                }
+            });
+        });
+
+        function handleSpaHashChange() {
+            const hash = window.location.hash.substring(1);
+            let targetWrapperIdToShow = null;
+
+            if (hash) {
+                spaNavLinks.forEach(link => {
+                    if (link.getAttribute('href') === `#${hash}`) {
+                        targetWrapperIdToShow = link.dataset.target;
+                    }
+                });
+            }
+
+            if (targetWrapperIdToShow && document.getElementById(targetWrapperIdToShow)) {
+                updateActiveSpaContent(targetWrapperIdToShow);
+            } else if (spaNavLinks.length > 0 && spaNavLinks[0].dataset.target && document.getElementById(spaNavLinks[0].dataset.target)) {
+                const firstTargetId = spaNavLinks[0].dataset.target;
+                updateActiveSpaContent(firstTargetId);
+                if (spaNavLinks[0].getAttribute('href').startsWith('#')) {
+                     window.location.hash = spaNavLinks[0].getAttribute('href').substring(1);
+                }
+            } else {
+                spaContentWrappers.forEach(wrapper => wrapper.style.display = 'none');
+                spaNavLinks.forEach(link => {
+                    link.classList.remove('active', 'text-red-500', 'font-semibold');
+                    link.classList.add('text-gray-700');
+                });
+            }
+        }
+
+        window.addEventListener('hashchange', handleSpaHashChange);
+        handleSpaHashChange(); 
+
+        const currentYearSpanSms = document.getElementById('currentYearSmsPage');
+        if (currentYearSpanSms) {
+            currentYearSpanSms.textContent = new Date().getFullYear() + 543; 
+        }
+    });
+</script>
+</body>
+</html>
