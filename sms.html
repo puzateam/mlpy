@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>การประกันคุณภาพและมาตรฐานฯ - โรงเรียนชุมชนบ้านแม่หละป่าป๋วย (SPA)</title>
+
+    <style>
+        /* === โค้ด CSS ของเว็บโรงเรียนเดิม (ส่วนที่ยังใช้และเกี่ยวข้อง) === */
+        * { font-family: 'Prompt', sans-serif; }
+        body { background-color: #fffaf0; /* สี FloralWhite พื้นหลังหน้าเว็บ */ margin: 0; padding: 0; color: #333; line-height: 1.7;}
+
+        .menu-item { position: relative; transition: all 0.3s ease; }
+        .menu-item:after { content: ''; position: absolute; width: 0; height: 2px; bottom: -2px; left: 0; background-color: #fbbf24; transition: width 0.3s ease; }
+        .menu-item.active:after, .menu-item:hover:after { width: 100%; }
+
+        .btn-primary { background-color: #ef4444; color: #FFF; transition: all 0.2s ease; border-radius: 50px; padding: 8px 15px; text-decoration: none; display: inline-block; border: none; cursor: pointer;}
+        .btn-primary:hover { background-color: #dc2626; transform: translateY(-2px); box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); }
+
+        /* Card สำหรับเนื้อหาหลัก - ไม่มีภาพพื้นหลังแล้ว */
+        .card-main-content {
+            position: relative;
+            overflow: hidden;
+            border-radius: 16px;
+            background-color: #ffffff; /* พื้นหลังสีขาว */
+            padding: 25px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        }
+
+        /* สไตล์ข้อความใน Footer */
+        .footer-text { line-height: 1.3; margin-bottom: 0.3rem; }
+        .footer-text:last-child { margin-bottom: 0; }
+        .contact-item { display: flex; align-items: center; margin-bottom: 0.5rem; }
+        .contact-icon { margin-right: 0.5rem; flex-shrink: 0; }
+
+        /* สไตล์สำหรับตาราง (ถ้ามีการใช้งานในเนื้อหา SPA) */
+        .data-table-theme { width: 100%; border-collapse: collapse; margin-top: 1rem; }
+        .data-table-theme th, .data-table-theme td { border: 1px solid #ddd; padding: 8px; }
+        .data-table-theme thead { background-color: #F59E0B; color: #ffffff; }
+        .data-table-theme th { padding: 0.625rem 0.5rem; font-weight: 600; text-align: left;}
+        .data-table-theme td a img { width: 1.5rem; height: 1.5rem; display: inline-block; vertical-align: middle; transition: transform 0.2s ease-in-out, opacity 0.2s ease-in-out; }
+        .data-table-theme td a:hover img { opacity: 0.75; transform: scale(1.15); }
+        .data-table-theme .col-number { width: 10%; text-align: center; }
+        .data-table-theme .col-name { width: 60%; text-align: left; }
+        .data-table-theme .col-link { width: 30%; text-align: center; }
+        /* === สิ้นสุด CSS ของเว็บโรงเรียนเดิม (ส่วนที่ยังใช้) === */
+
+
+        /* === CSS สำหรับ SPA === */
+        .container { width: 90%; max-width: 1100px; margin: 20px auto; padding: 0 15px; }
+
+        header.spa-header {
+            background: linear-gradient(to right, #E65100, #FFA000);
+            color: #FFFFFF;
+            padding: 15px 0;
+            text-align: center;
+            margin-bottom: 0;
+        }
+        header.spa-header .school-name { font-size: 1.8em; font-weight: bold; }
+        header.spa-header .school-logo { max-height: 50px; vertical-align: middle; margin-right: 10px; }
+
+        nav.spa-nav {
+            background-color: #ffffff;
+            padding: 10px 0;
+            text-align: center;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            border-bottom: 1px solid #eee;
+        }
+        nav.spa-nav ul { list-style: none; padding: 0; margin: 0; }
+        nav.spa-nav ul li { display: inline-block; margin: 0 10px; }
+        nav.spa-nav ul li a { /* สไตล์นี้จะถูก .menu-item override บางส่วน */
+            padding: 8px 12px;
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+        }
+
+        .page-content-section { /* นี่คือ .card-main-content ที่เราปรับปรุง */
+            display: none; /* JavaScript จะควบคุมการแสดงผล */
+        }
+        .page-content-section.active { display: block; }
+
+        .page-content-section h2 {
+            font-size: 1.8em;
+            color: #D84315;
+            margin-top: 0;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #fbbf24;
+        }
+
+        .iqa-item, .standard-block, .indicator, .highlight-item {
+            background-color: #fdfdfd;
+            border: 1px solid #eee;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 8px;
+        }
+        .iqa-item h3, .standard-block h3, .indicator h4, .highlight-item h3 {
+            color: #EF6C00;
+            margin-top: 0;
+            margin-bottom: 10px;
+        }
+        .highlight-item img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 4px;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+        }
+
+
+        .evidence-section summary {
+            cursor: pointer;
+            font-weight: bold;
+            color: #EF6C00;
+            padding: 8px 12px;
+            background-color: #FFF3E0;
+            border: 1px solid #FFCC80;
+            border-radius: 4px;
+            display: inline-block;
+            margin-bottom: 8px;
+            transition: background-color 0.2s;
+        }
+        .evidence-section summary:hover { background-color: #FFE0B2; }
+        .evidence-section summary::-webkit-details-marker { display: none; }
+        .evidence-section summary::before { content: '📂 '; margin-right: 5px; }
+        .evidence-section[open] summary::before { content: '📄 '; }
+        .evidence-list { list-style: none; padding-left: 10px; margin-top: 10px; }
+        .evidence-list li { margin-bottom: 8px; }
+        .evidence-list li a { text-decoration: none; color: #1E88E5; }
+        .evidence-list li a:hover { text-decoration: underline; color: #1565C0; }
+        .file-type { font-size: 0.8em; color: #757575; margin-left: 5px; background-color: #f0f0f0; padding: 2px 6px; border-radius: 3px; font-weight: normal; }
+
+
+        footer.spa-footer {
+            background-color: #333333;
+            color: #FFFFFF;
+            text-align: center;
+            padding: 20px 0;
+            margin-top: 40px;
+        }
+        footer.spa-footer a { color: #fbbf24; text-decoration: none; }
+        footer.spa-footer a:hover { text-decoration: underline; }
+        /* === สิ้นสุด CSS สำหรับ SPA === */
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="spa-header">
+        <img src="https://i.postimg.cc/d3PbrGqC/logo-School.png" alt="โลโก้โรงเรียน" class="school-logo"> <!-- แก้ path โลโก้ -->
+        <span class="school-name">โรงเรียนชุมชนบ้านแม่หละป่าป๋วย</span>
+    </header>
+
+    <nav class="spa-nav">
+        <ul>
+            <li><a class="nav-link menu-item" data-target="iqaSection" href="#iqa">ระบบประกันคุณภาพภายใน</a></li>
+            <li><a class="nav-link menu-item" data-target="onesqaSection" href="#standards">มาตรฐานการศึกษา (สมศ.)</a></li>
+            <li><a class="nav-link menu-item" data-target="highlightsSection" href="#highlights">ผลงานเด่น</a></li>
+            <li><a href="https://www.example.com" target="_blank" class="menu-item">กลับเว็บหลัก</a></li> <!-- แก้ URL เว็บหลัก -->
+        </ul>
+    </nav>
+
+    <div class="container" id="app-content">
+        <!-- Section for IQA -->
+        <section id="iqaSection" class="page-content-section card-main-content">
+            <h2>ระบบการประกันคุณภาพภายใน (IQA)</h2>
+            <div class="iqa-item">
+                <h3>รายงานการประเมินตนเอง (SAR)</h3>
+                <p>สถานศึกษามีการจัดทำรายงานการประเมินตนเองเป็นประจำทุกปี เพื่อสะท้อนผลการดำเนินงานและวางแผนพัฒนาคุณภาพอย่างต่อเนื่อง</p>
+                <ul>
+                    <li><a href="path/to/sar_current_year.pdf" target="_blank">SAR ปีการศึกษาปัจจุบัน</a> <span class="file-type">PDF</span></li>
+                </ul>
+            </div>
+            <div class="iqa-item">
+                <h3>แผนพัฒนาคุณภาพการศึกษา</h3>
+                <p>แผนงานที่แสดงทิศทางการพัฒนาคุณภาพของสถานศึกษาในระยะต่างๆ สอดคล้องกับนโยบายและบริบทของสถานศึกษา</p>
+                <ul>
+                    <li><a href="path/to/annual_plan.pdf" target="_blank">แผนปฏิบัติการประจำปี</a> <span class="file-type">PDF</span></li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Section for ONESQA Standards -->
+        <section id="onesqaSection" class="page-content-section card-main-content">
+            <h2>มาตรฐานการศึกษาเพื่อการประเมินคุณภาพภายนอก (สมศ.)</h2>
+            <div class="standard-block">
+                <h3>มาตรฐานที่ 1: คุณภาพของผู้เรียน</h3>
+                <article class="indicator">
+                    <h4>1.1 ผลสัมฤทธิ์ทางวิชาการของผู้เรียน</h4>
+                    <p>สถานศึกษามุ่งเน้นพัฒนาผู้เรียนให้มีความรู้ความสามารถตามหลักสูตร มีทักษะการคิดวิเคราะห์ สังเคราะห์ และแก้ปัญหาอย่างสร้างสรรค์...</p>
+                    <details class="evidence-section"><summary>หลักฐาน/ร่องรอย</summary><ul class="evidence-list"><li><a href="path/to/sar_chapter1_1.pdf" target="_blank">รายงาน SAR ส่วนที่ 1.1</a> <span class="file-type">PDF</span></li></ul></details>
+                </article>
+                 <article class="indicator">
+                    <h4>1.2 คุณลักษณะที่พึงประสงค์ของผู้เรียน</h4>
+                    <p>สถานศึกษาปลูกฝังคุณธรรม จริยธรรม ค่านิยมที่ดีงาม และคุณลักษณะอันพึงประสงค์...</p>
+                    <details class="evidence-section"><summary>หลักฐาน/ร่องรอย</summary><ul class="evidence-list"><li><a href="path/to/moral_dev_plan.pdf" target="_blank">แผนงานส่งเสริมคุณธรรม</a> <span class="file-type">PDF</span></li></ul></details>
+                </article>
+            </div>
+             <div class="standard-block">
+                <h3>มาตรฐานที่ 2: กระบวนการบริหารและการจัดการ</h3>
+                <article class="indicator">
+                    <h4>2.1 การมีเป้าหมาย วิสัยทัศน์ และพันธกิจที่สถานศึกษากำหนดชัดเจน</h4>
+                    <p>สถานศึกษามีการกำหนดเป้าหมาย วิสัยทัศน์ และพันธกิจที่ชัดเจน สอดคล้องกับบริบท...</p>
+                    <details class="evidence-section"><summary>หลักฐาน/ร่องรอย</summary><ul class="evidence-list"><li><a href="path/to/school_vision_mission.pdf" target="_blank">เอกสารวิสัยทัศน์ พันธกิจ</a> <span class="file-type">PDF</span></li></ul></details>
+                </article>
+            </div>
+        </section>
+
+        <!-- Section for Highlights -->
+        <section id="highlightsSection" class="page-content-section card-main-content">
+            <h2>ผลงานเด่นของสถานศึกษา</h2>
+            <p>นี่คือส่วนจัดแสดงผลงานและความสำเร็จที่น่าภาคภูมิใจของโรงเรียนเรา:</p>
+            <div class="highlight-item">
+                <img src="https://via.placeholder.com/600x400.png?text=ผลงานเด่น+1" alt="ผลงานเด่น 1">
+                <h3>รางวัลชนะเลิศการแข่งขันโครงงานวิทยาศาสตร์ระดับภาค</h3>
+                <p>นักเรียนของเราได้รับรางวัลชนะเลิศจากการแข่งขันโครงงานวิทยาศาสตร์ในหัวข้อ "พลังงานสะอาดเพื่ออนาคต" ซึ่งจัดขึ้นโดย...</p>
+                <a href="path/to/highlight_detail_1.html" target="_blank" class="btn-primary">อ่านเพิ่มเติม</a>
+            </div>
+            <div class="highlight-item">
+                <img src="https://via.placeholder.com/600x400.png?text=กิจกรรมเด่น+2" alt="กิจกรรมเด่น 2">
+                <h3>โครงการจิตอาสาพัฒนาชุมชน</h3>
+                <p>นักเรียนและบุคลากรของโรงเรียนร่วมกันจัดกิจกรรมบำเพ็ญประโยชน์ ทำความสะอาด และปรับปรุงภูมิทัศน์ในชุมชนรอบโรงเรียน...</p>
+                <a href="path/to/highlight_detail_2.html" target="_blank" class="btn-primary">ดูภาพกิจกรรม</a>
+            </div>
+        </section>
+    </div>
+
+    <footer class="spa-footer">
+        <p class="footer-text">© 2567 โรงเรียนชุมชนบ้านแม่หละป่าป๋วย. สงวนลิขสิทธิ์.</p>
+        <div class="contact-item">
+             <span class="contact-icon">📧</span>
+            <p class="footer-text"><a href="mailto:mlpvcop@gmail.com">mlpvcop@gmail.com</a></p>
+        </div>
+        <div class="contact-item">
+            <span class="contact-icon">📞</span>
+            <p class="footer-text">โทร: 089-9988096</p>
+        </div>
+    </footer>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const navLinks = document.querySelectorAll('nav a.nav-link.menu-item');
+        const contentSections = document.querySelectorAll('.page-content-section');
+
+        function updateActiveContent(targetId) {
+            let foundTarget = false;
+            contentSections.forEach(section => {
+                if (section.id === targetId) {
+                    section.classList.add('active');
+                    foundTarget = true;
+                } else {
+                    section.classList.remove('active');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.dataset.target === targetId) {
+                    link.classList.add('active');
+                }
+            });
+        }
+
+        navLinks.forEach(link => {
+            link.addEventListener('click', function (event) {
+                // ไม่ต้อง preventDefault ถ้า href เป็น #hash เพื่อให้ URL update
+                const targetId = this.dataset.target;
+                if (targetId) {
+                    updateActiveContent(targetId);
+                }
+            });
+        });
+
+        function handleHashChange() {
+            const hash = window.location.hash.substring(1);
+            let targetIdToShow = '';
+
+            if (hash) {
+                navLinks.forEach(link => {
+                    if (link.getAttribute('href') === `#${hash}`) {
+                        targetIdToShow = link.dataset.target;
+                    }
+                });
+            }
+
+            if (targetIdToShow) {
+                updateActiveContent(targetIdToShow);
+            } else if (navLinks.length > 0 && navLinks[0].dataset.target) {
+                const firstSpaLink = navLinks[0];
+                updateActiveContent(firstSpaLink.dataset.target);
+                if (firstSpaLink.getAttribute('href').startsWith('#')) { // Ensure it's an SPA link
+                    window.location.hash = firstSpaLink.getAttribute('href').substring(1);
+                }
+            } else {
+                contentSections.forEach(section => section.classList.remove('active'));
+                navLinks.forEach(link => link.classList.remove('active'));
+            }
+        }
+
+        window.addEventListener('hashchange', handleHashChange);
+        handleHashChange(); // Initial load
+    });
+</script>
+</body>
+</html>
