@@ -17,33 +17,33 @@ body {
 /* สไตล์สำหรับรายการเมนูหลักใน Nav ที่มีพื้นหลังสีขาว */
 header nav.bg-white .menu-item, /* สำหรับ index.html และ sms.html ที่ใช้โครงสร้าง nav ใหม่ */
 nav.bg-white .menu-item { /* เพิ่ม selector นี้เผื่อกรณีที่ nav อยู่เดี่ยวๆ และมี bg-white */
-    position: relative; 
-    display: inline-block; 
+    position: relative;
+    display: inline-block;
     padding-top: 0.5rem;    /* Tailwind py-2 */
     padding-bottom: 0.5rem; /* Tailwind py-2, บวกเพิ่มอีกเล็กน้อยสำหรับเส้นใต้ */
     margin-bottom: -3px; /* ชดเชยความสูงของเส้นใต้ เพื่อไม่ให้ layout กระโดด */
-    transition: color 0.3s ease; 
+    transition: color 0.3s ease;
     /* สีตัวอักษรตั้งต้นและ hover ถูกกำหนดด้วย Tailwind classes ใน HTML */
     /* เช่น text-gray-700 hover:text-red-500 */
 }
 
 header nav.bg-white .menu-item:after,
 nav.bg-white .menu-item:after {
-    content: ''; 
-    position: absolute; 
-    width: 0; 
+    content: '';
+    position: absolute;
+    width: 0;
     height: 3px; /* ความหนาของเส้นใต้ */
     bottom: 0; /* ให้เส้นอยู่ชิดขอบล่างสุด (หลัง padding) */
-    left: 50%; 
-    transform: translateX(-50%); 
+    left: 50%;
+    transform: translateX(-50%);
     background-color: #fbbf24; /* สีเหลือง/ส้ม (Tailwind amber-400) */
-    transition: width 0.3s ease; 
+    transition: width 0.3s ease;
 }
 
-header nav.bg-white .menu-item.active:after, 
+header nav.bg-white .menu-item.active:after,
 header nav.bg-white .menu-item:hover:after,
-nav.bg-white .menu-item.active:after, 
-nav.bg-white .menu-item:hover:after { 
+nav.bg-white .menu-item.active:after,
+nav.bg-white .menu-item:hover:after {
     width: 70%; /* ปรับความกว้างเส้นใต้ตามชอบ */
 }
 
@@ -61,9 +61,9 @@ nav.bg-white .menu-item.active {
    ========================================================================== */
 .btn-primary {
     background-color: #ef4444; /* Tailwind red-500 */
-    color: #FFF; 
-    transition: all 0.2s ease; 
-    border-radius: 50px; 
+    color: #FFF;
+    transition: all 0.2s ease;
+    border-radius: 50px;
     padding-left: 1rem; /* เพิ่ม padding เพื่อให้ดูสมส่วน */
     padding-right: 1rem;
     /* padding-top และ padding-bottom กำหนดใน HTML ด้วย Tailwind (เช่น py-2) */
@@ -71,22 +71,26 @@ nav.bg-white .menu-item.active {
 
 .btn-primary:hover {
     background-color: #dc2626; /* Tailwind red-600 */
-    transform: translateY(-2px); 
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); 
+    transform: translateY(-2px);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
 }
 
 /* ==========================================================================
    สไตล์สำหรับ Sidebar (เฉพาะ index.html)
    ========================================================================== */
+/* หมายเหตุ: .sidebar-item ถูกใช้ทั้งใน index.html และ sms.html (ผ่าน .sidebar-sms)
+   ดังนั้น สไตล์พื้นฐานของ .sidebar-item สามารถอยู่ที่นี่ได้
+   ส่วนสไตล์ที่เฉพาะเจาะจงมากๆ ของ sms.html อาจจะยังคงอยู่ใน <style> ของ sms.html หรือสร้างคลาสใหม่ */
 .sidebar-item {
     border-bottom: 1px solid #fee2e2; /* Tailwind red-100 */
-    transition: all 0.3s ease; 
+    transition: all 0.3s ease;
 }
 
-.sidebar-item a.active, /* ลิงก์ที่ active ใน sidebar */
-.sidebar-item:hover { /* เมื่อ hover รายการใน sidebar */
+/* สไตล์นี้อาจจะยังใช้ได้กับ index.html และเป็น base ให้ sms.html */
+.sidebar-item a.active,
+.sidebar-item:hover > a { /* เปลี่ยน :hover เป็น > a เพื่อให้ target ตัวลิงก์โดยตรงเมื่อ hover ที่ li */
     background-color: rgba(254, 226, 226, 0.5); /* Tailwind red-100 โปร่งแสง */
-    padding-left: 0.5rem; 
+    padding-left: 0.5rem;
     color: #dc2626 !important; /* Tailwind red-600, ใช้ !important ถ้า Tailwind override */
 }
 /* ถ้า a ใน sidebar-item ไม่ได้มีคลาส active โดยตรง แต่ถูก JS ทำให้ active ผ่านการเปลี่ยนสี */
@@ -100,68 +104,68 @@ nav.bg-white .menu-item.active {
    สไตล์สำหรับ Card ทั่วไป (ใช้ทั้ง index.html และส่วนย่อยใน sms.html ถ้ามีการใช้คลาส .card)
    ========================================================================== */
 .card {
-    border-radius: 16px; 
-    transition: all 0.3s ease; 
+    border-radius: 16px;
+    transition: all 0.3s ease;
     background-color: #ffffff; /* พื้นหลังสีขาวสำหรับ card ทั่วไป */
     /* box-shadow กำหนดใน HTML ด้วย Tailwind (เช่น shadow-md) */
 }
 
 .card:hover {
-    transform: translateY(-5px); 
+    transform: translateY(-5px);
     box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); /* Tailwind shadow-lg */
 }
 
 /* สไตล์สำหรับ Card เนื้อหาหลักใน index.html (ที่มีภาพพื้นหลัง) */
 .card-main-content { /* เฉพาะ Card ใหญ่ใน index.html */
-    position: relative; 
-    z-index: 0; 
-    overflow: hidden;  
+    position: relative;
+    z-index: 0;
+    overflow: hidden;
     /* border-radius และ background-color ถูกกำหนดโดย .card แล้ว */
 }
 
 .card-main-content::before {
-    content: ""; 
-    position: absolute; 
+    content: "";
+    position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
     background-image: url('img/around(31).jpg'); /* ตรวจสอบ Path รูปภาพ */
-    background-repeat: no-repeat; 
-    background-position: center center; 
-    background-size: cover; 
-    opacity: 0.2; 
-    z-index: -1; 
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    opacity: 0.2;
+    z-index: -1;
     border-radius: inherit; /* ให้ขอบมนเหมือน parent */
 }
 
-.card-main-content > * { 
-    position: relative; 
-    z-index: 1; 
+.card-main-content > * {
+    position: relative;
+    z-index: 1;
 }
 
 /* ==========================================================================
    สไตล์สำหรับ Footer (ใช้ร่วมกันทั้ง index.html และ sms.html)
    ========================================================================== */
 .footer-text {
-    line-height: 1.3; 
-    margin-bottom: 0.3rem; 
+    line-height: 1.3;
+    margin-bottom: 0.3rem;
 }
 
 .footer-text:last-child {
-    margin-bottom: 0; 
+    margin-bottom: 0;
 }
 
 /* สไตล์สำหรับรายการข้อมูลติดต่อ (ถ้าใช้คลาสนี้ใน Footer หรือส่วนอื่น) */
 .contact-item {
-    display: flex; 
-    align-items: center; 
-    margin-bottom: 0.5rem; 
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.5rem;
 }
 
 .contact-icon { /* ไอคอน SVG หรือ Text ที่ใช้เป็นไอคอน */
-    margin-right: 0.5rem; 
-    flex-shrink: 0; 
+    margin-right: 0.5rem;
+    flex-shrink: 0;
 }
 
 /* ==========================================================================
@@ -174,15 +178,15 @@ nav.bg-white .menu-item.active {
 
 /* สไตล์สำหรับส่วนประวัติโรงเรียน (#content-history) ใน index.html */
 #content-history p {
-    margin-bottom: 0.75rem; 
-    line-height: 1.6; 
-    text-indent: 2em; 
+    margin-bottom: 0.75rem;
+    line-height: 1.6;
+    text-indent: 2em;
 }
 #content-history h4 {
-    font-weight: 600; 
+    font-weight: 600;
     color: #c2410c; /* Tailwind text-orange-700 */
-    margin-top: 1rem; 
-    margin-bottom: 0.5rem; 
+    margin-top: 1rem;
+    margin-bottom: 0.5rem;
 }
 #content-history strong {
     color: #b91c1c; /* Tailwind text-red-700 */
@@ -190,110 +194,110 @@ nav.bg-white .menu-item.active {
 
 /* สไตล์ Container รูปภาพ (เช่น ผังองค์กร) */
 .org-chart-container {
-    text-align: center; 
-    margin-top: 1.5rem; 
-    margin-bottom: 1.5rem; 
-    padding: 1rem; 
+    text-align: center;
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
+    padding: 1rem;
     background-color: #f9fafb; /* Tailwind gray-50 */
-    border-radius: 8px; 
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); 
+    border-radius: 8px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
 }
 .org-chart-image {
-    max-width: 100%; 
-    height: auto; 
-    border-radius: 4px; 
+    max-width: 100%;
+    height: auto;
+    border-radius: 4px;
     border: 1px solid #e5e7eb; /* Tailwind gray-200 */
 }
 
 /* สไตล์ส่วนข้อมูลสถานศึกษา (#content-school-info) ใน index.html */
 #content-school-info p {
-    margin-bottom: 0.75rem; 
-    line-height: 1.6; 
+    margin-bottom: 0.75rem;
+    line-height: 1.6;
 }
 #content-school-info .info-label {
-    font-weight: 600; 
+    font-weight: 600;
     color: #4b5563; /* Tailwind gray-600 */
 }
 #content-school-info .school-identity-title {
     font-size: 1.125rem; /* Tailwind text-lg */
-    font-weight: 600; 
+    font-weight: 600;
     color: #b91c1c; /* Tailwind text-red-700 */
-    margin-top: 1.25rem; 
-    margin-bottom: 0.5rem; 
+    margin-top: 1.25rem;
+    margin-bottom: 0.5rem;
 }
 #content-school-info .school-identity-text {
     font-size: 1.25rem; /* Tailwind text-xl */
     color: #c2410c; /* Tailwind text-orange-700 */
-    margin-left: 1rem; 
-    font-weight: 500; 
+    margin-left: 1rem;
+    font-weight: 500;
 }
 #content-school-info .color-box {
-    display: inline-block; 
-    width: 1em; 
-    height: 1em; 
-    margin-right: 0.3em; 
-    border-radius: 3px; 
-    vertical-align: middle; 
+    display: inline-block;
+    width: 1em;
+    height: 1em;
+    margin-right: 0.3em;
+    border-radius: 3px;
+    vertical-align: middle;
 }
 
 /* สไตล์ส่วนวิสัยทัศน์/พันธกิจ (#content-vision) ใน index.html */
 #content-vision h3 {
-    font-size: 1.25rem; 
-    font-weight: 700; 
-    color: #b91c1c; 
-    margin-top: 1.5rem; 
-    margin-bottom: 0.75rem; 
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #b91c1c;
+    margin-top: 1.5rem;
+    margin-bottom: 0.75rem;
 }
 #content-vision h3:first-child {
-    margin-top: 0; 
+    margin-top: 0;
 }
 #content-vision p.vision-statement {
-    font-size: 1.125rem; 
-    line-height: 1.7; 
-    margin-left: 1rem; 
-    margin-bottom: 1.5rem; 
-    font-style: italic; 
+    font-size: 1.125rem;
+    line-height: 1.7;
+    margin-left: 1rem;
+    margin-bottom: 1.5rem;
+    font-style: italic;
     color: #374151; /* Tailwind gray-700 */
 }
-#content-vision ol, 
-#content-vision ul { 
-    list-style-position: outside; 
-    margin-left: 2.5rem; 
-    margin-bottom: 1.5rem; 
+#content-vision ol,
+#content-vision ul {
+    list-style-position: outside;
+    margin-left: 2.5rem;
+    margin-bottom: 1.5rem;
 }
 #content-vision ol li,
 #content-vision ul li {
-    margin-bottom: 0.5rem; 
-    line-height: 1.6; 
+    margin-bottom: 0.5rem;
+    line-height: 1.6;
 }
 
 /* สไตล์ส่วนโครงสร้างการบริหาร (#content-structure) ใน index.html */
 #content-structure .intro-paragraph {
-    margin-bottom: 1rem; 
-    line-height: 1.6; 
+    margin-bottom: 1rem;
+    line-height: 1.6;
 }
 #content-structure ol.admin-groups {
-    list-style-type: decimal; 
-    list-style-position: outside; 
-    margin-left: 2.5rem; 
-    margin-bottom: 1.5rem; 
+    list-style-type: decimal;
+    list-style-position: outside;
+    margin-left: 2.5rem;
+    margin-bottom: 1.5rem;
 }
 #content-structure ol.admin-groups li {
-    margin-bottom: 0.5rem; 
-    line-height: 1.6; 
+    margin-bottom: 0.5rem;
+    line-height: 1.6;
 }
 
 /* ==========================================================================
    สไตล์สำหรับตารางข้อมูลทั่วไป (link-table, data-table-theme)
    ========================================================================== */
-.link-table, .data-table-theme { 
-    width: 100%; 
-    border-collapse: collapse; 
-    margin-top: 1rem; 
+.link-table, .data-table-theme {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
     font-size: 0.875rem; /* Tailwind text-sm */
 }
 .link-table th, .link-table td,
-.data-table-theme th, .data-table-theme td { 
+.data-table-theme th, .data-table-theme td {
     border: 1px solid #e5e7eb; /* Tailwind gray-200 */
     padding: 0.5rem 0.75rem; /* Tailwind px-3 py-2 */
     /* text-align ถูกกำหนดโดย Tailwind classes ใน HTML */
@@ -301,75 +305,62 @@ nav.bg-white .menu-item.active {
 
 .data-table-theme thead {
     background-color: #F59E0B; /* Tailwind amber-500 */
-    color: #ffffff; 
+    color: #ffffff;
 }
-.data-table-theme th { 
+.data-table-theme th {
     font-weight: 600; /* Tailwind font-semibold */
 }
 
-.link-table td a img, 
-.data-table-theme td a img { 
+.link-table td a img,
+.data-table-theme td a img {
     width: 1.5rem; /* Tailwind w-6 */
     height: 1.5rem; /* Tailwind h-6 */
-    display: inline-block; 
-    vertical-align: middle; 
-    transition: transform 0.2s ease-in-out, opacity 0.2s ease-in-out; 
+    display: inline-block;
+    vertical-align: middle;
+    transition: transform 0.2s ease-in-out, opacity 0.2s ease-in-out;
 }
 .link-table td a:hover img,
 .data-table-theme td a:hover img {
-    opacity: 0.75; 
-    transform: scale(1.15); 
+    opacity: 0.75;
+    transform: scale(1.15);
 }
-
-/* ความกว้างคอลัมน์สำหรับตาราง (ถ้าต้องการกำหนดตายตัว) */
-/* .col-number { width: 10%; text-align: center; } */
-/* .col-name { width: 60%; text-align: left; } */
-/* .col-link { width: 30%; text-align: center; } */
 
 /* ==========================================================================
-   สไตล์สำหรับส่วนเนื้อหาเฉพาะของ sms.html
+   สไตล์สำหรับส่วนเนื้อหาเฉพาะของ sms.html (General, should be minimal if specific styles are in sms.html <style>)
    ========================================================================== */
-.page-content-section { /* ใช้สำหรับ section ใน sms.html */
-    display: none; /* ซ่อนไว้ เริ่มต้น JS จะควบคุมการแสดง */
-    padding: 1.5rem; /* Tailwind p-6 */
-    margin-bottom: 1.5rem; /* Tailwind mb-6 */
-    background-color: #ffffff; /* Tailwind bg-white */
-    border-radius: 0.75rem; /* Tailwind rounded-xl */
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); /* Tailwind shadow-md */
-}
-/* JS จะใช้ style.display = 'block' เพื่อแสดง section ที่ active */
+/* .page-content-section is not used anymore with the new sms.html structure */
 
-.iqa-item, .standard-block {
-    margin-bottom: 1.5rem; 
+.iqa-item, .standard-block { /* These might still be used within HTML content sections of sms.html */
+    margin-bottom: 1.5rem;
 }
 .iqa-item:not(:last-child), .standard-block:not(:last-child) {
-    padding-bottom: 1rem; 
+    padding-bottom: 1rem;
     border-bottom: 1px dashed #fed7aa; /* Tailwind border-orange-200 */
 }
 
-.iqa-item h3, .standard-block h3, .highlight-item h3 { /* .highlight-item h3 เพิ่มเข้ามา */
+.iqa-item h3, .standard-block h3, .highlight-item h3 {
     font-size: 1.25rem; /* Tailwind text-xl */
-    font-weight: 600; 
+    font-weight: 600;
     color: #c2410c; /* Tailwind text-orange-700 */
-    margin-bottom: 0.5rem; 
+    margin-bottom: 0.5rem;
 }
-.indicator h4 {
+.indicator h4 { /* If indicators are directly in HTML content */
     font-size: 1.125rem; /* Tailwind text-lg */
     font-weight: 500; /* Tailwind font-medium */
     color: #dd6b20; /* Tailwind text-orange-600 */
-    margin-top: 0.75rem; 
-    margin-bottom: 0.25rem; 
+    margin-top: 0.75rem;
+    margin-bottom: 0.25rem;
 }
 .evidence-section summary {
     cursor: pointer;
-    font-weight: 500; 
+    font-weight: 500;
     color: #4a5568; /* Tailwind text-gray-700 */
-    margin-top: 0.5rem; 
+    margin-top: 0.5rem;
 }
 .evidence-list {
     list-style-type: disc;
     margin-left: 1.5rem; /* Tailwind ml-6 */
-    padding-top: 0.5rem; 
+    padding-top: 0.5rem;
 }
 .evidence-list li a {
     color: #2b6cb0; /* Tailwind text-blue-600 */
@@ -377,46 +368,42 @@ nav.bg-white .menu-item.active {
 .evidence-list li a:hover {
     text-decoration: underline;
 }
-.file-type {
+.file-type { /* This is used by .evidence-button as well */
     font-size: 0.75rem; /* Tailwind text-xs */
     background-color: #edf2f7; /* Tailwind bg-gray-200 */
     color: #4a5568; /* Tailwind text-gray-700 */
     padding: 0.125rem 0.375rem; /* Tailwind px-1.5 py-0.5 */
     border-radius: 0.25rem; /* Tailwind rounded-md */
-    margin-left: 0.5rem; 
+    margin-left: 0.5rem;
 }
-/* สไตล์สำหรับ .highlight-item (ส่วนใหญ่ใช้ Tailwind ใน HTML แล้ว) */
 .highlight-item {
-    /* background-color, padding, border-radius, shadow ถูกกำหนดใน HTML ด้วย Tailwind */
-    margin-bottom: 1.5rem; /* เพิ่มระยะห่างระหว่าง item ถ้าอยู่เดี่ยวๆ */
+    margin-bottom: 1.5rem;
 }
-
 
 /* ==========================================================================
    สไตล์สำหรับ PDF Embed และ Responsive
    ========================================================================== */
-.pdf-embed-container {
-    width: 100%; 
+.pdf-embed-container { /* For index.html PDF embed */
+    width: 100%;
     height: calc(100vh - 180px);
     border: 1px solid #d1d5db; /* Tailwind gray-300 */
 }
 
 /* Media Query สำหรับ Responsive Design (ใช้กับทั้ง index.html และ sms.html) */
-@media (max-width: 768px) { 
-    .main-container { /* สำหรับ index.html */
-        flex-direction: column; 
+@media (max-width: 768px) {
+    .main-container { /* สำหรับ index.html and sms.html */
+        flex-direction: column;
     }
-    .sidebar, .content { /* สำหรับ index.html */
-        width: 100%; 
+    .sidebar, .content { /* สำหรับ index.html and sms.html */
+        width: 100%;
     }
-    .sidebar { /* สำหรับ index.html */
-        margin-bottom: 1rem; 
+    .sidebar { /* สำหรับ index.html and sms.html */
+        margin-bottom: 1rem;
     }
     .facebook-iframe { /* สำหรับ index.html */
-        width: 100% !important; 
-        max-width: 500px; 
+        width: 100% !important;
+        max-width: 500px;
     }
-    /* อาจจะเพิ่มสไตล์ responsive เฉพาะสำหรับ sms.html ที่นี่ถ้าจำเป็น */
 }
 
 /* ==========================================================================
@@ -434,100 +421,51 @@ nav.bg-white .menu-item.active {
     border-width: 0;
 }
 
-        .evidence-button {
-            background-color: #ef4444; /* Tailwind red-500 */
-            color: white;
-            padding: 0.25rem 0.75rem; /* py-1 px-3 */
-            border-radius: 9999px; /* rounded-full */
-            font-size: 0.75rem; /* text-xs */
-            font-weight: 500; /* font-medium */
-            transition: background-color 0.2s ease-in-out;
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-        }
-        .evidence-button:hover {
-            background-color: #dc2626; /* Tailwind red-600 */
-        }
-        .evidence-button .file-type {
-            background-color: rgba(255,255,255,0.2);
-            color: white;
-            margin-left: 0.35rem;
-            padding: 0.1rem 0.3rem;
-            font-size: 0.65rem;
-        }
-        /* สไตล์สำหรับ Tab ของแต่ละระดับการศึกษา */
-        .tab-button-level { /* คลาสใหม่สำหรับปุ่ม Tab ที่แสดงเฉพาะระดับ */
-             /* สไตล์เหมือน onesqa-tab-button เดิม */
-        }
-        /* Custom styles for sms.html specifically */
-        .sidebar-sms .sidebar-item {
-            border-bottom: 1px solid #fee2e2; /* Tailwind red-100 */
-            transition: all 0.3s ease;
-        }
-        .sidebar-sms .sidebar-item a.active, /* For main link if it becomes active */
-        .sidebar-sms .sidebar-item:hover > a.sms-sidebar-main-link { /* Hover effect on li or a */
-            background-color: rgba(254, 226, 226, 0.5); /* Tailwind red-100 โปร่งแสง */
-            padding-left: 0.5rem;
-            color: #dc2626 !important; /* Tailwind red-600 */
-            font-weight: 600;
-        }
-        .sidebar-sms .sub-indicator-menu {
-            list-style-type: none;
-            padding-left: 1rem; /* Indent sub-menu */
-            margin-top: 0.25rem;
-            margin-bottom: 0.5rem;
-        }
-        .sidebar-sms .sub-indicator-menu li a {
-            font-size: 0.875rem; /* text-sm */
-            padding-top: 0.25rem;
-            padding-bottom: 0.25rem;
-            display: block;
-            color: #4b5563; /* gray-600 */
-            transition: color 0.2s ease, padding-left 0.2s ease;
-        }
-        .sidebar-sms .sub-indicator-menu li a:hover,
-        .sidebar-sms .sub-indicator-menu li a.active-indicator {
-            color: #c53030; /* red-700 */
-            font-weight: 500;
-            /* padding-left: 0.25rem; /* Slight indent on hover/active */
-        }
-        .pdf-embed-container-sms {
-            width: 100%;
-            height: calc(100vh - 230px); /* Adjust height as needed, considering header and title */
-            border: 1px solid #d1d5db; /* Tailwind gray-300 */
-            position: relative; /* For z-index if needed over background */
-            z-index: 1;
-        }
-        .main-content-area-sms.showing-pdf .sms-html-content-section {
-            display: none !important;
-        }
-        .main-content-area-sms.showing-html #pdf-viewer-container {
-            display: none !important;
-        }
+/* ==========================================================================
+   สไตล์สำหรับปุ่ม Evidence Button (ใช้ใน sms.html และอาจจะที่อื่น)
+   ========================================================================== */
+.evidence-button {
+    background-color: #ef4444; /* Tailwind red-500 */
+    color: white;
+    padding: 0.25rem 0.75rem; /* py-1 px-3 */
+    border-radius: 9999px; /* rounded-full */
+    font-size: 0.75rem; /* text-xs */
+    font-weight: 500; /* font-medium */
+    transition: background-color 0.2s ease-in-out;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+}
+.evidence-button:hover {
+    background-color: #dc2626; /* Tailwind red-600 */
+}
+.evidence-button .file-type { /* Overrides general .file-type for this button */
+    background-color: rgba(255,255,255,0.2);
+    color: white;
+    margin-left: 0.35rem;
+    padding: 0.1rem 0.3rem;
+    font-size: 0.65rem;
+}
 
-        /* Background image for sms.html main content card */
-        .card-main-content-sms {
-            position: relative;
-            z-index: 0;
-            overflow: hidden;
-        }
-        .card-main-content-sms::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: url('img/around(31).jpg'); /* << ตรวจสอบ Path รูปภาพนี้ให้ถูกต้องนะคะ! */
-            background-repeat: no-repeat;
-            background-position: center center;
-            background-size: cover;
-            opacity: 0.1; /* << ปรับค่า opacity ตามต้องการ อาจจะน้อยกว่าของ index.html เพื่อให้เนื้อหาชัดเจน */
-            z-index: -1;
-            border-radius: inherit; /* ให้ขอบมนเหมือน parent */
-        }
-        .card-main-content-sms > * { /* For direct children like title and content containers */
-            position: relative;
-            z-index: 1;
-        }
+/* .tab-button-level is not used with the new sms.html structure, can be removed if not used elsewhere */
+/*
+.tab-button-level {
+}
+*/
+
+/* 
+   CSS Rules that were specific to sms.html's <style> tag previously and have been removed from this file:
+   - .sidebar-sms .sidebar-item a.active, .sidebar-sms .sidebar-item:hover > a.sms-sidebar-main-link
+   - .sidebar-sms .sub-indicator-menu
+   - .sidebar-sms .sub-indicator-menu li a
+   - .sidebar-sms .sub-indicator-menu li a:hover, .sidebar-sms .sub-indicator-menu li a.active-indicator
+   - .pdf-embed-container-sms
+   - .main-content-area-sms.showing-pdf .sms-html-content-section, etc. (visibility toggles)
+   - .card-main-content-sms and its ::before pseudo-element (background image for sms.html)
+   - #no-pdf-message-container
+   - #sms-center-content-title .title-line-1, #sms-center-content-title .title-line-2
+   - .sidebar-sms .sms-sidebar-main-link and .sidebar-sms .sms-sidebar-main-link.active-parent
+
+   These should remain within the <style> tag of sms.html or be managed by Tailwind classes if possible,
+   as they are highly specific to the layout and functionality of sms.html.
+*/
