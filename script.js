@@ -436,13 +436,15 @@ async function fetchAndDisplayCalendarEvents() {
 
                 if (button === selectedButton) {
                     button.setAttribute('aria-selected', 'true');
-                    button.classList.add('text-red-600', 'border-red-600', 'font-semibold'); // Active tab style
+                    // สไตล์ Tab Active: สีตัวอักษร, สี border ล่าง, **ไม่มี border ด้านอื่นๆ (เพื่อให้เชื่อมกับ Panel)**, **พื้นหลังสีเดียวกับ Panel**
+                    button.classList.add('text-red-600', 'border-red-600', 'font-semibold', 'bg-white', 'dark:bg-gray-800', 'dark:text-red-500', 'dark:border-red-500');
                     button.classList.remove('text-gray-500', 'hover:text-gray-600', 'hover:border-gray-300', 'border-transparent');
                     if (targetPanel) targetPanel.classList.remove('hidden');
                 } else {
                     button.setAttribute('aria-selected', 'false');
-                    button.classList.remove('text-red-600', 'border-red-600', 'font-semibold');
-                    button.classList.add('text-gray-500', 'hover:text-gray-600', 'hover:border-gray-300', 'border-transparent'); // Inactive tab style
+                    // สไตล์ Tab Inactive: สีตัวอักษรปกติ, border ล่างโปร่งใส, ไม่มีพื้นหลัง (หรือพื้นหลังของ nav)
+                    button.classList.remove('text-red-600', 'border-red-600', 'font-semibold', 'bg-white', 'dark:bg-gray-800', 'dark:text-red-500', 'dark:border-red-500');
+                    button.classList.add('text-gray-500', 'hover:text-gray-600', 'hover:border-gray-300', 'border-transparent');
                     if (targetPanel) targetPanel.classList.add('hidden');
                 }
             });
