@@ -242,7 +242,7 @@ nav.bg-white .menu-item.active {
    ========================================================================== */
 .pdf-embed-container {
     width: 100%;
-    height: calc(100vh - 100px);
+    height: 1000px;
     border: 1px solid #d1d5db;
 }
 
