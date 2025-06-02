@@ -170,12 +170,11 @@
     </footer>
 
 <script>
-    // URL ของ Google Apps Script Web App (ต้องเปลี่ยนเป็น URL จริงของพี่)
-    const COMMENTS_WEB_APP_URL = "YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL_HERE_FOR_COMMENTS"; 
+    // URL ของ Google Apps Script Web App (อันนี้ถูกต้องแล้วตามที่พี่ให้มา)
+    const COMMENTS_WEB_APP_URL = "https://script.google.com/macros/s/AKfycbx7COpl7wBfRS6DvxWq8382X8PExJmKciOpluJY4l78ob5biIXlQ4HkYfyG8UDzbeU4/exec"; 
 
     const commentsListDiv = document.getElementById('comments-list');
     
-    // Modal elements
     const commentModal = document.getElementById('commentModal');
     const closeModalButton = document.getElementById('closeModalButton');
     const cancelModalButton = document.getElementById('cancelModalButton');
@@ -189,73 +188,40 @@
 
     function openCommentModal() {
         commentModal.classList.remove('hidden');
-        setTimeout(() => commentModal.classList.remove('opacity-0'), 10); // For transition
-        modalUserNameInput.value = ''; // Clear previous input
+        setTimeout(() => commentModal.classList.remove('opacity-0'), 10);
+        modalUserNameInput.value = '';
         modalCommentMessageTextarea.value = '';
-        emojiPickerContainer.classList.add('hidden'); // Hide emoji picker initially
+        emojiPickerContainer.classList.add('hidden');
     }
 
     function closeCommentModal() {
         commentModal.classList.add('opacity-0');
-        setTimeout(() => commentModal.classList.add('hidden'), 300); // Wait for transition
+        setTimeout(() => commentModal.classList.add('hidden'), 300);
     }
 
-    // --- ฟังก์ชันโหลดความคิดเห็น ---
     async function loadComments() {
         if (!commentsListDiv) return;
         commentsListDiv.innerHTML = '<p class="text-center text-gray-400 animate-pulse py-8 text-lg">กำลังโหลดข้อความน่ารักๆ...</p>';
         
-        // --- SIMULATE NO COMMENTS FOR NOW ---
-        // Replace this block with actual fetch when Apps Script is ready
-        setTimeout(() => {
-             // Simulate API call delay
-            const noCommentsData = true; // ตั้งเป็น true เพื่อทดสอบกรณีไม่มี comment
-            // const commentsData = [ // ตัวอย่างข้อมูล comment (ถ้ามี)
-            //     { id: '1', name: 'น้องชมพู', commentText: 'เว็บน่ารักมากเลยค่ะ 😊', timestamp: new Date().toISOString() },
-            //     { id: '2', name: 'พี่ฟ้าใส', commentText: 'ชอบสีสันจังเลยยย 💖✨', timestamp: new Date(Date.now() - 3600000).toISOString() }
-            // ];
-
-            if (noCommentsData) { // หรือ (result.data && result.data.length === 0) จาก API จริง
-                commentsListDiv.innerHTML = `
-                    <div class="no-comments-container text-center p-8 md:p-12 rounded-2xl">
-                        <i class="far fa-comment-dots fa-4x text-pink-300 mb-6"></i>
-                        <p class="text-xl text-gray-500 mb-6">ยังไม่มีข้อความในขณะนี้...</p>
-                        <button id="openModalFromEmptyStateButton" class="btn-gradient py-3 px-8 text-lg font-semibold rounded-full">
-                            <i class="fas fa-pen-nib mr-2"></i>มาเป็นคนแรกที่ส่งข้อความถึงเรากันเถอะ!
-                        </button>
-                    </div>
-                `;
-                const openModalBtn = document.getElementById('openModalFromEmptyStateButton');
-                if (openModalBtn) {
-                    openModalBtn.addEventListener('click', openCommentModal);
-                }
-            } else {
-                // ... (ส่วน render comment list จาก API response จริง) ...
-                // let html = '<ul class="space-y-6">';
-                // commentsData.forEach(comment => { /* ...สร้าง HTML ... */ });
-                // html += '</ul>';
-                // commentsListDiv.innerHTML = html;
-                // Add a button to open modal even if there are comments
-                // commentsListDiv.insertAdjacentHTML('afterend', '<div class="text-center mt-8"><button id="openModalButton" class="btn-gradient ...">ส่งข้อความเพิ่ม</button></div>');
-                // document.getElementById('openModalButton').addEventListener('click', openCommentModal);
-            }
-        }, 1500); // Simulate API call delay
-
-        // --- ACTUAL FETCH (comment out the simulation block above when ready) ---
-        /*
         try {
-            const response = await fetch(`${COMMENTS_WEB_APP_URL}?action=getPublicComments×tamp=${new Date().getTime()}`);
-            if (!response.ok) throw new Error(`API call failed: ${response.status}`);
+            // ส่ง action 'getPublicComments' (ตรวจสอบให้แน่ใจว่า GAS ของพี่มี action นี้สำหรับ comment sheet)
+            const response = await fetch(`${COMMENTS_WEB_APP_URL}?action=getPublicComments&timestamp=${new Date().getTime()}`);
+            if (!response.ok) {
+                throw new Error(`การเรียก API ล้มเหลว: ${response.status} ${response.statusText}`);
+            }
             const result = await response.json();
 
             if (result.error) {
-                commentsListDiv.innerHTML = `<p class="text-center text-red-500 py-4">เกิดข้อผิดพลาด: ${result.error}</p>`;
+                commentsListDiv.innerHTML = `<p class="text-center text-red-500 py-4">เกิดข้อผิดพลาดในการโหลด: ${result.error}</p>`;
+                console.error("Error fetching comments from GAS:", result.error, result.details || result.stack || '');
                 return;
             }
 
             if (result.data && result.data.length > 0) {
                 let html = '<ul class="space-y-6">';
                 result.data.forEach(comment => {
+                    // สมมติว่า GAS return timestamp, name, commentText, id
+                    // และ IsApproved ถูก filter มาแล้วจาก GAS
                     const formattedDate = comment.timestamp ? new Date(comment.timestamp).toLocaleString('th-TH', { day: '2-digit', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' }) : 'ไม่ระบุเวลา';
                     const safeName = (comment.name || 'ผู้ไม่ประสงค์ออกนาม').replace(/</g, "<").replace(/>/g, ">");
                     const safeCommentText = (comment.commentText || '').replace(/</g, "<").replace(/>/g, ">");
@@ -271,16 +237,20 @@
                 });
                 html += '</ul>';
                 commentsListDiv.innerHTML = html;
-                 // Add a button to open modal if there are comments
-                const openModalButtonHtml = `
-                    <div class="text-center mt-10">
-                        <button id="openModalMainButton" class="btn-gradient py-3 px-8 text-lg font-semibold rounded-full">
-                            <i class="fas fa-plus-circle mr-2"></i>ฝากข้อความเพิ่ม
-                        </button>
-                    </div>`;
-                commentsListDiv.insertAdjacentHTML('afterend', openModalButtonHtml);
-                const openModalMainBtn = document.getElementById('openModalMainButton');
-                if (openModalMainBtn) openModalMainBtn.addEventListener('click', openCommentModal);
+                
+                // Add button to open modal if there are comments
+                const existingOpenModalButton = document.getElementById('openModalMainButton');
+                if (!existingOpenModalButton) { // Add only if not already there
+                    const openModalButtonHtml = `
+                        <div class="text-center mt-10">
+                            <button id="openModalMainButton" class="btn-gradient py-3 px-8 text-lg font-semibold rounded-full">
+                                <i class="fas fa-plus-circle mr-2"></i>ฝากข้อความเพิ่ม
+                            </button>
+                        </div>`;
+                    commentsListDiv.insertAdjacentHTML('afterend', openModalButtonHtml);
+                    const openModalMainBtn = document.getElementById('openModalMainButton');
+                    if (openModalMainBtn) openModalMainBtn.addEventListener('click', openCommentModal);
+                }
 
             } else {
                 // Display "No comments" message and button
@@ -298,11 +268,10 @@
             }
         } catch (error) {
             commentsListDiv.innerHTML = `<p class="text-center text-red-500 py-4">การเชื่อมต่อเพื่อโหลดความคิดเห็นล้มเหลว: ${error.message}</p>`;
+            console.error("Fetch error for comments:", error);
         }
-        */
     }
 
-    // --- ฟังก์ชันส่งความคิดเห็น ---
     async function handleSubmitComment(event) {
         event.preventDefault();
         const name = modalUserNameInput.value.trim();
@@ -324,31 +293,20 @@
             <span class="animate-spin inline-block w-4 h-4 border-2 border-white border-t-transparent rounded-full mr-2" role="status"></span>
             กำลังส่งข้อความ...
         `;
-
-        // --- SIMULATE API CALL (Replace with actual fetch when Apps Script is ready) ---
-        setTimeout(() => {
-            Swal.fire({
-                icon: 'success',
-                title: 'ส่งข้อความเรียบร้อย!',
-                text: 'ได้รับข้อมูลแล้วจ้า กำลังรอผู้ดูแลระบบอนุมัติ ข้อความถึงจะปรากฏบนเว็บนะคะ ขอบคุณค่า~ 😊',
-                confirmButtonColor: '#FF69B4',
-                timer: 4000,
-                timerProgressBar: true
-            });
-            closeCommentModal();
-            commentForm.reset();
-            submitCommentButton.disabled = false;
-            submitCommentButton.innerHTML = 'ส่งข้อความ <i class="fas fa-paper-plane ml-2"></i>';
-        }, 1500);
-
-        // --- ACTUAL FETCH (comment out simulation above when ready) ---
-        /*
+        
         try {
+            // ส่ง action 'submitComment' (ตรวจสอบให้แน่ใจว่า GAS ของพี่มี action นี้สำหรับ comment sheet)
             const response = await fetch(COMMENTS_WEB_APP_URL, {
                 method: 'POST',
                 mode: 'cors',
-                headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-                body: JSON.stringify({ action: "submitComment", name: name, commentText: text })
+                headers: { 'Content-Type': 'text/plain;charset=utf-8' }, // GAS doPost often expects text/plain for JSON string
+                body: JSON.stringify({ 
+                    action: "submitComment", // << ตรวจสอบว่า GAS ใช้ action ชื่อนี้
+                    name: name, 
+                    commentText: text,
+                    // ถ้า GAS ของพี่ต้องการ sheetName หรือ spreadsheetId ใน body ก็ต้องเพิ่มตรงนี้
+                    // sheetName: "Comments" // ตัวอย่าง ถ้า GAS ต้องการ
+                })
             });
             const result = await response.json();
 
@@ -356,7 +314,7 @@
                 Swal.fire({
                     icon: 'success',
                     title: 'ส่งข้อความเรียบร้อย!',
-                    text: result.message, // "ได้รับข้อมูลแล้ว กำลังรอผู้ดูแลระบบอนุมัติค่ะ"
+                    text: result.message, // "ได้รับข้อมูลแล้ว กำลังรอผู้ดูแลระบบอนุมัติค่ะ" หรือข้อความที่ GAS ส่งมา
                     confirmButtonColor: '#FF69B4',
                     timer: 4000,
                     timerProgressBar: true
@@ -364,34 +322,31 @@
                 closeCommentModal();
                 commentForm.reset(); 
             } else {
-                Swal.fire('เกิดข้อผิดพลาด', result.message || 'ไม่สามารถส่งความคิดเห็นได้', 'error');
+                Swal.fire('ส่งไม่สำเร็จ', result.message || 'ไม่สามารถส่งความคิดเห็นได้ กรุณาลองใหม่อีกครั้ง', 'error');
+                console.error("Error from GAS on submit:", result.message, result.details || '');
             }
         } catch (error) {
             Swal.fire('เกิดข้อผิดพลาดในการเชื่อมต่อ', `ไม่สามารถติดต่อเซิร์ฟเวอร์ได้: ${error.message}`, 'error');
+            console.error("Error submitting comment:", error);
         } finally {
             submitCommentButton.disabled = false;
             submitCommentButton.innerHTML = 'ส่งข้อความ <i class="fas fa-paper-plane ml-2"></i>';
         }
-        */
     }
 
-    // --- Event Listeners ---
     document.addEventListener('DOMContentLoaded', () => {
-        // Modal open/close
-        closeModalButton.addEventListener('click', closeCommentModal);
-        cancelModalButton.addEventListener('click', closeCommentModal);
-        commentModal.addEventListener('click', (event) => { // Close on outside click
-            if (event.target === commentModal) {
-                closeCommentModal();
-            }
-        });
-
-        // Form submission
+        if (closeModalButton) closeModalButton.addEventListener('click', closeCommentModal);
+        if (cancelModalButton) cancelModalButton.addEventListener('click', closeCommentModal);
+        if (commentModal) {
+            commentModal.addEventListener('click', (event) => {
+                if (event.target === commentModal) {
+                    closeCommentModal();
+                }
+            });
+        }
         if (commentForm) {
             commentForm.addEventListener('submit', handleSubmitComment);
         }
-
-        // Emoji Picker toggle and selection
         if (emojiToggleButton && emojiPickerContainer && emojiPicker && modalCommentMessageTextarea) {
             emojiToggleButton.addEventListener('click', () => {
                 emojiPickerContainer.classList.toggle('hidden');
@@ -404,19 +359,14 @@
                 const text = textarea.value;
                 textarea.value = text.substring(0, start) + emoji + text.substring(end);
                 textarea.focus();
-                // Move cursor after inserted emoji
                 textarea.selectionEnd = start + emoji.length; 
             });
         }
-        
         const currentYearSpan = document.getElementById('currentYear');
         if (currentYearSpan) {
             const year = new Date().getFullYear() + 543;
             currentYearSpan.textContent = year;
         }
-
-        loadComments(); // โหลดความคิดเห็นเมื่อหน้าเว็บพร้อม
+        loadComments();
     });
 </script>
-</body>
-</html>
