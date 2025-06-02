@@ -15,8 +15,7 @@ function calculateAndDisplaySchoolAge() {
     if (schoolAgeTextElement) {
         schoolAgeTextElement.textContent = `(รวมอายุ ${age} ปี)`; 
     } else {
-        // Comment นี้ถูกเพิ่มเข้ามาเพื่อแก้ปัญหา console error 'school-age-text' not found
-        // console.error("Element with id 'school-age-text' not found. School age cannot be displayed by this function.");
+        // console.error("Element with id 'school-age-text' not found.");
     }
 }
 const thaiShortMonths = ["ม.ค.", "ก.พ.", "มี.ค.", "เม.ย.", "พ.ค.", "มิ.ย.", "ก.ค.", "ส.ค.", "ก.ย.", "ต.ค.", "พ.ย.", "ธ.ค."];
@@ -28,8 +27,9 @@ function getThaiShortMonth(monthNumber) {
     return monthNumber.toString(); 
 }
 
-// --- DOM Elements ที่ใช้บ่อย ---
-let loginModal, loginForm, loginLogoutButton, roleSpecificMenuContainer;
+// --- DOM Elements ที่ใช้บ่อย (จะถูกกำหนดค่าใน DOMContentLoaded) ---
+let loginModal, loginForm;
+// loginLogoutButton และ roleSpecificMenuContainer จะถูกจัดการผ่าน mainNavUl โดยตรง
 
 // --- ฟังก์ชันเกี่ยวกับ Login และ Session ---
 function getUserSession() {
@@ -50,33 +50,21 @@ async function handleLoginSubmit(event) {
     const usernameInput = document.getElementById('username');
     const passwordInput = document.getElementById('password');
     const username = usernameInput.value.trim();
-    const password = passwordInput.value; // ไม่ trim password
+    const password = passwordInput.value;
 
     if (!username || !password) {
-        Swal.fire({
-            icon: 'warning',
-            title: 'ข้อมูลไม่ครบถ้วน',
-            text: 'กรุณากรอกชื่อผู้ใช้และรหัสผ่านค่ะ',
-        });
+        Swal.fire({ icon: 'warning', title: 'ข้อมูลไม่ครบถ้วน', text: 'กรุณากรอกชื่อผู้ใช้และรหัสผ่านค่ะ'});
         return;
     }
 
-    Swal.fire({
-        title: 'กำลังตรวจสอบ...',
-        allowOutsideClick: false,
-        didOpen: () => {
-            Swal.showLoading();
-        }
-    });
+    Swal.fire({ title: 'กำลังตรวจสอบ...', allowOutsideClick: false, didOpen: () => { Swal.showLoading(); }});
 
     try {
         const response = await fetch(WEB_APP_URL, {
             method: 'POST',
-            mode: 'cors', //สำคัญมากสำหรับการ POST ข้ามโดเมนไปยัง Apps Script
-            credentials: 'omit', // หรือ 'include' หากมีการจัดการ credentials
-            headers: {
-                'Content-Type': 'text/plain;charset=utf-8', // Apps Script จะรับ JSON string ผ่าน e.postData.contents
-            },
+            mode: 'cors',
+            credentials: 'omit',
+            headers: { 'Content-Type': 'text/plain;charset=utf-8' },
             body: JSON.stringify({ action: "verifyLogin", username: username, password: password })
         });
 
@@ -85,48 +73,27 @@ async function handleLoginSubmit(event) {
 
         if (result.success) {
             setUserSession({ username: result.username, role: result.role });
-            Swal.fire({
-                icon: 'success',
-                title: 'เข้าสู่ระบบสำเร็จ!',
-                text: `ยินดีต้อนรับคุณ ${result.username}`,
-                timer: 1500,
-                showConfirmButton: false
-            });
+            Swal.fire({ icon: 'success', title: 'เข้าสู่ระบบสำเร็จ!', text: `ยินดีต้อนรับคุณ ${result.username}`, timer: 1500, showConfirmButton: false });
             loginModal.classList.add('hidden');
             loginForm.reset();
             updateLoginUI();
-            // หากกำลังดู Smart School Service ให้โหลดใหม่
             if (document.getElementById('content-smart-school') && !document.getElementById('content-smart-school').classList.contains('hidden')) {
                 fetchAndDisplayTableData('getSystemLinks', 'content-smart-school');
             }
         } else {
-            Swal.fire({
-                icon: 'error',
-                title: 'เข้าสู่ระบบไม่สำเร็จ',
-                text: result.message || 'มีบางอย่างผิดพลาด กรุณาลองใหม่อีกครั้งค่ะ',
-            });
+            Swal.fire({ icon: 'error', title: 'เข้าสู่ระบบไม่สำเร็จ', text: result.message || 'มีบางอย่างผิดพลาด กรุณาลองใหม่อีกครั้งค่ะ'});
         }
     } catch (error) {
         Swal.close();
         console.error("Login error:", error);
-        Swal.fire({
-            icon: 'error',
-            title: 'เกิดข้อผิดพลาด',
-            text: 'ไม่สามารถเชื่อมต่อกับระบบ Login ได้ กรุณาลองใหม่อีกครั้งค่ะ',
-        });
+        Swal.fire({ icon: 'error', title: 'เกิดข้อผิดพลาด', text: 'ไม่สามารถเชื่อมต่อกับระบบ Login ได้ กรุณาลองใหม่อีกครั้งค่ะ'});
     }
 }
 
 function handleLogout() {
     clearUserSession();
-    Swal.fire({
-        icon: 'info',
-        title: 'ออกจากระบบแล้ว',
-        timer: 1500,
-        showConfirmButton: false
-    });
+    Swal.fire({ icon: 'info', title: 'ออกจากระบบแล้ว', timer: 1500, showConfirmButton: false });
     updateLoginUI();
-    // หากกำลังดู Smart School Service ให้โหลดใหม่
     if (document.getElementById('content-smart-school') && !document.getElementById('content-smart-school').classList.contains('hidden')) {
         fetchAndDisplayTableData('getSystemLinks', 'content-smart-school');
     }
@@ -134,36 +101,62 @@ function handleLogout() {
 
 function updateLoginUI() {
     const user = getUserSession();
-    roleSpecificMenuContainer.innerHTML = ''; // ล้างเมนูพิเศษเดิม
+    // หา ul หลักใน nav ที่มีพื้นหลังสีขาว
+    const mainWhiteNavUl = document.querySelector('header nav.bg-white ul'); 
+    if (!mainWhiteNavUl) {
+        console.error("Main navigation UL (with white background) not found for login UI update.");
+        return;
+    }
+
+    // ลบเมนูที่เกี่ยวกับ role และ login/logout เก่าออกก่อน (ที่สร้างโดย JS)
+    const existingGeneratedMenus = mainWhiteNavUl.querySelectorAll('.generated-menu-item');
+    existingGeneratedMenus.forEach(item => item.remove());
+
+    let menuItemsHtml = ''; // สร้าง HTML สำหรับเมนูที่จะเพิ่มใหม่
 
     if (user) {
-        loginLogoutButton.textContent = `Logout (${user.username})`;
-        loginLogoutButton.removeEventListener('click', openLoginModal);
-        loginLogoutButton.addEventListener('click', handleLogout);
-
-        // เพิ่มเมนูตาม Role
+        // สร้างเมนูตาม Role (เพิ่มก่อน Logout เพื่อให้อยู่ด้านซ้าย)
         if (user.role === 'admin' || user.role === 'manager') {
-            const regBookLink = document.createElement('li');
-            regBookLink.innerHTML = `<a href="#" class="menu-item px-3 py-1 hover:text-yellow-200">ลงทะเบียนรับหนังสือ</a>`;
-            // placeholder link, พี่สามารถเปลี่ยน href ได้ตามต้องการ
-            roleSpecificMenuContainer.appendChild(regBookLink);
+            menuItemsHtml += `<li class="generated-menu-item"><a href="#" class="menu-item px-3 py-2 text-gray-700 hover:text-red-500">ลงทะเบียนรับหนังสือ</a></li>`;
         }
         if (user.role === 'manager') {
-            const manageSystemLink = document.createElement('li');
-            manageSystemLink.innerHTML = `<a href="#" class="menu-item px-3 py-1 hover:text-yellow-200">จัดการระบบ</a>`;
-            // placeholder link
-            roleSpecificMenuContainer.appendChild(manageSystemLink);
+            menuItemsHtml += `<li class="generated-menu-item"><a href="#" class="menu-item px-3 py-2 text-gray-700 hover:text-red-500">จัดการระบบ</a></li>`;
         }
-
+        // สร้างเมนู Logout
+        menuItemsHtml += `<li class="generated-menu-item"><a href="#" id="perform-logout-action" class="menu-item px-3 py-2 text-gray-700 hover:text-red-500">Logout (${user.username})</a></li>`;
     } else {
-        loginLogoutButton.textContent = 'Login';
-        loginLogoutButton.removeEventListener('click', handleLogout);
-        loginLogoutButton.addEventListener('click', openLoginModal);
+        // สร้างเมนู Login
+        menuItemsHtml += `<li class="generated-menu-item"><a href="#" id="perform-login-action" class="menu-item px-3 py-2 text-gray-700 hover:text-red-500">Login</a></li>`;
+    }
+
+    // เพิ่ม HTML ของเมนูใหม่เข้าไปใน ul
+    mainWhiteNavUl.insertAdjacentHTML('beforeend', menuItemsHtml);
+
+    // เพิ่ม Event Listener ใหม่ให้กับปุ่ม Login/Logout ที่เพิ่งสร้าง
+    const loginButton = document.getElementById('perform-login-action');
+    if (loginButton) {
+        loginButton.addEventListener('click', (e) => {
+            e.preventDefault(); // ป้องกันการเปลี่ยนหน้า
+            openLoginModal();
+        });
+    }
+
+    const logoutButton = document.getElementById('perform-logout-action');
+    if (logoutButton) {
+        logoutButton.addEventListener('click', (e) => {
+            e.preventDefault(); // ป้องกันการเปลี่ยนหน้า
+            handleLogout();
+        });
     }
 }
 
+
 function openLoginModal() {
-    loginModal.classList.remove('hidden');
+    if (loginModal) {
+        loginModal.classList.remove('hidden');
+    } else {
+        console.error("Login modal element not found.");
+    }
 }
 
 // --- เมื่อเอกสาร HTML โหลดเสร็จสมบูรณ์ ---
@@ -177,25 +170,32 @@ document.addEventListener('DOMContentLoaded', function () {
     // กำหนดค่าให้กับ Global DOM Elements
     loginModal = document.getElementById('loginModal');
     loginForm = document.getElementById('loginForm');
-    loginLogoutButton = document.getElementById('login-logout-button');
-    roleSpecificMenuContainer = document.getElementById('role-specific-menu-container');
+    // loginLogoutButton และ roleSpecificMenuContainer ไม่ได้ใช้เป็นตัวแปร global โดยตรงแล้ว
+    // แต่จะถูกจัดการผ่าน mainWhiteNavUl ใน updateLoginUI
     const closeLoginModalButton = document.getElementById('closeLoginModalButton');
 
-    // Event Listeners สำหรับ Modal
-    loginForm.addEventListener('submit', handleLoginSubmit);
-    closeLoginModalButton.addEventListener('click', () => {
-        loginModal.classList.add('hidden');
-        loginForm.reset();
-    });
-    // ปิด Modal เมื่อคลิกนอก Modal
-    loginModal.addEventListener('click', (event) => {
-        if (event.target === loginModal) {
-            loginModal.classList.add('hidden');
-            loginForm.reset();
-        }
-    });
-
-    // ฟังก์ชันแสดงเนื้อหา (มีการปรับปรุงให้เรียก fetchAndDisplayTableData เมื่อแสดง content-smart-school)
+    // Event Listeners สำหรับ Modal (ถ้า loginModal และ loginForm มีอยู่จริง)
+    if (loginForm) {
+        loginForm.addEventListener('submit', handleLoginSubmit);
+    } else {
+        console.error("Login form element not found.");
+    }
+    if (closeLoginModalButton) {
+        closeLoginModalButton.addEventListener('click', () => {
+            if(loginModal) loginModal.classList.add('hidden');
+            if(loginForm) loginForm.reset();
+        });
+    }
+    if (loginModal) {
+        loginModal.addEventListener('click', (event) => {
+            if (event.target === loginModal) {
+                loginModal.classList.add('hidden');
+                if(loginForm) loginForm.reset();
+            }
+        });
+    }
+    
+    // ฟังก์ชันแสดงเนื้อหา
     window.showContent = function(targetId, linkElement) {
         contentSections.forEach(section => {
             section.classList.add('hidden');
@@ -206,7 +206,7 @@ document.addEventListener('DOMContentLoaded', function () {
         } else {
             document.getElementById('content-default').classList.remove('hidden');
             targetId = 'content-default'; 
-            console.warn(`Content section with id "${targetId}" not found. Showing default.`);
+            // console.warn(`Content section with id "${targetId}" not found. Showing default.`);
         }
         let newTitleText = initialTitle;
         if (linkElement) { 
@@ -218,21 +218,36 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         }
         centerContentTitle.textContent = newTitleText;
-        document.querySelectorAll('.menu-item, .sidebar-item a').forEach(link => {
-            link.classList.remove('active', 'text-yellow-200', 'text-red-600', 'font-semibold');
-            if (link.closest('.sidebar-item')) { 
-                link.classList.add('text-gray-700');
+
+        // จัดการ Active State ของเมนูใน Header และ Sidebar
+        document.querySelectorAll('header nav ul a.menu-item, #main-menu a').forEach(link => {
+            link.classList.remove('active', 'text-red-500', 'font-semibold'); // ใช้ text-red-500 สำหรับ active ใน nav ขาว
+            if (link.closest('#main-menu')) { 
+                link.classList.add('text-gray-700'); // สีปกติของ sidebar
+                link.classList.remove('text-red-600'); // ลบสี active ของ sidebar ออกก่อน
+            } else if (link.closest('header nav ul')) {
+                link.classList.add('text-gray-700'); // สีปกติของ nav ขาว
             }
         });
-        const activeHeaderLink = document.querySelector(`header nav a[data-target="${targetId}"], header nav div a[data-target="${targetId}"]`); // เพิ่มการค้นหาใน div ด้วย
-        if (activeHeaderLink) {
-            activeHeaderLink.classList.add('active', 'text-yellow-200', 'font-semibold');
+
+        // หา active link ใน header (ทั้ง nav หลัก และ nav ที่สร้างจาก JS)
+        // ต้องมั่นใจว่า selector นี้ครอบคลุมลิงก์ทั้งหมดใน nav ที่มีพื้นหลังสีขาว
+        const activeHeaderLink = document.querySelector(`header nav.bg-white ul a[data-target="${targetId}"], header nav.bg-white ul a#home-link[data-target="${targetId}"], header nav.bg-white ul li.generated-menu-item a[data-target="${targetId}"]`);
+        if (linkElement && linkElement.closest('header nav.bg-white ul')) { // ถ้า linkElement ที่คลิกอยู่ใน nav ขาว
+             linkElement.classList.add('active', 'text-red-500', 'font-semibold');
+             linkElement.classList.remove('text-gray-700');
+        } else if (activeHeaderLink) { // กรณีโหลดหน้า default หรืออื่นๆ ที่ไม่ได้เกิดจากการคลิก linkElement โดยตรงใน nav ขาว
+            activeHeaderLink.classList.add('active', 'text-red-500', 'font-semibold');
+            activeHeaderLink.classList.remove('text-gray-700');
         }
+
+
         const activeSidebarLink = document.querySelector(`#main-menu a[data-target="${targetId}"]`);
         if (activeSidebarLink) {
             activeSidebarLink.classList.add('active', 'text-red-600', 'font-semibold');
             activeSidebarLink.classList.remove('text-gray-700'); 
         }
+
 
         if (targetId === 'content-personnel') fetchPersonnelData(); 
         else if (targetId === 'content-students') fetchStudentSummaryData(); 
@@ -242,26 +257,36 @@ document.addEventListener('DOMContentLoaded', function () {
         else if (targetId === 'content-operation-report') displayPdf('content-operation-report', 'https://drive.google.com/file/d/1jmBa9Heg4SH9apJlubVRLFfZBm42cZXw/preview'); 
     }
 
-    document.querySelectorAll('nav a[data-target], #main-menu a[data-target]').forEach(link => {
+    // Event listener สำหรับเมนูหลักๆ ที่มี data-target
+    document.querySelectorAll('header nav.bg-white ul a[data-target], #main-menu a[data-target]').forEach(link => {
         link.addEventListener('click', function (event) {
             event.preventDefault(); 
             const targetId = this.dataset.target; 
             window.showContent(targetId, this); 
         });
     });
+    // เพิ่ม event listener ให้กับ #home-link โดยเฉพาะ
+    if(homeLink) {
+        homeLink.addEventListener('click', function (event) {
+            event.preventDefault();
+            const targetId = this.dataset.target;
+            window.showContent(targetId, this);
+        });
+    }
+
 
     const defaultTarget = homeLink && homeLink.dataset.target ? homeLink.dataset.target : 'content-default';
-    window.showContent(defaultTarget, homeLink);
+    window.showContent(defaultTarget, homeLink); // เรียก showContent สำหรับ home link เมื่อโหลดหน้า
 
-    updateLoginUI(); // ตรวจสอบสถานะ Login เมื่อโหลดหน้า
+    updateLoginUI(); // ตรวจสอบสถานะ Login และอัปเดต UI เมนูเมื่อโหลดหน้า
     fetchVisitorStats();
     calculateAndDisplaySchoolAge();
     fetchAndDisplayCalendarEvents(); 
 });
 
 // --- ฟังก์ชันดึงข้อมูลต่างๆ (VisitorStats, Personnel, Students, PDF, Calendar) ---
+// (โค้ดส่วนนี้เหมือนเดิม ไม่มีการเปลี่ยนแปลงจากเวอร์ชันก่อนหน้า)
 async function fetchVisitorStats() {
-    // ... (โค้ดเดิม ไม่เปลี่ยนแปลง)
     const visitsTodayEl = document.getElementById('visits-today');
     const visitsMonthEl = document.getElementById('visits-this-month');
     const visitsTotalEl = document.getElementById('visits-total');
@@ -286,7 +311,6 @@ async function fetchVisitorStats() {
     }
 }
 async function fetchPersonnelData() {
-    // ... (โค้ดเดิม ไม่เปลี่ยนแปลง)
     const personnelContentDiv = document.getElementById('content-personnel');
     personnelContentDiv.innerHTML = '<p class="text-gray-500 animate-pulse">กำลังโหลดข้อมูลบุคลากร...</p>';
     try {
@@ -323,7 +347,6 @@ async function fetchPersonnelData() {
     }
 }
 async function fetchStudentSummaryData() {
-    // ... (โค้ดเดิม ไม่เปลี่ยนแปลง)
     const studentContentDiv = document.getElementById('content-students');
     studentContentDiv.innerHTML = '<p class="text-gray-500 animate-pulse">กำลังโหลดข้อมูลนักเรียน...</p>';
     try {
@@ -365,7 +388,6 @@ async function fetchStudentSummaryData() {
     }
 }
 function displayPdf(targetDivId, pdfUrl) {
-    // ... (โค้ดเดิม ไม่เปลี่ยนแปลง)
     const contentDiv = document.getElementById(targetDivId);
     if (pdfUrl && pdfUrl.startsWith('https://drive.google.com/file/d/')) {
          contentDiv.innerHTML = `<iframe src="${pdfUrl}" class="pdf-embed-container" frameborder="0" allowfullscreen><p>เบราว์เซอร์ไม่รองรับ PDF <a href="${pdfUrl.replace('/preview', '/view')}" target="_blank">เปิดที่นี่</a>.</p></iframe>`;
@@ -374,7 +396,6 @@ function displayPdf(targetDivId, pdfUrl) {
     }
 }
 async function fetchAndDisplayCalendarEvents() {
-    // ... (โค้ดเดิม ไม่เปลี่ยนแปลง)
     const calendarContainer = document.getElementById('calendar-events-container'); 
     if (!calendarContainer) { console.error("Calendar container not found!"); return; }
     calendarContainer.innerHTML = '<p class="text-gray-500 animate-pulse">กำลังโหลดปฏิทิน...</p>';
@@ -429,7 +450,6 @@ async function fetchAndDisplayTableData(actionName, targetDivId) {
             html += '<thead><tr>';
             html += '<th scope="col" class="col-number px-4 py-2 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">ลำดับ</th>';
             html += '<th scope="col" class="col-name px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">ชื่อรายการ</th>';
-            // แสดงหัวตาราง "ลิงก์" ถ้า Login แล้ว หรือถ้าเป็นส่วนอื่นที่ไม่ใช่ Smart School Service
             if (userSession || targetDivId !== 'content-smart-school') {
                  html += '<th scope="col" class="col-link px-4 py-2 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">ลิงก์</th>';
             }
@@ -441,9 +461,8 @@ async function fetchAndDisplayTableData(actionName, targetDivId) {
                 html += `<td class="col-number px-4 py-2 text-center whitespace-nowrap align-middle">${item.number || '-'}</td>`;
                 html += `<td class="col-name px-4 py-2 whitespace-nowrap align-middle">${item.name || '-'}</td>`;
 
-                // ควบคุมการแสดงคอลัมน์ "ลิงก์" สำหรับ Smart School Service
                 if (targetDivId === 'content-smart-school') {
-                    if (userSession) { // ถ้า Login แล้ว (ทุก Role ดูลิงก์ได้ใน Smart School)
+                    if (userSession) { 
                         const linkDestination = item.link && item.link.trim() !== "" && item.link.trim().toLowerCase() !== "n/a" && item.link.trim().toLowerCase() !== "-" ? item.link.trim() : "";
                         const targetAttribute = linkDestination && (linkDestination.startsWith('http://') || linkDestination.startsWith('https://')) ? 'target="_blank" rel="noopener noreferrer"' : '';
                         let iconHtml = "<span class='text-gray-400'>-</span>";
@@ -457,10 +476,8 @@ async function fetchAndDisplayTableData(actionName, targetDivId) {
                             html += iconHtml;
                         }
                         html += `</td>`;
-                    } else {
-                        // ไม่ต้องแสดงคอลัมน์ลิงก์ถ้ายังไม่ Login และเป็น Smart School (หัวตารางก็ไม่แสดงแล้ว)
                     }
-                } else { // สำหรับส่วนอื่นๆ ที่ไม่ใช่ Smart School (เช่น Information Links) ให้แสดงลิงก์ตามปกติ
+                } else { 
                     const linkDestination = item.link && item.link.trim() !== "" && item.link.trim().toLowerCase() !== "n/a" && item.link.trim().toLowerCase() !== "-" ? item.link.trim() : "";
                     const targetAttribute = linkDestination && (linkDestination.startsWith('http://') || linkDestination.startsWith('https://')) ? 'target="_blank" rel="noopener noreferrer"' : '';
                     let iconHtml = "<span class='text-gray-400'>-</span>";
