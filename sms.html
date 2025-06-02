@@ -1,151 +1,174 @@
 <!DOCTYPE html>
-<html lang="th"> <!-- กำหนดภาษาหลักของหน้าเว็บเป็นภาษาไทย -->
+<html lang="th">
 <head>
-    <meta charset="UTF-8"> <!-- กำหนดชุดอักขระเป็น UTF-8 เพื่อรองรับภาษาไทย -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- ตั้งค่าการแสดงผลบนอุปกรณ์ต่างๆ ให้เหมาะสม -->
-    <title>โรงเรียนชุมชนบ้านแม่หละป่าป๋วย</title> <!-- ชื่อของหน้าเว็บที่แสดงบนแท็บของเบราว์เซอร์ -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ร.ร.ชุมชนบ้านแม่หละป่าป๋วย-รับการประเมิน สมศ.</title>
 
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600&display=swap" rel="stylesheet"> <!-- นำเข้าฟอนต์ Prompt จาก Google Fonts -->
-
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600&display=swap" rel="stylesheet">
     <!-- Tailwind CSS CDN -->
-    <script src="https://cdn.tailwindcss.com"></script> <!-- นำเข้า Tailwind CSS ผ่าน CDN -->
-
-    <!-- SweetAlert2 CDN (สำหรับการแจ้งเตือนสวยๆ) -->
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
-    <!-- Custom Stylesheet -->
-    <link rel="stylesheet" href="style.css"> <!-- เชื่อมโยงไปยังไฟล์ CSS ที่กำหนดเอง -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- SweetAlert2 CDN (อาจจะไม่จำเป็นถ้าไม่ใช้ แต่ใส่ไว้เผื่อ) -->
+    <!-- <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> -->
+    <!-- Custom Stylesheet (ไฟล์ style.css หลัก) -->
+    <link rel="stylesheet" href="style.css">
 </head>
-<body>
-    <header class="spa-header">
-        <img src="https://i.postimg.cc/d3PbrGqC/logo-School.png" alt="โลโก้โรงเรียน" class="school-logo"> <!-- แก้ path โลโก้ -->
-        <span class="school-name">โรงเรียนชุมชนบ้านแม่หละป่าป๋วย</span>
+<body class="bg-gray-100">
+
+    <!-- ส่วนหัวเว็บ (Header) - ใช้โครงสร้างเหมือน index.html -->
+    <header>
+        <div class="bg-gradient-to-r from-red-600 to-yellow-500 p-4">
+            <div class="container mx-auto flex flex-col items-center">
+                <div class="flex flex-col items-center mb-2">
+                    <img src="https://i.postimg.cc/d3PbrGqC/logo-School.png" alt="โลโก้โรงเรียน" class="w-[80px] h-auto mb-2">
+                    <div class="text-center">
+                        <h1 class="text-white text-2xl md:text-3xl font-bold">โรงเรียนชุมชนบ้านแม่หละป่าป๋วย</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
     </header>
 
-    <nav class="spa-nav">
-        <ul>
-            <li><a class="nav-link menu-item" data-target="iqaSection" href="#iqa">ระบบประกันคุณภาพภายใน</a></li>
-            <li><a class="nav-link menu-item" data-target="onesqaSection" href="#standards">มาตรฐานการศึกษา (สมศ.)</a></li>
-            <li><a class="nav-link menu-item" data-target="highlightsSection" href="#highlights">ผลงานเด่น</a></li>
-            <li><a href="https://www.example.com" target="_blank" class="menu-item">กลับเว็บหลัก</a></li> <!-- แก้ URL เว็บหลัก -->
-        </ul>
+    <!-- เมนูนำทาง (Navigation) - ใช้โครงสร้างเหมือน index.html แต่เปลี่ยนรายการเมนู -->
+    <nav class="bg-white shadow-md sticky top-0 z-40">
+        <div class="container mx-auto">
+            <ul class="flex flex-wrap justify-center space-x-2 sm:space-x-4 md:space-x-6 lg:space-x-8 items-center py-2" id="sms-main-nav-ul">
+                <li><a class="nav-link menu-item px-2 sm:px-3 py-2 text-gray-700 hover:text-red-500" data-target="iqaSection" href="#iqa">ประกันคุณภาพภายใน</a></li>
+                <li><a class="nav-link menu-item px-2 sm:px-3 py-2 text-gray-700 hover:text-red-500" data-target="onesqaSection" href="#standards">มาตรฐานการศึกษา (สมศ.)</a></li>
+                <li><a class="nav-link menu-item px-2 sm:px-3 py-2 text-gray-700 hover:text-red-500" data-target="highlightsSection" href="#highlights">ผลงานเด่น</a></li>
+                <li><a href="index.html" class="menu-item px-2 sm:px-3 py-2 text-gray-700 hover:text-red-500">กลับเว็บหลัก</a></li>
+            </ul>
+        </div>
     </nav>
 
-    <div class="container" id="app-content">
+    <!-- Container หลักสำหรับเนื้อหา SPA -->
+    <div class="container mx-auto p-4 md:p-6" id="app-content">
         <!-- Section for IQA -->
-        <section id="iqaSection" class="page-content-section card-main-content">
-            <h2>ระบบการประกันคุณภาพภายใน (IQA)</h2>
+        <section id="iqaSection" class="page-content-section">
+            <h2 class="text-2xl font-bold text-red-700 mb-4 border-b-2 border-yellow-400 pb-2">ระบบการประกันคุณภาพภายใน (IQA)</h2>
             <div class="iqa-item">
                 <h3>รายงานการประเมินตนเอง (SAR)</h3>
-                <p>สถานศึกษามีการจัดทำรายงานการประเมินตนเองเป็นประจำทุกปี เพื่อสะท้อนผลการดำเนินงานและวางแผนพัฒนาคุณภาพอย่างต่อเนื่อง</p>
-                <ul>
-                    <li><a href="path/to/sar_current_year.pdf" target="_blank">SAR ปีการศึกษาปัจจุบัน</a> <span class="file-type">PDF</span></li>
+                <p class="text-gray-700 mb-2">สถานศึกษามีการจัดทำรายงานการประเมินตนเองเป็นประจำทุกปี เพื่อสะท้อนผลการดำเนินงานและวางแผนพัฒนาคุณภาพอย่างต่อเนื่อง</p>
+                <ul class="list-disc ml-5 text-gray-700">
+                    <li><a href="path/to/sar_current_year.pdf" target="_blank" class="text-blue-600 hover:underline">SAR ปีการศึกษาปัจจุบัน</a> <span class="file-type">PDF</span></li>
                 </ul>
             </div>
             <div class="iqa-item">
                 <h3>แผนพัฒนาคุณภาพการศึกษา</h3>
-                <p>แผนงานที่แสดงทิศทางการพัฒนาคุณภาพของสถานศึกษาในระยะต่างๆ สอดคล้องกับนโยบายและบริบทของสถานศึกษา</p>
-                <ul>
-                    <li><a href="path/to/annual_plan.pdf" target="_blank">แผนปฏิบัติการประจำปี</a> <span class="file-type">PDF</span></li>
+                <p class="text-gray-700 mb-2">แผนงานที่แสดงทิศทางการพัฒนาคุณภาพของสถานศึกษาในระยะต่างๆ สอดคล้องกับนโยบายและบริบทของสถานศึกษา</p>
+                <ul class="list-disc ml-5 text-gray-700">
+                    <li><a href="path/to/annual_plan.pdf" target="_blank" class="text-blue-600 hover:underline">แผนปฏิบัติการประจำปี</a> <span class="file-type">PDF</span></li>
                 </ul>
             </div>
         </section>
 
         <!-- Section for ONESQA Standards -->
-        <section id="onesqaSection" class="page-content-section card-main-content">
-            <h2>มาตรฐานการศึกษาเพื่อการประเมินคุณภาพภายนอก (สมศ.)</h2>
+        <section id="onesqaSection" class="page-content-section">
+            <h2 class="text-2xl font-bold text-red-700 mb-4 border-b-2 border-yellow-400 pb-2">มาตรฐานการศึกษาเพื่อการประเมินคุณภาพภายนอก (สมศ.)</h2>
             <div class="standard-block">
                 <h3>มาตรฐานที่ 1: คุณภาพของผู้เรียน</h3>
                 <article class="indicator">
                     <h4>1.1 ผลสัมฤทธิ์ทางวิชาการของผู้เรียน</h4>
-                    <p>สถานศึกษามุ่งเน้นพัฒนาผู้เรียนให้มีความรู้ความสามารถตามหลักสูตร มีทักษะการคิดวิเคราะห์ สังเคราะห์ และแก้ปัญหาอย่างสร้างสรรค์...</p>
-                    <details class="evidence-section"><summary>หลักฐาน/ร่องรอย</summary><ul class="evidence-list"><li><a href="path/to/sar_chapter1_1.pdf" target="_blank">รายงาน SAR ส่วนที่ 1.1</a> <span class="file-type">PDF</span></li></ul></details>
+                    <p class="text-gray-700">สถานศึกษามุ่งเน้นพัฒนาผู้เรียนให้มีความรู้ความสามารถตามหลักสูตร มีทักษะการคิดวิเคราะห์ สังเคราะห์ และแก้ปัญหาอย่างสร้างสรรค์...</p>
+                    <details class="evidence-section mt-2"><summary class="font-medium text-gray-600 hover:text-gray-800">คลิกเพื่อดูหลักฐาน/ร่องรอย</summary><ul class="evidence-list mt-1"><li><a href="path/to/sar_chapter1_1.pdf" target="_blank">รายงาน SAR ส่วนที่ 1.1</a> <span class="file-type">PDF</span></li></ul></details>
                 </article>
                  <article class="indicator">
                     <h4>1.2 คุณลักษณะที่พึงประสงค์ของผู้เรียน</h4>
-                    <p>สถานศึกษาปลูกฝังคุณธรรม จริยธรรม ค่านิยมที่ดีงาม และคุณลักษณะอันพึงประสงค์...</p>
-                    <details class="evidence-section"><summary>หลักฐาน/ร่องรอย</summary><ul class="evidence-list"><li><a href="path/to/moral_dev_plan.pdf" target="_blank">แผนงานส่งเสริมคุณธรรม</a> <span class="file-type">PDF</span></li></ul></details>
+                    <p class="text-gray-700">สถานศึกษาปลูกฝังคุณธรรม จริยธรรม ค่านิยมที่ดีงาม และคุณลักษณะอันพึงประสงค์...</p>
+                    <details class="evidence-section mt-2"><summary class="font-medium text-gray-600 hover:text-gray-800">คลิกเพื่อดูหลักฐาน/ร่องรอย</summary><ul class="evidence-list mt-1"><li><a href="path/to/moral_dev_plan.pdf" target="_blank">แผนงานส่งเสริมคุณธรรม</a> <span class="file-type">PDF</span></li></ul></details>
                 </article>
             </div>
              <div class="standard-block">
                 <h3>มาตรฐานที่ 2: กระบวนการบริหารและการจัดการ</h3>
                 <article class="indicator">
                     <h4>2.1 การมีเป้าหมาย วิสัยทัศน์ และพันธกิจที่สถานศึกษากำหนดชัดเจน</h4>
-                    <p>สถานศึกษามีการกำหนดเป้าหมาย วิสัยทัศน์ และพันธกิจที่ชัดเจน สอดคล้องกับบริบท...</p>
-                    <details class="evidence-section"><summary>หลักฐาน/ร่องรอย</summary><ul class="evidence-list"><li><a href="path/to/school_vision_mission.pdf" target="_blank">เอกสารวิสัยทัศน์ พันธกิจ</a> <span class="file-type">PDF</span></li></ul></details>
+                    <p class="text-gray-700">สถานศึกษามีการกำหนดเป้าหมาย วิสัยทัศน์ และพันธกิจที่ชัดเจน สอดคล้องกับบริบท...</p>
+                    <details class="evidence-section mt-2"><summary class="font-medium text-gray-600 hover:text-gray-800">คลิกเพื่อดูหลักฐาน/ร่องรอย</summary><ul class="evidence-list mt-1"><li><a href="path/to/school_vision_mission.pdf" target="_blank">เอกสารวิสัยทัศน์ พันธกิจ</a> <span class="file-type">PDF</span></li></ul></details>
                 </article>
             </div>
         </section>
 
         <!-- Section for Highlights -->
-        <section id="highlightsSection" class="page-content-section card-main-content">
-            <h2>ผลงานเด่นของสถานศึกษา</h2>
-            <p>นี่คือส่วนจัดแสดงผลงานและความสำเร็จที่น่าภาคภูมิใจของโรงเรียนเรา:</p>
-            <div class="highlight-item">
-                <img src="https://via.placeholder.com/600x400.png?text=ผลงานเด่น+1" alt="ผลงานเด่น 1">
-                <h3>รางวัลชนะเลิศการแข่งขันโครงงานวิทยาศาสตร์ระดับภาค</h3>
-                <p>นักเรียนของเราได้รับรางวัลชนะเลิศจากการแข่งขันโครงงานวิทยาศาสตร์ในหัวข้อ "พลังงานสะอาดเพื่ออนาคต" ซึ่งจัดขึ้นโดย...</p>
-                <a href="path/to/highlight_detail_1.html" target="_blank" class="btn-primary">อ่านเพิ่มเติม</a>
-            </div>
-            <div class="highlight-item">
-                <img src="https://via.placeholder.com/600x400.png?text=กิจกรรมเด่น+2" alt="กิจกรรมเด่น 2">
-                <h3>โครงการจิตอาสาพัฒนาชุมชน</h3>
-                <p>นักเรียนและบุคลากรของโรงเรียนร่วมกันจัดกิจกรรมบำเพ็ญประโยชน์ ทำความสะอาด และปรับปรุงภูมิทัศน์ในชุมชนรอบโรงเรียน...</p>
-                <a href="path/to/highlight_detail_2.html" target="_blank" class="btn-primary">ดูภาพกิจกรรม</a>
+        <section id="highlightsSection" class="page-content-section">
+            <h2 class="text-2xl font-bold text-red-700 mb-4 border-b-2 border-yellow-400 pb-2">ผลงานเด่นของสถานศึกษา</h2>
+            <p class="text-gray-700 mb-6">นี่คือส่วนจัดแสดงผลงานและความสำเร็จที่น่าภาคภูมิใจของโรงเรียนเรา:</p>
+            <div class="grid md:grid-cols-2 gap-6">
+                <div class="highlight-item bg-white p-4 rounded-lg shadow hover:shadow-xl transition-shadow">
+                    <img src="https://via.placeholder.com/600x400.png?text=ผลงานเด่น+1" alt="ผลงานเด่น 1" class="w-full h-48 object-cover rounded-md mb-3">
+                    <h3>รางวัลชนะเลิศการแข่งขันโครงงานวิทยาศาสตร์ระดับภาค</h3>
+                    <p class="text-gray-600 text-sm mb-3">นักเรียนของเราได้รับรางวัลชนะเลิศจากการแข่งขันโครงงานวิทยาศาสตร์ในหัวข้อ "พลังงานสะอาดเพื่ออนาคต" ซึ่งจัดขึ้นโดย...</p>
+                    <a href="path/to/highlight_detail_1.html" target="_blank" class="btn-primary inline-block px-4 py-2 text-sm">อ่านเพิ่มเติม</a>
+                </div>
+                <div class="highlight-item bg-white p-4 rounded-lg shadow hover:shadow-xl transition-shadow">
+                    <img src="https://via.placeholder.com/600x400.png?text=กิจกรรมเด่น+2" alt="กิจกรรมเด่น 2" class="w-full h-48 object-cover rounded-md mb-3">
+                    <h3>โครงการจิตอาสาพัฒนาชุมชน</h3>
+                    <p class="text-gray-600 text-sm mb-3">นักเรียนและบุคลากรของโรงเรียนร่วมกันจัดกิจกรรมบำเพ็ญประโยชน์ ทำความสะอาด และปรับปรุงภูมิทัศน์ในชุมชนรอบโรงเรียน...</p>
+                    <a href="path/to/highlight_detail_2.html" target="_blank" class="btn-primary inline-block px-4 py-2 text-sm">ดูภาพกิจกรรม</a>
+                </div>
             </div>
         </section>
     </div>
 
-    <footer class="spa-footer">
-        <p class="footer-text">© 2567 โรงเรียนชุมชนบ้านแม่หละป่าป๋วย. สงวนลิขสิทธิ์.</p>
-        <div class="contact-item">
-             <span class="contact-icon">📧</span>
-            <p class="footer-text"><a href="mailto:mlpvcop@gmail.com">mlpvcop@gmail.com</a></p>
-        </div>
-        <div class="contact-item">
-            <span class="contact-icon">📞</span>
-            <p class="footer-text">โทร: 089-9988096</p>
+    <!-- ส่วนท้ายเว็บ (Footer) - ใช้โครงสร้างและสไตล์เหมือนกับ index.html -->
+    <footer class="bg-gradient-to-r from-red-600 to-yellow-500 text-white py-4 mt-8 rounded-t-3xl">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col items-center text-center">
+                <p class="footer-text">โรงเรียนชุมชนบ้านแม่หละป่าป๋วย</p>
+                <p class="footer-text">ตำบลสรอย อำเภอวังชิ้น จังหวัดแพร่</p>
+                <p class="footer-text">สำนักงานเขตพื้นที่การศึกษาประถมศึกษาแพร่เขต 2</p>
+                <!-- เพิ่มข้อความลิขสิทธิ์และปี (ถ้าต้องการแยกจาก index.html) -->
+                <p class="text-xs mt-2 opacity-75">© <span id="currentYearSmsPage"></span> สงวนลิขสิทธิ์</p>
+            </div>
         </div>
     </footer>
 
 <script>
     document.addEventListener('DOMContentLoaded', function () {
-        const navLinks = document.querySelectorAll('nav a.nav-link.menu-item');
+        const navLinks = document.querySelectorAll('#sms-main-nav-ul a.nav-link.menu-item');
         const contentSections = document.querySelectorAll('.page-content-section');
 
-        function updateActiveContent(targetId) {
-            let foundTarget = false;
+        function updateActiveState(targetId) {
             contentSections.forEach(section => {
                 if (section.id === targetId) {
-                    section.classList.add('active');
-                    foundTarget = true;
+                    section.style.display = 'block';
                 } else {
-                    section.classList.remove('active');
+                    section.style.display = 'none';
                 }
             });
 
             navLinks.forEach(link => {
-                link.classList.remove('active');
+                link.classList.remove('active', 'text-red-500', 'font-semibold');
+                link.classList.add('text-gray-700');
                 if (link.dataset.target === targetId) {
-                    link.classList.add('active');
+                    link.classList.add('active', 'text-red-500', 'font-semibold');
+                    link.classList.remove('text-gray-700');
                 }
             });
         }
 
         navLinks.forEach(link => {
             link.addEventListener('click', function (event) {
-                // ไม่ต้อง preventDefault ถ้า href เป็น #hash เพื่อให้ URL update
                 const targetId = this.dataset.target;
-                if (targetId) {
-                    updateActiveContent(targetId);
+                const targetElement = document.getElementById(targetId);
+
+                if (targetId && targetElement) {
+                    if (!this.getAttribute('href').startsWith('#')) {
+                        event.preventDefault();
+                    }
+                    updateActiveState(targetId);
+                } else if (this.getAttribute('href') === 'index.html') {
+                    // Allow navigation to index.html
+                } else {
+                    event.preventDefault();
+                    console.warn("Target section not found or invalid for:", targetId);
                 }
             });
         });
 
         function handleHashChange() {
             const hash = window.location.hash.substring(1);
-            let targetIdToShow = '';
+            let targetIdToShow = null;
 
             if (hash) {
                 navLinks.forEach(link => {
@@ -155,22 +178,31 @@
                 });
             }
 
-            if (targetIdToShow) {
-                updateActiveContent(targetIdToShow);
-            } else if (navLinks.length > 0 && navLinks[0].dataset.target) {
-                const firstSpaLink = navLinks[0];
-                updateActiveContent(firstSpaLink.dataset.target);
-                if (firstSpaLink.getAttribute('href').startsWith('#')) { // Ensure it's an SPA link
-                    window.location.hash = firstSpaLink.getAttribute('href').substring(1);
+            if (targetIdToShow && document.getElementById(targetIdToShow)) {
+                updateActiveState(targetIdToShow);
+            } else if (navLinks.length > 0 && navLinks[0].dataset.target && document.getElementById(navLinks[0].dataset.target)) {
+                const firstTargetId = navLinks[0].dataset.target;
+                updateActiveState(firstTargetId);
+                if (navLinks[0].getAttribute('href').startsWith('#')) {
+                     window.location.hash = navLinks[0].getAttribute('href').substring(1);
                 }
             } else {
-                contentSections.forEach(section => section.classList.remove('active'));
-                navLinks.forEach(link => link.classList.remove('active'));
+                contentSections.forEach(section => section.style.display = 'none');
+                navLinks.forEach(link => {
+                    link.classList.remove('active', 'text-red-500', 'font-semibold');
+                    link.classList.add('text-gray-700');
+                });
             }
         }
 
         window.addEventListener('hashchange', handleHashChange);
-        handleHashChange(); // Initial load
+        handleHashChange();
+
+        // อัปเดตปีปัจจุบันใน Footer ของหน้านี้
+        const currentYearSpanSms = document.getElementById('currentYearSmsPage');
+        if (currentYearSpanSms) {
+            currentYearSpanSms.textContent = new Date().getFullYear() + 543; // แสดงเป็นปี พ.ศ.
+        }
     });
 </script>
 </body>
