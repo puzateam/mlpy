@@ -20,7 +20,7 @@
             border-radius: 9999px; /* rounded-full */
             font-size: 0.75rem; /* text-xs */
             font-weight: 500; /* font-medium */
-            margin-left: 0.5rem; /* ml-2 */
+            /* margin-left: 0.5rem; /* ml-2 */ /* เอาออกเมื่อปุ่มอยู่บรรทัดใหม่ */
             transition: background-color 0.2s ease-in-out;
             text-decoration: none; /* ป้องกันขีดเส้นใต้จาก a tag */
             display: inline-flex; /* ช่วยจัด icon กับ text ถ้ามี */
@@ -96,67 +96,97 @@
             <div class="mb-0">
                 <ul class="flex flex-wrap text-center border-b border-gray-300 dark:border-gray-700" id="onesqaStandardsTabs" role="tablist">
                     <li role="presentation">
-                        <button class="onesqa-tab-button inline-block py-3 px-4 sm:py-4 sm:px-5 text-sm md:text-base font-medium rounded-t-lg border-b-2 border-transparent" 
-                                id="standard1-tab" data-tabs-target="#standard1-content" type="button" role="tab" 
+                        <button class="onesqa-tab-button inline-block py-3 px-4 sm:py-4 sm:px-5 text-sm md:text-base font-medium rounded-t-lg border-b-2 border-transparent"
+                                id="standard1-tab" data-tabs-target="#standard1-content" type="button" role="tab"
                                 aria-controls="standard1-content" aria-selected="true">มาตรฐานที่ 1: คุณภาพผู้เรียน</button>
                     </li>
                     <li role="presentation">
-                        <button class="onesqa-tab-button inline-block py-3 px-4 sm:py-4 sm:px-5 text-sm md:text-base font-medium rounded-t-lg border-b-2 border-transparent" 
-                                id="standard2-tab" data-tabs-target="#standard2-content" type="button" role="tab" 
+                        <button class="onesqa-tab-button inline-block py-3 px-4 sm:py-4 sm:px-5 text-sm md:text-base font-medium rounded-t-lg border-b-2 border-transparent"
+                                id="standard2-tab" data-tabs-target="#standard2-content" type="button" role="tab"
                                 aria-controls="standard2-content" aria-selected="false">มาตรฐานที่ 2: การบริหาร</button>
                     </li>
                     <li role="presentation">
-                        <button class="onesqa-tab-button inline-block py-3 px-4 sm:py-4 sm:px-5 text-sm md:text-base font-medium rounded-t-lg border-b-2 border-transparent" 
-                                id="standard3-tab" data-tabs-target="#standard3-content" type="button" role="tab" 
+                        <button class="onesqa-tab-button inline-block py-3 px-4 sm:py-4 sm:px-5 text-sm md:text-base font-medium rounded-t-lg border-b-2 border-transparent"
+                                id="standard3-tab" data-tabs-target="#standard3-content" type="button" role="tab"
                                 aria-controls="standard3-content" aria-selected="false">มาตรฐานที่ 3: การจัดการเรียนรู้</button>
                     </li>
                 </ul>
             </div>
 
             <!-- Tab Content Panels -->
-            <div id="onesqaStandardsTabContent" class="mt-0"> 
+            <div id="onesqaStandardsTabContent" class="mt-0">
                 <!-- เนื้อหา มาตรฐานที่ 1 -->
-                <div class="onesqa-tab-panel hidden p-4 bg-white border border-gray-300 border-t-0 rounded-b-lg dark:border-gray-600 dark:bg-gray-800" 
+                <div class="onesqa-tab-panel hidden p-4 bg-white border border-gray-300 border-t-0 rounded-b-lg dark:border-gray-600 dark:bg-gray-800"
                      id="standard1-content" role="tabpanel" aria-labelledby="standard1-tab">
-                    <div class="standard-block"> 
+                    <div class="standard-block">
                         <h3 class="text-lg font-semibold text-orange-700 mb-3 mt-2">มาตรฐานที่ 1: คุณภาพของผู้เรียน</h3>
                         <article class="indicator">
                             <h4>1.1 ผลสัมฤทธิ์ทางวิชาการของผู้เรียน</h4>
                             <ul class="list-disc ml-5 text-gray-700 mb-2 text-sm">
-                                <li class="mb-1">ความสามารถในการอ่าน การเขียน การสื่อสาร และการคิดคำนวณ
-                                    <a href="path/to/evidence_std1_1_reading_writing.pdf" target="_blank" class="evidence-button">ดูหลักฐาน<span class="file-type">PDF</span></a>
+                                <li class="mb-2"> <!-- เพิ่ม mb-2 เพื่อระยะห่างระหว่าง item -->
+                                    ความสามารถในการอ่าน การเขียน การสื่อสาร และการคิดคำนวณ
+                                    <div class="mt-1"> <!-- เพิ่ม div ครอบปุ่ม และ mt-1 -->
+                                        <a href="path/to/evidence_std1_1_reading_writing.pdf" target="_blank" class="evidence-button">ดูหลักฐาน<span class="file-type">PDF</span></a>
+                                    </div>
                                 </li>
-                                <li class="mb-1">ความสามารถในการคิดวิเคราะห์ คิดอย่างมีวิจารณญาณ อภิปราย แลกเปลี่ยนความคิดเห็น และแก้ปัญหา
-                                    <a href="path/to/evidence_std1_1_critical_thinking.pdf" target="_blank" class="evidence-button">ดูหลักฐาน<span class="file-type">PDF</span></a>
+                                <li class="mb-2">
+                                    ความสามารถในการคิดวิเคราะห์ คิดอย่างมีวิจารณญาณ อภิปราย แลกเปลี่ยนความคิดเห็น และแก้ปัญหา
+                                    <div class="mt-1">
+                                        <a href="path/to/evidence_std1_1_critical_thinking.pdf" target="_blank" class="evidence-button">ดูหลักฐาน<span class="file-type">PDF</span></a>
+                                    </div>
                                 </li>
-                                <li class="mb-1">ความสามารถในการสร้างนวัตกรรม
-                                    <a href="path/to/evidence_std1_1_innovation.pdf" target="_blank" class="evidence-button">ดูหลักฐาน<span class="file-type">PDF</span></a>
+                                <li class="mb-2">
+                                    ความสามารถในการสร้างนวัตกรรม
+                                    <div class="mt-1">
+                                        <a href="path/to/evidence_std1_1_innovation.pdf" target="_blank" class="evidence-button">ดูหลักฐาน<span class="file-type">PDF</span></a>
+                                    </div>
                                 </li>
-                                <li class="mb-1">ความสามารถในการใช้เทคโนโลยีสารสนเทศและการสื่อสาร
-                                    <a href="path/to/evidence_std1_1_ict_usage.pdf" target="_blank" class="evidence-button">ดูหลักฐาน<span class="file-type">PDF</span></a>
+                                <li class="mb-2">
+                                    ความสามารถในการใช้เทคโนโลยีสารสนเทศและการสื่อสาร
+                                    <div class="mt-1">
+                                        <a href="path/to/evidence_std1_1_ict_usage.pdf" target="_blank" class="evidence-button">ดูหลักฐาน<span class="file-type">PDF</span></a>
+                                    </div>
                                 </li>
-                                <li class="mb-1">ผลสัมฤทธิ์ทางการเรียนตามหลักสูตรสถานศึกษา
-                                    <a href="path/to/evidence_std1_1_academic_results.pdf" target="_blank" class="evidence-button">ดูหลักฐาน<span class="file-type">PDF</span></a>
+                                <li class="mb-2">
+                                    ผลสัมฤทธิ์ทางการเรียนตามหลักสูตรสถานศึกษา
+                                    <div class="mt-1">
+                                        <a href="path/to/evidence_std1_1_academic_results.pdf" target="_blank" class="evidence-button">ดูหลักฐาน<span class="file-type">PDF</span></a>
+                                    </div>
                                 </li>
-                                <li class="mb-1">ความรู้ ทักษะพื้นฐาน และเจตคติที่ดีต่องานอาชีพ
-                                    <a href="path/to/evidence_std1_1_career_skills.pdf" target="_blank" class="evidence-button">ดูหลักฐาน<span class="file-type">PDF</span></a>
+                                <li class="mb-2">
+                                    ความรู้ ทักษะพื้นฐาน และเจตคติที่ดีต่องานอาชีพ
+                                    <div class="mt-1">
+                                        <a href="path/to/evidence_std1_1_career_skills.pdf" target="_blank" class="evidence-button">ดูหลักฐาน<span class="file-type">PDF</span></a>
+                                    </div>
                                 </li>
                             </ul>
                         </article>
                         <article class="indicator">
                             <h4>1.2 คุณลักษณะที่พึงประสงค์ของผู้เรียน</h4>
                             <ul class="list-disc ml-5 text-gray-700 mb-2 text-sm">
-                                <li class="mb-1">การมีคุณธรรม จริยธรรม ค่านิยมที่พึงประสงค์
-                                    <a href="path/to/evidence_std1_2_ethics.pdf" target="_blank" class="evidence-button">ดูหลักฐาน<span class="file-type">PDF</span></a>
+                                <li class="mb-2">
+                                    การมีคุณธรรม จริยธรรม ค่านิยมที่พึงประสงค์
+                                    <div class="mt-1">
+                                        <a href="path/to/evidence_std1_2_ethics.pdf" target="_blank" class="evidence-button">ดูหลักฐาน<span class="file-type">PDF</span></a>
+                                    </div>
                                 </li>
-                                <li class="mb-1">ความภูมิใจในท้องถิ่นและความเป็นไทย
-                                    <a href="path/to/evidence_std1_2_local_pride.pdf" target="_blank" class="evidence-button">ดูหลักฐาน<span class="file-type">PDF</span></a>
+                                <li class="mb-2">
+                                    ความภูมิใจในท้องถิ่นและความเป็นไทย
+                                    <div class="mt-1">
+                                        <a href="path/to/evidence_std1_2_local_pride.pdf" target="_blank" class="evidence-button">ดูหลักฐาน<span class="file-type">PDF</span></a>
+                                    </div>
                                 </li>
-                                <li class="mb-1">การยอมรับที่จะอยู่ร่วมกันบนความแตกต่างและหลากหลาย
-                                    <a href="path/to/evidence_std1_2_diversity.pdf" target="_blank" class="evidence-button">ดูหลักฐาน<span class="file-type">PDF</span></a>
+                                <li class="mb-2">
+                                    การยอมรับที่จะอยู่ร่วมกันบนความแตกต่างและหลากหลาย
+                                    <div class="mt-1">
+                                        <a href="path/to/evidence_std1_2_diversity.pdf" target="_blank" class="evidence-button">ดูหลักฐาน<span class="file-type">PDF</span></a>
+                                    </div>
                                 </li>
-                                <li class="mb-1">สุขภาวะทางร่างกาย และจิตสังคม
-                                    <a href="path/to/evidence_std1_2_wellbeing.pdf" target="_blank" class="evidence-button">ดูหลักฐาน<span class="file-type">PDF</span></a>
+                                <li class="mb-2">
+                                    สุขภาวะทางร่างกาย และจิตสังคม
+                                    <div class="mt-1">
+                                        <a href="path/to/evidence_std1_2_wellbeing.pdf" target="_blank" class="evidence-button">ดูหลักฐาน<span class="file-type">PDF</span></a>
+                                    </div>
                                 </li>
                             </ul>
                         </article>
@@ -164,7 +194,7 @@
                 </div>
 
                 <!-- เนื้อหา มาตรฐานที่ 2 -->
-                <div class="onesqa-tab-panel hidden p-4 bg-white border border-gray-300 border-t-0 rounded-b-lg dark:border-gray-600 dark:bg-gray-800" 
+                <div class="onesqa-tab-panel hidden p-4 bg-white border border-gray-300 border-t-0 rounded-b-lg dark:border-gray-600 dark:bg-gray-800"
                      id="standard2-content" role="tabpanel" aria-labelledby="standard2-tab">
                     <div class="standard-block">
                         <h3 class="text-lg font-semibold text-orange-700 mb-3 mt-2">มาตรฐานที่ 2: กระบวนการบริหารและการจัดการ</h3>
@@ -214,7 +244,7 @@
                 </div>
 
                 <!-- เนื้อหา มาตรฐานที่ 3 -->
-                <div class="onesqa-tab-panel hidden p-4 bg-white border border-gray-300 border-t-0 rounded-b-lg dark:border-gray-600 dark:bg-gray-800" 
+                <div class="onesqa-tab-panel hidden p-4 bg-white border border-gray-300 border-t-0 rounded-b-lg dark:border-gray-600 dark:bg-gray-800"
                      id="standard3-content" role="tabpanel" aria-labelledby="standard3-tab">
                     <div class="standard-block">
                         <h3 class="text-lg font-semibold text-orange-700 mb-3 mt-2">มาตรฐานที่ 3: กระบวนการจัดการเรียนการสอนที่เน้นผู้เรียนเป็นสำคัญ</h3>
@@ -309,15 +339,15 @@
                     button.setAttribute('aria-selected', 'true');
                     button.classList.remove('text-gray-500', 'hover:text-gray-700', 'hover:border-gray-300', 'dark:hover:text-gray-300', 'border-transparent');
                     button.classList.add('text-red-600', 'border-red-600', 'font-semibold', 'bg-white', 'dark:bg-gray-800', 'dark:text-red-500', 'dark:border-red-500');
-                    button.classList.add('relative', '-mb-px'); 
+                    button.classList.add('relative', '-mb-px');
 
                     if (targetPanel) {
                         targetPanel.classList.remove('hidden');
-                        targetPanel.classList.add('border-t-0'); 
+                        targetPanel.classList.add('border-t-0');
                         targetPanel.classList.remove('rounded-tl-lg', 'rounded-tr-lg');
-                        if (button.parentElement.previousElementSibling === null) { 
+                        if (button.parentElement.previousElementSibling === null) {
                            targetPanel.classList.add('rounded-tr-lg');
-                        } else if (button.parentElement.nextElementSibling === null) { 
+                        } else if (button.parentElement.nextElementSibling === null) {
                            targetPanel.classList.add('rounded-tl-lg');
                         }
                     }
@@ -327,8 +357,8 @@
                     button.classList.add('text-gray-500', 'hover:text-gray-700', 'hover:border-gray-300', 'dark:hover:text-gray-300', 'border-transparent');
                     if (targetPanel) {
                         targetPanel.classList.add('hidden');
-                        targetPanel.classList.remove('border-t-0'); 
-                        targetPanel.classList.remove('rounded-tl-lg', 'rounded-tr-lg'); 
+                        targetPanel.classList.remove('border-t-0');
+                        targetPanel.classList.remove('rounded-tl-lg', 'rounded-tr-lg');
                     }
                 }
             });
@@ -400,7 +430,7 @@
             if (targetWrapperIdToShow && document.getElementById(targetWrapperIdToShow)) {
                 updateActiveSpaContent(targetWrapperIdToShow);
                  if (targetWrapperIdToShow === 'onesqaSectionContent' && onesqaTabButtons.length > 0) {
-                    // updateOnesqaTabs(onesqaTabButtons[0]); 
+                    // updateOnesqaTabs(onesqaTabButtons[0]);
                 }
             } else if (spaNavLinks.length > 0 && spaNavLinks[0].dataset.target && document.getElementById(spaNavLinks[0].dataset.target)) {
                 const firstTargetId = spaNavLinks[0].dataset.target;
@@ -418,11 +448,11 @@
         }
 
         window.addEventListener('hashchange', handleSpaHashChange);
-        handleSpaHashChange(); 
+        handleSpaHashChange();
 
         const currentYearSpanSms = document.getElementById('currentYearSmsPage');
         if (currentYearSpanSms) {
-            currentYearSpanSms.textContent = new Date().getFullYear() + 543; 
+            currentYearSpanSms.textContent = new Date().getFullYear() + 543;
         }
     });
 </script>
