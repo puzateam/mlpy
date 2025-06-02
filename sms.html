@@ -70,17 +70,17 @@
             <div class="mb-0">
                 <ul class="flex flex-wrap text-center border-b border-gray-300 dark:border-gray-700" id="onesqaStandardsTabs" role="tablist">
                     <li role="presentation">
-                        <button class="onesqa-tab-button inline-block py-3 px-4 sm:py-4 sm:px-5 text-sm md:text-base font-medium rounded-t-lg border-b-2 border-transparent" 
+                        <button class="onesqa-tab-button inline-block py-3 px-4 sm:py-4 sm:px-5 text-sm md:text-base font-medium rounded-t-lg border-b-2" 
                                 id="standard1-tab" data-tabs-target="#standard1-content" type="button" role="tab" 
                                 aria-controls="standard1-content" aria-selected="true">มาตรฐานที่ 1: คุณภาพผู้เรียน</button>
                     </li>
                     <li role="presentation">
-                        <button class="onesqa-tab-button inline-block py-3 px-4 sm:py-4 sm:px-5 text-sm md:text-base font-medium rounded-t-lg border-b-2 border-transparent" 
+                        <button class="onesqa-tab-button inline-block py-3 px-4 sm:py-4 sm:px-5 text-sm md:text-base font-medium rounded-t-lg border-b-2" 
                                 id="standard2-tab" data-tabs-target="#standard2-content" type="button" role="tab" 
                                 aria-controls="standard2-content" aria-selected="false">มาตรฐานที่ 2: การบริหาร</button>
                     </li>
                     <li role="presentation">
-                        <button class="onesqa-tab-button inline-block py-3 px-4 sm:py-4 sm:px-5 text-sm md:text-base font-medium rounded-t-lg border-b-2 border-transparent" 
+                        <button class="onesqa-tab-button inline-block py-3 px-4 sm:py-4 sm:px-5 text-sm md:text-base font-medium rounded-t-lg border-b-2" 
                                 id="standard3-tab" data-tabs-target="#standard3-content" type="button" role="tab" 
                                 aria-controls="standard3-content" aria-selected="false">มาตรฐานที่ 3: การจัดการเรียนรู้</button>
                     </li>
@@ -90,7 +90,7 @@
             <!-- Tab Content Panels -->
             <div id="onesqaStandardsTabContent" class="mt-0"> 
                 <!-- เนื้อหา มาตรฐานที่ 1 -->
-                <div class="onesqa-tab-panel hidden p-4 bg-white border border-gray-300 border-t-0 rounded-b-lg dark:border-gray-600 dark:bg-gray-800" 
+                <div class="onesqa-tab-panel hidden p-4 border border-gray-300 border-t-0 rounded-b-lg dark:border-gray-600" 
                      id="standard1-content" role="tabpanel" aria-labelledby="standard1-tab">
                     <div class="standard-block"> 
                         <h3 class="text-lg font-semibold text-orange-700 mb-3 mt-2">มาตรฐานที่ 1: คุณภาพของผู้เรียน</h3>
@@ -130,7 +130,7 @@
                 </div>
 
                 <!-- เนื้อหา มาตรฐานที่ 2 -->
-                <div class="onesqa-tab-panel hidden p-4 bg-white border border-gray-300 border-t-0 rounded-b-lg dark:border-gray-600 dark:bg-gray-800" 
+                <div class="onesqa-tab-panel hidden p-4 border border-gray-300 border-t-0 rounded-b-lg dark:border-gray-600" 
                      id="standard2-content" role="tabpanel" aria-labelledby="standard2-tab">
                     <div class="standard-block">
                         <h3 class="text-lg font-semibold text-orange-700 mb-3 mt-2">มาตรฐานที่ 2: กระบวนการบริหารและการจัดการ</h3>
@@ -180,8 +180,9 @@
                 </div>
 
                 <!-- เนื้อหา มาตรฐานที่ 3 -->
-                <div class="onesqa-tab-panel hidden p-4 bg-white border border-gray-300 border-t-0 rounded-b-lg dark:border-gray-600 dark:bg-gray-800" 
+                <div class="onesqa-tab-panel hidden p-4 border border-gray-300 border-t-0 rounded-b-lg dark:border-gray-600" 
                      id="standard3-content" role="tabpanel" aria-labelledby="standard3-tab">
+                     <!-- JavaScript จะเพิ่ม/ลบ bg-gray-100 หรือ dark:bg-gray-700 เมื่อ active -->
                     <div class="standard-block">
                         <h3 class="text-lg font-semibold text-orange-700 mb-3 mt-2">มาตรฐานที่ 3: กระบวนการจัดการเรียนการสอนที่เน้นผู้เรียนเป็นสำคัญ</h3>
                         <article class="indicator">
@@ -252,7 +253,6 @@
                 <p class="footer-text">โรงเรียนชุมชนบ้านแม่หละป่าป๋วย</p>
                 <p class="footer-text">ตำบลสรอย อำเภอวังชิ้น จังหวัดแพร่</p>
                 <p class="footer-text">สำนักงานเขตพื้นที่การศึกษาประถมศึกษาแพร่เขต 2</p>
-                <p class="text-xs mt-2 opacity-75">© <span id="currentYearSmsPage"></span> สงวนลิขสิทธิ์</p>
             </div>
         </div>
     </footer>
@@ -266,6 +266,13 @@
         const onesqaTabButtons = document.querySelectorAll('#onesqaStandardsTabs .onesqa-tab-button');
         const onesqaTabPanels = document.querySelectorAll('#onesqaStandardsTabContent .onesqa-tab-panel');
 
+        // กำหนดคลาส Tailwind สำหรับสไตล์ Active และ Inactive ของ Tab และ Panel
+        const activeTabClasses = ['text-red-600', 'border-red-600', 'font-semibold', 'bg-gray-100', 'dark:bg-gray-700', 'dark:text-red-500', 'dark:border-red-500', 'relative', '-mb-px'];
+        const inactiveTabClasses = ['text-gray-500', 'hover:text-gray-700', 'hover:border-gray-300', 'dark:text-gray-400', 'dark:hover:text-gray-300', 'border-transparent', 'bg-transparent'];
+
+        const activePanelClasses = ['bg-gray-100', 'dark:bg-gray-700', 'border-t-0']; 
+        const inactivePanelClasses = ['bg-white', 'dark:bg-gray-800']; // พื้นหลังปกติสำหรับ panel inactive
+
         function updateOnesqaTabs(selectedButton) {
             onesqaTabButtons.forEach(button => {
                 const targetPanelId = button.getAttribute('data-tabs-target');
@@ -273,44 +280,35 @@
 
                 if (button === selectedButton) {
                     button.setAttribute('aria-selected', 'true');
-                    // สไตล์ Tab Active: คล้ายแฟ้ม
-                    button.classList.remove('text-gray-500', 'hover:text-gray-700', 'hover:border-gray-300', 'dark:hover:text-gray-300', 'border-transparent');
-                    button.classList.add('text-red-600', 'border-red-600', 'font-semibold', 'bg-white', 'dark:bg-gray-800', 'dark:text-red-500', 'dark:border-red-500');
-                    // ทำให้ปุ่ม active อยู่เหนือเส้นขอบของ ul และ panel ไม่มีขอบบน
-                    button.classList.add('relative', '-mb-px'); // -mb-px ดึงปุ่มลงมาทับเส้นของ ul
-
+                    button.classList.remove(...inactiveTabClasses);
+                    button.classList.add(...activeTabClasses);
+                    
                     if (targetPanel) {
                         targetPanel.classList.remove('hidden');
-                        targetPanel.classList.add('border-t-0'); // ทำให้ Panel ที่ Active ไม่มีเส้นขอบบน
-                        // จัดการมุมโค้งของ Panel ให้ดูเหมือนแฟ้ม
-                        // ถ้า Tab แรก Active, Panel จะมีมุมขวาบนโค้ง
-                        // ถ้า Tab กลาง Active, Panel จะไม่มีมุมบนโค้ง (หรือโค้งทั้งสองถ้าออกแบบ)
-                        // ถ้า Tab สุดท้าย Active, Panel จะมีมุมซ้ายบนโค้ง
-                        // ลบคลาสโค้งทั้งหมดก่อน
+                        targetPanel.classList.remove(...inactivePanelClasses);
+                        targetPanel.classList.add(...activePanelClasses);     
+                        
                         targetPanel.classList.remove('rounded-tl-lg', 'rounded-tr-lg');
-                        if (button.parentElement.previousElementSibling === null) { // Tab แรก
+                        if (button.parentElement.previousElementSibling === null) {
                            targetPanel.classList.add('rounded-tr-lg');
-                        } else if (button.parentElement.nextElementSibling === null) { // Tab สุดท้าย
+                        } else if (button.parentElement.nextElementSibling === null) {
                            targetPanel.classList.add('rounded-tl-lg');
-                        } else { // Tab กลาง
-                           // อาจจะไม่ต้องมีมุมโค้งบนเลย หรือโค้งทั้งสองถ้าต้องการ
                         }
                     }
                 } else {
                     button.setAttribute('aria-selected', 'false');
-                    // สไตล์ Tab Inactive
-                    button.classList.remove('text-red-600', 'border-red-600', 'font-semibold', 'bg-white', 'dark:bg-gray-800', 'dark:text-red-500', 'dark:border-red-500', '-mb-px');
-                    button.classList.add('text-gray-500', 'hover:text-gray-700', 'hover:border-gray-300', 'dark:hover:text-gray-300', 'border-transparent');
+                    button.classList.remove(...activeTabClasses);
+                    button.classList.add(...inactiveTabClasses);
+                    
                     if (targetPanel) {
                         targetPanel.classList.add('hidden');
-                        targetPanel.classList.remove('border-t-0'); // คืนค่า default
-                        // อาจจะต้องคืนค่า rounded corners ของ panel ด้วยถ้ามีการเปลี่ยนแปลง
-                        targetPanel.classList.remove('rounded-tl-lg', 'rounded-tr-lg'); // นำมุมโค้งพิเศษออกเมื่อไม่ active
+                        targetPanel.classList.remove(...activePanelClasses);
+                        targetPanel.classList.add(...inactivePanelClasses);
+                        targetPanel.classList.remove('rounded-tl-lg', 'rounded-tr-lg', 'border-t-0');
                     }
                 }
             });
         }
-
 
         onesqaTabButtons.forEach(button => {
             button.addEventListener('click', function() {
@@ -376,11 +374,20 @@
 
             if (targetWrapperIdToShow && document.getElementById(targetWrapperIdToShow)) {
                 updateActiveSpaContent(targetWrapperIdToShow);
-                 // ถ้าส่วนที่แสดงคือ ONESQA ให้แน่ใจว่า Tab ภายใน ONESQA ก็ถูกตั้งค่าถูกต้องด้วย
-                if (targetWrapperIdToShow === 'onesqaSectionContent' && onesqaTabButtons.length > 0) {
-                    // อาจจะต้องมี logic เพิ่มเติมเพื่อดูว่า hash ย่อยของ ONESQA คืออะไร
-                    // หรือแค่ default ไปที่ tab แรกของ ONESQA
-                    // updateOnesqaTabs(onesqaTabButtons[0]); // << หรือหา tab ที่ตรงกับ hash ย่อยถ้ามี
+                 if (targetWrapperIdToShow === 'onesqaSectionContent' && onesqaTabButtons.length > 0) {
+                    // ถ้า hash ชี้ไปที่ onesqaSectionContent, อาจจะต้องดู hash ย่อยเพื่อเลือก tab ที่ถูกต้อง
+                    // หรือ default ไปที่ tab แรกของ ONESQA
+                    // ตัวอย่าง: ตรวจสอบ hash #standards-s2 เพื่อไปที่ tab มาตรฐานที่ 2
+                    let onesqaSubHash = window.location.hash.split('-s')[1]; // เช่น "2" จาก #standards-s2
+                    let target OnesqaTabIndex = 0; // default to first tab
+                    if (onesqaSubHash && onesqaTabButtons[parseInt(onesqaSubHash)-1]) {
+                        targetOnesqaTabIndex = parseInt(onesqaSubHash)-1;
+                    }
+                    if(onesqaTabButtons[targetOnesqaTabIndex]){
+                         updateOnesqaTabs(onesqaTabButtons[targetOnesqaTabIndex]);
+                    } else {
+                         updateOnesqaTabs(onesqaTabButtons[0]);
+                    }
                 }
             } else if (spaNavLinks.length > 0 && spaNavLinks[0].dataset.target && document.getElementById(spaNavLinks[0].dataset.target)) {
                 const firstTargetId = spaNavLinks[0].dataset.target;
