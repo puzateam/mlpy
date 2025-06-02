@@ -11,36 +11,10 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Custom Stylesheet (ไฟล์ style.css หลัก) -->
     <link rel="stylesheet" href="style.css">
-    <style>
-        /* เพิ่มสไตล์เล็กน้อยสำหรับปุ่มหลักฐานย่อย ถ้าต้องการปรับแต่งเพิ่มเติมจาก Tailwind */
-        .evidence-button {
-            background-color: #ef4444; /* Tailwind red-500 */
-            color: white;
-            padding: 0.25rem 0.75rem; /* py-1 px-3 */
-            border-radius: 9999px; /* rounded-full */
-            font-size: 0.75rem; /* text-xs */
-            font-weight: 500; /* font-medium */
-            /* margin-left: 0.5rem; /* ml-2 */ /* เอาออกเมื่อปุ่มอยู่บรรทัดใหม่ */
-            transition: background-color 0.2s ease-in-out;
-            text-decoration: none; /* ป้องกันขีดเส้นใต้จาก a tag */
-            display: inline-flex; /* ช่วยจัด icon กับ text ถ้ามี */
-            align-items: center;
-        }
-        .evidence-button:hover {
-            background-color: #dc2626; /* Tailwind red-600 */
-        }
-        .evidence-button .file-type {
-            background-color: rgba(255,255,255,0.2);
-            color: white;
-            margin-left: 0.35rem;
-            padding: 0.1rem 0.3rem;
-            font-size: 0.65rem;
-        }
-    </style>
 </head>
 <body class="bg-gray-100">
 
-    <!-- ส่วนหัวเว็บ (Header) - ใช้โครงสร้างเหมือน index.html -->
+    <!-- ส่วนหัวเว็บ (Header) -->
     <header>
         <div class="bg-gradient-to-r from-red-600 to-yellow-500 p-4">
             <div class="container mx-auto flex flex-col items-center">
@@ -54,14 +28,15 @@
         </div>
     </header>
 
-    <!-- เมนูนำทาง (Navigation) - ใช้โครงสร้างเหมือน index.html แต่เปลี่ยนรายการเมนู -->
+    <!-- เมนูนำทาง (Navigation) -->
     <nav class="bg-white shadow-md sticky top-0 z-40">
         <div class="container mx-auto">
-            <ul class="flex flex-wrap justify-center space-x-2 sm:space-x-4 md:space-x-6 lg:space-x-8 items-center py-2" id="sms-main-nav-ul">
-                <li><a class="nav-link menu-item px-2 sm:px-3 py-2 text-gray-700 hover:text-red-500" data-target="iqaSectionContent" href="#iqa">ประกันคุณภาพภายใน</a></li>
-                <li><a class="nav-link menu-item px-2 sm:px-3 py-2 text-gray-700 hover:text-red-500" data-target="onesqaSectionContent" href="#standards">มาตรฐานการศึกษา (สมศ.)</a></li>
-                <li><a class="nav-link menu-item px-2 sm:px-3 py-2 text-gray-700 hover:text-red-500" data-target="highlightsSectionContent" href="#highlights">ผลงานเด่น</a></li>
-                <li><a href="index.html" class="menu-item px-2 sm:px-3 py-2 text-gray-700 hover:text-red-500">กลับเว็บหลัก</a></li>
+            <ul class="flex flex-wrap justify-center space-x-1 sm:space-x-2 md:space-x-3 lg:space-x-4 items-center py-2" id="sms-main-nav-ul">
+                <li><a class="nav-link menu-item px-2 sm:px-3 py-2 text-gray-700 hover:text-red-500 text-sm md:text-base" data-target="iqaSectionContent" href="#iqa">ประกันคุณภาพภายใน</a></li>
+                <li><a class="nav-link menu-item px-2 sm:px-3 py-2 text-gray-700 hover:text-red-500 text-sm md:text-base" data-target="preschoolStandardsSectionContent" href="#preschool">มาตรฐานฯ ปฐมวัย</a></li>
+                <li><a class="nav-link menu-item px-2 sm:px-3 py-2 text-gray-700 hover:text-red-500 text-sm md:text-base" data-target="basicEdStandardsSectionContent" href="#basic-ed">มาตรฐานฯ ขั้นพื้นฐาน</a></li>
+                <li><a class="nav-link menu-item px-2 sm:px-3 py-2 text-gray-700 hover:text-red-500 text-sm md:text-base" data-target="highlightsSectionContent" href="#highlights">ผลงานเด่น</a></li>
+                <li><a href="index.html" class="menu-item px-2 sm:px-3 py-2 text-gray-700 hover:text-red-500 text-sm md:text-base">กลับเว็บหลัก</a></li>
             </ul>
         </div>
     </nav>
@@ -69,7 +44,7 @@
     <!-- Container หลักสำหรับเนื้อหา SPA -->
     <div class="container mx-auto p-4 md:p-6" id="app-content">
 
-        <!-- Section Wrapper สำหรับ IQA - ใช้สไตล์เหมือน Main Content Area Card -->
+        <!-- Section Wrapper สำหรับ IQA -->
         <div id="iqaSectionContent" class="page-content-wrapper content-section bg-white rounded-2xl shadow-md p-5 card mb-6">
             <h2 class="text-xl font-bold text-red-600 border-b-2 border-yellow-400 pb-2 mb-6">ระบบการประกันคุณภาพภายใน (IQA)</h2>
             <div class="iqa-item">
@@ -88,210 +63,251 @@
             </div>
         </div>
 
-        <!-- Section Wrapper สำหรับ ONESQA Standards - ใช้สไตล์เหมือน Main Content Area Card -->
-        <div id="onesqaSectionContent" class="page-content-wrapper content-section bg-white rounded-2xl shadow-md p-5 card mb-6">
-            <h2 class="text-xl font-bold text-red-600 border-b-2 border-yellow-400 pb-2 mb-6">มาตรฐานการศึกษาเพื่อการประเมินคุณภาพภายนอก (สมศ.)</h2>
-
-            <!-- Tab Buttons -->
+        <!-- Section Wrapper สำหรับ มาตรฐานการศึกษาระดับปฐมวัย -->
+        <div id="preschoolStandardsSectionContent" class="page-content-wrapper content-section bg-white rounded-2xl shadow-md p-5 card mb-6">
+            <h2 class="text-xl font-bold text-red-600 border-b-2 border-yellow-400 pb-2 mb-6">มาตรฐานการศึกษาระดับปฐมวัย</h2>
+            <!-- Tab Buttons for Preschool -->
             <div class="mb-0">
-                <ul class="flex flex-wrap text-center border-b border-gray-300 dark:border-gray-700" id="onesqaStandardsTabs" role="tablist">
+                <ul class="flex flex-wrap text-center border-b border-gray-300 dark:border-gray-700" id="preschoolStandardsTabs" role="tablist">
                     <li role="presentation">
-                        <button class="onesqa-tab-button inline-block py-3 px-4 sm:py-4 sm:px-5 text-sm md:text-base font-medium rounded-t-lg border-b-2 border-transparent"
-                                id="standard1-tab" data-tabs-target="#standard1-content" type="button" role="tab"
-                                aria-controls="standard1-content" aria-selected="true">มาตรฐานที่ 1: คุณภาพผู้เรียน</button>
+                        <button class="tab-button-level inline-block py-3 px-4 sm:py-4 sm:px-5 text-sm md:text-base font-medium rounded-t-lg border-b-2 border-transparent"
+                                id="preschool-std1-tab" data-tabs-target="#preschool-std1-content" type="button" role="tab"
+                                aria-controls="preschool-std1-content" aria-selected="true">มาตรฐานที่ 1: คุณภาพของเด็ก</button>
                     </li>
                     <li role="presentation">
-                        <button class="onesqa-tab-button inline-block py-3 px-4 sm:py-4 sm:px-5 text-sm md:text-base font-medium rounded-t-lg border-b-2 border-transparent"
-                                id="standard2-tab" data-tabs-target="#standard2-content" type="button" role="tab"
-                                aria-controls="standard2-content" aria-selected="false">มาตรฐานที่ 2: การบริหาร</button>
+                        <button class="tab-button-level inline-block py-3 px-4 sm:py-4 sm:px-5 text-sm md:text-base font-medium rounded-t-lg border-b-2 border-transparent"
+                                id="preschool-std2-tab" data-tabs-target="#preschool-std2-content" type="button" role="tab"
+                                aria-controls="preschool-std2-content" aria-selected="false">มาตรฐานที่ 2: กระบวนการบริหารและการจัดการ</button>
                     </li>
                     <li role="presentation">
-                        <button class="onesqa-tab-button inline-block py-3 px-4 sm:py-4 sm:px-5 text-sm md:text-base font-medium rounded-t-lg border-b-2 border-transparent"
-                                id="standard3-tab" data-tabs-target="#standard3-content" type="button" role="tab"
-                                aria-controls="standard3-content" aria-selected="false">มาตรฐานที่ 3: การจัดการเรียนรู้</button>
+                        <button class="tab-button-level inline-block py-3 px-4 sm:py-4 sm:px-5 text-sm md:text-base font-medium rounded-t-lg border-b-2 border-transparent"
+                                id="preschool-std3-tab" data-tabs-target="#preschool-std3-content" type="button" role="tab"
+                                aria-controls="preschool-std3-content" aria-selected="false">มาตรฐานที่ 3: การจัดประสบการณ์ฯ</button>
                     </li>
                 </ul>
             </div>
-
-            <!-- Tab Content Panels -->
-            <div id="onesqaStandardsTabContent" class="mt-0">
-                <!-- เนื้อหา มาตรฐานที่ 1 -->
-                <div class="onesqa-tab-panel hidden p-4 bg-white border border-gray-300 border-t-0 rounded-b-lg dark:border-gray-600 dark:bg-gray-800"
-                     id="standard1-content" role="tabpanel" aria-labelledby="standard1-tab">
+            <!-- Tab Content Panels for Preschool -->
+            <div id="preschoolStandardsTabContent" class="mt-0">
+                <!-- ปฐมวัย: มาตรฐานที่ 1 -->
+                <div class="tab-panel-level hidden p-4 bg-white border border-gray-300 border-t-0 rounded-b-lg dark:border-gray-600 dark:bg-gray-800"
+                     id="preschool-std1-content" role="tabpanel" aria-labelledby="preschool-std1-tab">
                     <div class="standard-block">
-                        <h3 class="text-lg font-semibold text-orange-700 mb-3 mt-2">มาตรฐานที่ 1: คุณภาพของผู้เรียน</h3>
+                        <h3 class="text-lg font-semibold text-orange-700 mb-3 mt-2">มาตรฐานที่ 1: คุณภาพของเด็ก</h3>
                         <article class="indicator">
-                            <h4>1.1 ผลสัมฤทธิ์ทางวิชาการของผู้เรียน</h4>
-                            <ul class="list-disc ml-5 text-gray-700 mb-2 text-sm">
-                                <li class="mb-2"> <!-- เพิ่ม mb-2 เพื่อระยะห่างระหว่าง item -->
-                                    ความสามารถในการอ่าน การเขียน การสื่อสาร และการคิดคำนวณ
-                                    <div class="mt-1"> <!-- เพิ่ม div ครอบปุ่ม และ mt-1 -->
-                                        <a href="path/to/evidence_std1_1_reading_writing.pdf" target="_blank" class="evidence-button">ดูหลักฐาน<span class="file-type">PDF</span></a>
-                                    </div>
-                                </li>
-                                <li class="mb-2">
-                                    ความสามารถในการคิดวิเคราะห์ คิดอย่างมีวิจารณญาณ อภิปราย แลกเปลี่ยนความคิดเห็น และแก้ปัญหา
-                                    <div class="mt-1">
-                                        <a href="path/to/evidence_std1_1_critical_thinking.pdf" target="_blank" class="evidence-button">ดูหลักฐาน<span class="file-type">PDF</span></a>
-                                    </div>
-                                </li>
-                                <li class="mb-2">
-                                    ความสามารถในการสร้างนวัตกรรม
-                                    <div class="mt-1">
-                                        <a href="path/to/evidence_std1_1_innovation.pdf" target="_blank" class="evidence-button">ดูหลักฐาน<span class="file-type">PDF</span></a>
-                                    </div>
-                                </li>
-                                <li class="mb-2">
-                                    ความสามารถในการใช้เทคโนโลยีสารสนเทศและการสื่อสาร
-                                    <div class="mt-1">
-                                        <a href="path/to/evidence_std1_1_ict_usage.pdf" target="_blank" class="evidence-button">ดูหลักฐาน<span class="file-type">PDF</span></a>
-                                    </div>
-                                </li>
-                                <li class="mb-2">
-                                    ผลสัมฤทธิ์ทางการเรียนตามหลักสูตรสถานศึกษา
-                                    <div class="mt-1">
-                                        <a href="path/to/evidence_std1_1_academic_results.pdf" target="_blank" class="evidence-button">ดูหลักฐาน<span class="file-type">PDF</span></a>
-                                    </div>
-                                </li>
-                                <li class="mb-2">
-                                    ความรู้ ทักษะพื้นฐาน และเจตคติที่ดีต่องานอาชีพ
-                                    <div class="mt-1">
-                                        <a href="path/to/evidence_std1_1_career_skills.pdf" target="_blank" class="evidence-button">ดูหลักฐาน<span class="file-type">PDF</span></a>
-                                    </div>
-                                </li>
-                            </ul>
+                            <p class="text-gray-700 text-sm mb-1"><strong>ตัวชี้วัดที่ 1.1:</strong> เด็กเจริญเติบโตสมวัย สุขภาพแข็งแรง และมีพัฒนาการด้านการเคลื่อนไหว</p>
+                            <div class="mt-2"><a href="path/to/preschool/std1/evidence_1_1.pdf" target="_blank" class="evidence-button">ดูหลักฐาน<span class="file-type">PDF</span></a></div>
                         </article>
                         <article class="indicator">
-                            <h4>1.2 คุณลักษณะที่พึงประสงค์ของผู้เรียน</h4>
-                            <ul class="list-disc ml-5 text-gray-700 mb-2 text-sm">
-                                <li class="mb-2">
-                                    การมีคุณธรรม จริยธรรม ค่านิยมที่พึงประสงค์
-                                    <div class="mt-1">
-                                        <a href="path/to/evidence_std1_2_ethics.pdf" target="_blank" class="evidence-button">ดูหลักฐาน<span class="file-type">PDF</span></a>
-                                    </div>
-                                </li>
-                                <li class="mb-2">
-                                    ความภูมิใจในท้องถิ่นและความเป็นไทย
-                                    <div class="mt-1">
-                                        <a href="path/to/evidence_std1_2_local_pride.pdf" target="_blank" class="evidence-button">ดูหลักฐาน<span class="file-type">PDF</span></a>
-                                    </div>
-                                </li>
-                                <li class="mb-2">
-                                    การยอมรับที่จะอยู่ร่วมกันบนความแตกต่างและหลากหลาย
-                                    <div class="mt-1">
-                                        <a href="path/to/evidence_std1_2_diversity.pdf" target="_blank" class="evidence-button">ดูหลักฐาน<span class="file-type">PDF</span></a>
-                                    </div>
-                                </li>
-                                <li class="mb-2">
-                                    สุขภาวะทางร่างกาย และจิตสังคม
-                                    <div class="mt-1">
-                                        <a href="path/to/evidence_std1_2_wellbeing.pdf" target="_blank" class="evidence-button">ดูหลักฐาน<span class="file-type">PDF</span></a>
-                                    </div>
-                                </li>
-                            </ul>
+                            <p class="text-gray-700 text-sm mb-1"><strong>ตัวชี้วัดที่ 1.2:</strong> เด็กมีพัฒนาการด้านสติปัญญา เรียนรู้และสร้างสรรค์</p>
+                            <div class="mt-2"><a href="path/to/preschool/std1/evidence_1_2.pdf" target="_blank" class="evidence-button">ดูหลักฐาน<span class="file-type">PDF</span></a></div>
+                        </article>
+                        <article class="indicator">
+                            <p class="text-gray-700 text-sm mb-1"><strong>ตัวชี้วัดที่ 1.3:</strong> เด็กมีพัฒนาการด้านภาษาและการสื่อสาร</p>
+                            <div class="mt-2"><a href="path/to/preschool/std1/evidence_1_3.pdf" target="_blank" class="evidence-button">ดูหลักฐาน<span class="file-type">PDF</span></a></div>
+                        </article>
+                        <article class="indicator">
+                            <p class="text-gray-700 text-sm mb-1"><strong>ตัวชี้วัดที่ 1.4:</strong> เด็กมีพัฒนาการด้านอารมณ์และจิตใจ</p>
+                            <div class="mt-2"><a href="path/to/preschool/std1/evidence_1_4.pdf" target="_blank" class="evidence-button">ดูหลักฐาน<span class="file-type">PDF</span></a></div>
+                        </article>
+                        <article class="indicator">
+                            <p class="text-gray-700 text-sm mb-1"><strong>ตัวชี้วัดที่ 1.5:</strong> เด็กมีพัฒนาการด้านสังคมและคุณธรรม</p>
+                            <div class="mt-2"><a href="path/to/preschool/std1/evidence_1_5.pdf" target="_blank" class="evidence-button">ดูหลักฐาน<span class="file-type">PDF</span></a></div>
                         </article>
                     </div>
                 </div>
-
-                <!-- เนื้อหา มาตรฐานที่ 2 -->
-                <div class="onesqa-tab-panel hidden p-4 bg-white border border-gray-300 border-t-0 rounded-b-lg dark:border-gray-600 dark:bg-gray-800"
-                     id="standard2-content" role="tabpanel" aria-labelledby="standard2-tab">
+                <!-- ปฐมวัย: มาตรฐานที่ 2 -->
+                <div class="tab-panel-level hidden p-4 bg-white border border-gray-300 border-t-0 rounded-b-lg dark:border-gray-600 dark:bg-gray-800"
+                     id="preschool-std2-content" role="tabpanel" aria-labelledby="preschool-std2-tab">
                     <div class="standard-block">
                         <h3 class="text-lg font-semibold text-orange-700 mb-3 mt-2">มาตรฐานที่ 2: กระบวนการบริหารและการจัดการ</h3>
                         <article class="indicator">
-                            <h4>2.1 การมีเป้าหมาย วิสัยทัศน์ และพันธกิจที่สถานศึกษากำหนดชัดเจน</h4>
-                            <p class="text-gray-700 text-sm mb-1">สถานศึกษามีการกำหนดเป้าหมาย วิสัยทัศน์ และพันธกิจที่ชัดเจน สอดคล้องกับบริบท...</p>
-                            <div class="mt-2">
-                                <a href="path/to/school_vision_mission_doc.pdf" target="_blank" class="evidence-button">ดูหลักฐาน<span class="file-type">PDF</span></a>
-                            </div>
+                            <p class="text-gray-700 text-sm mb-1"><strong>ตัวชี้วัดที่ 2.1:</strong> วิสัยทัศน์ พันธกิจ และค่านิยมของสถานศึกษา</p>
+                            <div class="mt-2"><a href="path/to/preschool/std2/evidence_2_1.pdf" target="_blank" class="evidence-button">ดูหลักฐาน<span class="file-type">PDF</span></a></div>
                         </article>
                         <article class="indicator">
-                            <h4>2.2 การมีระบบบริหารจัดการคุณภาพของสถานศึกษา</h4>
-                            <p class="text-gray-700 text-sm mb-1">สถานศึกษามีระบบการบริหารจัดการคุณภาพที่ชัดเจนและดำเนินการตามระบบอย่างต่อเนื่อง...</p>
-                            <div class="mt-2">
-                                <a href="path/to/qms_manual.pdf" target="_blank" class="evidence-button">ดูหลักฐาน<span class="file-type">PDF</span></a>
-                            </div>
+                            <p class="text-gray-700 text-sm mb-1"><strong>ตัวชี้วัดที่ 2.2:</strong> กลยุทธ์และเป้าหมายของสถานศึกษา</p>
+                            <div class="mt-2"><a href="path/to/preschool/std2/evidence_2_2.pdf" target="_blank" class="evidence-button">ดูหลักฐาน<span class="file-type">PDF</span></a></div>
                         </article>
                         <article class="indicator">
-                            <h4>2.3 การดำเนินงานพัฒนาวิชาการที่เน้นคุณภาพผู้เรียนรอบด้าน</h4>
-                            <p class="text-gray-700 text-sm mb-1">สถานศึกษามีการพัฒนาหลักสูตรสถานศึกษาให้สอดคล้องกับหลักสูตรแกนกลาง...</p>
-                             <div class="mt-2">
-                                <a href="path/to/school_curriculum.pdf" target="_blank" class="evidence-button">ดูหลักฐาน<span class="file-type">PDF</span></a>
-                            </div>
+                            <p class="text-gray-700 text-sm mb-1"><strong>ตัวชี้วัดที่ 2.3:</strong> ผู้บริหารมีภาวะผู้นำทางวิชาการและบริหารจัดการด้วยหลักธรรมาภิบาล</p>
+                            <div class="mt-2"><a href="path/to/preschool/std2/evidence_2_3.pdf" target="_blank" class="evidence-button">ดูหลักฐาน<span class="file-type">PDF</span></a></div>
                         </article>
                         <article class="indicator">
-                            <h4>2.4 การพัฒนาครูและบุคลากรให้มีความเชี่ยวชาญทางวิชาชีพ</h4>
-                             <p class="text-gray-700 text-sm mb-1">สถานศึกษาส่งเสริมและสนับสนุนให้ครูและบุคลากรได้รับการพัฒนาตนเองอย่างต่อเนื่อง...</p>
-                             <div class="mt-2">
-                                <a href="path/to/teacher_development_plan.pdf" target="_blank" class="evidence-button">ดูหลักฐาน<span class="file-type">PDF</span></a>
-                            </div>
+                            <p class="text-gray-700 text-sm mb-1"><strong>ตัวชี้วัดที่ 2.4:</strong> การพัฒนาวิชาชีพผู้บริหาร ครู และบุคลากรทางการศึกษา</p>
+                            <div class="mt-2"><a href="path/to/preschool/std2/evidence_2_4.pdf" target="_blank" class="evidence-button">ดูหลักฐาน<span class="file-type">PDF</span></a></div>
                         </article>
-                         <article class="indicator">
-                            <h4>2.5 การจัดสภาพแวดล้อมทางกายภาพและสังคมที่เอื้อต่อการจัดการเรียนรู้</h4>
-                             <p class="text-gray-700 text-sm mb-1">สถานศึกษาจัดอาคารสถานที่ สภาพแวดล้อม แหล่งเรียนรู้ และสิ่งอำนวยความสะดวก...</p>
-                             <div class="mt-2">
-                                <a href="path/to/school_environment_photos.pdf" target="_blank" class="evidence-button">ดูหลักฐาน<span class="file-type">รูปภาพ</span></a>
-                            </div>
+                        <article class="indicator">
+                            <p class="text-gray-700 text-sm mb-1"><strong>ตัวชี้วัดที่ 2.5:</strong> การนิเทศและประเมินการปฏิบัติงานอย่างเป็นระบบ</p>
+                            <div class="mt-2"><a href="path/to/preschool/std2/evidence_2_5.pdf" target="_blank" class="evidence-button">ดูหลักฐาน<span class="file-type">PDF</span></a></div>
                         </article>
-                         <article class="indicator">
-                            <h4>2.6 การจัดระบบเทคโนโลยีสารสนเทศเพื่อสนับสนุนการบริหารจัดการและการเรียนรู้</h4>
-                             <p class="text-gray-700 text-sm mb-1">สถานศึกษามีการนำเทคโนโลยีสารสนเทศมาใช้ในการบริหารจัดการและสนับสนุนการจัดการเรียนการสอน...</p>
-                            <div class="mt-2">
-                                <a href="path/to/ict_plan.pdf" target="_blank" class="evidence-button">ดูหลักฐาน<span class="file-type">PDF</span></a>
-                            </div>
+                        <article class="indicator">
+                            <p class="text-gray-700 text-sm mb-1"><strong>ตัวชี้วัดที่ 2.6:</strong> การใช้สื่อและเทคโนโลยีสารสนเทศที่เอื้อต่อการเรียนรู้</p>
+                            <div class="mt-2"><a href="path/to/preschool/std2/evidence_2_6.pdf" target="_blank" class="evidence-button">ดูหลักฐาน<span class="file-type">PDF</span></a></div>
+                        </article>
+                        <article class="indicator">
+                            <p class="text-gray-700 text-sm mb-1"><strong>ตัวชี้วัดที่ 2.7:</strong> การจัดสภาพแวดล้อมและแหล่งเรียนรู้ที่ปลอดภัย</p>
+                            <div class="mt-2"><a href="path/to/preschool/std2/evidence_2_7.pdf" target="_blank" class="evidence-button">ดูหลักฐาน<span class="file-type">PDF</span></a></div>
+                        </article>
+                        <article class="indicator">
+                            <p class="text-gray-700 text-sm mb-1"><strong>ตัวชี้วัดที่ 2.8:</strong> สวัสดิการและแนวทางการป้องกันโรคและภัยพิบัติ</p>
+                            <div class="mt-2"><a href="path/to/preschool/std2/evidence_2_8.pdf" target="_blank" class="evidence-button">ดูหลักฐาน<span class="file-type">PDF</span></a></div>
+                        </article>
+                        <article class="indicator">
+                            <p class="text-gray-700 text-sm mb-1"><strong>ตัวชี้วัดที่ 2.9:</strong> กระบวนการเฝ้าระวังและคัดกรองเด็กที่ต้องการความช่วยเหลือ</p>
+                            <div class="mt-2"><a href="path/to/preschool/std2/evidence_2_9.pdf" target="_blank" class="evidence-button">ดูหลักฐาน<span class="file-type">PDF</span></a></div>
+                        </article>
+                        <article class="indicator">
+                            <p class="text-gray-700 text-sm mb-1"><strong>ตัวชี้วัดที่ 2.10:</strong> การสร้างเครือข่ายและการมีส่วนร่วมของผู้ปกครองและชุมชน</p>
+                            <div class="mt-2"><a href="path/to/preschool/std2/evidence_2_10.pdf" target="_blank" class="evidence-button">ดูหลักฐาน<span class="file-type">PDF</span></a></div>
                         </article>
                     </div>
                 </div>
-
-                <!-- เนื้อหา มาตรฐานที่ 3 -->
-                <div class="onesqa-tab-panel hidden p-4 bg-white border border-gray-300 border-t-0 rounded-b-lg dark:border-gray-600 dark:bg-gray-800"
-                     id="standard3-content" role="tabpanel" aria-labelledby="standard3-tab">
+                <!-- ปฐมวัย: มาตรฐานที่ 3 -->
+                <div class="tab-panel-level hidden p-4 bg-white border border-gray-300 border-t-0 rounded-b-lg dark:border-gray-600 dark:bg-gray-800"
+                     id="preschool-std3-content" role="tabpanel" aria-labelledby="preschool-std3-tab">
                     <div class="standard-block">
-                        <h3 class="text-lg font-semibold text-orange-700 mb-3 mt-2">มาตรฐานที่ 3: กระบวนการจัดการเรียนการสอนที่เน้นผู้เรียนเป็นสำคัญ</h3>
+                        <h3 class="text-lg font-semibold text-orange-700 mb-3 mt-2">มาตรฐานที่ 3: การจัดประสบการณ์ที่เน้นเด็กเป็นสำคัญ</h3>
                         <article class="indicator">
-                            <h4>3.1 การจัดการเรียนรู้ผ่านกระบวนการคิดและปฏิบัติจริง และนำไปประยุกต์ใช้ในชีวิตได้</h4>
-                            <p class="text-gray-700 text-sm mb-1">ครูจัดการเรียนการสอนที่ส่งเสริมให้ผู้เรียนได้คิดวิเคราะห์ แก้ปัญหา เรียนรู้จากการปฏิบัติจริง...</p>
-                            <div class="mt-2">
-                                <a href="path/to/lesson_plans_active_learning.pdf" target="_blank" class="evidence-button">ดูหลักฐาน<span class="file-type">PDF</span></a>
-                            </div>
+                            <p class="text-gray-700 text-sm mb-1"><strong>ตัวชี้วัดที่ 3.1:</strong> ครูมีการวางแผนการจัดประสบการณ์รายปี</p>
+                            <div class="mt-2"><a href="path/to/preschool/std3/evidence_3_1.pdf" target="_blank" class="evidence-button">ดูหลักฐาน<span class="file-type">PDF</span></a></div>
                         </article>
                         <article class="indicator">
-                            <h4>3.2 การใช้สื่อ เทคโนโลยีสารสนเทศ และแหล่งเรียนรู้ที่เอื้อต่อการเรียนรู้</h4>
-                             <p class="text-gray-700 text-sm mb-1">ครูเลือกใช้สื่อ นวัตกรรม เทคโนโลยี และแหล่งเรียนรู้ทั้งภายในและภายนอกสถานศึกษา...</p>
-                            <div class="mt-2">
-                                <a href="path/to/media_usage_log.pdf" target="_blank" class="evidence-button">ดูหลักฐาน<span class="file-type">เอกสาร</span></a>
-                            </div>
+                            <p class="text-gray-700 text-sm mb-1"><strong>ตัวชี้วัดที่ 3.2:</strong> ครูนำแผนการจัดประสบการณ์ไปใช้โดยใช้สื่อและแหล่งเรียนรู้ที่เอื้อต่อการเรียนรู้</p>
+                            <div class="mt-2"><a href="path/to/preschool/std3/evidence_3_2.pdf" target="_blank" class="evidence-button">ดูหลักฐาน<span class="file-type">PDF</span></a></div>
                         </article>
                         <article class="indicator">
-                            <h4>3.3 การมีการบริหารจัดการชั้นเรียนเชิงบวก</h4>
-                            <p class="text-gray-700 text-sm mb-1">ครูสร้างบรรยากาศในชั้นเรียนที่อบอุ่น ปลอดภัย ส่งเสริมการเรียนรู้...</p>
-                            <div class="mt-2">
-                                <a href="path/to/classroom_observation_notes.pdf" target="_blank" class="evidence-button">ดูหลักฐาน<span class="file-type">เอกสาร</span></a>
-                            </div>
+                            <p class="text-gray-700 text-sm mb-1"><strong>ตัวชี้วัดที่ 3.3:</strong> มีการตรวจสอบและประเมินเด็กอย่างเป็นระบบ</p>
+                            <div class="mt-2"><a href="path/to/preschool/std3/evidence_3_3.pdf" target="_blank" class="evidence-button">ดูหลักฐาน<span class="file-type">PDF</span></a></div>
                         </article>
                         <article class="indicator">
-                            <h4>3.4 การตรวจสอบและประเมินผู้เรียนอย่างเป็นระบบ และนำผลมาพัฒนาผู้เรียน</h4>
-                            <p class="text-gray-700 text-sm mb-1">ครูมีวิธีการวัดและประเมินผลที่หลากหลาย สอดคล้องกับสิ่งที่ต้องการวัด...</p>
-                            <div class="mt-2">
-                                <a href="path/to/assessment_tools.pdf" target="_blank" class="evidence-button">ดูหลักฐาน<span class="file-type">PDF</span></a>
-                            </div>
+                            <p class="text-gray-700 text-sm mb-1"><strong>ตัวชี้วัดที่ 3.4:</strong> มีการนำผลการประเมินมาพัฒนาเด็ก</p>
+                            <div class="mt-2"><a href="path/to/preschool/std3/evidence_3_4.pdf" target="_blank" class="evidence-button">ดูหลักฐาน<span class="file-type">PDF</span></a></div>
                         </article>
                         <article class="indicator">
-                            <h4>3.5 การมีการแลกเปลี่ยนเรียนรู้และให้ข้อมูลสะท้อนกลับเพื่อพัฒนาและปรับปรุงการจัดการเรียนรู้</h4>
-                            <p class="text-gray-700 text-sm mb-1">ครูและผู้เกี่ยวข้องมีการแลกเปลี่ยนเรียนรู้ (PLC) และให้ข้อมูลป้อนกลับซึ่งกันและกัน...</p>
-                            <div class="mt-2">
-                                <a href="path/to/plc_minutes.pdf" target="_blank" class="evidence-button">ดูหลักฐาน<span class="file-type">PDF</span></a>
-                            </div>
+                            <p class="text-gray-700 text-sm mb-1"><strong>ตัวชี้วัดที่ 3.5:</strong> มีการแลกเปลี่ยนเรียนรู้และให้ข้อมูลป้อนกลับเพื่อพัฒนาการจัดประสบการณ์</p>
+                            <div class="mt-2"><a href="path/to/preschool/std3/evidence_3_5.pdf" target="_blank" class="evidence-button">ดูหลักฐาน<span class="file-type">PDF</span></a></div>
                         </article>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- Section Wrapper สำหรับ Highlights - สไตล์เหมือนส่วนอื่นๆ -->
+        <!-- Section Wrapper สำหรับ มาตรฐานการศึกษาระดับการศึกษาขั้นพื้นฐาน -->
+        <div id="basicEdStandardsSectionContent" class="page-content-wrapper content-section bg-white rounded-2xl shadow-md p-5 card mb-6">
+            <h2 class="text-xl font-bold text-red-600 border-b-2 border-yellow-400 pb-2 mb-6">มาตรฐานการศึกษาระดับการศึกษาขั้นพื้นฐาน</h2>
+            <!-- Tab Buttons for Basic Education -->
+            <div class="mb-0">
+                <ul class="flex flex-wrap text-center border-b border-gray-300 dark:border-gray-700" id="basicEdStandardsTabs" role="tablist">
+                    <li role="presentation">
+                        <button class="tab-button-level inline-block py-3 px-4 sm:py-4 sm:px-5 text-sm md:text-base font-medium rounded-t-lg border-b-2 border-transparent"
+                                id="basiced-std1-tab" data-tabs-target="#basiced-std1-content" type="button" role="tab"
+                                aria-controls="basiced-std1-content" aria-selected="true">มาตรฐานที่ 1: คุณภาพของผู้เรียน</button>
+                    </li>
+                    <li role="presentation">
+                        <button class="tab-button-level inline-block py-3 px-4 sm:py-4 sm:px-5 text-sm md:text-base font-medium rounded-t-lg border-b-2 border-transparent"
+                                id="basiced-std2-tab" data-tabs-target="#basiced-std2-content" type="button" role="tab"
+                                aria-controls="basiced-std2-content" aria-selected="false">มาตรฐานที่ 2: กระบวนการบริหารและการจัดการ</button>
+                    </li>
+                    <li role="presentation">
+                        <button class="tab-button-level inline-block py-3 px-4 sm:py-4 sm:px-5 text-sm md:text-base font-medium rounded-t-lg border-b-2 border-transparent"
+                                id="basiced-std3-tab" data-tabs-target="#basiced-std3-content" type="button" role="tab"
+                                aria-controls="basiced-std3-content" aria-selected="false">มาตรฐานที่ 3: กระบวนการจัดการเรียนการสอนฯ</button>
+                    </li>
+                </ul>
+            </div>
+            <!-- Tab Content Panels for Basic Education -->
+            <div id="basicEdStandardsTabContent" class="mt-0">
+                <!-- ขั้นพื้นฐาน: มาตรฐานที่ 1 -->
+                <div class="tab-panel-level hidden p-4 bg-white border border-gray-300 border-t-0 rounded-b-lg dark:border-gray-600 dark:bg-gray-800"
+                     id="basiced-std1-content" role="tabpanel" aria-labelledby="basiced-std1-tab">
+                    <div class="standard-block">
+                        <h3 class="text-lg font-semibold text-orange-700 mb-3 mt-2">มาตรฐานที่ 1: คุณภาพของผู้เรียน</h3>
+                        <article class="indicator">
+                            <p class="text-gray-700 text-sm mb-1"><strong>ตัวชี้วัดที่ 1.1:</strong> ผู้เรียนมีสมรรถนะตามหลักสูตรสถานศึกษา</p>
+                            <div class="mt-2"><a href="path/to/basiced/std1/evidence_1_1.pdf" target="_blank" class="evidence-button">ดูหลักฐาน<span class="file-type">PDF</span></a></div>
+                        </article>
+                        <article class="indicator">
+                            <p class="text-gray-700 text-sm mb-1"><strong>ตัวชี้วัดที่ 1.2:</strong> ผู้เรียนมีคุณลักษณะที่พึงประสงค์ตามหลักสูตรสถานศึกษา</p>
+                            <div class="mt-2"><a href="path/to/basiced/std1/evidence_1_2.pdf" target="_blank" class="evidence-button">ดูหลักฐาน<span class="file-type">PDF</span></a></div>
+                        </article>
+                        <article class="indicator">
+                            <p class="text-gray-700 text-sm mb-1"><strong>ตัวชี้วัดที่ 1.3:</strong> ผู้เรียนสามารถนำตนเองในการเรียนรู้</p>
+                            <div class="mt-2"><a href="path/to/basiced/std1/evidence_1_3.pdf" target="_blank" class="evidence-button">ดูหลักฐาน<span class="file-type">PDF</span></a></div>
+                        </article>
+                    </div>
+                </div>
+                <!-- ขั้นพื้นฐาน: มาตรฐานที่ 2 -->
+                <div class="tab-panel-level hidden p-4 bg-white border border-gray-300 border-t-0 rounded-b-lg dark:border-gray-600 dark:bg-gray-800"
+                     id="basiced-std2-content" role="tabpanel" aria-labelledby="basiced-std2-tab">
+                    <div class="standard-block">
+                        <h3 class="text-lg font-semibold text-orange-700 mb-3 mt-2">มาตรฐานที่ 2: กระบวนการบริหารและการจัดการ</h3>
+                        <article class="indicator">
+                            <p class="text-gray-700 text-sm mb-1"><strong>ตัวชี้วัดที่ 2.1:</strong> วิสัยทัศน์ พันธกิจ และค่านิยมของสถานศึกษา</p>
+                            <div class="mt-2"><a href="path/to/basiced/std2/evidence_2_1.pdf" target="_blank" class="evidence-button">ดูหลักฐาน<span class="file-type">PDF</span></a></div>
+                        </article>
+                        <article class="indicator">
+                            <p class="text-gray-700 text-sm mb-1"><strong>ตัวชี้วัดที่ 2.2:</strong> นโยบาย ทิศทาง กลยุทธ์ และแผนงานสอดคล้องกับวิสัยทัศน์และพันธกิจ</p>
+                            <div class="mt-2"><a href="path/to/basiced/std2/evidence_2_2.pdf" target="_blank" class="evidence-button">ดูหลักฐาน<span class="file-type">PDF</span></a></div>
+                        </article>
+                        <article class="indicator">
+                            <p class="text-gray-700 text-sm mb-1"><strong>ตัวชี้วัดที่ 2.3:</strong> ผู้บริหารมีภาวะผู้นำทางวิชาการและบริหารจัดการด้วยหลักธรรมาภิบาล</p>
+                            <div class="mt-2"><a href="path/to/basiced/std2/evidence_2_3.pdf" target="_blank" class="evidence-button">ดูหลักฐาน<span class="file-type">PDF</span></a></div>
+                        </article>
+                        <article class="indicator">
+                            <p class="text-gray-700 text-sm mb-1"><strong>ตัวชี้วัดที่ 2.4:</strong> การพัฒนาครูและบุคลากรทางการศึกษา</p>
+                            <div class="mt-2"><a href="path/to/basiced/std2/evidence_2_4.pdf" target="_blank" class="evidence-button">ดูหลักฐาน<span class="file-type">PDF</span></a></div>
+                        </article>
+                        <article class="indicator">
+                            <p class="text-gray-700 text-sm mb-1"><strong>ตัวชี้วัดที่ 2.5:</strong> กระบวนการนิเทศการปฏิบัติงานของครูและบุคลากรทางการศึกษา</p>
+                            <div class="mt-2"><a href="path/to/basiced/std2/evidence_2_5.pdf" target="_blank" class="evidence-button">ดูหลักฐาน<span class="file-type">PDF</span></a></div>
+                        </article>
+                        <article class="indicator">
+                            <p class="text-gray-700 text-sm mb-1"><strong>ตัวชี้วัดที่ 2.6:</strong> การใช้สื่อ อุปกรณ์ และเทคโนโลยีเพื่อสนับสนุนการจัดการศึกษา</p>
+                            <div class="mt-2"><a href="path/to/basiced/std2/evidence_2_6.pdf" target="_blank" class="evidence-button">ดูหลักฐาน<span class="file-type">PDF</span></a></div>
+                        </article>
+                        <article class="indicator">
+                            <p class="text-gray-700 text-sm mb-1"><strong>ตัวชี้วัดที่ 2.7:</strong> การจัดสภาพแวดล้อม อาคารสถานที่ที่ปลอดภัยและถูกสุขลักษณะ</p>
+                            <div class="mt-2"><a href="path/to/basiced/std2/evidence_2_7.pdf" target="_blank" class="evidence-button">ดูหลักฐาน<span class="file-type">PDF</span></a></div>
+                        </article>
+                        <article class="indicator">
+                            <p class="text-gray-700 text-sm mb-1"><strong>ตัวชี้วัดที่ 2.8:</strong> สวัสดิการ สวัสดิภาพ และแนวทางการป้องกันโรคและภัยพิบัติ</p>
+                            <div class="mt-2"><a href="path/to/basiced/std2/evidence_2_8.pdf" target="_blank" class="evidence-button">ดูหลักฐาน<span class="file-type">PDF</span></a></div>
+                        </article>
+                        <article class="indicator">
+                            <p class="text-gray-700 text-sm mb-1"><strong>ตัวชี้วัดที่ 2.9:</strong> ระบบและกระบวนการช่วยเหลือผู้เรียน</p>
+                            <div class="mt-2"><a href="path/to/basiced/std2/evidence_2_9.pdf" target="_blank" class="evidence-button">ดูหลักฐาน<span class="file-type">PDF</span></a></div>
+                        </article>
+                        <article class="indicator">
+                            <p class="text-gray-700 text-sm mb-1"><strong>ตัวชี้วัดที่ 2.10:</strong> การเสริมสร้างเครือข่ายผู้ปกครอง องค์กร และชุมชน</p>
+                            <div class="mt-2"><a href="path/to/basiced/std2/evidence_2_10.pdf" target="_blank" class="evidence-button">ดูหลักฐาน<span class="file-type">PDF</span></a></div>
+                        </article>
+                    </div>
+                </div>
+                <!-- ขั้นพื้นฐาน: มาตรฐานที่ 3 -->
+                <div class="tab-panel-level hidden p-4 bg-white border border-gray-300 border-t-0 rounded-b-lg dark:border-gray-600 dark:bg-gray-800"
+                     id="basiced-std3-content" role="tabpanel" aria-labelledby="basiced-std3-tab">
+                    <div class="standard-block">
+                        <h3 class="text-lg font-semibold text-orange-700 mb-3 mt-2">มาตรฐานที่ 3: กระบวนการจัดการเรียนการสอนที่เน้นผู้เรียนเป็นสำคัญ</h3>
+                        <article class="indicator">
+                            <p class="text-gray-700 text-sm mb-1"><strong>ตัวชี้วัดที่ 3.1:</strong> การออกแบบหลักสูตรและแผนการจัดการเรียนรู้ที่เสริมสร้างสมรรถนะและคุณลักษณะที่พึงประสงค์</p>
+                            <div class="mt-2"><a href="path/to/basiced/std3/evidence_3_1.pdf" target="_blank" class="evidence-button">ดูหลักฐาน<span class="file-type">PDF</span></a></div>
+                        </article>
+                        <article class="indicator">
+                            <p class="text-gray-700 text-sm mb-1"><strong>ตัวชี้วัดที่ 3.2:</strong> การจัดกิจกรรมการเรียนรู้ที่เสริมสร้างสมรรถนะและคุณลักษณะที่พึงประสงค์</p>
+                            <div class="mt-2"><a href="path/to/basiced/std3/evidence_3_2.pdf" target="_blank" class="evidence-button">ดูหลักฐาน<span class="file-type">PDF</span></a></div>
+                        </article>
+                        <article class="indicator">
+                            <p class="text-gray-700 text-sm mb-1"><strong>ตัวชี้วัดที่ 3.3:</strong> ครูวัดและประเมินผลการเรียนรู้ของผู้เรียนอย่างเป็นระบบและต่อเนื่อง</p>
+                            <div class="mt-2"><a href="path/to/basiced/std3/evidence_3_3.pdf" target="_blank" class="evidence-button">ดูหลักฐาน<span class="file-type">PDF</span></a></div>
+                        </article>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section Wrapper สำหรับ Highlights -->
         <div id="highlightsSectionContent" class="page-content-wrapper content-section bg-white rounded-2xl shadow-md p-5 card">
             <h2 class="text-xl font-bold text-red-600 border-b-2 border-yellow-400 pb-2 mb-6">ผลงานเด่นของสถานศึกษา</h2>
-            <p class="text-gray-700 mb-6">นี่คือส่วนจัดแสดงผลงานและความสำเร็จที่น่าภาคภูมิใจของโรงเรียนเรา:</p>
             <div class="grid md:grid-cols-2 gap-6">
                 <div class="highlight-item bg-white p-4 rounded-lg shadow hover:shadow-xl transition-shadow">
                     <img src="https://via.placeholder.com/600x400.png?text=ผลงานเด่น+1" alt="ผลงานเด่น 1" class="w-full h-48 object-cover rounded-md mb-3">
@@ -309,7 +325,7 @@
         </div>
     </div>
 
-    <!-- ส่วนท้ายเว็บ (Footer) - ใช้โครงสร้างและสไตล์เหมือนกับ index.html -->
+    <!-- ส่วนท้ายเว็บ (Footer) -->
     <footer class="bg-gradient-to-r from-red-600 to-yellow-500 text-white py-4 mt-8 rounded-t-3xl">
         <div class="container mx-auto px-4">
             <div class="flex flex-col items-center text-center">
@@ -326,57 +342,61 @@
         const spaNavLinks = document.querySelectorAll('#sms-main-nav-ul a.nav-link.menu-item');
         const spaContentWrappers = document.querySelectorAll('.page-content-wrapper.content-section');
 
-        // --- Tab System for ONESQA Standards (มาตรฐานที่ 1, 2, 3) ---
-        const onesqaTabButtons = document.querySelectorAll('#onesqaStandardsTabs .onesqa-tab-button');
-        const onesqaTabPanels = document.querySelectorAll('#onesqaStandardsTabContent .onesqa-tab-panel');
+        // --- Generic Tab System Function ---
+        function initializeTabs(tabContainerId, tabButtonClass, tabPanelClass) {
+            const tabButtons = document.querySelectorAll(`#${tabContainerId} .${tabButtonClass}`);
+            const tabPanels = document.querySelectorAll(`#${tabContainerId} ~ div .${tabPanelClass}`); // Assumes tab content is sibling div
 
-        function updateOnesqaTabs(selectedButton) {
-            onesqaTabButtons.forEach(button => {
-                const targetPanelId = button.getAttribute('data-tabs-target');
-                const targetPanel = document.querySelector(targetPanelId);
+            function updateTabs(selectedButton) {
+                tabButtons.forEach(button => {
+                    const targetPanelId = button.getAttribute('data-tabs-target');
+                    const targetPanel = document.querySelector(targetPanelId);
 
-                if (button === selectedButton) {
-                    button.setAttribute('aria-selected', 'true');
-                    button.classList.remove('text-gray-500', 'hover:text-gray-700', 'hover:border-gray-300', 'dark:hover:text-gray-300', 'border-transparent');
-                    button.classList.add('text-red-600', 'border-red-600', 'font-semibold', 'bg-white', 'dark:bg-gray-800', 'dark:text-red-500', 'dark:border-red-500');
-                    button.classList.add('relative', '-mb-px');
+                    if (button === selectedButton) {
+                        button.setAttribute('aria-selected', 'true');
+                        button.classList.remove('text-gray-500', 'hover:text-gray-700', 'hover:border-gray-300', 'dark:hover:text-gray-300', 'border-transparent');
+                        button.classList.add('text-red-600', 'border-red-600', 'font-semibold', 'bg-white', 'dark:bg-gray-800', 'dark:text-red-500', 'dark:border-red-500');
+                        button.classList.add('relative', '-mb-px');
 
-                    if (targetPanel) {
-                        targetPanel.classList.remove('hidden');
-                        targetPanel.classList.add('border-t-0');
-                        targetPanel.classList.remove('rounded-tl-lg', 'rounded-tr-lg');
-                        if (button.parentElement.previousElementSibling === null) {
-                           targetPanel.classList.add('rounded-tr-lg');
-                        } else if (button.parentElement.nextElementSibling === null) {
-                           targetPanel.classList.add('rounded-tl-lg');
+                        if (targetPanel) {
+                            targetPanel.classList.remove('hidden');
+                            targetPanel.classList.add('border-t-0');
+                            targetPanel.classList.remove('rounded-tl-lg', 'rounded-tr-lg');
+                            if (button.parentElement.previousElementSibling === null) {
+                               targetPanel.classList.add('rounded-tr-lg');
+                            } else if (button.parentElement.nextElementSibling === null) {
+                               targetPanel.classList.add('rounded-tl-lg');
+                            }
+                        }
+                    } else {
+                        button.setAttribute('aria-selected', 'false');
+                        button.classList.remove('text-red-600', 'border-red-600', 'font-semibold', 'bg-white', 'dark:bg-gray-800', 'dark:text-red-500', 'dark:border-red-500', '-mb-px');
+                        button.classList.add('text-gray-500', 'hover:text-gray-700', 'hover:border-gray-300', 'dark:hover:text-gray-300', 'border-transparent');
+                        if (targetPanel) {
+                            targetPanel.classList.add('hidden');
+                            targetPanel.classList.remove('border-t-0');
+                            targetPanel.classList.remove('rounded-tl-lg', 'rounded-tr-lg');
                         }
                     }
-                } else {
-                    button.setAttribute('aria-selected', 'false');
-                    button.classList.remove('text-red-600', 'border-red-600', 'font-semibold', 'bg-white', 'dark:bg-gray-800', 'dark:text-red-500', 'dark:border-red-500', '-mb-px');
-                    button.classList.add('text-gray-500', 'hover:text-gray-700', 'hover:border-gray-300', 'dark:hover:text-gray-300', 'border-transparent');
-                    if (targetPanel) {
-                        targetPanel.classList.add('hidden');
-                        targetPanel.classList.remove('border-t-0');
-                        targetPanel.classList.remove('rounded-tl-lg', 'rounded-tr-lg');
-                    }
-                }
+                });
+            }
+
+            tabButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    updateTabs(this);
+                });
             });
+
+            if (tabButtons.length > 0) {
+                updateTabs(tabButtons[0]); // Activate the first tab by default
+            }
         }
 
+        // Initialize Tab Systems for each education level
+        initializeTabs('preschoolStandardsTabs', 'tab-button-level', 'tab-panel-level');
+        initializeTabs('basicEdStandardsTabs', 'tab-button-level', 'tab-panel-level');
 
-        onesqaTabButtons.forEach(button => {
-            button.addEventListener('click', function() {
-                updateOnesqaTabs(this);
-            });
-        });
-
-        if (onesqaTabButtons.length > 0) {
-            updateOnesqaTabs(onesqaTabButtons[0]);
-        }
-        // --- End Tab System for ONESQA Standards ---
-
-
+        // --- SPA Navigation ---
         function updateActiveSpaContent(targetWrapperId) {
             spaContentWrappers.forEach(wrapper => {
                 if (wrapper.id === targetWrapperId) {
@@ -402,12 +422,21 @@
                 const targetElement = document.getElementById(targetWrapperId);
 
                 if (targetWrapperId && targetElement) {
-                    if (!this.getAttribute('href').startsWith('#')) {
+                    if (!this.getAttribute('href').startsWith('#')) { // For SPA links with href starting with #
                         event.preventDefault();
                     }
                     updateActiveSpaContent(targetWrapperId);
+                     // If the target is a standards section, ensure its first tab is active (or specific tab if hash indicates)
+                    if (targetWrapperId === 'preschoolStandardsSectionContent') {
+                        const preschoolTabs = document.querySelectorAll('#preschoolStandardsTabs .tab-button-level');
+                        if (preschoolTabs.length > 0) initializeTabs('preschoolStandardsTabs', 'tab-button-level', 'tab-panel-level'); // Re-init or just activate first
+                    } else if (targetWrapperId === 'basicEdStandardsSectionContent') {
+                        const basicEdTabs = document.querySelectorAll('#basicEdStandardsTabs .tab-button-level');
+                        if (basicEdTabs.length > 0) initializeTabs('basicEdStandardsTabs', 'tab-button-level', 'tab-panel-level'); // Re-init or just activate first
+                    }
+
                 } else if (this.getAttribute('href') === 'index.html') {
-                    // Allow navigation
+                    // Allow navigation to index.html
                 } else {
                     event.preventDefault();
                     console.warn("Target section wrapper not found or invalid for:", targetWrapperId);
@@ -429,16 +458,20 @@
 
             if (targetWrapperIdToShow && document.getElementById(targetWrapperIdToShow)) {
                 updateActiveSpaContent(targetWrapperIdToShow);
-                 if (targetWrapperIdToShow === 'onesqaSectionContent' && onesqaTabButtons.length > 0) {
-                    // updateOnesqaTabs(onesqaTabButtons[0]);
+                if (targetWrapperIdToShow === 'preschoolStandardsSectionContent') {
+                     initializeTabs('preschoolStandardsTabs', 'tab-button-level', 'tab-panel-level');
+                } else if (targetWrapperIdToShow === 'basicEdStandardsSectionContent') {
+                     initializeTabs('basicEdStandardsTabs', 'tab-button-level', 'tab-panel-level');
                 }
             } else if (spaNavLinks.length > 0 && spaNavLinks[0].dataset.target && document.getElementById(spaNavLinks[0].dataset.target)) {
+                // Default to the first nav link if no valid hash or specific target
                 const firstTargetId = spaNavLinks[0].dataset.target;
                 updateActiveSpaContent(firstTargetId);
                 if (spaNavLinks[0].getAttribute('href').startsWith('#')) {
-                     window.location.hash = spaNavLinks[0].getAttribute('href').substring(1);
+                     window.location.hash = spaNavLinks[0].getAttribute('href').substring(1); // Update hash to reflect the shown content
                 }
             } else {
+                // Fallback if no content can be shown (e.g., all wrappers are invalid)
                 spaContentWrappers.forEach(wrapper => wrapper.style.display = 'none');
                 spaNavLinks.forEach(link => {
                     link.classList.remove('active', 'text-red-500', 'font-semibold');
@@ -448,7 +481,7 @@
         }
 
         window.addEventListener('hashchange', handleSpaHashChange);
-        handleSpaHashChange();
+        handleSpaHashChange(); // Initial call to handle hash on page load
 
         const currentYearSpanSms = document.getElementById('currentYearSmsPage');
         if (currentYearSpanSms) {
