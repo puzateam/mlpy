@@ -62,31 +62,40 @@
             </div>
         </div>
 
-        <!-- Section Wrapper สำหรับ ONESQA Standards - ใช้สไตล์เหมือน Main Content Area Card -->
+!-- Section Wrapper สำหรับ ONESQA Standards - ใช้สไตล์เหมือน Main Content Area Card -->
         <div id="onesqaSectionContent" class="page-content-wrapper content-section bg-white rounded-2xl shadow-md p-5 card mb-6">
             <h2 class="text-xl font-bold text-red-600 border-b-2 border-yellow-400 pb-2 mb-6">มาตรฐานการศึกษาเพื่อการประเมินคุณภาพภายนอก (สมศ.)</h2>
 
-            <!-- Tab Buttons สำหรับ มาตรฐานที่ 1, 2, 3 -->
-            <div class="mb-4 border-b border-gray-200 dark:border-gray-700">
-                <ul class="flex flex-wrap -mb-px text-sm font-medium text-center" id="onesqaStandardsTabs" role="tablist">
-                    <li class="mr-2" role="presentation">
-                        <button class="onesqa-tab-button inline-block p-3 sm:p-4 border-b-2 rounded-t-lg" id="standard1-tab" data-tabs-target="#standard1-content" type="button" role="tab" aria-controls="standard1-content" aria-selected="true">มาตรฐานที่ 1: คุณภาพผู้เรียน</button>
+            <!-- Tab Buttons สำหรับ มาตรฐานที่ 1, 2, 3 (กลับไปชิดซ้าย) -->
+            <div class="mb-0"> <!-- ลด mb หรือเอาออกถ้าไม่ต้องการระยะห่างระหว่างปุ่มกับเนื้อหามาก -->
+                <ul class="flex flex-wrap text-sm font-medium text-center border-b border-gray-200 dark:border-gray-700" id="onesqaStandardsTabs" role="tablist">
+                    <!-- JavaScript จะจัดการการเพิ่ม/ลบคลาส active -->
+                    <li role="presentation"> <!-- เอา mr-2 ออกเพื่อให้ชิดกัน หรือปรับตามชอบ -->
+                        <button class="onesqa-tab-button inline-block p-3 sm:p-4 rounded-t-lg border-b-2 border-transparent hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300" 
+                                id="standard1-tab" data-tabs-target="#standard1-content" type="button" role="tab" 
+                                aria-controls="standard1-content" aria-selected="true">มาตรฐานที่ 1: คุณภาพผู้เรียน</button>
                     </li>
-                    <li class="mr-2" role="presentation">
-                        <button class="onesqa-tab-button inline-block p-3 sm:p-4 border-b-2 rounded-t-lg" id="standard2-tab" data-tabs-target="#standard2-content" type="button" role="tab" aria-controls="standard2-content" aria-selected="false">มาตรฐานที่ 2: การบริหาร</button>
+                    <li role="presentation">
+                        <button class="onesqa-tab-button inline-block p-3 sm:p-4 rounded-t-lg border-b-2 border-transparent hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300" 
+                                id="standard2-tab" data-tabs-target="#standard2-content" type="button" role="tab" 
+                                aria-controls="standard2-content" aria-selected="false">มาตรฐานที่ 2: การบริหาร</button>
                     </li>
-                    <li class="mr-2" role="presentation">
-                        <button class="onesqa-tab-button inline-block p-3 sm:p-4 border-b-2 rounded-t-lg" id="standard3-tab" data-tabs-target="#standard3-content" type="button" role="tab" aria-controls="standard3-content" aria-selected="false">มาตรฐานที่ 3: การจัดการเรียนรู้</button>
+                    <li role="presentation">
+                        <button class="onesqa-tab-button inline-block p-3 sm:p-4 rounded-t-lg border-b-2 border-transparent hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300" 
+                                id="standard3-tab" data-tabs-target="#standard3-content" type="button" role="tab" 
+                                aria-controls="standard3-content" aria-selected="false">มาตรฐานที่ 3: การจัดการเรียนรู้</button>
                     </li>
                 </ul>
             </div>
 
             <!-- Tab Content Panels -->
-            <div id="onesqaStandardsTabContent">
+            <div id="onesqaStandardsTabContent" class="mt-0"> <!-- เอา mt-0 ถ้าอยากให้เนื้อหาชิดกับเส้นใต้ของ Tab -->
                 <!-- เนื้อหา มาตรฐานที่ 1 -->
-                <div class="onesqa-tab-panel hidden p-1 bg-gray-50 rounded-lg dark:bg-gray-800" id="standard1-content" role="tabpanel" aria-labelledby="standard1-tab">
+                <div class="onesqa-tab-panel hidden p-4 bg-white border border-gray-200 rounded-b-lg rounded-tr-lg dark:bg-gray-800 dark:border-gray-700" id="standard1-content" role="tabpanel" aria-labelledby="standard1-tab">
+                    <!-- ^ เพิ่ม border และ rounded-b-lg, rounded-tr-lg เพื่อให้เหมือนครอบ -->
                     <div class="standard-block"> 
                         <h3 class="text-lg font-semibold text-orange-700 mb-3 mt-2">มาตรฐานที่ 1: คุณภาพของผู้เรียน</h3>
+                        <!-- ... (เนื้อหามาตรฐานที่ 1 เหมือนเดิม) ... -->
                         <article class="indicator">
                             <h4>1.1 ผลสัมฤทธิ์ทางวิชาการของผู้เรียน</h4>
                             <ul class="list-disc ml-5 text-gray-700 mb-2 text-sm">
@@ -123,9 +132,10 @@
                 </div>
 
                 <!-- เนื้อหา มาตรฐานที่ 2 -->
-                <div class="onesqa-tab-panel hidden p-1 bg-gray-50 rounded-lg dark:bg-gray-800" id="standard2-content" role="tabpanel" aria-labelledby="standard2-tab">
+                <div class="onesqa-tab-panel hidden p-4 bg-white border border-gray-200 rounded-b-lg rounded-tr-lg dark:bg-gray-800 dark:border-gray-700" id="standard2-content" role="tabpanel" aria-labelledby="standard2-tab">
                     <div class="standard-block">
                         <h3 class="text-lg font-semibold text-orange-700 mb-3 mt-2">มาตรฐานที่ 2: กระบวนการบริหารและการจัดการ</h3>
+                        <!-- ... (เนื้อหามาตรฐานที่ 2 เหมือนเดิม) ... -->
                         <article class="indicator">
                             <h4>2.1 การมีเป้าหมาย วิสัยทัศน์ และพันธกิจที่สถานศึกษากำหนดชัดเจน</h4>
                             <p class="text-gray-700 text-sm mb-1">สถานศึกษามีการกำหนดเป้าหมาย วิสัยทัศน์ และพันธกิจที่ชัดเจน สอดคล้องกับบริบท...</p>
@@ -172,9 +182,10 @@
                 </div>
 
                 <!-- เนื้อหา มาตรฐานที่ 3 -->
-                <div class="onesqa-tab-panel hidden p-1 bg-gray-50 rounded-lg dark:bg-gray-800" id="standard3-content" role="tabpanel" aria-labelledby="standard3-tab">
+                <div class="onesqa-tab-panel hidden p-4 bg-white border border-gray-200 rounded-b-lg rounded-tr-lg dark:bg-gray-800 dark:border-gray-700" id="standard3-content" role="tabpanel" aria-labelledby="standard3-tab">
                     <div class="standard-block">
                         <h3 class="text-lg font-semibold text-orange-700 mb-3 mt-2">มาตรฐานที่ 3: กระบวนการจัดการเรียนการสอนที่เน้นผู้เรียนเป็นสำคัญ</h3>
+                        <!-- ... (เนื้อหามาตรฐานที่ 3 เหมือนเดิม) ... -->
                         <article class="indicator">
                             <h4>3.1 การจัดการเรียนรู้ผ่านกระบวนการคิดและปฏิบัติจริง และนำไปประยุกต์ใช้ในชีวิตได้</h4>
                             <p class="text-gray-700 text-sm mb-1">ครูจัดการเรียนการสอนที่ส่งเสริมให้ผู้เรียนได้คิดวิเคราะห์ แก้ปัญหา เรียนรู้จากการปฏิบัติจริง...</p>
