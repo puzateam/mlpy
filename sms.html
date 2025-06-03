@@ -81,35 +81,43 @@
             </div>
         </aside>
 
-        <main class="content w-full md:w-2/4">
-            <div class="bg-white rounded-2xl shadow-md p-5 card card-main-content-sms main-content-area-sms">
-                <div id="iqaDocumentsSection" class="main-content-panel">
-                    <div class="iqa-sub-nav">
-                        <button data-pdf-src="https://drive.google.com/file/d/1n3XtVetBdlzZqaDE8Hlm5xs9GGQg0sSH/preview" class="iqa-sub-nav-item">แผนพัฒนาคุณภาพการศึกษา</button>
+<div id="iqaDocumentsSection" class="main-content-panel">
+    <div class="iqa-tab-container">
+        <!-- กลุ่มที่ 1: แผนพัฒนาคุณภาพการศึกษา (ไม่มี sub-menu) -->
+        <div class="iqa-tab-item-wrapper">
+            <button data-pdf-src="https://drive.google.com/file/d/1n3XtVetBdlzZqaDE8Hlm5xs9GGQg0sSH/preview" class="iqa-sub-nav-item">แผนพัฒนาคุณภาพการศึกษา</button>
+        </div>
 
-                        <button data-submenu-target="sar-submenu" class="iqa-sub-nav-item has-submenu">รายงานการประเมินตนเอง (SAR)</button>
-                        <div id="sar-submenu" class="iqa-nested-submenu">
-                            <button data-pdf-src="URL_SAR_2565_PDF" class="iqa-nested-submenu-item">รายงานการประเมินตนเอง 2565</button>
-                            <button data-pdf-src="URL_SAR_2566_PDF" class="iqa-nested-submenu-item">รายงานการประเมินตนเอง 2566</button>
-                            <button data-pdf-src="URL_SAR_2567_PDF" class="iqa-nested-submenu-item">รายงานการประเมินตนเอง 2567</button>
-                        </div>
+        <!-- กลุ่มที่ 2: รายงานการประเมินตนเอง (SAR) และ sub-menu ของมัน -->
+        <div class="iqa-tab-item-wrapper has-nested-menu-container">
+            <button data-submenu-target="sar-submenu" class="iqa-sub-nav-item has-submenu">รายงานการประเมินตนเอง (SAR)</button>
+            <div id="sar-submenu" class="iqa-nested-submenu">
+                <button data-pdf-src="URL_SAR_2565_PDF" class="iqa-nested-submenu-item">รายงานการประเมินตนเอง 2565</button>
+                <button data-pdf-src="URL_SAR_2566_PDF" class="iqa-nested-submenu-item">รายงานการประเมินตนเอง 2566</button>
+                <button data-pdf-src="URL_SAR_2567_PDF" class="iqa-nested-submenu-item">รายงานการประเมินตนเอง 2567</button>
+            </div>
+        </div>
 
-                        <button data-submenu-target="annual-plan-submenu" class="iqa-sub-nav-item has-submenu">แผนปฏิบัติการประจำปี</button>
-                        <div id="annual-plan-submenu" class="iqa-nested-submenu">
-                            <button data-pdf-src="URL_ANNUAL_PLAN_2566_PDF" class="iqa-nested-submenu-item">แผนปฏิบัติการประจำปี 2566</button>
-                            <button data-pdf-src="URL_ANNUAL_PLAN_2567_PDF" class="iqa-nested-submenu-item">แผนปฏิบัติการประจำปี 2567</button>
-                            <button data-pdf-src="URL_ANNUAL_PLAN_2568_PDF" class="iqa-nested-submenu-item">แผนปฏิบัติการประจำปี 2568</button>
-                        </div>
-                    </div>
-                    <div id="commonPdfDisplayArea">
-                        <div id="pdf-viewer-container">
-                            <iframe id="pdf-iframe" class="pdf-embed-container-sms" frameborder="0" allowfullscreen></iframe>
-                        </div>
-                        <div id="no-pdf-message-container">
-                            <p id="no-pdf-message-text"></p>
-                        </div>
-                    </div>
-                </div>
+        <!-- กลุ่มที่ 3: แผนปฏิบัติการประจำปี และ sub-menu ของมัน -->
+        <div class="iqa-tab-item-wrapper has-nested-menu-container">
+            <button data-submenu-target="annual-plan-submenu" class="iqa-sub-nav-item has-submenu">แผนปฏิบัติการประจำปี</button>
+            <div id="annual-plan-submenu" class="iqa-nested-submenu">
+                <button data-pdf-src="URL_ANNUAL_PLAN_2566_PDF" class="iqa-nested-submenu-item">แผนปฏิบัติการประจำปี 2566</button>
+                <button data-pdf-src="URL_ANNUAL_PLAN_2567_PDF" class="iqa-nested-submenu-item">แผนปฏิบัติการประจำปี 2567</button>
+                <button data-pdf-src="URL_ANNUAL_PLAN_2568_PDF" class="iqa-nested-submenu-item">แผนปฏิบัติการประจำปี 2568</button>
+            </div>
+        </div>
+    </div> <!-- ปิด iqa-tab-container -->
+
+    <div id="commonPdfDisplayArea">
+        <div id="pdf-viewer-container">
+            <iframe id="pdf-iframe" class="pdf-embed-container-sms" frameborder="0" allowfullscreen></iframe>
+        </div>
+        <div id="no-pdf-message-container">
+            <p id="no-pdf-message-text"></p>
+        </div>
+    </div>
+</div>
 
                 <div id="highlightsSectionContent" class="main-content-panel sms-html-content-section hidden">
                     <h2 class="text-xl font-bold text-red-600 border-b-2 border-yellow-400 pb-2 mb-6">ผลงานเด่นของสถานศึกษา</h2>
