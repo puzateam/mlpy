@@ -84,34 +84,29 @@
         <main class="content w-full md:w-2/4">
             <div class="bg-white rounded-2xl shadow-md p-5 card card-main-content-sms main-content-area-sms">
                 <div id="iqaDocumentsSection" class="main-content-panel">
-                    <div class="iqa-tab-container">
-                        <!-- กลุ่มที่ 1: แผนพัฒนาคุณภาพการศึกษา (ไม่มี sub-menu) -->
-                        <div class="iqa-tab-item-wrapper">
-                            <button data-pdf-src="https://drive.google.com/file/d/1n3XtVetBdlzZqaDE8Hlm5xs9GGQg0sSH/preview" class="iqa-sub-nav-item">แผนพัฒนาคุณภาพการศึกษา</button>
-                        </div>
+                    <!-- แถบเมนูหลัก -->
+                    <div class="iqa-primary-tab-container">
+                        <button data-pdf-src="https://drive.google.com/file/d/1n3XtVetBdlzZqaDE8Hlm5xs9GGQg0sSH/preview" class="iqa-primary-tab-item" id="main-tab-plan">แผนพัฒนาคุณภาพการศึกษา</button>
+                        <button data-secondary-target="sar-secondary-tabs" class="iqa-primary-tab-item has-secondary-tabs" id="main-tab-sar">รายงานการประเมินตนเอง (SAR)</button>
+                        <button data-secondary-target="annual-plan-secondary-tabs" class="iqa-primary-tab-item has-secondary-tabs" id="main-tab-annual">แผนปฏิบัติการประจำปี</button>
+                    </div>
 
-                        <!-- กลุ่มที่ 2: รายงานการประเมินตนเอง (SAR) และ sub-menu ของมัน -->
-                        <div class="iqa-tab-item-wrapper">
-                            <button data-submenu-target="sar-submenu" class="iqa-sub-nav-item has-submenu">รายงานการประเมินตนเอง (SAR)</button>
-                            <div id="sar-submenu" class="iqa-nested-submenu">
-                                <button data-pdf-src="URL_SAR_2565_PDF" class="iqa-nested-submenu-item">รายงานการประเมินตนเอง 2565</button>
-                                <button data-pdf-src="URL_SAR_2566_PDF" class="iqa-nested-submenu-item">รายงานการประเมินตนเอง 2566</button>
-                                <button data-pdf-src="URL_SAR_2567_PDF" class="iqa-nested-submenu-item">รายงานการประเมินตนเอง 2567</button>
-                            </div>
-                        </div>
+                    <!-- แถบเมนูย่อยสำหรับ SAR (ซ่อนไว้ตอนแรก) -->
+                    <div id="sar-secondary-tabs" class="iqa-secondary-tab-container hidden">
+                        <button data-pdf-src="URL_SAR_2565_PDF" class="iqa-secondary-tab-item">รายงานการประเมินตนเอง 2565</button>
+                        <button data-pdf-src="URL_SAR_2566_PDF" class="iqa-secondary-tab-item">รายงานการประเมินตนเอง 2566</button>
+                        <button data-pdf-src="URL_SAR_2567_PDF" class="iqa-secondary-tab-item">รายงานการประเมินตนเอง 2567</button>
+                    </div>
 
-                        <!-- กลุ่มที่ 3: แผนปฏิบัติการประจำปี และ sub-menu ของมัน -->
-                        <div class="iqa-tab-item-wrapper">
-                            <button data-submenu-target="annual-plan-submenu" class="iqa-sub-nav-item has-submenu">แผนปฏิบัติการประจำปี</button>
-                            <div id="annual-plan-submenu" class="iqa-nested-submenu">
-                                <button data-pdf-src="URL_ANNUAL_PLAN_2566_PDF" class="iqa-nested-submenu-item">แผนปฏิบัติการประจำปี 2566</button>
-                                <button data-pdf-src="URL_ANNUAL_PLAN_2567_PDF" class="iqa-nested-submenu-item">แผนปฏิบัติการประจำปี 2567</button>
-                                <button data-pdf-src="URL_ANNUAL_PLAN_2568_PDF" class="iqa-nested-submenu-item">แผนปฏิบัติการประจำปี 2568</button>
-                            </div>
-                        </div>
-                    </div> <!-- ปิด iqa-tab-container -->
+                    <!-- แถบเมนูย่อยสำหรับ แผนปฏิบัติการประจำปี (ซ่อนไว้ตอนแรก) -->
+                    <div id="annual-plan-secondary-tabs" class="iqa-secondary-tab-container hidden">
+                        <button data-pdf-src="URL_ANNUAL_PLAN_2566_PDF" class="iqa-secondary-tab-item">แผนปฏิบัติการประจำปี 2566</button>
+                        <button data-pdf-src="URL_ANNUAL_PLAN_2567_PDF" class="iqa-secondary-tab-item">แผนปฏิบัติการประจำปี 2567</button>
+                        <button data-pdf-src="URL_ANNUAL_PLAN_2568_PDF" class="iqa-secondary-tab-item">แผนปฏิบัติการประจำปี 2568</button>
+                    </div>
 
-                    <div id="commonPdfDisplayArea">
+                    <!-- พื้นที่แสดง PDF -->
+                    <div id="commonPdfDisplayArea" class="mt-4">
                         <div id="pdf-viewer-container">
                             <iframe id="pdf-iframe" class="pdf-embed-container-sms" frameborder="0" allowfullscreen></iframe>
                         </div>
@@ -127,8 +122,7 @@
 
                 <div id="indicatorDisplayArea" class="main-content-panel hidden">
                     <h2 id="sms-center-content-title" class="text-xl font-bold text-red-600 border-b-2 border-yellow-400 pb-2 mb-6 hidden"></h2>
-                    {/* This panel will re-use the #commonPdfDisplayArea when showing PDF/NoPDF message for indicators.
-                        JavaScript will manage showing/hiding commonPdfDisplayArea appropriately. */}
+                    {/* This panel will re-use the #commonPdfDisplayArea */}
                 </div>
             </div>
         </main>
@@ -189,13 +183,9 @@ document.addEventListener('DOMContentLoaded', function () {
     const mainNavLinks = mainNavUl.querySelectorAll('a.sms-nav-link.menu-item');
 
     const iqaDocumentsSection = document.getElementById('iqaDocumentsSection');
-    // Selectors for IQA tab navigation
-    const iqaTabContainer = iqaDocumentsSection.querySelector('.iqa-tab-container');
-    const iqaDirectPdfItems = iqaTabContainer.querySelectorAll('.iqa-tab-item-wrapper > .iqa-sub-nav-item:not(.has-submenu)');
-    const iqaParentItems = iqaTabContainer.querySelectorAll('.iqa-tab-item-wrapper > .iqa-sub-nav-item.has-submenu');
-    const allNestedSubmenus = iqaTabContainer.querySelectorAll('.iqa-nested-submenu');
-    const allNestedSubmenuItems = iqaTabContainer.querySelectorAll('.iqa-nested-submenu-item');
-
+    const iqaPrimaryTabContainer = iqaDocumentsSection.querySelector('.iqa-primary-tab-container');
+    const iqaPrimaryTabs = iqaPrimaryTabContainer.querySelectorAll('.iqa-primary-tab-item');
+    const iqaSecondaryTabContainers = iqaDocumentsSection.querySelectorAll('.iqa-secondary-tab-container');
 
     const indicatorLinks = document.querySelectorAll('.sms-indicator-link');
 
@@ -214,41 +204,29 @@ document.addEventListener('DOMContentLoaded', function () {
     const defaultIqaPdfUrl = "https://drive.google.com/file/d/1n3XtVetBdlzZqaDE8Hlm5xs9GGQg0sSH/preview";
     const defaultIqaPdfName = "แผนพัฒนาคุณภาพการศึกษา";
 
-
     function clearAllActiveNavStates() {
-        // Clear main navigation active state
         mainNavLinks.forEach(link => link.classList.remove('active', 'text-red-500', 'font-semibold'));
-
-        // Clear IQA direct PDF tab active state
-        iqaDirectPdfItems.forEach(item => item.classList.remove('active'));
-        // Clear IQA parent tab active state
-        iqaParentItems.forEach(item => item.classList.remove('active'));
-        // Clear nested sub-menu item active state
-        allNestedSubmenuItems.forEach(item => item.classList.remove('active'));
-
-        // Clear sidebar indicator active state
+        iqaPrimaryTabs.forEach(tab => tab.classList.remove('active'));
+        iqaSecondaryTabContainers.forEach(container => {
+            container.querySelectorAll('.iqa-secondary-tab-item').forEach(tab => tab.classList.remove('active'));
+        });
         indicatorLinks.forEach(link => link.classList.remove('active-indicator'));
         document.querySelectorAll('.sms-sidebar-main-link.active-parent').forEach(link => link.classList.remove('active-parent'));
     }
 
-    function hideAllNestedSubmenus() {
-        allNestedSubmenus.forEach(submenu => submenu.classList.remove('active'));
-        // Also remove active state from parent items when hiding their submenus if not handled elsewhere
-        iqaParentItems.forEach(item => {
-            const submenu = document.getElementById(item.dataset.submenuTarget);
-            if (submenu && !submenu.classList.contains('active')) {
-                item.classList.remove('active');
-            }
+    function hideAllSecondaryTabContainers() {
+        iqaSecondaryTabContainers.forEach(container => {
+            container.classList.add('hidden');
+            // Also deactivate items within them
+            container.querySelectorAll('.iqa-secondary-tab-item').forEach(tab => tab.classList.remove('active'));
         });
     }
-
 
     function showMainContentPanel(panelIdToShow) {
         mainContentPanels.forEach(panel => {
             panel.classList.toggle('hidden', panel.id !== panelIdToShow);
         });
         commonPdfDisplayArea.classList.toggle('hidden', !(panelIdToShow === 'iqaDocumentsSection' || panelIdToShow === 'indicatorDisplayArea'));
-
         if (panelIdToShow !== 'indicatorDisplayArea') {
             smsCenterContentTitleElement.classList.add('hidden');
             smsCenterContentTitleElement.innerHTML = '';
@@ -256,20 +234,24 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function displayPdfInCommonArea(pdfSrc, tabNameForNoPdf) {
+        const iframeContainer = document.getElementById('pdf-viewer-container');
+        const messageContainer = document.getElementById('no-pdf-message-container');
+        const messageText = document.getElementById('no-pdf-message-text');
+        const iframe = document.getElementById('pdf-iframe');
+
         if (pdfSrc && pdfSrc.trim() !== "" && !pdfSrc.toLowerCase().includes("url_") && !pdfSrc.toLowerCase().includes("your_")) {
-            pdfViewerContainer.style.display = 'block';
-            noPdfMessageContainer.style.display = 'none';
+            iframeContainer.style.display = 'block';
+            messageContainer.style.display = 'none';
             let finalPdfSrc = pdfSrc;
-            // Ensure Google Drive links are in preview format
             if (pdfSrc.includes('drive.google.com') && pdfSrc.includes('/file/d/') && !pdfSrc.includes('/preview')) {
                 finalPdfSrc = pdfSrc.replace('/view', '/preview').replace(/\?usp=sharing$/, "").replace(/\/$/, "") + '/preview';
             }
-            pdfIframe.src = finalPdfSrc;
+            iframe.src = finalPdfSrc;
         } else {
-            pdfViewerContainer.style.display = 'none';
-            noPdfMessageContainer.style.display = 'block';
-            noPdfMessageText.textContent = `ยังไม่มีข้อมูลไฟล์ PDF สำหรับ: ${tabNameForNoPdf || 'รายการที่เลือก'}`;
-            pdfIframe.src = 'about:blank'; // Clear iframe
+            iframeContainer.style.display = 'none';
+            messageContainer.style.display = 'block';
+            messageText.textContent = `ยังไม่มีข้อมูลไฟล์ PDF สำหรับ: ${tabNameForNoPdf || 'รายการที่เลือก'}`;
+            iframe.src = 'about:blank';
         }
     }
 
@@ -285,112 +267,76 @@ document.addEventListener('DOMContentLoaded', function () {
             event.preventDefault();
             const targetPanelId = this.dataset.target;
 
-            clearAllActiveNavStates(); // Clear all active states from previous views
-            hideAllNestedSubmenus();    // Ensure all nested submenus are hidden
+            clearAllActiveNavStates();
+            hideAllSecondaryTabContainers(); // Hide all secondary tabs when main nav changes
 
-            this.classList.add('active', 'text-red-500', 'font-semibold'); // Activate current main nav link
+            this.classList.add('active', 'text-red-500', 'font-semibold');
             showMainContentPanel(targetPanelId);
 
             if (targetPanelId === 'iqaDocumentsSection') {
-                // Default to the first direct PDF item when IQA section is shown
-                if (iqaDirectPdfItems.length > 0) {
-                    iqaDirectPdfItems[0].classList.add('active');
-                    displayPdfInCommonArea(iqaDirectPdfItems[0].dataset.pdfSrc || defaultIqaPdfUrl, iqaDirectPdfItems[0].textContent.trim() || defaultIqaPdfName);
-                } else {
-                    // If no direct PDF items, maybe show a placeholder or first parent item (without opening submenu yet)
-                     displayPdfInCommonArea("", "กรุณาเลือกรายการเอกสาร");
+                // Activate the first primary tab (Plan) by default
+                const firstPrimaryTab = iqaPrimaryTabContainer.querySelector('#main-tab-plan');
+                if (firstPrimaryTab) {
+                    firstPrimaryTab.click(); // Simulate click to handle its logic
                 }
             }
         });
     });
 
-    // Event listener for IQA tabs that directly show a PDF
-    iqaDirectPdfItems.forEach(item => {
-        item.addEventListener('click', function() {
-            // Deactivate other direct PDF items and all parent items + their submenus
-            iqaDirectPdfItems.forEach(i => i.classList.remove('active'));
-            iqaParentItems.forEach(p => p.classList.remove('active'));
-            allNestedSubmenus.forEach(s => s.classList.remove('active'));
-            allNestedSubmenuItems.forEach(n => n.classList.remove('active'));
+    iqaPrimaryTabs.forEach(tab => {
+        tab.addEventListener('click', function() {
+            // Deactivate all primary tabs first
+            iqaPrimaryTabs.forEach(t => t.classList.remove('active'));
+            this.classList.add('active'); // Activate the clicked primary tab
 
-            this.classList.add('active'); // Activate this item
-            displayPdfInCommonArea(this.dataset.pdfSrc, this.textContent.trim());
-        });
-    });
+            const secondaryTargetId = this.dataset.secondaryTarget;
 
-    // Event listener for IQA parent tabs (that open a sub-menu)
-    iqaParentItems.forEach(parentItem => {
-        parentItem.addEventListener('click', function() {
-            const targetSubmenuId = this.dataset.submenuTarget;
-            const targetSubmenu = document.getElementById(targetSubmenuId);
+            // Hide all secondary tab containers
+            hideAllSecondaryTabContainers();
 
-            // Deactivate other direct PDF items
-            iqaDirectPdfItems.forEach(i => i.classList.remove('active'));
-            // Deactivate other parent items and their submenus
-            iqaParentItems.forEach(p => {
-                if (p !== this) {
-                    p.classList.remove('active');
-                    const otherSubmenu = document.getElementById(p.dataset.submenuTarget);
-                    if (otherSubmenu) {
-                        otherSubmenu.classList.remove('active');
+            if (secondaryTargetId) { // If this primary tab has a secondary tab group
+                const secondaryContainer = document.getElementById(secondaryTargetId);
+                if (secondaryContainer) {
+                    secondaryContainer.classList.remove('hidden');
+                    // Optionally, activate the first item in the newly shown secondary tab
+                    const firstSecondaryItem = secondaryContainer.querySelector('.iqa-secondary-tab-item');
+                    if (firstSecondaryItem) {
+                         // firstSecondaryItem.click(); // Uncomment to auto-click first secondary item
+                         displayPdfInCommonArea("", `กรุณาเลือกปีจากแถบเมนู "${this.textContent.trim()}"`);
+                    } else {
+                        displayPdfInCommonArea("", `ไม่มีรายการย่อยสำหรับ "${this.textContent.trim()}"`);
                     }
                 }
-            });
-            // Deactivate all nested items (will be reactivated if one is clicked)
-            allNestedSubmenuItems.forEach(n => n.classList.remove('active'));
-
-
-            // Toggle active state for this parent item and its submenu
-            this.classList.toggle('active');
-            if (targetSubmenu) {
-                targetSubmenu.classList.toggle('active');
+            } else if (this.dataset.pdfSrc) { // If it's a direct PDF link
+                displayPdfInCommonArea(this.dataset.pdfSrc, this.textContent.trim());
             }
+        });
+    });
 
-            // If submenu is now open, show a placeholder message for PDF
-            // If submenu is now closed, and no direct PDF item is active, show default PDF
-            if (targetSubmenu && targetSubmenu.classList.contains('active')) {
-                displayPdfInCommonArea("", "กรุณาเลือกรายการจากเมนูย่อย");
-            } else {
-                // If this parent was just closed, try to activate the first direct PDF item as default
-                if (iqaDirectPdfItems.length > 0) {
-                    iqaDirectPdfItems[0].click(); // Simulate click to handle activation and PDF display
-                } else {
-                    displayPdfInCommonArea("", "กรุณาเลือกรายการเอกสาร");
+    iqaSecondaryTabContainers.forEach(container => {
+        const secondaryTabs = container.querySelectorAll('.iqa-secondary-tab-item');
+        secondaryTabs.forEach(tab => {
+            tab.addEventListener('click', function() {
+                // Deactivate other tabs within the same secondary container
+                secondaryTabs.forEach(t => t.classList.remove('active'));
+                this.classList.add('active'); // Activate this secondary tab
+
+                // Keep its parent primary tab active
+                const parentPrimaryTabId = container.id.startsWith('sar-') ? 'main-tab-sar' : (container.id.startsWith('annual-plan-') ? 'main-tab-annual' : null);
+                if (parentPrimaryTabId) {
+                    iqaPrimaryTabs.forEach(pt => pt.classList.remove('active')); // Deactivate all
+                    document.getElementById(parentPrimaryTabId)?.classList.add('active'); // Reactivate correct one
                 }
-            }
+                displayPdfInCommonArea(this.dataset.pdfSrc, this.textContent.trim());
+            });
         });
     });
-
-    // Event listener for items within a nested sub-menu
-    allNestedSubmenuItems.forEach(nestedItem => {
-        nestedItem.addEventListener('click', function() {
-            // Deactivate other nested items within the same submenu
-            const parentSubmenu = this.closest('.iqa-nested-submenu');
-            if (parentSubmenu) {
-                parentSubmenu.querySelectorAll('.iqa-nested-submenu-item').forEach(n => n.classList.remove('active'));
-            }
-            // Deactivate other direct PDF items
-            iqaDirectPdfItems.forEach(i => i.classList.remove('active'));
-
-            this.classList.add('active'); // Activate this nested item
-
-            // Ensure its parent tab is active, and other parent tabs are not
-            const parentTabButton = iqaTabContainer.querySelector(`.iqa-sub-nav-item.has-submenu[data-submenu-target="${parentSubmenu.id}"]`);
-            iqaParentItems.forEach(p => p.classList.remove('active')); // Deactivate all parent items first
-            if (parentTabButton) {
-                parentTabButton.classList.add('active'); // Activate the correct parent
-            }
-
-            displayPdfInCommonArea(this.dataset.pdfSrc, this.textContent.trim());
-        });
-    });
-
 
     indicatorLinks.forEach(link => {
         link.addEventListener('click', function (event) {
             event.preventDefault();
-            clearAllActiveNavStates(); // Clear all IQA tab and main nav states
-            hideAllNestedSubmenus();   // Ensure all nested submenus are hidden
+            clearAllActiveNavStates();
+            hideAllSecondaryTabContainers();
             showMainContentPanel('indicatorDisplayArea');
 
             this.classList.add('active-indicator');
@@ -415,21 +361,14 @@ document.addEventListener('DOMContentLoaded', function () {
 
     document.querySelectorAll('.sms-sidebar-main-link').forEach(mainLink => {
         mainLink.addEventListener('click', function(event) {
-            event.preventDefault(); // These are not meant to navigate
+            event.preventDefault();
         });
     });
 
     function initializePage() {
-        // When the page loads, click the "ประกันคุณภาพภายใน" main nav link
-        const iqaMainNavLink = mainNavUl.querySelector('a[data-target="iqaDocumentsSection"]');
-        if (iqaMainNavLink) {
-            iqaMainNavLink.click(); // This will trigger its event listener
-                                   // which should then activate the first IQA direct PDF item.
-        } else {
-            // Fallback if the main nav link isn't found for some reason
-            if (iqaDirectPdfItems.length > 0) {
-                iqaDirectPdfItems[0].click();
-            }
+        const iqaNavLink = mainNavUl.querySelector('a[data-target="iqaDocumentsSection"]');
+        if (iqaNavLink) {
+            iqaNavLink.click();
         }
     }
     initializePage();
