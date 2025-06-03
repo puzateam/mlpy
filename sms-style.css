@@ -1,292 +1,110 @@
-/* sms-style.css - Custom styles specifically for sms.html */
-/* --- Sidebar Styling for sms.html --- /
-.sidebar-sms .sidebar-item {
-border-bottom: 1px solid #fee2e2; / Tailwind red-100 */
+/* --- IQA Sub-navigation Tabs (Main Level) --- */
+.iqa-tab-container { /* เปลี่ยนจาก iqa-sub-nav มาเป็น container หลัก */
+    display: flex;
+    flex-wrap: wrap; /* Allow groups to wrap */
+    gap: 0.5rem; /* Space between tab groups/items */
+    margin-bottom: 1.5rem; /* mb-6 */
+    padding-bottom: 0.75rem; /* pb-3 */
+    border-bottom: 2px solid #fbbf24; /* border-yellow-400, the main underline */
+    position: relative;
+    z-index: 10;
 }
-.sidebar-sms .sms-sidebar-main-link {
-font-weight: 600;
-color: #c53030;   /* Tailwind red-700 /
-padding: 0.5rem 0.25rem;
-display: block;
-cursor: default; / Prevent pointer cursor for non-clickable main links /
+
+.iqa-tab-item-wrapper { /* Wrapper สำหรับแต่ละปุ่มหลัก (และ sub-menu ของมันถ้ามี) */
+    display: flex; /* Default: items in a row */
+    flex-direction: column; /* Stack parent button and its sub-menu vertically */
+    position: relative; /* For positioning of nested sub-menu if needed */
 }
-.sidebar-sms .sms-sidebar-main-link:hover {
-background-color: transparent !important; / Ensure no hover effect /
-color: #c53030 !important;
-}
-.sidebar-sms .sms-sidebar-main-link.active-parent {
-background-color: rgba(254, 226, 226, 0.3); / Light red background for active parent */
-}
-.sidebar-sms .sub-indicator-menu {
-list-style-type: none;
-padding-left: 1rem; /* Indent sub-menu items /
-margin-top: 0.1rem;
-margin-bottom: 0.5rem;
-}
-.sidebar-sms .sub-indicator-menu li a.sms-indicator-link {
-font-size: 0.875rem; / text-sm /
-padding: 0.3rem 0.25rem;
-display: block;
-color: #4b5563; / Tailwind gray-600 /
-transition: color 0.2s ease, background-color 0.2s ease, padding-left 0.2s ease;
-border-radius: 0.25rem; / rounded-sm /
-}
-.sidebar-sms .sub-indicator-menu li a.sms-indicator-link:hover {
-color: #b91c1c; / Tailwind red-700 /
-background-color: rgba(254, 202, 202, 0.4); / Tailwind red-200 with opacity /
-padding-left: 0.5rem; / Indent further on hover /
-}
-.sidebar-sms .sub-indicator-menu li a.sms-indicator-link.active-indicator {
-color: #991b1b; / Tailwind red-800 /
-font-weight: 500; / font-medium /
-background-color: rgba(252, 165, 165, 0.5); / Tailwind red-300 with opacity /
-padding-left: 0.5rem; / Keep indent for active */
-}
-/* --- PDF Viewer and Message Container Styling --- /
-.pdf-embed-container-sms {
-width: 100%;
-height: 950px;
-border: 1px solid #d1d5db; / Tailwind gray-300 /
-position: relative; / Ensure it's part of the stacking context /
-z-index: 1; / Above the background image, below other UI elements if needed /
-}
-#no-pdf-message-container {
-padding: 1rem;
-text-align: center;
-color: #718096; / Tailwind gray-600 /
-background-color: rgba(249, 250, 251, 0.7); / Tailwind gray-50 with opacity /
-border: 1px dashed #e2e8f0; / Tailwind gray-300 /
-border-radius: 0.375rem; / rounded-md /
-margin-top: 1rem;
-position: relative; / Ensure it's part of the stacking context */
-z-index: 1;
-}
-/* --- Background Image for Main Content Card in sms.html --- /
-.card-main-content-sms {
-position: relative; / Needed for z-index stacking context of ::before /
-z-index: 0; / Base z-index for the card itself /
-overflow: hidden; / To ensure ::before pseudo-element respects border-radius /
-}
-.card-main-content-sms::before {
-content: "";
-position: absolute;
-top: 0;
-left: 0;
-width: 100%;
-height: 100%;
-background-image: url('img/around(31).jpg'); / พี่ต้องตรวจสอบ Path รูปภาพนี้ให้ถูกต้องนะคะ! /
-background-repeat: no-repeat;
-background-position: center center;
-background-size: cover;
-opacity: 0.1; / Adjust opacity as needed /
-z-index: -1;  / Position the background image behind the content /
-border-radius: inherit; / Make sure the background image respects the card's border-radius /
-}
-/ Ensure direct children of the card are above the pseudo-element */
-.card-main-content-sms > * {
-position: relative;
-z-index: 1;
-}
-/* --- Styles for Two-Line Title in Main Content (when showing indicator) --- /
-#sms-center-content-title {
-/ Default styling from Tailwind: text-xl font-bold text-red-600 border-b-2 border-yellow-400 pb-2 mb-6 /
-/ These are already applied via Tailwind classes in HTML /
-}
-#sms-center-content-title .title-line-1 {
-display: block; / Each title part on its own line /
-}
-#sms-center-content-title .title-line-2 {
-display: block;
-font-size: 1rem; / text-base or md /
-font-weight: 500; / medium /
-color: #4b5563; / Tailwind gray-600 /
-margin-top: 0.1rem;
-line-height: 1.4; / Adjust line height for readability */
-}
-/* --- IQA Sub-navigation Tabs (Main Level) --- /
-.iqa-sub-nav {
-display: flex;
-flex-wrap: wrap; / Allow tabs to wrap to the next line on smaller screens /
-gap: 0.5rem; / space-x-2 or similar, for spacing between tabs /
-margin-bottom: 1.5rem; / mb-6 /
-padding-bottom: 0.75rem; / pb-3, space before the border /
-border-bottom: 2px solid #fbbf24; / border-yellow-400, the main underline for the tab bar /
-position: relative; / For z-index context of active tab /
-z-index: 10; / Ensure sub-nav is above potential background elements /
-}
-.iqa-sub-nav-item { / For direct PDF links and parent buttons /
-padding: 0.5rem 1rem; / py-2 px-4 /
-font-weight: 500; / font-medium /
-color: #4b5563; / text-gray-600 /
-background-color: #f3f4f6; / bg-gray-100, default tab background /
-border: 1px solid #d1d5db; / border-gray-300, default border /
-border-bottom: none; / Remove bottom border, it will be handled by active state or main underline /
-border-radius: 0.375rem 0.375rem 0 0; / rounded-t-md, top corners rounded /
-cursor: pointer;
-transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
-position: relative;
-z-index: 1; / Default z-index for non-active tabs /
+
+.iqa-sub-nav-item { /* สำหรับปุ่มหลัก (แผนพัฒนาฯ, SAR, แผนปฏิบัติการฯ) */
+    padding: 0.5rem 1rem;
+    font-weight: 500;
+    color: #4b5563;
+    background-color: #f3f4f6;
+    border: 1px solid #d1d5db;
+    border-bottom: none;
+    border-radius: 0.375rem 0.375rem 0 0; /* rounded-t-md */
+    cursor: pointer;
+    transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+    position: relative;
+    z-index: 1;
+    width: auto; /* Allow button to size to content, or set a min-width */
+    text-align: center;
 }
 .iqa-sub-nav-item:hover {
-background-color: #e5e7eb; / bg-gray-200, slightly darker on hover /
-color: #1f2937; / text-gray-800 /
+    background-color: #e5e7eb;
+    color: #1f2937;
 }
-/ Active style for direct PDF link tabs and Parent tabs that ARE NOT currently showing their sub-menu /
-.iqa-sub-nav-item.active:not(.has-submenu.active) { / Active style for tabs that show PDF directly, or parent tabs whose sub-menu is closed /
-background-color: #ffffff; / bg-white /
-color: #dc2626; / text-red-600 /
-border-left-color: #fbbf24; / yellow border /
-border-top-color: #fbbf24;
-border-right-color: #fbbf24;
-/ Create illusion of tab being on top of the main border /
-border-bottom: 2px solid #ffffff; / Match background to "erase" the main border /
-margin-bottom: -2px; / Pull tab up to visually sit on top of the main border-bottom /
-z-index: 5; / Higher z-index for active tab to ensure its border is on top /
-}
-/ Specific active style for Parent tabs WHEN their sub-menu is open /
-.iqa-sub-nav-item.has-submenu.active {
-background-color: #ef4444; / bg-red-500 or a distinct color for open parent /
-color: white;
-border-color: #ef4444; / Match the background or a suitable border /
-z-index: 5; / Ensure it's above other non-active tabs /
-/ No margin-bottom adjustment here, as it's not "merging" with the main border */
-}
-/* --- Nested Sub-menu (SAR years, Annual Plan years) --- /
-.iqa-nested-submenu {
-display: none; / Hidden by default /
-width: 100%; / Take full width of its container (which is under a parent tab) /
-padding-left: 1rem; / Indent nested menu slightly (optional) /
-margin-top: 0.5rem; / Space above the nested menu /
-margin-bottom: 0.5rem; / Space below the nested menu /
-background-color: #f9fafb; / bg-gray-50, very light background for the nested group /
-border-radius: 0.375rem; / rounded-md /
-padding: 0.5rem; / Inner padding for the group /
-/ border: 1px solid #e5e7eb; /* Optional: border around the nested group /
-}
-.iqa-nested-submenu.active { / This class is toggled by JavaScript /
-display: flex; / Show as a flex container /
-flex-wrap: wrap; / Allow items to wrap /
-gap: 0.5rem; / Spacing between nested items /
-}
-.iqa-nested-submenu-item {
-padding: 0.5rem 1rem;
-border: 1px solid #e5e7eb; / border-gray-200 /
-border-radius: 0.375rem; / rounded-md /
-cursor: pointer;
-font-size: 0.875rem; / text-sm /
-color: #4b5563; / text-gray-600 /
-background-color: white; / Default background for nested items /
-transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
-}
-.iqa-nested-submenu-item:hover {
-background-color: #f3f4f6; / bg-gray-100 on hover /
-}
-.iqa-nested-submenu-item.active {
-background-color: #fee2e2; / bg-red-100, active nested item background /
-color: #dc2626; / text-red-600, active nested item text /
-font-weight: 600; / font-semibold /
-border-color: #fecaca; / border-red-200 /
-}
-/ --- IQA Sub-navigation Tabs (Main Level) --- /
-.iqa-tab-container { / เปลี่ยนจาก iqa-sub-nav มาเป็น container หลัก /
-display: flex;
-flex-wrap: wrap; / Allow groups to wrap /
-gap: 0.5rem; / Space between tab groups/items /
-margin-bottom: 1.5rem; / mb-6 /
-padding-bottom: 0.75rem; / pb-3 /
-border-bottom: 2px solid #fbbf24; / border-yellow-400, the main underline */
-position: relative;
-z-index: 10;
-}
-.iqa-tab-item-wrapper { /* Wrapper สำหรับแต่ละปุ่มหลัก (และ sub-menu ของมันถ้ามี) /
-display: flex; / Default: items in a row /
-flex-direction: column; / Stack parent button and its sub-menu vertically /
-position: relative; / For positioning of nested sub-menu if needed */
-}
-.iqa-sub-nav-item { /* สำหรับปุ่มหลัก (แผนพัฒนาฯ, SAR, แผนปฏิบัติการฯ) /
-padding: 0.5rem 1rem;
-font-weight: 500;
-color: #4b5563;
-background-color: #f3f4f6;
-border: 1px solid #d1d5db;
-border-bottom: none;
-border-radius: 0.375rem 0.375rem 0 0; / rounded-t-md /
-cursor: pointer;
-transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
-position: relative;
-z-index: 1;
-width: auto; / Allow button to size to content, or set a min-width */
-text-align: center;
-}
-.iqa-sub-nav-item:hover {
-background-color: #e5e7eb;
-color: #1f2937;
-}
-/* Active style for tabs that show PDF directly (e.g., แผนพัฒนาคุณภาพการศึกษา) /
+
+/* Active style for tabs that show PDF directly (e.g., แผนพัฒนาคุณภาพการศึกษา) */
 .iqa-sub-nav-item.active:not(.has-submenu) {
-background-color: #ffffff;
-color: #dc2626;
-border-left-color: #fbbf24;
-border-top-color: #fbbf24;
-border-right-color: #fbbf24;
-border-bottom: 2px solid #ffffff; / "Erase" the main border /
-margin-bottom: -2px; / Pull tab up */
-z-index: 5;
+    background-color: #ffffff;
+    color: #dc2626;
+    border-left-color: #fbbf24;
+    border-top-color: #fbbf24;
+    border-right-color: #fbbf24;
+    border-bottom: 2px solid #ffffff; /* "Erase" the main border */
+    margin-bottom: -2px; /* Pull tab up */
+    z-index: 5;
 }
-/* Active style for Parent tabs (SAR, Annual Plan) WHEN their sub-menu is open /
+
+/* Active style for Parent tabs (SAR, Annual Plan) WHEN their sub-menu is open */
 .iqa-sub-nav-item.has-submenu.active {
-background-color: #ef4444; / Red background for open parent /
-color: white;
-border-color: #ef4444;
-z-index: 5;
-/ The border-bottom will naturally be the main yellow line here */
+     background-color: #ef4444; /* Red background for open parent */
+     color: white;
+     border-color: #ef4444;
+     z-index: 5;
+     /* The border-bottom will naturally be the main yellow line here */
 }
-/* --- Nested Sub-menu (SAR years, Annual Plan years) --- /
+
+
+/* --- Nested Sub-menu (SAR years, Annual Plan years) --- */
 .iqa-nested-submenu {
-display: none; / Hidden by default /
-/ width: 100%; Remove this if it causes issues with parent button width /
-/ It will now be a child of iqa-tab-item-wrapper, which is a flex item /
-flex-direction: column; / Stack nested items vertically /
-align-items: stretch; / Make nested items take full width of this container /
-margin-top: 0; / Position it directly under the parent button /
-/ padding-left: 1rem; Remove if not needed, items will align with parent /
-background-color: #f9fafb; / bg-gray-50 /
-border-radius: 0 0 0.375rem 0.375rem; / Rounded bottom corners /
-padding: 0.5rem;
-border: 1px solid #d1d5db; / Border around the sub-menu /
-border-top: none; / Top border is handled by parent or visually connected /
-position: absolute; / Position relative to its .iqa-tab-item-wrapper /
-top: 100%; / Start right below the parent button /
-left: 0;
-width: max-content; / Let the width be determined by the widest item, or set a specific width /
-min-width: 100%; / Ensure it's at least as wide as the parent button /
-z-index: 20; / Ensure it's on top of the PDF viewer if it overlaps /
-box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); / Optional shadow */
+    display: none; /* Hidden by default */
+    /* width: 100%; Remove this if it causes issues with parent button width */
+    /* It will now be a child of iqa-tab-item-wrapper, which is a flex item */
+    flex-direction: column; /* Stack nested items vertically */
+    align-items: stretch; /* Make nested items take full width of this container */
+    margin-top: 0; /* Position it directly under the parent button */
+    /* padding-left: 1rem; Remove if not needed, items will align with parent */
+    background-color: #f9fafb; /* bg-gray-50 */
+    border-radius: 0 0 0.375rem 0.375rem; /* Rounded bottom corners */
+    padding: 0.5rem;
+    border: 1px solid #d1d5db; /* Border around the sub-menu */
+    border-top: none; /* Top border is handled by parent or visually connected */
+    position: absolute; /* Position relative to its .iqa-tab-item-wrapper */
+    top: 100%; /* Start right below the parent button */
+    left: 0;
+    width: max-content; /* Let the width be determined by the widest item, or set a specific width */
+    min-width: 100%; /* Ensure it's at least as wide as the parent button */
+    z-index: 20; /* Ensure it's on top of the PDF viewer if it overlaps */
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); /* Optional shadow */
 }
+
 .iqa-tab-item-wrapper.has-nested-menu-container > .iqa-nested-submenu.active {
-display: flex; /* Show as a flex container (column direction) */
+    display: flex; /* Show as a flex container (column direction) */
 }
+
 .iqa-nested-submenu-item {
-padding: 0.5rem 1rem;
-/* border: 1px solid #e5e7eb; / / Can remove if sub-menu has its own border /
-border-radius: 0.25rem; / rounded-sm for individual items /
-cursor: pointer;
-font-size: 0.875rem;
-color: #4b5563;
-background-color: white;
-margin-bottom: 0.25rem; / Space between nested items /
-text-align: left; / Align text to the left for better readability /
+    padding: 0.5rem 1rem;
+    /* border: 1px solid #e5e7eb; */ /* Can remove if sub-menu has its own border */
+    border-radius: 0.25rem; /* rounded-sm for individual items */
+    cursor: pointer;
+    font-size: 0.875rem;
+    color: #4b5563;
+    background-color: white;
+    margin-bottom: 0.25rem; /* Space between nested items */
+    text-align: left; /* Align text to the left for better readability */
 }
 .iqa-nested-submenu-item:last-child {
-margin-bottom: 0;
+    margin-bottom: 0;
 }
 .iqa-nested-submenu-item:hover {
-background-color: #f3f4f6;
+    background-color: #f3f4f6;
 }
 .iqa-nested-submenu-item.active {
-background-color: #fee2e2;
-color: #dc2626;
-font-weight: 600;
-/ border-color: #fecaca; */
+    background-color: #fee2e2;
+    color: #dc2626;
+    font-weight: 600;
+    /* border-color: #fecaca; */
 }
-เอาโค้ดซ้ำออก
