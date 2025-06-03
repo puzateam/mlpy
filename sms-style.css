@@ -110,89 +110,111 @@
     line-height: 1.4; /* Adjust line height for readability */
 }
 
-/* --- IQA Sub-navigation Tabs (Main Level) --- */
-.iqa-sub-nav {
+/* --- IQA Navigation Tabs --- */
+.iqa-tab-container { /* Main container for all IQA tabs and their sub-menus */
     display: flex;
-    flex-wrap: wrap; /* Allow tabs to wrap to the next line on smaller screens */
-    gap: 0.5rem; /* space-x-2 or similar, for spacing between tabs */
+    flex-wrap: wrap; /* Allow tab groups to wrap */
+    gap: 0.5rem; /* Space between tab groups/items */
     margin-bottom: 1.5rem; /* mb-6 */
-    padding-bottom: 0.75rem; /* pb-3, space before the border */
+    padding-bottom: 0.75rem; /* pb-3, space before the main bottom border */
     border-bottom: 2px solid #fbbf24; /* border-yellow-400, the main underline for the tab bar */
-    position: relative; /* For z-index context of active tab */
-    z-index: 10; /* Ensure sub-nav is above potential background elements */
+    position: relative;
+    z-index: 10; /* Ensure this container is above other page elements */
 }
-.iqa-sub-nav-item { /* For direct PDF links and parent buttons */
-    padding: 0.5rem 1rem; /* py-2 px-4 */
-    font-weight: 500; /* font-medium */
+
+.iqa-tab-item-wrapper { /* Wrapper for each main tab button (and its potential sub-menu) */
+    display: flex;
+    flex-direction: column; /* Stacks the main tab button and its sub-menu vertically */
+    position: relative; /* Crucial for absolute positioning of the nested sub-menu */
+}
+
+.iqa-sub-nav-item { /* Styles for the main tab buttons (e.g., แผนพัฒนาฯ, SAR, แผนปฏิบัติการฯ) */
+    padding: 0.5rem 1rem;
+    font-weight: 500;
     color: #4b5563; /* text-gray-600 */
-    background-color: #f3f4f6; /* bg-gray-100, default tab background */
-    border: 1px solid #d1d5db; /* border-gray-300, default border */
-    border-bottom: none; /* Remove bottom border, it will be handled by active state or main underline */
-    border-radius: 0.375rem 0.375rem 0 0; /* rounded-t-md, top corners rounded */
+    background-color: #f3f4f6; /* bg-gray-100 */
+    border: 1px solid #d1d5db; /* border-gray-300 */
+    border-bottom: none; /* Bottom border is handled by active state or the main container's border */
+    border-radius: 0.375rem 0.375rem 0 0; /* rounded-t-md */
     cursor: pointer;
     transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
-    position: relative;
-    z-index: 1; /* Default z-index for non-active tabs */
+    position: relative; /* For z-index stacking relative to its wrapper */
+    z-index: 1; /* Default z-index */
+    width: auto; /* Allow button to size to its content */
+    text-align: center;
+    white-space: nowrap; /* Prevent text wrapping inside the button if desired */
 }
 .iqa-sub-nav-item:hover {
-    background-color: #e5e7eb; /* bg-gray-200, slightly darker on hover */
+    background-color: #e5e7eb; /* bg-gray-200 */
     color: #1f2937; /* text-gray-800 */
 }
-/* Active style for direct PDF link tabs and Parent tabs that ARE NOT currently showing their sub-menu */
-.iqa-sub-nav-item.active:not(.has-submenu.active) { /* Active style for tabs that show PDF directly, or parent tabs whose sub-menu is closed */
+
+/* Active style for main tab buttons that directly link to a PDF (no sub-menu) */
+.iqa-sub-nav-item.active:not(.has-submenu) {
     background-color: #ffffff; /* bg-white */
     color: #dc2626; /* text-red-600 */
-    border-left-color: #fbbf24; /* yellow border */
+    border-left-color: #fbbf24; /* yellow border accent */
     border-top-color: #fbbf24;
     border-right-color: #fbbf24;
-    /* Create illusion of tab being on top of the main border */
-    border-bottom: 2px solid #ffffff; /* Match background to "erase" the main border */
-    margin-bottom: -2px; /* Pull tab up to visually sit on top of the main border-bottom */
-    z-index: 5; /* Higher z-index for active tab to ensure its border is on top */
+    border-bottom: 2px solid #ffffff; /* "Erase" the main container's bottom border */
+    margin-bottom: -2px; /* Pull tab up to sit on top of the main border */
+    z-index: 5; /* Ensure it's above other elements and the main border */
 }
-/* Specific active style for Parent tabs WHEN their sub-menu is open */
+
+/* Active style for main tab buttons that have an OPEN sub-menu */
 .iqa-sub-nav-item.has-submenu.active {
-     background-color: #ef4444; /* bg-red-500 or a distinct color for open parent */
+     background-color: #ef4444; /* bg-red-500, distinct color for an open parent tab */
      color: white;
-     border-color: #ef4444; /* Match the background or a suitable border */
-     z-index: 5; /* Ensure it's above other non-active tabs */
-     /* No margin-bottom adjustment here, as it's not "merging" with the main border */
+     border-color: #ef4444; /* Match background or a suitable contrast */
+     z-index: 5; /* Ensure it's visually prominent */
+     /* No margin-bottom adjustment needed here, sub-menu appears below */
 }
 
-
-/* --- Nested Sub-menu (SAR years, Annual Plan years) --- */
+/* --- Nested Sub-menu (e.g., SAR years, Annual Plan years) --- */
 .iqa-nested-submenu {
-    display: none; /* Hidden by default */
-    width: 100%; /* Take full width of its container (which is under a parent tab) */
-    padding-left: 1rem; /* Indent nested menu slightly (optional) */
-    margin-top: 0.5rem; /* Space above the nested menu */
-    margin-bottom: 0.5rem; /* Space below the nested menu */
-    background-color: #f9fafb; /* bg-gray-50, very light background for the nested group */
-    border-radius: 0.375rem; /* rounded-md */
-    padding: 0.5rem; /* Inner padding for the group */
-    /* border: 1px solid #e5e7eb; /* Optional: border around the nested group */
+    display: none; /* Hidden by default, shown by JS adding .active to parent wrapper or this element */
+    flex-direction: column; /* Stack sub-menu items vertically */
+    align-items: stretch; /* Make items take the full width of this sub-menu container */
+    margin-top: 0; /* Position directly under the parent tab button */
+    background-color: #f9fafb; /* bg-gray-50, light background for the sub-menu group */
+    border-radius: 0 0 0.375rem 0.375rem; /* Rounded bottom corners */
+    padding: 0.5rem;
+    border: 1px solid #d1d5db; /* border-gray-300, border around the sub-menu group */
+    border-top: none; /* Top border visually connects or is covered by parent tab */
+    position: absolute; /* Positioned relative to .iqa-tab-item-wrapper */
+    top: 100%; /* Start directly below the parent tab button */
+    left: 0;
+    width: max-content; /* Width determined by the widest item, or set a specific one */
+    min-width: 100%; /* Ensure it's at least as wide as its parent tab button */
+    z-index: 20; /* High z-index to appear above PDF viewer or other content if it overlaps */
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); /* Optional shadow */
 }
-.iqa-nested-submenu.active { /* This class is toggled by JavaScript */
-    display: flex; /* Show as a flex container */
-    flex-wrap: wrap; /* Allow items to wrap */
-    gap: 0.5rem; /* Spacing between nested items */
+
+/* This class is added by JS to the .iqa-nested-submenu element itself to show it */
+.iqa-nested-submenu.active {
+    display: flex;
 }
+
 .iqa-nested-submenu-item {
     padding: 0.5rem 1rem;
-    border: 1px solid #e5e7eb; /* border-gray-200 */
-    border-radius: 0.375rem; /* rounded-md */
+    border-radius: 0.25rem; /* rounded-sm for individual items */
     cursor: pointer;
     font-size: 0.875rem; /* text-sm */
     color: #4b5563; /* text-gray-600 */
-    background-color: white; /* Default background for nested items */
-    transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+    background-color: white;
+    margin-bottom: 0.25rem; /* Space between sub-menu items */
+    text-align: left; /* Align text to the left for readability */
+    transition: background-color 0.2s ease, color 0.2s ease;
+    white-space: nowrap; /* Prevent text wrapping */
+}
+.iqa-nested-submenu-item:last-child {
+    margin-bottom: 0;
 }
 .iqa-nested-submenu-item:hover {
-    background-color: #f3f4f6; /* bg-gray-100 on hover */
+    background-color: #f3f4f6; /* bg-gray-100 */
 }
 .iqa-nested-submenu-item.active {
-    background-color: #fee2e2; /* bg-red-100, active nested item background */
-    color: #dc2626; /* text-red-600, active nested item text */
+    background-color: #fee2e2; /* bg-red-100 */
+    color: #dc2626; /* text-red-600 */
     font-weight: 600; /* font-semibold */
-    border-color: #fecaca; /* border-red-200 */
 }
