@@ -559,7 +559,7 @@ async function fetchVisitorStats() {
 
     try {
         console.log("Attempting to fetch visitor stats from:", `${WEB_APP_URL}?action=logVisitAndGetCounts&cb=${new Date().getTime()}`);
-        const response = await fetch(`${WEB_APP_URL}?action=logVisitAndGetCounts&cb=${new Date().getTime()}`); // cb for cache busting
+        const response = await fetch(`${WEB_APP_URL}?action=logVisitAndGetCounts&timestamp=${new Date().getTime()}`); // cb for cache busting
         console.log("Visitor stats response status:", response.status);
 
         if (!response.ok) {
