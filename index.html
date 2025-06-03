@@ -14,21 +14,16 @@
     <!-- SweetAlert2 CDN (สำหรับการแจ้งเตือนสวยๆ) -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-    <!-- Emoji Picker Element (Web Component) CDN - เพิ่มสำหรับ Comment Modal -->
-    <script type="module" src="https://cdn.jsdelivr.net/npm/emoji-picker-element@^1/index.js"></script>
-    <!-- Font Awesome for Icons (Optional, for a cute emoji icon button) -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
-
     <!-- Custom Stylesheet -->
     <link rel="stylesheet" href="style.css"> <!-- เชื่อมโยงไปยังไฟล์ CSS ที่กำหนดเอง -->
 </head>
 <body>
     <!-- ส่วนหัวเว็บ (Header) -->
-    <header>
+    <header> <!-- ลบคลาสสีพื้นหลังออกจาก <header> หลัก -->
+        <!-- ส่วนที่ 1: โลโก้และชื่อโรงเรียน (พื้นหลังสีส้มไล่เฉด) -->
         <div class="bg-gradient-to-r from-red-600 to-yellow-500 p-4">
             <div class="container mx-auto flex flex-col items-center">
-                <div class="flex flex-col items-center mb-4 md:mb-2">
+                <div class="flex flex-col items-center mb-4 md:mb-2"> <!-- ลด mb ในจอ md ขึ้นไปเล็กน้อย -->
                     <img src="https://i.postimg.cc/d3PbrGqC/logo-School.png" alt="โลโก้โรงเรียน" class="w-[80px] h-auto mb-2">
                     <div class="text-center">
                         <h1 class="text-white text-2xl md:text-3xl font-bold">โรงเรียนชุมชนบ้านแม่หละป่าป๋วย</h1>
@@ -37,31 +32,42 @@
             </div>
         </div>
 
-        <nav class="bg-white shadow-md">
-            <div class="container mx-auto">
-                <ul class="flex flex-wrap justify-center space-x-1 md:space-x-6 lg:space-x-8 items-center py-2">
+        <!-- ส่วนที่ 2: เมนูนำทาง (พื้นหลังสีขาว) -->
+        <nav class="bg-white shadow-md"> <!-- เพิ่ม bg-white และ shadow-md -->
+            <div class="container mx-auto"> <!-- Container สำหรับจัดกึ่งกลางเมนู -->
+                <ul class="flex flex-wrap justify-center space-x-1 md:space-x-6 lg:space-x-8 items-center py-2"> <!-- ปรับ space-x และเพิ่ม py-2 -->
+                    <!-- เปลี่ยนสีตัวอักษรเมนูเป็นสีเข้ม และปรับ hover state -->
                     <li><a href="#" id="home-link" data-target="content-default" class="menu-item px-3 py-2 text-gray-700 hover:text-red-500">หน้าหลัก</a></li>
                     <li><a href="sms.html" class="menu-item px-3 py-2 text-gray-700 hover:text-red-500">รับการประเมิน สมศ.</a></li>
                     <li><a href="#" data-target="content-smart-school" class="menu-item px-3 py-2 text-gray-700 hover:text-red-500">Smart School Service</a></li>
-                    <!-- START: เพิ่มเมนู "ติดต่อเรา" (สำหรับ Comment) -->
-                    <li><a href="#" data-target="content-comments" id="contact-us-link" class="menu-item px-3 py-2 text-gray-700 hover:text-red-500">ติดต่อเรา</a></li>
-                    <!-- END: เพิ่มเมนู "ติดต่อเรา" -->
-                    <div id="role-specific-menu-container" class="contents">
-                        <!-- JavaScript จะสร้าง <li> มาต่อท้าย ul นี้โดยตรง -->
-                    </div>
-                    <!-- ปุ่ม Login/Logout จะถูกจัดการโดย JavaScript -->
+                    
+                    <!-- Container สำหรับเมนูพิเศษตาม Role (จะถูกเติมโดย JavaScript) -->
+                    <!-- JavaScript ควรจะสร้าง <li><a>...</a></li> มาใส่ในนี้ -->
+                    <div id="role-specific-menu-container" class="contents"> 
+                        <!-- ใช้ class "contents" เพื่อให้ div นี้ไม่กระทบ layout ของ flex ul โดยตรง
+                             แต่ JavaScript จะต้องสร้าง <li> มาใส่ข้างใน ul หลัก ไม่ใช่ใน div นี้
+                             หรืออีกวิธีคือให้ JS สร้าง <li> มาต่อท้าย ul เลย
+                             **ปรับปรุง: ให้ JavaScript สร้าง <li> แล้ว append เข้าไปใน <ul> นี้โดยตรงจะง่ายกว่า**
+                             ดังนั้น div นี้อาจจะไม่จำเป็นถ้า JS จัดการได้ดี หรือจะคงไว้ถ้ามีเหตุผลอื่น
+                             **เพื่อความง่าย น้องจะให้ JavaScript สร้าง <li> ไปต่อท้าย <ul> โดยตรง**
+                             ดังนั้นน้องจะลบ div นี้ออก และให้ JS จัดการกับ <ul> โดยตรง
+                        -->
+                    </div> 
+                    <!-- ปุ่ม Login/Logout จะถูกจัดการโดย JavaScript ให้อยู่ในรูปแบบ <li> เช่นกัน -->
+                    <!-- <li><a href="#" id="login-logout-button" class="menu-item px-3 py-2 text-gray-700 hover:text-red-500">Login</a></li> -->
+                    <!-- JavaScript จะสร้าง <li> นี้ขึ้นมา หรืออัปเดต <li> ที่มีอยู่แล้ว -->
                 </ul>
             </div>
         </nav>
     </header>
 
     <!-- ส่วนเนื้อหาหลักของหน้าเว็บ -->
-    <div class="container mx-auto p-4 main-container flex flex-col md:flex-row gap-6">
+    <div class="container mx-auto p-4 main-container flex flex-col md:flex-row gap-6"> <!-- Container หลักของเนื้อหา -->
         <!-- แถบด้านข้างซ้าย (Sidebar Left) -->
-        <aside class="sidebar w-full md:w-1/4">
-            <div class="bg-white rounded-2xl shadow-md p-5 card">
+        <aside class="sidebar w-full md:w-1/4"> <!-- แถบข้างซ้าย -->
+            <div class="bg-white rounded-2xl shadow-md p-5 card"> <!-- กล่องเนื้อหาในแถบข้างซ้าย -->
                 <h2 class="text-xl font-bold text-red-600 border-b-2 border-yellow-400 pb-2 my-4">เมนูหลัก</h2>
-                <ul class="space-y-2" id="main-menu">
+                <ul class="space-y-2" id="main-menu"> <!-- รายการเมนูหลักในแถบข้าง -->
                     <li class="sidebar-item pb-2"><a href="#" data-target="content-history" class="block text-gray-700">ประวัติโรงเรียน</a></li>
                     <li class="sidebar-item pb-2"><a href="#" data-target="content-school-info" class="block text-gray-700">ข้อมูลสถานศึกษา</a></li>
                     <li class="sidebar-item pb-2"><a href="#" data-target="content-vision" class="block text-gray-700">วิสัยทัศน์/พันธกิจ</a></li>
@@ -74,31 +80,36 @@
                 </ul>
 
                 <h2 class="text-xl font-bold text-red-600 border-b-2 border-yellow-400 pb-2 my-4">ปฏิทินกิจกรรม</h2>
+                <!-- Container สำหรับปฏิทินกิจกรรมแบบไดนามิก -->
                 <div class="bg-yellow-50 p-4 rounded-xl" id="calendar-events-container">
-                    <p class="text-gray-500 animate-pulse">กำลังโหลดปฏิทินกิจกรรม...</p>
+                    <!-- JavaScript จะนำข้อมูลปฏิทินมาแสดงที่นี่ -->
+                    <p class="text-gray-500 animate-pulse">กำลังโหลดปฏิทินกิจกรรม...</p> 
                 </div>
             </div>
         </aside>
 
         <!-- ส่วนเนื้อหาตรงกลาง (Main Content Area) -->
-        <main class="content w-full md:w-2/4">
-            <div class="bg-white rounded-2xl shadow-md p-5 card card-main-content">
-                <h2 id="center-content-title" class="text-xl font-bold text-red-600 border-b-2 border-yellow-400 pb-2 mb-6">ยินดีต้อนรับสู่โรงเรียนชุมชนบ้านแม่หละป่าป๋วย</h2>
+        <main class="content w-full md:w-2/4"> <!-- เนื้อหาหลักตรงกลาง -->
+            <div class="bg-white rounded-2xl shadow-md p-5 card card-main-content"> <!-- กล่องเนื้อหาหลัก -->
+                <h2 id="center-content-title" class="text-xl font-bold text-red-600 border-b-2 border-yellow-400 pb-2 mb-6">ยินดีต้อนรับสู่โรงเรียนชุมชนบ้านแม่หละป่าป๋วย</h2> <!-- หัวข้อเนื้อหาตรงกลาง -->
 
                 <!-- 0. เนื้อหาเริ่มต้น (Default Content) - ข่าวประชาสัมพันธ์ -->
-                <div id="content-default" class="content-section">
+                <div id="content-default" class="content-section"> <!-- ส่วนเนื้อหาเริ่มต้น -->
                     <h3 class="text-xl font-bold text-red-600 mb-4">ข่าวประชาสัมพันธ์</h3>
-                    <div style="display: flex; justify-content: center;">
+                    <div style="display: flex; justify-content: center;"> <!-- จัด iframe Facebook ให้อยู่กึ่งกลาง -->
                         <iframe class="facebook-iframe" src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Fprofile.php%3Fid%3D100057201651273&tabs=timeline&width=500&height=800&small_header=true&adapt_container_width=true&hide_cover=false&show_facepile=true&appId=313205698760377" width="500" height="800" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>
                     </div>
                 </div>
 
                 <!-- 1. เนื้อหาส่วนประวัติโรงเรียน -->
-                <div id="content-history" class="content-section hidden text-gray-700">
-                    <!-- ... เนื้อหาประวัติโรงเรียน (เหมือนเดิม) ... -->
-                    <div class="org-chart-container"> <img src='https://i.postimg.cc/J0HZ0LZ2/around-31.jpg' border='0' alt='around-31' class="org-chart-image"/></div>
+                <div id="content-history" class="content-section hidden text-gray-700"> <!-- ส่วนเนื้อหาประวัติโรงเรียน (ซ่อนไว้เริ่มต้น) -->
+                    <div class="org-chart-container"> <!-- Container สำหรับรูปภาพ -->
+                        <img src='https://i.postimg.cc/J0HZ0LZ2/around-31.jpg' border='0' alt='around-31' class="org-chart-image"/>
+                    </div>
                     <p>โรงเรียนชุมชนบ้านแม่หละป่าป๋วย ตั้งอยู่หมู่ที่ ๙ หมู่บ้านดงเจริญ รับผิดชอบในเขตบริการ ๔ หมู่บ้าน คือ บ้านป่าป๋วย หมูที่ ๓, บ้านดงเจริญ หมู่ที่ ๙, บ้านแม่หละหมู่ที่ ๕ และบ้านเจริญสุข หมู่ที่ ๑๑</p>
+                    <!-- เพิ่ม span id="school-age-text" สำหรับแสดงอายุโรงเรียนแบบไดนามิก -->
                     <p>โรงเรียนชุมชนบ้านแม่หละป่าป๋วย <strong>ตั้งขึ้นเมื่อวันที่ ๑ พฤศจิกายน พ.ศ. ๒๔๖๘</strong> <span id="school-age-text"></span> โดยมี <strong>นายเมืองตื่น จันทรัตน์</strong> ศึกษาธิการอำเภอลองในขณะนั้นเป็นผู้จัดตั้งขึ้น จัดการเรียนการสอน ตั้งแต่ชั้นประถมศึกษาปีที่ ๑ ถึง ชั้นประถมศึกษาปีที่ ๔ โดยอาศัยศาลาวัดป่าป๋วย (ศรีบุญนำ) เป็นสถานที่เรียน หมู่บ้านอื่นที่มาเรียนร่วมกัน คือ บ้านม่วงคำ และบ้านแม่ขมิง</p>
+                    
                     <h4>พัฒนาการของโรงเรียน</h4>
                     <p>ต่อมาใน <strong>พ.ศ. ๒๔๗๙</strong> <strong>นายมาลิน ลัยเจริญ</strong> ครูใหญ่ ได้ปรึกษากับนายสุข ตาเปี้ย และนายกิ วิชัยหอมผู้ใหญ่บ้าน เพื่อขยายโรงเรียนออกนอกวัดได้ที่ดิน จำนวน ๑ ไร่ ที่บ้านป่าป๋วย จึงได้ช่วยกันปลูกสร้างอาคารเรียนชั่วคราวในที่แห่งใหม่ขึ้น ขณะนั้นมีนักเรียน ๘๓ คน</p>
                     <p><strong>พ.ศ. ๒๔๙๑</strong> <strong>นายทัน จรลี</strong> รักษาการในตำแหน่ง ครูใหญ่, <strong>นายต่วน เชียงทา</strong> ผู้ใหญ่บ้านป่าป๋วย, <strong>นายอิ่น ปัญญาวงค์</strong> ผู้ใหญ่บ้านแม่หละ ได้ปรึกษาหารือกันจับจองที่ดินว่างเปล่า ระหว่างหมู่บ้านป่าป๋วยและบ้านแม่หละ สร้างอาคารเรียนชั่วคราวแห่งนี้ อีก ๔ ปีต่อมา ได้ร่วมใจกันสร้างอาคารเรียนถาวร โดยได้ทุนสมทบจากทางราชการ จำนวน ๒,๕๐๐ บาท สร้างอาคารเรียน แบบ ป.๓ ตัวอาคารกว้าง ๘ เมตร ยาว ๓๘ เมตร มีมุขกว้าง ๖ เมตร ยาว ๘ เมตร เริ่มลงมือก่อสร้างเมื่อ <strong>๒๑ มิถุนายน ๒๔๙๙</strong></p>
@@ -107,7 +118,7 @@
                     <p>ปี <strong>พ.ศ. ๒๕๑๑</strong> ได้รับงบประมาณสร้างอาคารเรียนประถมศึกษาตอนปลาย จำนวนเงิน ๗๐,๕๐๐ บาท โดยสร้างอาคารเรียนแบบ ป.๑ จำนวน ๓ ห้องเรียน กว้าง ๓ เมตร ยาว ๒๗ เมตร ในปีเดียวกันได้สร้างบ่อน้ำ ๑ บ่อ และได้รับงบสร้างบ้านพักครูอีก ๓ หลัง จำนวน ๒๐,๐๐๐ บาท</p>
                     <p>ปี <strong>พ.ศ. ๒๕๑๔</strong> ได้รับงบจากอนามัยจังหวัดสมทบกับทุนโรงเรียนสร้างประปาขึ้น ๑ แห่งเป็นเงิน ๑๔,๐๐๐ บาท</p>
                     <p>ปี <strong>พ.ศ. ๒๕๑๖</strong> ทางสภาตำบลได้สร้างหอประชุมของสภาตำบลด้านหลังโรงเรียน งบประมาณ ๑๘,๐๐๐ บาท</p>
-                    <p>ปี <strong>พ.ศ. ๒๕๑๘</strong> <strong>นายประเสริฐ คำจันทรา</strong> รักษาการณ์ในตำแหน่งครูใหญ่ พร้อมด้วยคณะครู และนักการภารโรง ได้ขอความร่วมมือจากผู้ปกครองจัดสร้างโต๊ะ ม้านั่ง จำนวน ๔๕ ชุด และต่อเติมอาคารเรียนอีก ๓ ห้องเรียน ในปีเดียวกันนี้ได้รับงบประมาณจากทางราชการสร้างโรงฝึกงาน ๑ หลัง งบประมาณ ๖๐,๐๐０ บาท</p>
+                    <p>ปี <strong>พ.ศ. ๒๕๑๘</strong> <strong>นายประเสริฐ คำจันทรา</strong> รักษาการณ์ในตำแหน่งครูใหญ่ พร้อมด้วยคณะครู และนักการภารโรง ได้ขอความร่วมมือจากผู้ปกครองจัดสร้างโต๊ะ ม้านั่ง จำนวน ๔๕ ชุด และต่อเติมอาคารเรียนอีก ๓ ห้องเรียน ในปีเดียวกันนี้ได้รับงบประมาณจากทางราชการสร้างโรงฝึกงาน ๑ หลัง งบประมาณ ๖๐,๐๐๐ บาท</p>
                     <p>ปี <strong>พ.ศ. ๒๕๒๑</strong> ได้รับงบประมาณ ๗๒๐,๐๐๐ บาท สร้างอาคารเรียนหลังที่ ๔ แบบ ป.พร. ๐๐๒ กว้าง ๑๐ เมตร ยาว ๗๒ เมตร และได้เปิดทำการสอนตามหลักสูตร ๒๕๒๑ ในชั้นประถมศึกษาปีที่ ๑</p>
                     <p>ปี <strong>พ.ศ. ๒๕๒๒</strong> ได้เปิดทำการสอนตั้งแต่ชั้นเด็กเล็ก จนถึงชั้นประถมศึกษาปีที่ ๖ จำนวนนักเรียน ๕๐๗ คน ๒๐ ห้องเรียน ครู ๒๓ คน</p>
                     <p>ปี <strong>พ.ศ. ๒๕๒๔</strong> ได้รับงบประมาณ กสช. จำนวน ๔๐,๐๐๐ บาท สร้างสนามบาสเกตบอล ๑ แห่ง</p>
@@ -128,10 +139,10 @@
                     <p>ปี <strong>พ.ศ. ๒๕５５</strong> ผ่านการประเมิน จาก สมศ. รอบ ๓</p>
                     <p>ในปีงบประมาณ <strong>๒๕๕５</strong> ทางโรงเรียนได้จัด การเรียนการสอนตามหลักสูตรแกนกลางการศึกษาขั้นพื้นฐาน พุทธศักราช ๒๕๕๑ ในชั้นประถมศึกษาปีที่ ๑ - ๖ โดยเริ่มในปีการศึกษา ๒๕๕๓ โดยทางโรงเรียนได้พัฒนาหลักสูตรสถานศึกษาให้สอดคล้องกับการบริหารของโรงเรียน</p>
                     <p>ปีการศึกษา <strong>๒๕５๙</strong> โรงเรียนชุมชนบ้านแม่หละป่าป๋วย ได้ดำเนินการจัดกิจกรรมผ่านเกณฑ์ประเมินสถานศึกษาแบบอย่างการจัดกิจกรรมการเรียนรู้และการบริหารจัดการตามหลักปรัชญาของเศรษฐกิจพอเพียงประจำปี ๒๕๕๘</p>
-                    <p>ปี <strong>พ.ศ. ๒๕๖๐</strong> <strong>นางสุวพร ขันคำนันต๊ะ</strong> รักษาราชการในตำแหน่งผู้อำนวยการโรงเรียน</p>
-                    <p>ปี <strong>พ.ศ. ๒๕๖๐</strong> ได้รับรางวัลระดับเหรียญทอง กิจกรรมการแข่งขันท่องอาขยานทำนองเสนาะ ระดับชั้น ป.๔ - ป.๖ และกิจกรรมการประกวดเพลงคุณธรรม ระดับชั้น ป.๔ - ป.๖</p>
-                    <p>ปีการศึกษา <strong>๒๕６０</strong> โรงเรียนชุมชนบ้านแม่หละป่าป๋วย มีผลการทดสอบทางการศึกษาระดับชาติ O–NET ชั้นประถมศึกษาปีที่ ๖ ค่าเฉลี่ยรวมสูงกว่าค่าเฉลี่ยระดับประเทศ</p>
-                    <p>ปีการศึกษา <strong>๒๕６１</strong> ได้รับรางวัลเหรียญเงิน กิจกรรมการแข่งขันเดี่ยวฆ้องวงใหญ่ ระดับชั้น ป.๑ - ป.๖, รางวัลเหรียญเงิน กิจกรรมการแข่งขันเดี่ยวระนาดเอก ระดับชั้น ป.๑ - ป.๖, และรางวัลเหรียญทองแดง กิจกรรมการแข่งขันเดี่ยวระนาดทุ้ม ระดับชั้น ป.๑ - ป.๖</p>
+                    <p>ปี <strong>พ.ศ. ๒๕６๐</strong> <strong>นางสุวพร ขันคำนันต๊ะ</strong> รักษาราชการในตำแหน่งผู้อำนวยการโรงเรียน</p>
+                    <p>ปี <strong>พ.ศ. ๒๕６๐</strong> ได้รับรางวัลระดับเหรียญทอง กิจกรรมการแข่งขันท่องอาขยานทำนองเสนาะ ระดับชั้น ป.๔ - ป.๖ และกิจกรรมการประกวดเพลงคุณธรรม ระดับชั้น ป.๔ - ป.๖</p>
+                    <p>ปีการศึกษา <strong>๒๕６๐</strong> โรงเรียนชุมชนบ้านแม่หละป่าป๋วย มีผลการทดสอบทางการศึกษาระดับชาติ O–NET ชั้นประถมศึกษาปีที่ ๖ ค่าเฉลี่ยรวมสูงกว่าค่าเฉลี่ยระดับประเทศ</p>
+                    <p>ปีการศึกษา <strong>๒๕๖๑</strong> ได้รับรางวัลเหรียญเงิน กิจกรรมการแข่งขันเดี่ยวฆ้องวงใหญ่ ระดับชั้น ป.๑ - ป.๖, รางวัลเหรียญเงิน กิจกรรมการแข่งขันเดี่ยวระนาดเอก ระดับชั้น ป.๑ - ป.๖, และรางวัลเหรียญทองแดง กิจกรรมการแข่งขันเดี่ยวระนาดทุ้ม ระดับชั้น ป.๑ - ป.๖</p>
                     <p>ปี <strong>พ.ศ.๒๕๖๒</strong> ได้ดำเนินการระดมทุนร่วมกันของโรงเรียน คณะกรรมการสถานศึกษา คณะกรรมการศิษย์เก่า และชุมชน เพื่อสร้างหลังคา (โดม) ลานกีฬาเอนกประสงค์ และสร้างจนแล้วเสร็จ มีมูลค่าโดยรวม ๕๐๐,๐๐๐ บาท</p>
                     <p><strong>๕ ตุลาคม ๒๕๖๖</strong> <strong>นายสุชาติ เวียงชัย</strong> มาดำรงตำแหน่งผู้อำนวยการโรงเรียนชุมชนบ้านแม่หละป่าป๋วย</p>
                     <h4>ข้อมูลปัจจุบัน</h4>
@@ -140,9 +151,8 @@
                 </div>
 
                 <!-- 2. เนื้อหาส่วนข้อมูลสถานศึกษา -->
-                <div id="content-school-info" class="content-section hidden text-gray-700">
-                    <!-- ... เนื้อหาข้อมูลสถานศึกษา (เหมือนเดิม) ... -->
-                     <div class="org-chart-container">
+                <div id="content-school-info" class="content-section hidden text-gray-700"> <!-- ส่วนเนื้อหาข้อมูลสถานศึกษา (ซ่อนไว้เริ่มต้น) -->
+                    <div class="org-chart-container">
                         <img src='https://i.postimg.cc/TYrQJV5H/around-10.jpg' border='0' alt='around-10' class="org-chart-image"/>
                     </div>
                         <p><span class="info-label">ชื่อโรงเรียน :</span> โรงเรียนชุมชนบ้านแม่หละป่าป๋วย</p>
@@ -166,9 +176,8 @@
                 </div>
 
                 <!-- 3. เนื้อหาส่วนวิสัยทัศน์/พันธกิจ -->
-                <div id="content-vision" class="content-section hidden text-gray-700">
-                    <!-- ... เนื้อหาวิสัยทัศน์/พันธกิจ (เหมือนเดิม) ... -->
-                     <div class="org-chart-container">
+                <div id="content-vision" class="content-section hidden text-gray-700"> <!-- ส่วนเนื้อหาวิสัยทัศน์/พันธกิจ (ซ่อนไว้เริ่มต้น) -->
+                    <div class="org-chart-container">
                         <a href='https://postimg.cc/1VnsHBSG' target='_blank'><img src='https://i.postimg.cc/0jZj9XHB/sc1.png' border='0' alt='sc1' class="org-chart-image"/></a>
                     </div>
                     <h3>วิสัยทัศน์ (VISION)</h3>
@@ -207,8 +216,7 @@
                 </div>
 
                 <!-- 4. เนื้อหาส่วนโครงสร้างการบริหาร -->
-                <div id="content-structure" class="content-section hidden text-gray-700">
-                    <!-- ... เนื้อหาโครงสร้างการบริหาร (เหมือนเดิม) ... -->
+                <div id="content-structure" class="content-section hidden text-gray-700"> <!-- ส่วนเนื้อหาโครงสร้างการบริหาร (ซ่อนไว้เริ่มต้น) -->
                     <div class="org-chart-container">
                         <img src='https://i.postimg.cc/L6xjNJ5p/Blue-and-White-Modern-Organizational-Structure-A4.png' border='0' alt='Blue-and-White-Modern-Organizational-Structure-A4' class="org-chart-image"/>
                     </div>
@@ -224,56 +232,42 @@
                 </div>
 
                 <!-- 5. เนื้อหาส่วนข้อมูลบุคลากร -->
-                <div id="content-personnel" class="content-section hidden">
+                <div id="content-personnel" class="content-section hidden"> <!-- ส่วนนี้ JavaScript จะนำข้อมูลบุคลากรมาแสดง -->
                     <!-- JavaScript จะนำข้อมูลบุคลากรมาแสดงที่นี่ -->
                 </div>
 
                 <!-- 6. เนื้อหาส่วนข้อมูลนักเรียน -->
-                <div id="content-students" class="content-section hidden">
+                <div id="content-students" class="content-section hidden"> <!-- ส่วนนี้ JavaScript จะนำข้อมูลนักเรียนมาแสดง -->
                     <!-- JavaScript จะนำข้อมูลนักเรียนมาแสดงที่นี่ -->
                 </div>
 
                 <!-- 7. Smart School Service -->
-                <div id="content-smart-school" class="content-section hidden">
+                <div id="content-smart-school" class="content-section hidden"> <!-- ส่วนนี้ JavaScript จะโหลดตารางลิงก์ Smart School Service -->
                     <!-- JavaScript จะโหลดข้อมูลตารางมาใส่ที่นี่ -->
                 </div>
 
                 <!-- 8. สารสนเทศอื่นๆ -->
-                <div id="content-information-links" class="content-section hidden">
+                <div id="content-information-links" class="content-section hidden"> <!-- ส่วนนี้ JavaScript จะโหลดตารางลิงก์สารสนเทศอื่นๆ -->
                     <!-- JavaScript จะโหลดข้อมูลตารางมาใส่ที่นี่ -->
                 </div>
 
                 <!-- 9. แผนปฏิบัติการประจำปี (PDF) -->
-                <div id="content-action-plan" class="content-section hidden">
+                <div id="content-action-plan" class="content-section hidden"> <!-- ส่วนนี้ JavaScript จะโหลด PDF แผนปฏิบัติการ -->
                     <!-- JavaScript จะโหลด PDF หรือข้อความมาใส่ที่นี่ -->
                 </div>
 
                 <!-- 10. รายงานผลการดำเนินงาน (PDF) -->
-                <div id="content-operation-report" class="content-section hidden">
+                <div id="content-operation-report" class="content-section hidden"> <!-- ส่วนนี้ JavaScript จะโหลด PDF รายงานผลฯ -->
                     <!-- JavaScript จะโหลด PDF หรือข้อความมาใส่ที่นี่ -->
                 </div>
-
-                <!-- START: XX. เนื้อหาส่วนแสดงความคิดเห็น (Comment Section) -->
-                <div id="content-comments" class="content-section hidden">
-                    <!-- หัวข้อจะถูกตั้งโดย JS แต่สามารถใส่ default ไว้ได้ -->
-                    <h2 id="comments-section-title" class="text-xl font-bold text-red-600 border-b-2 border-yellow-400 pb-2 mb-6">ติดต่อเรา / ฝากข้อความ</h2>
-                    <div id="comment-form-area" class="mb-8">
-                        <!-- JavaScript จะสร้างปุ่ม "เขียนข้อความใหม่" หรือฟอร์มที่นี่ ถ้าผู้ใช้ Login -->
-                    </div>
-                    <div id="comments-display-area">
-                        <!-- JavaScript จะโหลดรายการ comment มาแสดงที่นี่ -->
-                    </div>
-                </div>
-                <!-- END: XX. เนื้อหาส่วนแสดงความคิดเห็น -->
-
             </div>
         </main>
 
         <!-- แถบด้านข้างขวา (Sidebar Right) -->
-        <aside class="sidebar w-full md:w-1/4">
-            <div class="bg-white rounded-2xl shadow-md p-5 card">
+        <aside class="sidebar w-full md:w-1/4"> <!-- แถบข้างขวา -->
+            <div class="bg-white rounded-2xl shadow-md p-5 card"> <!-- กล่องเนื้อหาในแถบข้างขวา -->
                 <h2 class="text-xl font-bold text-red-600 border-b-2 border-yellow-400 pb-2 mb-4">ลิงก์ที่เกี่ยวข้อง</h2>
-                <ul class="space-y-2">
+                <ul class="space-y-2"> <!-- รายการลิงก์ที่เกี่ยวข้อง -->
                     <li class="sidebar-item pb-2"><a href="https://www.moe.go.th/" target="_blank" class="block text-gray-700 hover:text-red-600">กระทรวงศึกษาธิการ</a></li>
                     <li class="sidebar-item pb-2"><a href="https://www.obec.go.th/" target="_blank" class="block text-gray-700 hover:text-red-600">สำนักงานคณะกรรมการการศึกษาขั้นพื้นฐาน</a></li>
                     <li class="sidebar-item pb-2"><a href="http://www.ictphrae2.com/" target="_blank" class="block text-gray-700 hover:text-red-600">สำนักงานเขตพื้นที่การศึกษาประถมศึกษาแพร่เขต 2</a></li>
@@ -282,28 +276,28 @@
                 </ul>
 
                 <h2 class="text-xl font-bold text-red-600 border-b-2 border-yellow-400 pb-2 my-4">สถิติผู้เข้าชม</h2>
-                <div class="bg-yellow-50 p-4 rounded-xl">
+                <div class="bg-yellow-50 p-4 rounded-xl"> <!-- กล่องแสดงสถิติผู้เข้าชม -->
                     <div class="flex justify-between mb-2">
                         <span class="text-gray-700">วันนี้:</span>
-                        <span id="visits-today" class="font-medium text-red-600">กำลังโหลด...</span>
+                        <span id="visits-today" class="font-medium text-red-600">กำลังโหลด...</span> <!-- JavaScript จะอัปเดตส่วนนี้ -->
                     </div>
                     <div class="flex justify-between mb-2">
                         <span class="text-gray-700">เดือนนี้:</span>
-                        <span id="visits-this-month" class="font-medium text-red-600">กำลังโหลด...</span>
+                        <span id="visits-this-month" class="font-medium text-red-600">กำลังโหลด...</span> <!-- JavaScript จะอัปเดตส่วนนี้ -->
                     </div>
                     <div class="flex justify-between">
                         <span class="text-gray-700">ทั้งหมด:</span>
-                        <span id="visits-total" class="font-medium text-red-600">กำลังโหลด...</span>
+                        <span id="visits-total" class="font-medium text-red-600">กำลังโหลด...</span> <!-- JavaScript จะอัปเดตส่วนนี้ -->
                     </div>
                 </div>
 
                 <h2 class="text-xl font-bold text-red-600 border-b-2 border-yellow-400 pb-2 my-4">ติดต่อเรา</h2>
-                <div class="bg-yellow-50 p-4 rounded-xl mb-4">
-                    <div class="contact-item">
+                <div class="bg-yellow-50 p-4 rounded-xl mb-4"> <!-- กล่องข้อมูลติดต่อ -->
+                    <div class="contact-item"> <!-- รายการติดต่อ: อีเมล -->
                         <svg class="contact-icon w-5 h-5 text-red-600" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"></path><path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"></path></svg>
                         <span class="text-gray-700">mlpycop@gmail.com</span>
                     </div>
-                    <div class="contact-item">
+                    <div class="contact-item"> <!-- รายการติดต่อ: โทรศัพท์ -->
                         <svg class="contact-icon w-5 h-5 text-red-600" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"></path></svg>
                         <span class="text-gray-700">089-9988096</span>
                     </div>
@@ -313,9 +307,9 @@
     </div>
 
     <!-- ส่วนท้ายเว็บ (Footer) -->
-    <footer class="bg-gradient-to-r from-red-600 to-yellow-500 text-white py-4 mt-8 rounded-t-3xl">
-        <div class="container mx-auto px-4">
-            <div class="flex flex-col items-center text-center">
+    <footer class="bg-gradient-to-r from-red-600 to-yellow-500 text-white py-4 mt-8 rounded-t-3xl"> <!-- ส่วนท้ายเว็บ -->
+        <div class="container mx-auto px-4"> <!-- จัดเนื้อหาให้อยู่กึ่งกลาง -->
+            <div class="flex flex-col items-center text-center"> <!-- จัดข้อความให้อยู่กึ่งกลาง -->
                 <p class="footer-text">โรงเรียนชุมชนบ้านแม่หละป่าป๋วย</p>
                 <p class="footer-text">ตำบลสรอย อำเภอวังชิ้น จังหวัดแพร่</p>
                 <p class="footer-text">สำนักงานเขตพื้นที่การศึกษาประถมศึกษาแพร่เขต 2</p>
@@ -325,25 +319,26 @@
 
     <!-- Login Modal (หน้าต่าง Popup สำหรับ Login) -->
     <div id="loginModal" class="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full flex items-center justify-center hidden z-50">
-        <div class="relative mx-auto p-5 border w-full max-w-md shadow-lg rounded-md bg-white">
+        <!-- `hidden` คือซ่อนไว้ตอนแรก, `z-50` ให้อยู่หน้าสุด -->
+        <div class="relative mx-auto p-5 border w-full max-w-md shadow-lg rounded-md bg-white"> <!-- กล่อง Modal -->
             <div class="mt-3 text-center">
-                <h3 class="text-lg leading-6 font-medium text-gray-900">เข้าสู่ระบบ</h3>
-                <form id="loginForm" class="mt-2 px-7 py-3">
-                    <div class="mb-4">
+                <h3 class="text-lg leading-6 font-medium text-gray-900">เข้าสู่ระบบ</h3> <!-- หัวข้อ Modal -->
+                <form id="loginForm" class="mt-2 px-7 py-3"> <!-- ฟอร์มสำหรับกรอกข้อมูล -->
+                    <div class="mb-4"> <!-- กลุ่ม Input Username -->
                         <label for="username" class="block text-sm font-medium text-gray-700 text-left">ชื่อผู้ใช้:</label>
                         <input type="text" name="username" id="username" class="mt-1 p-2 w-full border border-gray-300 rounded-md shadow-sm focus:ring-red-500 focus:border-red-500" required>
                     </div>
-                    <div class="mb-4">
+                    <div class="mb-4"> <!-- กลุ่ม Input Password -->
                         <label for="password" class="block text-sm font-medium text-gray-700 text-left">รหัสผ่าน:</label>
                         <input type="password" name="password" id="password" class="mt-1 p-2 w-full border border-gray-300 rounded-md shadow-sm focus:ring-red-500 focus:border-red-500" required>
                     </div>
-                    <div class="items-center px-4 py-3">
+                    <div class="items-center px-4 py-3"> <!-- ปุ่ม Submit -->
                         <button id="submitLoginButton" type="submit" class="px-4 py-2 bg-red-500 text-white text-base font-medium rounded-md w-full shadow-sm hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500">
                             เข้าสู่ระบบ
                         </button>
                     </div>
                 </form>
-                <div class="items-center px-4 pb-3">
+                <div class="items-center px-4 pb-3"> <!-- ปุ่มยกเลิก -->
                      <button id="closeLoginModalButton" type="button" class="px-4 py-2 bg-gray-200 text-gray-800 text-base font-medium rounded-md w-full shadow-sm hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-300">
                         ยกเลิก
                     </button>
@@ -351,66 +346,6 @@
             </div>
         </div>
     </div>
-
-    <!-- START: Modal สำหรับ ส่ง/แก้ไข/จัดการ Comment (รวมจาก comment.html เดิม) -->
-    <div id="commentActionModal" class="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full flex items-center justify-center hidden z-50 opacity-0 transition-opacity duration-300">
-        <div class="relative mx-auto p-6 border w-full max-w-lg shadow-xl rounded-xl bg-white transform transition-all duration-300 scale-95">
-            <div class="mt-3">
-                <div class="flex justify-between items-center mb-6">
-                    <h3 id="commentModalTitle" class="text-xl leading-6 font-semibold text-gray-800">เขียนข้อความใหม่</h3>
-                    <button id="closeCommentActionModalButton" class="text-gray-400 hover:text-red-500 text-3xl font-light">&times;</button>
-                </div>
-                <form id="commentActionForm" class="px-2 py-1">
-                    <input type="hidden" id="commentActionId" name="commentId">
-
-                    <div class="mb-4">
-                        <label for="commentActionUserName" class="block text-sm font-medium text-gray-700 mb-1">ชื่อเล่น / นามแฝง <span class="text-red-500">*</span></label>
-                        <input type="text" name="userName" id="commentActionUserName" class="mt-1 p-3 w-full border border-gray-300 rounded-lg shadow-sm focus:ring-red-500 focus:border-red-500 transition-colors" placeholder="เช่น น้องใจดี" required>
-                    </div>
-                    <div class="mb-5">
-                        <label for="commentActionMessage" class="block text-sm font-medium text-gray-700 mb-1">ข้อความของคุณ <span class="text-red-500">*</span></label>
-                        <textarea name="commentMessage" id="commentActionMessage" rows="4" class="mt-1 p-3 w-full border border-gray-300 rounded-lg shadow-sm focus:ring-red-500 focus:border-red-500 transition-colors" placeholder="พิมพ์ความในใจ..." required></textarea>
-                    </div>
-
-                    <!-- ส่วนสำหรับผู้ใช้ที่ Login เพื่ออนุมัติ -->
-                    <div id="commentApprovalSection" class="mb-5 p-3 bg-red-50 border border-red-200 rounded-lg hidden">
-                        <label class="block text-sm font-medium text-gray-700 mb-2">สถานะการแสดงผล:</label>
-                        <div class="flex items-center space-x-6">
-                            <label class="inline-flex items-center cursor-pointer">
-                                <input type="radio" class="form-radio h-5 w-5 text-green-500 focus:ring-green-400" name="isApproved" value="true">
-                                <span class="ml-2 text-gray-700">อนุมัติให้แสดง</span>
-                            </label>
-                            <label class="inline-flex items-center cursor-pointer">
-                                <input type="radio" class="form-radio h-5 w-5 text-yellow-500 focus:ring-yellow-400" name="isApproved" value="false" checked>
-                                <span class="ml-2 text-gray-700">รอการอนุมัติ / ไม่แสดง</span>
-                            </label>
-                        </div>
-                    </div>
-                    <!-- จบส่วนอนุมัติ -->
-
-                    <div class="flex justify-between items-center mt-8 mb-2">
-                        <div class="relative">
-                            <button type="button" id="commentEmojiToggleButton" class="px-4 py-2 text-sm text-gray-700 border border-gray-300 rounded-full hover:bg-gray-100 transition-colors flex items-center">
-                                <i class="far fa-smile mr-2"></i>Emoji
-                            </button>
-                            <div id="commentEmojiPickerContainer" class="absolute bottom-full left-0 mb-2 bg-white border border-gray-200 rounded-lg shadow-xl z-20 hidden w-[300px] sm:w-[352px]">
-                                <emoji-picker locale="th" class="light w-full h-[250px] sm:h-[300px]"></emoji-picker>
-                            </div>
-                        </div>
-                        <div class="space-x-3">
-                            <button id="deleteCommentButton" type="button" class="px-5 py-2.5 bg-gray-200 text-gray-700 text-sm font-semibold rounded-full shadow-sm hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-opacity-50 transition-colors hidden">
-                                <i class="fas fa-trash-alt mr-1.5"></i>ลบ
-                            </button>
-                            <button id="submitCommentActionButton" type="submit" class="px-6 py-2.5 bg-gradient-to-r from-red-500 to-yellow-500 text-white text-sm font-semibold rounded-full shadow-md hover:from-red-600 hover:to-yellow-600 focus:outline-none focus:ring-2 focus:ring-red-400 focus:ring-opacity-75 transition-all transform hover:scale-105">
-                                ส่งข้อความ
-                            </button>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-    <!-- END: Modal สำหรับ Comment -->
 
 <script src="script.js"></script> <!-- เชื่อมโยงไปยังไฟล์ JavaScript -->
 </body>
