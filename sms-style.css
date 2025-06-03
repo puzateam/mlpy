@@ -110,77 +110,78 @@
     line-height: 1.4; /* Adjust line height for readability */
 }
 
-/* --- IQA Navigation Tabs (Primary and Secondary) --- */
+/* --- IQA Navigation Tabs (Primary and Secondary) & Curriculum Tabs --- */
 .iqa-primary-tab-container,
-.iqa-secondary-tab-container {
-    display: flex; /* Makes items in this container align in a row */
-    flex-wrap: wrap; /* Allows items to wrap to the next line if not enough space */
+.iqa-secondary-tab-container,
+.curriculum-tab-container { /* << ตรวจสอบว่า .curriculum-tab-container ถูกรวมอยู่ที่นี่ */
+    display: flex;
+    flex-wrap: wrap;
     gap: 0.5rem; /* Space between tab items */
-    padding-bottom: 0.75rem; /* Space before the bottom border */
-    border-bottom: 2px solid #fbbf24; /* border-yellow-400, the main underline for the tab bar */
-    margin-bottom: 1rem; /* Space below this tab bar before the next element (e.g., another tab bar or PDF viewer) */
+    padding-bottom: 0.75rem; /* << สำคัญ: เพื่อให้มีที่สำหรับเส้น border และการ "ยก" ของปุ่ม active */
+    border-bottom: 2px solid #fbbf24; /* << สำคัญ: เส้น border สีเหลือง */
+    margin-bottom: 1rem; /* Space below this tab bar */
     position: relative;
-    z-index: 10; /* Ensures tab bar is above other elements */
+    z-index: 10;
 }
 
-/* Adjustments for the secondary tab container if it's directly below the primary one */
 .iqa-secondary-tab-container {
-    /* margin-top: -0.75rem; /* Optional: Pulls it up slightly if primary has padding-bottom */
-    /* border-top: 1px solid #e5e7eb; /* Optional: Adds a separator line above it */
-    /* border-bottom-color: #fcd34d; /* Optional: Slightly different border color for secondary */
-    margin-bottom: 1.5rem; /* More space after secondary tabs before the PDF viewer */
+    /* margin-top: -0.75rem; /* Optional */
+    /* border-top: 1px solid #e5e7eb; /* Optional */
+    /* border-bottom-color: #fcd34d; /* Optional */
+    margin-bottom: 1.5rem;
 }
 
 .iqa-primary-tab-item,
-.iqa-secondary-tab-item {
-    padding: 0.5rem 1rem; /* Padding inside each tab button */
-    font-weight: 500; /* Medium font weight */
-    color: #4b5563; /* text-gray-600, default text color */
-    background-color: #f3f4f6; /* bg-gray-100, default background */
-    border: 1px solid #d1d5db; /* border-gray-300, default border */
-    border-bottom: none; /* Bottom border is handled by active state or container's border */
-    border-radius: 0.375rem 0.375rem 0 0; /* rounded-t-md, top corners rounded */
+.iqa-secondary-tab-item,
+.curriculum-tab-item { /* << ตรวจสอบว่า .curriculum-tab-item ถูกรวมอยู่ที่นี่ */
+    padding: 0.5rem 1rem;
+    font-weight: 500;
+    color: #4b5563; /* text-gray-600 */
+    background-color: #f3f4f6; /* bg-gray-100 */
+    border: 1px solid #d1d5db; /* border-gray-300 */
+    border-bottom: none; /* << สำคัญ */
+    border-radius: 0.375rem 0.375rem 0 0; /* rounded-t-md */
     cursor: pointer;
     transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
     position: relative;
-    z-index: 1; /* Default z-index for tabs */
-    white-space: nowrap; /* Prevents text inside tab from wrapping */
+    z-index: 1;
+    white-space: nowrap;
     text-align: center;
 }
 
 .iqa-primary-tab-item:hover,
-.iqa-secondary-tab-item:hover {
-    background-color: #e5e7eb; /* bg-gray-200, background on hover */
-    color: #1f2937; /* text-gray-800, text color on hover */
+.iqa-secondary-tab-item:hover,
+.curriculum-tab-item:hover { /* << ตรวจสอบว่า .curriculum-tab-item ถูกรวมอยู่ที่นี่ */
+    background-color: #e5e7eb; /* bg-gray-200 */
+    color: #1f2937; /* text-gray-800 */
 }
 
-/* Active state for any tab item (primary or secondary) */
+/* Active state for tab items (primary, secondary, and curriculum) */
 .iqa-primary-tab-item.active,
-.iqa-secondary-tab-item.active {
-    background-color: #ffffff; /* bg-white, active tab background */
-    color: #dc2626; /* text-red-600, active tab text color */
-    border-left-color: #fbbf24; /* Yellow accent on left */
-    border-top-color: #fbbf24;  /* Yellow accent on top */
-    border-right-color: #fbbf24;/* Yellow accent on right */
-    /* Create illusion of tab "lifting" over its container's bottom border */
-    border-bottom: 2px solid #ffffff; /* Match background to "erase" the container's border */
-    margin-bottom: -2px; /* Pulls the tab up by the height of the container's border */
-    z-index: 5; /* Ensures active tab is visually on top */
+.iqa-secondary-tab-item.active,
+.curriculum-tab-item.active { /* << ตรวจสอบว่า .curriculum-tab-item ถูกรวมอยู่ที่นี่ */
+    background-color: #ffffff; /* bg-white */
+    color: #dc2626; /* text-red-600 */
+    border-left-color: #fbbf24;
+    border-top-color: #fbbf24;
+    border-right-color: #fbbf24;
+    border-bottom: 2px solid #ffffff; /* "Erase" the container's bottom border */
+    margin-bottom: -2px; /* Pull tab up to sit on top of its container's border */
+    z-index: 5; /* << สำคัญ: เพื่อให้ปุ่ม active อยู่เหนือเส้น border ของ container */
 }
 
-/* Specific style for a primary tab that is active AND has its secondary tabs visible.
-   This can be used to make it look different from a primary tab that is active but shows a PDF directly.
-   For example, make it look "pressed down" or connected to the secondary bar. */
+/* Specific active style for primary tabs that have an OPEN secondary tab bar below them */
 .iqa-primary-tab-item.has-secondary-tabs.active.secondary-visible {
-    /* Override some .active styles if needed */
-    /* background-color: #e5e7eb; /* Example: slightly darker to show it's a parent of an active bar */
-    /* color: #1f2937; */
-    /* border-bottom: 1px solid #d1d5db; /* Example: a thin line to connect to secondary bar */
-    /* margin-bottom: -1px; /* Adjust if border-bottom changes */
-    /* Or keep it the same as other active tabs if that's preferred */
+    /* This style is for the IQA section's primary tabs when their secondary tabs are shown.
+       It can be kept the same as other .active tabs or styled differently if needed.
+       The .curriculum-tab-item.active will use the general .active style above.
+    */
+    /* Example of different styling if needed: */
+    /* background-color: #e5e7eb; */
+    /* border-bottom-color: #e5e7eb; */
+    /* margin-bottom: 0; */ /* If not "lifting" */
 }
-
 
 .hidden {
-    display: none !important; /* Utility class to hide elements, used by JavaScript */
+    display: none !important;
 }
