@@ -209,7 +209,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const contentSections = document.querySelectorAll('.content-section'); // ทุก section ที่เป็นเนื้อหา
     const centerContentTitle = document.getElementById('center-content-title'); // element ที่แสดง title ของเนื้อหาปัจจุบัน
     const initialTitle = 'ยินดีต้อนรับสู่โรงเรียนชุมชนบ้านแม่หละป่าป๋วย'; // title เริ่มต้น
-    const schoolInfoPrefix = 'สารสนเทศของโรงเรียน - '; // prefix สำหรับ title เมื่อเลือกเมนูใน sidebar
+    const schoolInfoPrefix = 'Smart School Service - '; // prefix สำหรับ title เมื่อเลือกเมนูใน sidebar
 
     // กำหนดค่าให้กับ Global DOM Elements (loginModal, loginForm)
     loginModal = document.getElementById('loginModal');
